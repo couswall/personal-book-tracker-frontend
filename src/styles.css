@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --lexend-font-family: 'Lexend', serif;
+}
+
+body {
+    font-family: var(--lexend-font-family);
+}
