@@ -6,6 +6,8 @@ interface CoverBookImgProps {
     width?: string;
     height?: string;
     flex?: string;
+    onClick?: () => void;
+    cursor?: string;
 }
 
 export const CoverBookImg: React.FC<CoverBookImgProps> = ({
@@ -13,6 +15,8 @@ export const CoverBookImg: React.FC<CoverBookImgProps> = ({
     width = '220px',
     height = '280px',
     flex,
+    onClick,
+    cursor = 'default',
 }) => {
     return (
         <FlexContainer
@@ -20,7 +24,9 @@ export const CoverBookImg: React.FC<CoverBookImgProps> = ({
             Overflow="hidden"
             Width={width}
             Height={height}
-            Flex={flex}
+            Flex={flex} 
+            onClick={() => onClick?.()}
+            Cursor={cursor}
         >
             {imgSrc ? (
                 <Image src={imgSrc} Width="100%" Height="100%" ObjectFit="fill" />

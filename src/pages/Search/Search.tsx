@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {FieldValues, useForm, useWatch} from 'react-hook-form';
-import {useLocation} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import {useEffect, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -19,13 +19,14 @@ import {
 } from '@components/index';
 import {ErrorMessage} from '@pages/Login/ErrorMessage';
 import {schemaSearchBook} from '@pages/Search/schemaSearchBook';
-import {SEARCH_PAGE, MAX_RESULTS, searchBooks} from '@pages/Search/constants';
+import {SEARCH_PAGE, MAX_RESULTS} from '@pages/Search/constants';
 
 import {SearchInputWrapper} from '@components/Navbar/components/SearchingNavbar/styles';
 import {BookResult} from '@pages/Search/BookResult';
 
 export const Search = () => {
     const {state} = useLocation();
+    const navigate = useNavigate();
     const dispatch: AppDispatch = useDispatch();
     const {
         register,
@@ -71,7 +72,8 @@ export const Search = () => {
         if (!state?.searchText) return;
         reset({searchText: state.searchText});
         performSearch(state.searchText, 1);
-    }, [state, reset]);
+        navigate('.', {replace: true, state: null});
+    }, [state]);
 
     return (
         <Container Padding="20px 40px" MaxWidthVariant="lg" MinHeight="100vh">

@@ -10,7 +10,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {authSlice, darkModeSlice, getBookByIdSlice, searchBookSlice} from '@store/index';
+import {authSlice, darkModeSlice, getBookByIdSlice, searchBookSlice, navbarSearchSlice} from '@store/index';
 
 const persistConfig = {
     key: 'root',
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
     auth: authSlice.reducer,
     getBookById: getBookByIdSlice.reducer,
     searchBook: searchBookSlice.reducer,
+    navbarSearch: navbarSearchSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -3,3 +3,5 @@ export * from './auth/';
 export * from './books/getBookById';
 export * from './books/searchBook/thunks';
 export * from './books/searchBook/searchBookSlice';
+export * from './books/navbarSearch/navbarSearchThunk';
+export * from './books/navbarSearch/navbarSearchSlice';

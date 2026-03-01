@@ -20,6 +20,7 @@ export interface ISearchBook {
     authors?: string[];
     imageCover?: string;
     averageRating?: number;
+    reviewCount?: number;
 }
 
 export interface ISearchBookAPIResponse extends IBaseFetchRes {
