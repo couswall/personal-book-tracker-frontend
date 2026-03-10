@@ -1,5 +1,5 @@
 import { BaseContainer, FlexContainer, Icon, Text } from '@components/index';
-import * as S from '@pages/Book/Book.styled';
+import * as S from './BookActivity.styled';
 
 export const BookActivity = () => (
     <S.ActivityCard FlexDirection='column' BorderRadius='1rem' Padding='1.5rem' Border='1px solid' Gap='1rem' MarginBottom='2rem'>

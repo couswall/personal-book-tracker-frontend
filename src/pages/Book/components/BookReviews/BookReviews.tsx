@@ -1,5 +1,5 @@
 import { FlexContainer } from '@components/index';
-import * as S from '../Book.styled';
+import * as S from './BookReviews.styled';
 
 const AVATAR_URL =
     'https://lh3.googleusercontent.com/aida-public/AB6AXuBSSXSJ8MaJ1EsShAO28sa_EwbtiqSO-7L-elfvDMA8OflYJhlNQgqfXxgFrakihXCwa5bFmOPKgMvNo7CGen3SjnPce8WtGnftBbys8ttD7FMyBioSVU29kYT_n0Eyhnmhnndzk1t9lsW0Odn6xfospEUKgJnMR0pDN4qujQboRtmMVVL0ycy0gnOjSCuft81_a4V08tH_UM9vzKJ-7bNiVB-c2jOTFK31jXSeZtHldX1bZojCzxo-UnHk81VC-HDaxBubc6TQDlA';

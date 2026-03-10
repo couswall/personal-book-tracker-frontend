@@ -1,5 +1,5 @@
 import { BaseContainer, ButtonGhost, FlexContainer, Icon, Text } from '@components/index';
-import * as S from '@pages/Book/Book.styled';
+import * as S from './BookSidebar.styled';
 
 const SIDEBAR_BOOKS = [
     {
