@@ -33,6 +33,8 @@ interface IBaseContainerProps {
     BorderTop?: string;
     LgDisplay?: string;
     LgWidth?: string;
+    LgGridColumn?: string;
+    LgPadding?: string;
     MdWidth?: string;
     MdDisplay?: string;
     SmallPadding?: string;
@@ -43,6 +45,7 @@ interface IBaseContainerProps {
     Filter?: string;
     HBackgroundColorVariant?: keyof ThemeContainerHBGColorVariants;
     ZIndex?: string;
+    GridColumn?: string;
 }
 
 export interface IFlexContainerProps extends IBaseContainerProps {
@@ -115,6 +118,7 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     overflow: ${(props) => props.Overflow || 'unset'};
     filter: ${(props) => props.Filter};
     z-index: ${(props) => props.ZIndex};
+    grid-column: ${(props) => props.GridColumn};
 
     &:hover {
         background-color: ${(props) => {
@@ -129,6 +133,8 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
         display: ${(props) => props.LgDisplay};
         width: ${(props) => props.LgWidth};
+        grid-column: ${(props) => props.LgGridColumn};
+        padding: ${(props) => props.LgPadding};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.md}) {
@@ -152,6 +158,7 @@ export const FlexContainer = styled(BaseContainer)<IFlexContainerProps>`
     gap: ${(props) => props.Gap};
 
     @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
+        grid-column: ${(props) => props.LgGridColumn};
         display: ${(props) => props.LgDisplay};
     }
 

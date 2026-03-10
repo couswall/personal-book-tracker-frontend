@@ -1,32 +1,30 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router';
-import {useEffect, useState} from 'react';
-import {AppDispatch, RootState} from '@store/store';
-import {getBookById} from '@store/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+import { AppDispatch, RootState } from '@store/store';
+import { BaseContainer, ButtonOutline, FlexContainer, GridContainer, Icon, LoadingSpinner, Text, TitleH4 } from '@components/index';
 import {
-    ButtonSecondary,
-    ButtonTransparent,
-    FlexContainer,
-    Icon,
-    LoadingSpinner,
-    Paragraph,
-    TitleH1,
-    TitleH3,
-} from '@components/index';
-import {CoverBookImg, NoBookFound} from '@pages/Book/components/index';
-import {formatIsoDate} from '@pages/Book/Book.utils';
+    CoverBookImg,
+    NoBookFound,
+    BookActivity,
+    BookReviews,
+    BookSidebar,
+} from '@pages/Book/components/index';
+import * as S from '@pages/Book/Book.styled';
+import { getBookById } from '@store/index';
+import { formatIsoDate } from '@pages/Book/Book.utils';
 
 export const Book = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const dispatch: AppDispatch = useDispatch();
-    const {token} = useSelector((state: RootState) => state.auth);
-    const {book, loading} = useSelector((state: RootState) => state.getBookById);
-    const [showMoreDescription, setShowMorDescription] = useState<boolean>(false);
+    const { token } = useSelector((state: RootState) => state.auth);
+    const { book, loading } = useSelector((state: RootState) => state.getBookById);
+    const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!id) return;
-        dispatch(getBookById({token, id}));
-    }, [id]);
+        if (!id || !token) return;
+        dispatch(getBookById({ token, id }));
+    }, [id, token, dispatch]);
 
     if (loading) {
         return (
@@ -36,119 +34,140 @@ export const Book = () => {
         );
     }
 
-    if (!book) {
-        return <NoBookFound />;
-    }
+    if (!book) return <NoBookFound />;
 
     return (
-        <FlexContainer
-            MinHeight="100vh"
-            MaxWidth="1400px"
-            Margin="0px auto"
-            Padding="40px"
-            Gap="1.5rem"
-        >
-            {/* SIDEBAR IMAGE */}
-            <FlexContainer Gap="32px" Width="350px">
-                <FlexContainer
-                    FlexDirection="column"
-                    Gap="1.5rem"
-                    AlignItems="center"
-                    JustifyContent="start"
-                    Width="100%"
-                >
-                    <CoverBookImg imgSrc={book.coverImageUrl} />
-                    <ButtonSecondary Width="100%">{'Want to read'}</ButtonSecondary>
-                </FlexContainer>
-            </FlexContainer>
-            {/* BOOK INFORMATION */}
-            <FlexContainer FlexDirection="column" Width="100%" Gap="1rem">
-                <FlexContainer FlexDirection="column">
-                    <TitleH1 FontSize="2rem">{book?.title}</TitleH1>
-                    {book.authors.map((author, index) => (
-                        <TitleH3 key={index} FontWeight="300" FontSize="1.25rem" FontStyle="italic">
-                            {author}
-                        </TitleH3>
-                    ))}
-                </FlexContainer>
-                <FlexContainer AlignItems="center" Gap="0.5rem">
-                    <Paragraph FontSize="1.5rem">{book.averageRating}</Paragraph>
-                    <Paragraph size="sm">{`${book.reviewCount} reviews`}</Paragraph>
-                </FlexContainer>
-                <FlexContainer FlexDirection="column" Gap="1.25rem" Width="100%">
-                    {book.subtitle && <Paragraph FontWeight="500">{book.subtitle}</Paragraph>}
-                    {book.description && (
-                        <FlexContainer FlexDirection="column" Gap="0.5rem">
-                            <FlexContainer
-                                Position="relative"
-                                MaxHeight={showMoreDescription ? 'none' : '100px'}
-                                Overflow="hidden"
-                            >
-                                <Paragraph
-                                    dangerouslySetInnerHTML={{__html: book.description}}
-                                    FontSize="0.875rem"
-                                />
-                                {!showMoreDescription && (
-                                    <FlexContainer
-                                        Position="absolute"
-                                        Top="95px"
-                                        Width="100%"
-                                        Height="16px"
-                                        Filter="blur(4px)"
-                                    />
-                                )}
+        <S.LayoutContainer>
+            {/* ── Top Section ── */}
+            <S.TopSectionGrid>
+                <S.ImageColumn>
+                    <S.ImageWrapper>
+                        <CoverBookImg width="100%" height="100%" imgSrc={book.coverImageUrl} />
+                    </S.ImageWrapper>
+                </S.ImageColumn>
+
+                <S.InfoColumn>
+                    <FlexContainer FlexDirection='column' Gap='0.5rem' MarginBottom='1.5rem'>
+                        <S.BookTitle>{book.title}</S.BookTitle>
+                        <FlexContainer FlexDirection='column'>
+                            {book.authors?.length > 0 && (
+                                <S.AuthorText variant='muted' FontSize='1.25rem' LgFontSize='1.125rem'>
+                                    by{' '}
+                                    {book.authors.map((author, index) => (
+                                        <span key={index}>
+                                            {author}
+                                            {index < book.authors.length - 1 ? ', ' : ''}
+                                        </span>
+                                    ))}
+                                </S.AuthorText>
+                            )}
+                            {book.subtitle && (
+                                <Text variant='muted' FontSize='1.25rem' LgFontSize='1.125rem' MarginTop='0.25rem'>
+                                    {book.subtitle}
+                                </Text>
+                            )}
+                        </FlexContainer>
+                    </FlexContainer>
+
+                    <FlexContainer FlexWrap='wrap' AlignItems='center' BorderTop='1px solid' BorderBottom='1px solid' Padding='1.5rem 0' MarginBottom='1rem' Gap='2rem'>
+                        {book.publishedDate && (
+                            <FlexContainer FlexDirection='column' Gap='0.25rem'>
+                                <Text variant='muted' weight='bold' size='xs' TextTransform='uppercase' >
+                                    Published
+                                </Text>
+                                <Text weight='medium'>{formatIsoDate(book.publishedDate)}</Text>
                             </FlexContainer>
-                            <ButtonTransparent
-                                Width="fit-content"
-                                HBackGColor="transparent"
-                                onClick={() => setShowMorDescription(!showMoreDescription)}
-                                Padding="0"
-                                FontWeight="500"
-                                HTextDecoration="underline"
-                                FontSize="0.875rem"
-                            >
-                                {showMoreDescription ? 'Show Less' : 'Show More'}
-                                <Icon
-                                    FontColor="inherit"
-                                    MarginLeft="0.5rem"
-                                    className={
+                        )}
+                        {book.pageCount && (
+                            <FlexContainer FlexDirection='column' Gap='0.25rem'>
+                                <Text variant='muted' weight='bold' size='xs' TextTransform='uppercase' >
+                                    Page Count
+                                </Text>
+                                <Text weight='medium'>{book.pageCount} pages</Text>
+                            </FlexContainer>
+                        )}
+                        <FlexContainer FlexDirection='column' Gap='0.25rem'>
+                            <Text variant='muted' weight='bold' size='xs' TextTransform='uppercase' >
+                                Global Rating
+                            </Text>
+                            <FlexContainer AlignItems='center' Gap='0.5rem'>
+                                <S.StarRating isPrimaryColor>
+                                    {[...Array(4)].map((_, i) => (
+                                        <Icon key={i} className="fa-solid fa-star" FontSize='1.125rem' />
+                                    ))}
+                                    <Icon className="fa-solid fa-star-half-stroke" FontSize='1.125rem' />
+                                </S.StarRating>
+                                <Text weight='medium'>{book.averageRating || 'N/A'}</Text>
+                            </FlexContainer>
+                        </FlexContainer>
+                    </FlexContainer>
+
+                    <FlexContainer
+                        AlignItems="center"
+                        Gap="0.5rem"
+                        MarginBottom="2rem"
+                        FlexWrap="wrap"
+                    >
+                        {book.categories?.length > 0 ? (
+                            book.categories.map((cat, i) => (
+                                <S.CategoryBadge key={i}>{cat}</S.CategoryBadge>
+                            ))
+                        ) : (
+                            <S.CategoryBadge>Uncategorized</S.CategoryBadge>
+                        )}
+                    </FlexContainer>
+
+                    <BookActivity />
+
+                    <FlexContainer FlexWrap='wrap' Gap='1rem'>
+                        <ButtonOutline Gap='0.5rem'>
+                            <Icon className="fa-solid fa-share-nodes" FontColor='inherit' />
+                            Share
+                        </ButtonOutline>
+                    </FlexContainer>
+                </S.InfoColumn>
+            </S.TopSectionGrid>
+
+            {/* ── Bottom Section ── */}
+            <GridContainer TemplateColumns='repeat(12, minmax(0, 1fr))' Gap='3rem' LgTemplateColumns='1fr' LgGap='2rem'>
+                <FlexContainer FlexDirection='column' Gap='3rem' GridColumn='span 8 / span 8' LgGridColumn='unset'>
+                    <section>
+                        <TitleH4 MarginBottom='1rem'>
+                            Description
+                        </TitleH4>
+                        {book.description ? (
+                            <>
+                                <S.DescriptionText
+                                    $showMore={showMoreDescription}
+                                    dangerouslySetInnerHTML={{ __html: book.description }}
+                                />
+
+                                <S.ShowMoreBtn
+                                    onClick={() => setShowMoreDescription(!showMoreDescription)}
+                                >
+                                    {showMoreDescription ? 'Show less' : 'Show more'}
+                                    <Icon FontColor='inherit' className={
                                         showMoreDescription
                                             ? 'fa-solid fa-chevron-up'
                                             : 'fa-solid fa-chevron-down'
-                                    }
-                                />
-                            </ButtonTransparent>
-                        </FlexContainer>
-                    )}
+                                    } />
+
+                                </S.ShowMoreBtn>
+                            </>
+                        ) : (
+                            <S.DescriptionText $showMore={true}>
+                                No description available.
+                            </S.DescriptionText>
+                        )}
+                    </section>
+
+                    <BookReviews />
                 </FlexContainer>
-                {book.categories.length > 0 && (
-                    <FlexContainer Gap="0.5rem" AlignItems="start">
-                        <Paragraph size="sm" variant="muted">
-                            {'Categories: '}
-                        </Paragraph>
-                        <FlexContainer FlexWrap="wrap" Gap="1rem">
-                            {book.categories.map((category, index) => (
-                                <Paragraph
-                                    key={index}
-                                    TextDecoration="underline"
-                                    FontWeight="500"
-                                    FontSize="1rem"
-                                >
-                                    {category}
-                                </Paragraph>
-                            ))}
-                        </FlexContainer>
-                    </FlexContainer>
-                )}
-                <Paragraph size="sm" variant="muted">
-                    {`${book.pageCount} pages`}
-                </Paragraph>
-                {book.publishedDate && (
-                    <Paragraph size="sm" variant="muted">
-                        {`Published on ${formatIsoDate(book.publishedDate)}`}
-                    </Paragraph>
-                )}
-            </FlexContainer>
-        </FlexContainer>
+
+                <BaseContainer GridColumn='span 4 / span 4' LgGridColumn='unset'>
+                    <BookSidebar />
+                </BaseContainer>
+            </GridContainer>
+        </S.LayoutContainer>
     );
 };

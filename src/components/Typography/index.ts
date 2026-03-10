@@ -38,6 +38,10 @@ interface ITypographyBaseProps {
     Overflow?: string;
     HTextDecoration?: string;
     SmDisplay?: string;
+    MarginTop?: string;
+    LgFontSize?: string;
+    TextTransform?: string;
+    MarginBottom?: string;
 }
 
 const getVariantStyles = (variant: TypographyVariant, theme: DefaultTheme) => {
@@ -104,6 +108,9 @@ export const Text = styled.p<ITypographyBaseProps>`
     white-space: ${(props) => props.WhiteSpace};
     text-overflow: ${(props) => props.TextOverflow};
     overflow: ${(props) => props.Overflow};
+    margin-top: ${(props) => props.MarginTop};
+    margin-bottom: ${(props) => props.MarginBottom};
+    text-transform: ${(props) => props.TextTransform};
     transition: color 0.2s ease;
 
     /* Apply size styles */
@@ -139,6 +146,10 @@ export const Text = styled.p<ITypographyBaseProps>`
 
     &:hover {
         text-decoration: ${(props) => props.HTextDecoration};
+    }
+
+    @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
+        font-size: ${(props) => props.LgFontSize};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {

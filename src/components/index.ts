@@ -12,3 +12,4 @@ export * from './Logo/index';
 export * from './Logo/LogoIcon';
 export * from './Modal/index';
 export * from './Modal/Modal';
+export * from './GridContainer/index';
