@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export { StarRating } from '@pages/Book/Book.styled';
+export {StarRating} from '@pages/Book/Book.styled';
 
 /* ── Your Review ── */
 
@@ -37,13 +37,6 @@ export const YourReviewBadge = styled.span`
     border: 1px solid ${({theme}) => theme.colors.primaryColor}4D;
 `;
 
-export const ReviewHeader = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-`;
-
 export const YourReviewAvatar = styled.div<{$bgImage?: string}>`
     width: 3rem;
     height: 3rem;
@@ -63,32 +56,6 @@ export const ReviewTitleText = styled.h4`
 export const ReviewDateText = styled.p`
     font-size: 0.75rem;
     color: ${({theme}) => theme.colors.text.light};
-`;
-
-export const ReviewContentContainer = styled.div`
-    margin-bottom: 1.5rem;
-`;
-
-export const ReviewHeading = styled.h5`
-    color: ${({theme}) => theme.colors.text.theme};
-    font-weight: bold;
-    font-size: 1.125rem;
-    margin-bottom: 0.5rem;
-`;
-
-export const ReviewBodyText = styled.p`
-    color: ${({theme}) => theme.colors.text.theme};
-    opacity: 0.8;
-    line-height: 1.625;
-    font-style: italic;
-`;
-
-export const ReviewActionsBar = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid ${({theme}) => theme.colors.borderColor};
 `;
 
 export const ReviewActionBtn = styled.button<{$danger?: boolean}>`
@@ -113,28 +80,6 @@ export const ReviewActionBtn = styled.button<{$danger?: boolean}>`
 `;
 
 /* ── Global Rating ── */
-
-export const GlobalRatingCard = styled.div`
-    background-color: ${({theme}) => theme.colors.backgroundSecondary};
-    border-radius: 1rem;
-    padding: 1.5rem;
-    border: 1px solid ${({theme}) => theme.colors.borderColor};
-
-    @media (min-width: ${({theme}) => theme.breakpoints.lg || '1024px'}) {
-        padding: 2.5rem;
-    }
-`;
-
-export const GlobalRatingGrid = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: center;
-
-    @media (min-width: ${({theme}) => theme.breakpoints.md || '768px'}) {
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-    }
-`;
 
 export const GlobalScoreCol = styled.div`
     display: flex;
@@ -166,34 +111,6 @@ export const BigScoreValue = styled.span`
     }
 `;
 
-export const TotalReviewsText = styled.p`
-    color: ${({theme}) => theme.colors.text.light};
-    font-size: 0.875rem;
-    font-weight: 500;
-`;
-
-export const WriteReviewBtn = styled.button`
-    margin-top: 1.5rem;
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-    background-color: ${({theme}) => theme.colors.primaryColor};
-    color: ${({theme}) => theme.colors.background};
-    font-weight: bold;
-    border-radius: 0.75rem;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    box-shadow: 0 10px 15px -3px ${({theme}) => theme.colors.primaryColor}33;
-
-    &:hover {
-        background-color: ${({theme}) => theme.colors.primaryHover};
-    }
-`;
-
 export const ProgressBarsCol = styled.div`
     display: flex;
     flex-direction: column;
@@ -204,25 +121,11 @@ export const ProgressBarsCol = styled.div`
     }
 `;
 
-export const ProgressBarRow = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-`;
-
-export const StarLabel = styled.span`
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: ${({theme}) => theme.colors.text.light};
-    width: 3rem;
-    flex-shrink: 0;
-`;
-
 export const ProgressBarTrack = styled.div`
     flex-grow: 1;
     height: 0.625rem;
     background-color: ${({theme}) => theme.colors.borderColor};
-    border-radius: 9999px;
+    border-radius: 2rem;
     overflow: hidden;
 `;
 
@@ -230,62 +133,8 @@ export const ProgressBarFill = styled.div<{$percentage: number; $opacity?: numbe
     height: 100%;
     background-color: ${({theme}) => theme.colors.primaryColor};
     width: ${({$percentage}) => $percentage}%;
-    border-radius: 9999px;
+    border-radius: 2rem;
     opacity: ${({$opacity}) => $opacity || 1};
-`;
-
-export const PercentLabel = styled.span`
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: ${({theme}) => theme.colors.text.theme};
-    width: 3rem;
-    text-align: right;
-    opacity: 0.8;
-`;
-
-/* ── Community Reviews ── */
-
-export const CommunityReviewsHeader = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-`;
-
-export const CommunityReviewsTitle = styled.h3`
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: ${({theme}) => theme.colors.text.theme};
-`;
-
-export const SortContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-`;
-
-export const SortLabel = styled.span`
-    color: ${({theme}) => theme.colors.text.light};
-    font-size: 0.875rem;
-`;
-
-export const SortDropdownBtn = styled.button`
-    background-color: ${({theme}) => theme.colors.backgroundSecondary};
-    color: ${({theme}) => theme.colors.text.theme};
-    font-size: 0.875rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid ${({theme}) => theme.colors.borderColor};
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: border-color 0.2s;
-
-    &:hover {
-        border-color: ${({theme}) => theme.colors.primaryColor}80;
-    }
 `;
 
 export const ReviewCard = styled.div`
@@ -307,37 +156,6 @@ export const ReviewCard = styled.div`
     }
 `;
 
-export const ReviewCardHeader = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-`;
-
-export const ReviewerInfoBlock = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-`;
-
-export const ReviewerDetails = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-`;
-
-export const ReviewerNameAndBadge = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-`;
-
-export const ReviewerName = styled.p`
-    font-size: 1rem;
-    font-weight: bold;
-    color: ${({theme}) => theme.colors.text.theme};
-`;
-
 export const VerifiedBadge = styled.span`
     display: flex;
     align-items: center;
@@ -351,23 +169,6 @@ export const VerifiedBadge = styled.span`
     text-transform: uppercase;
     letter-spacing: 0.1em;
     border: 1px solid ${({theme}) => theme.colors.secondaryColor}33;
-`;
-
-export const ReviewCardBody = styled.div``;
-
-export const ReviewCardFooter = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1rem;
-    margin-top: 1rem;
-    border-top: 1px solid ${({theme}) => theme.colors.borderColor};
-`;
-
-export const ReviewInteractions = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
 `;
 
 export const InteractionBtn = styled.button`

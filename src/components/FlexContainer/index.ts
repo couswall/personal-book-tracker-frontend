@@ -46,6 +46,7 @@ interface IBaseContainerProps {
     HBackgroundColorVariant?: keyof ThemeContainerHBGColorVariants;
     ZIndex?: string;
     GridColumn?: string;
+    PaddingTop?: string;
 }
 
 export interface IFlexContainerProps extends IBaseContainerProps {
@@ -119,6 +120,7 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     filter: ${(props) => props.Filter};
     z-index: ${(props) => props.ZIndex};
     grid-column: ${(props) => props.GridColumn};
+    padding-top: ${(props) => props.PaddingTop};
 
     &:hover {
         background-color: ${(props) => {

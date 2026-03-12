@@ -42,6 +42,8 @@ interface ITypographyBaseProps {
     LgFontSize?: string;
     TextTransform?: string;
     MarginBottom?: string;
+    Opacity?: string;
+    FlexShrink?: string;
 }
 
 const getVariantStyles = (variant: TypographyVariant, theme: DefaultTheme) => {
@@ -112,6 +114,8 @@ export const Text = styled.p<ITypographyBaseProps>`
     margin-bottom: ${(props) => props.MarginBottom};
     text-transform: ${(props) => props.TextTransform};
     transition: color 0.2s ease;
+    opacity: ${(props) => props.Opacity};
+    flex-shrink: ${(props) => props.FlexShrink};
 
     /* Apply size styles */
     ${(props) => getSizeStyles(props.size || 'md', props.theme)}

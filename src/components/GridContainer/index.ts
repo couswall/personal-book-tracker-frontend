@@ -10,9 +10,13 @@ export interface IGridContainerProps {
     GridAutoFlow?: string;
     GridAutoRows?: string;
     GridAutoColumns?: string;
+    AlignItems?: string;
 
     LgTemplateColumns?: string;
     LgGap?: string;
+
+    MdTemplateColumns?: string;
+    MdGap?: string;
 }
 
 export const GridContainer = styled.div<IGridContainerProps>`
@@ -26,9 +30,15 @@ export const GridContainer = styled.div<IGridContainerProps>`
     grid-auto-flow: ${(props) => props.GridAutoFlow};
     grid-auto-rows: ${(props) => props.GridAutoRows};
     grid-auto-columns: ${(props) => props.GridAutoColumns};
+    align-items: ${(props) => props.AlignItems};
 
     @media (max-width: ${({theme}) => theme.breakpoints.lg}) {
         grid-template-columns: ${(props) => props.LgTemplateColumns};
         gap: ${(props) => props.LgGap};
+    }
+
+    @media (max-width: ${({theme}) => theme.breakpoints.md}) {
+        grid-template-columns: ${(props) => props.MdTemplateColumns};
+        gap: ${(props) => props.MdGap};
     }
 `;

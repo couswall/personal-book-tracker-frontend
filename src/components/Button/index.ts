@@ -10,6 +10,7 @@ interface ButtonProps {
     Width?: string;
     Height?: string;
     Margin?: string;
+    MarginTop?: string;
     Padding?: string;
     BackGroundColor?: string;
     HBackGColor?: string;
@@ -138,6 +139,7 @@ export const Button = styled.button<ButtonProps>`
     flex: ${(props) => props.Flex};
     max-width: ${(props) => props.MaxWidth};
     margin: ${(props) => props.Margin};
+    margin-top: ${(props) => props.MarginTop};
     gap: ${(props) => props.Gap};
 
     /* Apply size styles */
