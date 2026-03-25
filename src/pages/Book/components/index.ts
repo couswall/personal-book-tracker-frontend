@@ -3,3 +3,4 @@ export * from './NoBookFound';
 export * from './BookActivity';
 export * from './BookReviews';
 export * from './BookSidebar';
+export * from './BookTopSection';

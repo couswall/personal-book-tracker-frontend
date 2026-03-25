@@ -60,6 +60,7 @@ export const ReviewDateText = styled.p`
 
 export const ReviewActionBtn = styled.button<{$danger?: boolean}>`
     display: flex;
+    font-family: inherit;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
@@ -173,6 +174,7 @@ export const VerifiedBadge = styled.span`
 
 export const InteractionBtn = styled.button`
     display: flex;
+    font-family: inherit;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;

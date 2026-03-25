@@ -14,7 +14,13 @@ import {AVATAR_URL, COMMUNITY_REVIEWS} from '@pages/Book/Book.constants';
 
 export const CommunityReviews = () => (
     <BaseContainer as="section">
-        <FlexContainer AlignItems="center" JustifyContent="space-between" MarginBottom="2rem">
+        <FlexContainer
+            AlignItems="center"
+            JustifyContent="space-between"
+            MarginBottom="2rem"
+            FlexWrap="wrap"
+            Gap="1rem"
+        >
             <TitleH4>Community Reviews</TitleH4>
             <FlexContainer AlignItems="center" Gap="0.75rem">
                 <Text size="sm" variant="muted">
@@ -39,6 +45,8 @@ export const CommunityReviews = () => (
                             AlignItems="center"
                             JustifyContent="space-between"
                             BackgroundColor="inherit"
+                            FlexWrap="wrap"
+                            Gap="0.75rem"
                         >
                             <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="inherit">
                                 <S.YourReviewAvatar $bgImage={AVATAR_URL} />
