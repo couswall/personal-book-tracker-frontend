@@ -1,4 +1,4 @@
-import {FlexContainer, ButtonOutline, Icon, Text} from '@components/index';
+import {FlexContainer, ButtonOutline, Icon, Text, ButtonPrimary} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
 import * as S from '@pages/Book/Book.styled';
@@ -7,12 +7,14 @@ import {IBook} from '@store/books/getBookById/interfaces';
 
 interface BookTopSectionProps {
     book: IBook;
+    isOwned: boolean;
     onOpenAddToBookshelfModal: () => void;
 }
 
 export const BookTopSection: React.FC<BookTopSectionProps> = ({
     book,
     onOpenAddToBookshelfModal,
+    isOwned,
 }) => (
     <S.TopSectionGrid>
         <S.ImageColumn>
@@ -100,9 +102,15 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 )}
             </FlexContainer>
 
-            <BookActivity onOpenAddToBookshelfModal={onOpenAddToBookshelfModal} />
+            {isOwned && <BookActivity onOpenAddToBookshelfModal={onOpenAddToBookshelfModal} />}
 
             <FlexContainer FlexWrap="wrap" Gap="1rem">
+                {!isOwned && (
+                    <ButtonPrimary Gap="0.5rem" onClick={onOpenAddToBookshelfModal}>
+                        <Icon className="fa-solid fa-plus" FontColor="inherit" />
+                        Add to Bookshelf
+                    </ButtonPrimary>
+                )}
                 <ButtonOutline Gap="0.5rem">
                     <Icon className="fa-solid fa-share-nodes" FontColor="inherit" />
                     Share

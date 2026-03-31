@@ -8,50 +8,18 @@ import {
     TitleH3,
 } from '@components/index';
 import {BookshelfOptionsContainer} from './AddToBookshelfModal.styled';
-
-const bookshelfOptions = [
-    {
-        id: 1,
-        name: 'Currently Reading',
-        icon: 'fa-solid fa-book-open',
-        isSelected: true,
-        bookCount: 1,
-        isCustom: false,
-    },
-    {
-        id: 2,
-        name: 'Want to Read',
-        icon: 'fa-solid fa-book',
-        isSelected: false,
-        bookCount: 1,
-        isCustom: false,
-    },
-    {
-        id: 3,
-        name: 'Read',
-        icon: 'fa-solid fa-book-bookmark',
-        isSelected: false,
-        bookCount: 1,
-        isCustom: false,
-    },
-    {
-        id: 4,
-        name: 'Custom Bookshelf',
-        icon: 'fa-solid fa-book-bookmark',
-        isSelected: false,
-        bookCount: 1,
-        isCustom: true,
-    },
-];
+import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
 
 export interface IAddToBookshelfModalProps {
     isOpen: boolean;
     onCloseModal: () => void;
+    bookshelves: IBookshelfWithStatus[];
 }
 
 export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
     isOpen,
     onCloseModal,
+    bookshelves,
 }) => {
     return (
         <Modal
@@ -94,14 +62,21 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     OverflowY="auto"
                     Overflow="hidden"
                 >
-                    {bookshelfOptions.map((option) => (
+                    {bookshelves.map((option) => (
                         <BookshelfOptionsContainer key={option.id} isSelected={option.isSelected}>
                             <FlexContainer
                                 Gap="1.25rem"
                                 AlignItems="center"
                                 BackgroundColor="transparent"
                             >
-                                <LightIcon className={option.icon} size="lg" />
+                                <LightIcon
+                                    className={
+                                        option.isCustom
+                                            ? 'fa-solid fa-book-bookmark'
+                                            : 'fa-solid fa-book'
+                                    }
+                                    size="lg"
+                                />
                                 <FlexContainer
                                     FlexDirection="column"
                                     Gap="0.25rem"

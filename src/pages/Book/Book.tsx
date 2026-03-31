@@ -14,19 +14,23 @@ import {NoBookFound, BookReviews, BookSidebar, BookTopSection} from '@pages/Book
 import {AddToBookshelfModal} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal';
 import * as S from '@pages/Book/Book.styled';
 import {getBookById} from '@store/index';
+import {getBookshelvesWithStatus} from '@pages/Book/Book.utils';
+import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
 
 export const Book = () => {
     const {id} = useParams();
     const dispatch: AppDispatch = useDispatch();
-    const {token} = useSelector((state: RootState) => state.auth);
+    const {token, user} = useSelector((state: RootState) => state.auth);
     const {book, loading} = useSelector((state: RootState) => state.getBookById);
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
     const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
+    const [bookshelves, setBookshelves] = useState<IBookshelfWithStatus[]>([]);
 
     useEffect(() => {
-        if (!id || !token) return;
+        if (!id || !token || !user) return;
         dispatch(getBookById({token, id}));
-    }, [id, token, dispatch]);
+        getBookshelvesWithStatus({token, userId: user.id, apiBookId: id, setBookshelves});
+    }, [id, token, dispatch, user]);
 
     if (loading) {
         return (
@@ -42,6 +46,7 @@ export const Book = () => {
         <S.LayoutContainer>
             <BookTopSection
                 book={book}
+                isOwned={bookshelves.some((shelf) => shelf.isSelected)}
                 onOpenAddToBookshelfModal={() => setShowAddToBookshelfModal(true)}
             />
 
@@ -97,6 +102,7 @@ export const Book = () => {
             <AddToBookshelfModal
                 isOpen={showAddToBookshelfModal}
                 onCloseModal={() => setShowAddToBookshelfModal(false)}
+                bookshelves={bookshelves}
             />
         </S.LayoutContainer>
     );
