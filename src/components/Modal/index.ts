@@ -14,7 +14,8 @@ export const ModalOverlay = styled(FlexContainer)<{$isVisible: boolean}>`
     visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};
     pointer-events: ${(props) => (props.$isVisible ? 'auto' : 'none')};
 
-    transition: background-color 0.3s ease-out,
-                backdrop-filter 0.3s ease-out,
-                visibility 0s ${(props) => (props.$isVisible ? '0s' : '0.3s')};
+    transition:
+        background-color 0.2s ease-out,
+        backdrop-filter 0.2s ease-out,
+        visibility 0s ${(props) => (props.$isVisible ? '0s' : '0.2s')};
 `;

@@ -11,6 +11,7 @@ import {
     TitleH4,
 } from '@components/index';
 import {NoBookFound, BookReviews, BookSidebar, BookTopSection} from '@pages/Book/components/index';
+import {AddToBookshelfModal} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal';
 import * as S from '@pages/Book/Book.styled';
 import {getBookById} from '@store/index';
 
@@ -20,6 +21,7 @@ export const Book = () => {
     const {token} = useSelector((state: RootState) => state.auth);
     const {book, loading} = useSelector((state: RootState) => state.getBookById);
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
+    const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
 
     useEffect(() => {
         if (!id || !token) return;
@@ -38,7 +40,10 @@ export const Book = () => {
 
     return (
         <S.LayoutContainer>
-            <BookTopSection book={book} />
+            <BookTopSection
+                book={book}
+                onOpenAddToBookshelfModal={() => setShowAddToBookshelfModal(true)}
+            />
 
             {/* ── Bottom Section ── */}
             <GridContainer
@@ -89,6 +94,10 @@ export const Book = () => {
                     <BookSidebar />
                 </BaseContainer>
             </GridContainer>
+            <AddToBookshelfModal
+                isOpen={showAddToBookshelfModal}
+                onCloseModal={() => setShowAddToBookshelfModal(false)}
+            />
         </S.LayoutContainer>
     );
 };

@@ -47,6 +47,8 @@ interface IBaseContainerProps {
     ZIndex?: string;
     GridColumn?: string;
     PaddingTop?: string;
+    OverflowY?: string;
+    HBorderColorVariant?: keyof ThemeContainerHBorderColorVariants;
 }
 
 export interface IFlexContainerProps extends IBaseContainerProps {
@@ -64,6 +66,11 @@ type ThemeContainerBGColorVariants = {
 };
 
 type ThemeContainerHBGColorVariants = {
+    primary: string;
+    muted: string;
+};
+
+type ThemeContainerHBorderColorVariants = {
     primary: string;
     muted: string;
 };
@@ -117,6 +124,7 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     left: ${(props) => props.Left};
     right: ${(props) => props.Right};
     overflow: ${(props) => props.Overflow || 'unset'};
+    overflow-y: ${(props) => props.OverflowY};
     filter: ${(props) => props.Filter};
     z-index: ${(props) => props.ZIndex};
     grid-column: ${(props) => props.GridColumn};
@@ -129,6 +137,13 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
                 muted: props.theme.colors.containerHover.muted,
             };
             return props.HBackgroundColorVariant && colorMap[props.HBackgroundColorVariant];
+        }};
+        border-color: ${(props) => {
+            const colorMap: ThemeContainerHBorderColorVariants = {
+                primary: props.theme.colors.containerHover.primary,
+                muted: props.theme.colors.containerHover.muted,
+            };
+            return props.HBorderColorVariant && colorMap[props.HBorderColorVariant];
         }};
     }
 

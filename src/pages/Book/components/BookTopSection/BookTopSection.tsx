@@ -7,9 +7,13 @@ import {IBook} from '@store/books/getBookById/interfaces';
 
 interface BookTopSectionProps {
     book: IBook;
+    onOpenAddToBookshelfModal: () => void;
 }
 
-export const BookTopSection = ({book}: BookTopSectionProps) => (
+export const BookTopSection: React.FC<BookTopSectionProps> = ({
+    book,
+    onOpenAddToBookshelfModal,
+}) => (
     <S.TopSectionGrid>
         <S.ImageColumn>
             <S.ImageWrapper>
@@ -96,7 +100,7 @@ export const BookTopSection = ({book}: BookTopSectionProps) => (
                 )}
             </FlexContainer>
 
-            <BookActivity />
+            <BookActivity onOpenAddToBookshelfModal={onOpenAddToBookshelfModal} />
 
             <FlexContainer FlexWrap="wrap" Gap="1rem">
                 <ButtonOutline Gap="0.5rem">
