@@ -9,4 +9,7 @@ export const urlWeb = {
     getBookById: 'book/bookById',
     searchBook: 'book/search',
     getBookshelvesWithStatus: 'bookshelf/bookStatus/:userId/:apiBookId',
+    addBookToBookshelf: 'bookshelfBook/addToBookshelf',
+    updateBookToBookshelf: 'bookshelfBook/updateBookshelf',
+    removeBookFromBookshelf: 'bookshelfBook/:bookshelfBookId',
 };

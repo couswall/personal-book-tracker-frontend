@@ -1,26 +1,47 @@
+import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
 import {
     ButtonGhost,
     ButtonPrimary,
     FlexContainer,
-    LightIcon,
+    Icon,
     Modal,
     Text,
     TitleH3,
 } from '@components/index';
-import {BookshelfOptionsContainer} from './AddToBookshelfModal.styled';
+import {
+    BookshelfOptionsContainer,
+    ModalAlert,
+    IAddToBookshelfModalProps,
+} from '@pages/Book/components/AddToBookshelfModal/index';
 import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
-
-export interface IAddToBookshelfModalProps {
-    isOpen: boolean;
-    onCloseModal: () => void;
-    bookshelves: IBookshelfWithStatus[];
-}
 
 export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
     isOpen,
     onCloseModal,
     bookshelves,
+    bookId,
+    token,
+    onRefresh,
 }) => {
+    const {isLoading, alert, add, update, remove} = useBookshelfActions({token, bookId, onRefresh});
+
+    const handleSelectBookshelf = async (bookshelf: IBookshelfWithStatus) => {
+        if (isLoading || bookshelf.isSelected) return;
+        const selectedBookshelf = bookshelves.find((shelf) => shelf.isSelected);
+        if (selectedBookshelf?.bookshelfBookId) {
+            await update(selectedBookshelf.bookshelfBookId, bookshelf.id, bookshelf.name);
+            return;
+        }
+        await add(bookshelf.id, bookshelf.name);
+    };
+
+    const handleDeleteFromBookshelf = async () => {
+        if (isLoading) return;
+        const selectedBookshelf = bookshelves.find((shelf) => shelf.isSelected);
+        if (!selectedBookshelf?.bookshelfBookId) return;
+        await remove(selectedBookshelf.bookshelfBookId, selectedBookshelf.name);
+    };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -51,7 +72,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                         Height="1.25rem"
                         onClick={onCloseModal}
                     >
-                        <LightIcon className="fa-solid fa-xmark" size="lg" />
+                        <Icon className="fa-solid fa-xmark" size="lg" />
                     </ButtonGhost>
                 </FlexContainer>
                 <FlexContainer
@@ -60,16 +81,21 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     BackgroundColor="inherit"
                     MaxHeight="300px"
                     OverflowY="auto"
-                    Overflow="hidden"
                 >
                     {bookshelves.map((option) => (
-                        <BookshelfOptionsContainer key={option.id} isSelected={option.isSelected}>
+                        <BookshelfOptionsContainer
+                            key={option.id}
+                            isSelected={option.isSelected}
+                            $isLoading={isLoading}
+                            onClick={() => handleSelectBookshelf(option)}
+                        >
                             <FlexContainer
                                 Gap="1.25rem"
                                 AlignItems="center"
                                 BackgroundColor="transparent"
                             >
-                                <LightIcon
+                                <Icon
+                                    variant={option.isSelected ? 'primary' : 'muted'}
                                     className={
                                         option.isCustom
                                             ? 'fa-solid fa-book-bookmark'
@@ -82,7 +108,12 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                     Gap="0.25rem"
                                     BackgroundColor="transparent"
                                 >
-                                    <Text size="lg">{option.name}</Text>
+                                    <Text
+                                        size="lg"
+                                        variant={option.isSelected ? 'primary' : 'default'}
+                                    >
+                                        {option.name}
+                                    </Text>
                                     <Text variant="muted" size="xs">
                                         {option.bookCount}{' '}
                                         {option.bookCount === 1 ? 'BOOK' : 'BOOKS'}
@@ -90,16 +121,26 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                 </FlexContainer>
                             </FlexContainer>
                             {option.isSelected && (
-                                <LightIcon className="fa-solid fa-check" size="lg" />
+                                <Icon variant="primary" className="fa-solid fa-check" size="lg" />
                             )}
                         </BookshelfOptionsContainer>
                     ))}
                 </FlexContainer>
                 <ButtonPrimary>Create a new bookshelf</ButtonPrimary>
-                <Text variant="danger" size="xs" Cursor="pointer" Width="100%" TextAlign="center">
-                    Remove from Bookshelf
-                </Text>
+                {bookshelves.some((shelf) => shelf.isSelected) && (
+                    <Text
+                        variant={isLoading ? 'muted' : 'danger'}
+                        size="xs"
+                        Cursor={isLoading ? 'default' : 'pointer'}
+                        Width="100%"
+                        TextAlign="center"
+                        onClick={isLoading ? undefined : handleDeleteFromBookshelf}
+                    >
+                        Remove from Bookshelf
+                    </Text>
+                )}
             </FlexContainer>
+            {alert.visible && <ModalAlert message={alert.message} variant={alert.variant} />}
         </Modal>
     );
 };

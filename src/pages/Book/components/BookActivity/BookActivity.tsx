@@ -3,9 +3,13 @@ import * as S from './BookActivity.styled';
 
 interface IBookActivityProps {
     onOpenAddToBookshelfModal: () => void;
+    bookshelfLabel?: string;
 }
 
-export const BookActivity: React.FC<IBookActivityProps> = ({onOpenAddToBookshelfModal}) => (
+export const BookActivity: React.FC<IBookActivityProps> = ({
+    onOpenAddToBookshelfModal,
+    bookshelfLabel,
+}) => (
     <S.ActivityCard
         FlexDirection="column"
         BorderRadius="1rem"
@@ -28,7 +32,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({onOpenAddToBookshelf
                     </Text>
                     <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
                         <Text size="sm" weight="bold">
-                            Currently Reading
+                            {bookshelfLabel}
                         </Text>
                         <S.TextLink onClick={onOpenAddToBookshelfModal}>
                             Move to another shelf

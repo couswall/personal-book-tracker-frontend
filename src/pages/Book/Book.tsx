@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {
     BaseContainer,
@@ -14,7 +14,7 @@ import {NoBookFound, BookReviews, BookSidebar, BookTopSection} from '@pages/Book
 import {AddToBookshelfModal} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal';
 import * as S from '@pages/Book/Book.styled';
 import {getBookById} from '@store/index';
-import {getBookshelvesWithStatus} from '@pages/Book/Book.utils';
+import {getBookshelvesWithStatus} from '@pages/Book/book.api';
 import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
 
 export const Book = () => {
@@ -25,6 +25,11 @@ export const Book = () => {
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
     const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
     const [bookshelves, setBookshelves] = useState<IBookshelfWithStatus[]>([]);
+
+    const handleRefresh = useCallback(() => {
+        if (!token || !user || !id) return Promise.resolve();
+        return getBookshelvesWithStatus({token, userId: user.id, apiBookId: id, setBookshelves});
+    }, [token, user, id]);
 
     useEffect(() => {
         if (!id || !token || !user) return;
@@ -48,6 +53,7 @@ export const Book = () => {
                 book={book}
                 isOwned={bookshelves.some((shelf) => shelf.isSelected)}
                 onOpenAddToBookshelfModal={() => setShowAddToBookshelfModal(true)}
+                bookshelfLabel={bookshelves.find((shelf) => shelf.isSelected)?.name}
             />
 
             {/* ── Bottom Section ── */}
@@ -103,6 +109,9 @@ export const Book = () => {
                 isOpen={showAddToBookshelfModal}
                 onCloseModal={() => setShowAddToBookshelfModal(false)}
                 bookshelves={bookshelves}
+                bookId={id}
+                token={token}
+                onRefresh={handleRefresh}
             />
         </S.LayoutContainer>
     );

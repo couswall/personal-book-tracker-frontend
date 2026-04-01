@@ -9,12 +9,14 @@ interface BookTopSectionProps {
     book: IBook;
     isOwned: boolean;
     onOpenAddToBookshelfModal: () => void;
+    bookshelfLabel?: string;
 }
 
 export const BookTopSection: React.FC<BookTopSectionProps> = ({
     book,
     onOpenAddToBookshelfModal,
     isOwned,
+    bookshelfLabel,
 }) => (
     <S.TopSectionGrid>
         <S.ImageColumn>
@@ -102,7 +104,12 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 )}
             </FlexContainer>
 
-            {isOwned && <BookActivity onOpenAddToBookshelfModal={onOpenAddToBookshelfModal} />}
+            {isOwned && (
+                <BookActivity
+                    onOpenAddToBookshelfModal={onOpenAddToBookshelfModal}
+                    bookshelfLabel={bookshelfLabel}
+                />
+            )}
 
             <FlexContainer FlexWrap="wrap" Gap="1rem">
                 {!isOwned && (
