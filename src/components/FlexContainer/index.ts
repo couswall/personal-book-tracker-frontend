@@ -40,6 +40,7 @@ interface IBaseContainerProps {
     SmallPadding?: string;
     SmallFlexDir?: string;
     SmallWidth?: string;
+    SmallHeight?: string;
     hasError?: boolean;
     Overflow?: string;
     Filter?: string;
@@ -162,6 +163,7 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
         padding: ${(props) => props.SmallPadding};
         width: ${(props) => props.SmallWidth};
+        height: ${(props) => props.SmallHeight};
     }
 `;
 

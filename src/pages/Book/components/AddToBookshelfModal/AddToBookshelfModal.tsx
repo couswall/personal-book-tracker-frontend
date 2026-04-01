@@ -6,14 +6,26 @@ import {
     Icon,
     Modal,
     Text,
-    TitleH3,
+    TitleH4,
 } from '@components/index';
 import {
     BookshelfOptionsContainer,
+    ShelfIconWrapper,
     ModalAlert,
     IAddToBookshelfModalProps,
 } from '@pages/Book/components/AddToBookshelfModal/index';
 import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
+
+const DEFAULT_SHELF_ICONS: Record<string, string> = {
+    'to be read': 'fa-solid fa-hourglass-half',
+    'currently reading': 'fa-solid fa-book-open',
+    read: 'fa-solid fa-check-double',
+};
+
+const getShelfIcon = (name: string, isCustom: boolean): string => {
+    if (isCustom) return 'fa-solid fa-book-bookmark';
+    return DEFAULT_SHELF_ICONS[name.toLowerCase()] ?? 'fa-solid fa-book';
+};
 
 export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
     isOpen,
@@ -48,39 +60,45 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
             onCloseModal={onCloseModal}
             JustifyContent="center"
             AlignItems="center"
+            Padding="1rem"
         >
             <FlexContainer
                 FlexDirection="column"
-                Gap="1.5rem"
                 BackgroundColorVariant="card"
-                Padding="1rem 1.25rem"
-                Height="max-content"
                 BorderRadius="0.75rem"
-                Border="1px solid"
-                Width="400px"
+                Border="1px solid rgba(255, 255, 255, 0.05)"
+                Width="100%"
+                MaxWidth="440px"
+                Overflow="hidden"
+                BoxShadow="0 32px 64px -12px rgba(0, 0, 0, 0.6)"
             >
                 <FlexContainer
                     JustifyContent="space-between"
                     AlignItems="center"
-                    BackgroundColor="inherit"
+                    BackgroundColorVariant="tertiary"
+                    BorderBottom="1px solid rgba(255, 255, 255, 0.05)"
+                    Padding="1.25rem 1.5rem"
                     Width="100%"
                 >
-                    <TitleH3>Add to Bookshelf</TitleH3>
+                    <TitleH4>Add to bookshelf</TitleH4>
                     <ButtonGhost
-                        Padding="1rem"
-                        Width="1.25rem"
-                        Height="1.25rem"
+                        BorderRadius="50%"
+                        Width="2.5rem"
+                        Height="2.5rem"
+                        Padding="0"
                         onClick={onCloseModal}
                     >
-                        <Icon className="fa-solid fa-xmark" size="lg" />
+                        <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />
                     </ButtonGhost>
                 </FlexContainer>
+
                 <FlexContainer
                     FlexDirection="column"
                     Gap="0.5rem"
-                    BackgroundColor="inherit"
-                    MaxHeight="300px"
+                    BackgroundColor="transparent"
+                    MaxHeight="240px"
                     OverflowY="auto"
+                    Padding="1rem"
                 >
                     {bookshelves.map((option) => (
                         <BookshelfOptionsContainer
@@ -90,26 +108,25 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                             onClick={() => handleSelectBookshelf(option)}
                         >
                             <FlexContainer
-                                Gap="1.25rem"
+                                Gap="1rem"
                                 AlignItems="center"
                                 BackgroundColor="transparent"
                             >
-                                <Icon
-                                    variant={option.isSelected ? 'primary' : 'muted'}
-                                    className={
-                                        option.isCustom
-                                            ? 'fa-solid fa-book-bookmark'
-                                            : 'fa-solid fa-book'
-                                    }
-                                    size="lg"
-                                />
+                                <ShelfIconWrapper isSelected={option.isSelected}>
+                                    <Icon
+                                        variant={option.isSelected ? 'primary' : 'muted'}
+                                        className={getShelfIcon(option.name, option.isCustom)}
+                                        size="md"
+                                    />
+                                </ShelfIconWrapper>
                                 <FlexContainer
                                     FlexDirection="column"
-                                    Gap="0.25rem"
+                                    Gap="0.2rem"
                                     BackgroundColor="transparent"
                                 >
                                     <Text
-                                        size="lg"
+                                        size="md"
+                                        weight="semibold"
                                         variant={option.isSelected ? 'primary' : 'default'}
                                     >
                                         {option.name}
@@ -121,24 +138,47 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                 </FlexContainer>
                             </FlexContainer>
                             {option.isSelected && (
-                                <Icon variant="primary" className="fa-solid fa-check" size="lg" />
+                                <Icon
+                                    variant="primary"
+                                    className="fa-solid fa-circle-check"
+                                    size="xl"
+                                />
                             )}
                         </BookshelfOptionsContainer>
                     ))}
                 </FlexContainer>
-                <ButtonPrimary>Create a new bookshelf</ButtonPrimary>
-                {bookshelves.some((shelf) => shelf.isSelected) && (
-                    <Text
-                        variant={isLoading ? 'muted' : 'danger'}
-                        size="xs"
-                        Cursor={isLoading ? 'default' : 'pointer'}
-                        Width="100%"
-                        TextAlign="center"
-                        onClick={isLoading ? undefined : handleDeleteFromBookshelf}
-                    >
-                        Remove from Bookshelf
-                    </Text>
-                )}
+
+                <FlexContainer
+                    FlexDirection="column"
+                    Gap="0.75rem"
+                    Padding="0.5rem 1rem 1.5rem"
+                    BackgroundColor="transparent"
+                >
+                    <ButtonPrimary fullWidth Gap="0.5rem">
+                        <Icon className="fa-solid fa-plus" size="md" FontColor="inherit" />
+                        <Text
+                            size="xs"
+                            weight="bold"
+                            TextTransform="uppercase"
+                            LetterSpacing="0.1em"
+                            FontColor="inherit"
+                        >
+                            Create new shelf
+                        </Text>
+                    </ButtonPrimary>
+                    {bookshelves.some((shelf) => shelf.isSelected) && (
+                        <Text
+                            variant={isLoading ? 'muted' : 'danger'}
+                            size="sm"
+                            Cursor={isLoading ? 'default' : 'pointer'}
+                            Width="100%"
+                            TextAlign="center"
+                            onClick={isLoading ? undefined : handleDeleteFromBookshelf}
+                        >
+                            Remove from Bookshelf
+                        </Text>
+                    )}
+                </FlexContainer>
             </FlexContainer>
             {alert.visible && <ModalAlert message={alert.message} variant={alert.variant} />}
         </Modal>

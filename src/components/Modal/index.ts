@@ -9,8 +9,12 @@ export const ModalOverlay = styled(FlexContainer)<{$isVisible: boolean}>`
     height: 100vh;
     z-index: 5;
 
-    background-color: ${(props) => (props.$isVisible ? 'rgb(0 0 0 / 0.6)' : 'rgb(0 0 0 / 0)')};
-    backdrop-filter: ${(props) => (props.$isVisible ? 'blur(2px)' : 'blur(0px)')};
+    background-color: ${(props) =>
+        props.$isVisible
+            ? `${props.theme.colors.background}CC`
+            : `${props.theme.colors.background}00`};
+    backdrop-filter: ${(props) => (props.$isVisible ? 'blur(4px)' : 'blur(0px)')};
+    -webkit-backdrop-filter: ${(props) => (props.$isVisible ? 'blur(4px)' : 'blur(0px)')};
     visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};
     pointer-events: ${(props) => (props.$isVisible ? 'auto' : 'none')};
 

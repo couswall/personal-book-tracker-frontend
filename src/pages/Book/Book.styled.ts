@@ -1,5 +1,5 @@
-import { Button, Icon, Text } from '@components/index';
 import styled from 'styled-components';
+import {Button, Icon, Text} from '@components/index';
 
 export const LayoutContainer = styled.main`
     padding: 2rem 1rem;
