@@ -1,6 +1,6 @@
 import {BaseContainer, FlexContainer, Text, TitleH5} from '@components/index';
-import * as S from '@pages/Book/components/BookReviews/BookReviews.styled';
-import {AVATAR_URL} from '@pages/Book/Book.constants';
+import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
+import {AVATAR_URL} from '@pages/Book/book.constants';
 
 export const YourReview = () => (
     <BaseContainer as="section">

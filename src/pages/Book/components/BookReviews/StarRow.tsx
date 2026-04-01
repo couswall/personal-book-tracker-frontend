@@ -1,4 +1,4 @@
-import * as S from '@pages/Book/components/BookReviews/BookReviews.styled';
+import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
 
 export const StarRow = ({count, filled = true}: {count: number; filled?: boolean}) => (
     <S.StarRating>

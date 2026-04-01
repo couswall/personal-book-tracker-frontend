@@ -14,7 +14,10 @@ export const BookshelfOptionsContainer = styled(FlexContainer)<IBookshelfOptions
     cursor: ${({$isLoading}) => ($isLoading ? 'default' : 'pointer')};
     pointer-events: ${({$isLoading}) => ($isLoading ? 'none' : 'auto')};
     opacity: ${({$isLoading}) => ($isLoading ? 0.5 : 1)};
-    transition: opacity 0.15s ease, background-color 0.2s ease, border-color 0.3s ease,
+    transition:
+        opacity 0.15s ease,
+        background-color 0.2s ease,
+        border-color 0.3s ease,
         box-shadow 0.3s ease;
     background-color: ${({isSelected, theme}) =>
         isSelected ? `${theme.colors.primaryColor}1A` : 'transparent'};

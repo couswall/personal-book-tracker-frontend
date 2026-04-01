@@ -1,5 +1,5 @@
 import {Icon, Text} from '@components/index';
-import {AlertContainer} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal.styled';
+import {AlertContainer} from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.styled';
 import {IModalAlertProps} from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.interfaces';
 
 export const ModalAlert: React.FC<IModalAlertProps> = ({message, variant}) => {

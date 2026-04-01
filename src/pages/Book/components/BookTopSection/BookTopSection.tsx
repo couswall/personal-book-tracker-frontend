@@ -1,8 +1,8 @@
 import {FlexContainer, ButtonOutline, Icon, Text, ButtonPrimary} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
-import * as S from '@pages/Book/Book.styled';
-import {formatIsoDate} from '@pages/Book/Book.utils';
+import * as S from '@pages/Book/book.styled';
+import {formatIsoDate} from '@pages/Book/book.utils';
 import {IBook} from '@store/books/getBookById/interfaces';
 
 interface BookTopSectionProps {

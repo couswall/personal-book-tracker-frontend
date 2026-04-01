@@ -8,9 +8,9 @@ import {
     TitleH4,
     TitleH5,
 } from '@components/index';
-import * as S from '@pages/Book/components/BookReviews/BookReviews.styled';
+import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
 import {StarRow} from '@pages/Book/components/BookReviews/StarRow';
-import {AVATAR_URL, COMMUNITY_REVIEWS} from '@pages/Book/Book.constants';
+import {AVATAR_URL, COMMUNITY_REVIEWS} from '@pages/Book/book.constants';
 
 export const CommunityReviews = () => (
     <BaseContainer as="section">

@@ -1,5 +1,5 @@
 import {BaseContainer, FlexContainer, Icon, Text} from '@components/index';
-import * as S from './BookActivity.styled';
+import * as S from '@pages/Book/components/BookActivity/bookActivity.styled';
 
 interface IBookActivityProps {
     onOpenAddToBookshelfModal: () => void;

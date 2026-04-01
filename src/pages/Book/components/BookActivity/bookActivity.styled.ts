@@ -1,7 +1,7 @@
-import { Button, FlexContainer } from '@components/index';
+import {Button, FlexContainer} from '@components/index';
 import styled from 'styled-components';
 
-export { StarRating } from '@pages/Book/Book.styled';
+export {StarRating} from '@pages/Book/book.styled';
 
 export const ActivityCard = styled(FlexContainer)`
     background-color: ${({theme}) => theme.colors.backgroundSecondary}80;

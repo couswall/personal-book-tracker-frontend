@@ -14,7 +14,7 @@ import {
     ModalAlert,
     IAddToBookshelfModalProps,
 } from '@pages/Book/components/AddToBookshelfModal/index';
-import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
+import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
 
 const DEFAULT_SHELF_ICONS: Record<string, string> = {
     'to be read': 'fa-solid fa-hourglass-half',

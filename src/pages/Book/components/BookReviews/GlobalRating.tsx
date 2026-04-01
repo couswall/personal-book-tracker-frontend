@@ -6,8 +6,8 @@ import {
     Icon,
     Text,
 } from '@components/index';
-import * as S from '@pages/Book/components/BookReviews/BookReviews.styled';
-import {RATING_BARS} from '@pages/Book/Book.constants';
+import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
+import {RATING_BARS} from '@pages/Book/book.constants';
 
 export const GlobalRating = () => (
     <BaseContainer as="section">

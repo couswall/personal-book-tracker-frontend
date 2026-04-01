@@ -1,7 +1,7 @@
-import { FlexContainer, Text } from '@components/index';
+import {FlexContainer, Text} from '@components/index';
 import styled from 'styled-components';
 
-export { StarRating } from '@pages/Book/Book.styled';
+export {StarRating} from '@pages/Book/book.styled';
 
 export const MockSidebarItemImg = styled.div<{$bgImage?: string}>`
     width: 5rem;

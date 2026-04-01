@@ -3,7 +3,7 @@ import {apiUrl, urlWeb} from '@constants/apiEndpoints';
 import {
     IGetBookshelvesWithStatusParams,
     IGetBookshelvesWithStatusResponse,
-} from '@pages/Book/Book.interfaces';
+} from '@pages/Book/book.interfaces';
 
 export const getBookshelvesWithStatus = async (params: IGetBookshelvesWithStatusParams) => {
     const headers = {

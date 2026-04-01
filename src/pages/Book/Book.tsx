@@ -12,10 +12,10 @@ import {
 } from '@components/index';
 import {NoBookFound, BookReviews, BookSidebar, BookTopSection} from '@pages/Book/components/index';
 import {AddToBookshelfModal} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal';
-import * as S from '@pages/Book/Book.styled';
+import * as S from '@pages/Book/book.styled';
 import {getBookById} from '@store/index';
 import {getBookshelvesWithStatus} from '@pages/Book/book.api';
-import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
+import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
 
 export const Book = () => {
     const {id} = useParams();

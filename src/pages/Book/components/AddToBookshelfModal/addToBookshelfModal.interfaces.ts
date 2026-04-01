@@ -1,4 +1,4 @@
-import {IBookshelfWithStatus} from '@pages/Book/Book.interfaces';
+import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
 
 export interface IBaseBookshelfParams {
     token: string;

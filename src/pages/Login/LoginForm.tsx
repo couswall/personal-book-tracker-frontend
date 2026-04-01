@@ -99,11 +99,7 @@ export const LoginForm = () => {
                                 BackgroundColor="transparent"
                                 JustifyContent="center"
                             >
-                                <LoadingSpinner
-                                    Width="25px"
-                                    Padding="5px"
-                                    BackGroundColor="#FFFFFE"
-                                />
+                                <LoadingSpinner Width="25px" Padding="5px" />
                             </FlexContainer>
                         ) : (
                             <>{LOGIN_PAGE.BTN_LOGIN}</>
