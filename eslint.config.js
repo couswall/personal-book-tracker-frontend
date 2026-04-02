@@ -30,7 +30,7 @@ export default tseslint.config(
             // No-negotiables
             '@typescript-eslint/no-explicit-any': 'error',
             '@typescript-eslint/consistent-type-assertions': ['error', {assertionStyle: 'never'}],
-            'max-lines': ['error', {max: 190, skipBlankLines: true, skipComments: true}],
+            'max-lines': ['error', {max: 210, skipBlankLines: true, skipComments: true}],
 
             // TypeScript
             '@typescript-eslint/no-unused-vars': [

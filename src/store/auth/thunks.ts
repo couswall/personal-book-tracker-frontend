@@ -1,7 +1,12 @@
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {NavigateFunction} from 'react-router';
 import {getEnvVariables} from '@helpers/getEnvVariables';
-import {ILoginFetchResponse, ILoginParams, IRegisterUserParams} from '@store/auth/interfaces';
+import {
+    ILoginFetchResponse,
+    ILoginParams,
+    ILoginSuccessRes,
+    IRegisterUserParams,
+} from '@store/auth/interfaces';
 import {urlWeb} from '@constants/apiEndpoints';
 import {privateRoutes} from '@routes/routes';
 import {createAsyncThunk} from '@reduxjs/toolkit';
@@ -58,11 +63,11 @@ export const registerUser = createAsyncThunk(
     }
 );
 
-export const refreshToken = createAsyncThunk(
+export const refreshToken = createAsyncThunk<ILoginSuccessRes, void, {state: RootState}>(
     'auth/refreshToken',
     async (_, thunkAPI) => {
         try {
-            const state = thunkAPI.getState() as RootState;
+            const state = thunkAPI.getState();
             const token = state.auth.token;
 
             const {data}: AxiosResponse<ILoginFetchResponse> = await axios.post(

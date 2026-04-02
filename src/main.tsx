@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './styles.css'
-import {BookTracker} from './BookTracker'
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import './styles.css';
+import {BookTracker} from './BookTracker';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BookTracker />
-  </StrictMode>,
-)
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found');
+
+createRoot(rootElement).render(
+    <StrictMode>
+        <BookTracker />
+    </StrictMode>
+);
