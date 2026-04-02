@@ -1,19 +1,13 @@
-import axios, {AxiosError, AxiosResponse} from 'axios';
 import {NavigateFunction} from 'react-router';
-import {getEnvVariables} from '@helpers/getEnvVariables';
-import {
-    ILoginFetchResponse,
-    ILoginParams,
-    ILoginSuccessRes,
-    IRegisterUserParams,
-} from '@store/auth/interfaces';
-import {urlWeb} from '@constants/apiEndpoints';
 import {privateRoutes} from '@routes/routes';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {RootState} from '@store/store';
 import {onLogout} from '@store/auth/authSlice';
-
-const apiUrl = getEnvVariables().api_url;
+import {createPrivateClient, createPublicClient} from '@api/httpClient';
+import {urlWeb} from '@constants/apiEndpoints';
+import {API_ERROR_MSGS, GENERAL_ERROR_MSGS} from '@constants/errorMessages';
+import {ILoginParams, ILoginSuccessRes, IRegisterUserParams} from '@store/auth/interfaces';
+import {IApiResponse} from '@api/api.interfaces';
 
 export const loginUser = createAsyncThunk(
     'auth/login',
@@ -22,20 +16,18 @@ export const loginUser = createAsyncThunk(
         thunkAPI
     ) => {
         try {
-            const {data}: AxiosResponse<ILoginFetchResponse> = await axios.post(
-                `${apiUrl}${urlWeb.login}`,
+            const client = createPublicClient();
+            const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(
+                urlWeb.login,
                 credentials
             );
-
             navigate(privateRoutes.myBooks);
-            return data.data;
+            return data;
         } catch (error) {
-            if (error instanceof AxiosError) {
-                return thunkAPI.rejectWithValue(
-                    error.response?.data.error?.message || 'Login failed'
-                );
+            if (error instanceof Error) {
+                return thunkAPI.rejectWithValue(error.message);
             }
-            return thunkAPI.rejectWithValue('Unknown error');
+            return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
         }
     }
 );
@@ -47,18 +39,18 @@ export const registerUser = createAsyncThunk(
         {rejectWithValue}
     ) => {
         try {
-            const {data}: AxiosResponse<ILoginFetchResponse> = await axios.post(
-                `${apiUrl}${urlWeb.registerUser}`,
+            const client = createPublicClient();
+            const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(
+                urlWeb.registerUser,
                 newUser
             );
-
             navigate(privateRoutes.myBooks);
-            return data.data;
+            return data;
         } catch (error) {
-            if (error instanceof AxiosError) {
-                return rejectWithValue(error.response?.data.error?.message || 'Login failed');
+            if (error instanceof Error) {
+                return rejectWithValue(error.message);
             }
-            return rejectWithValue('Unknown error');
+            return rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
         }
     }
 );
@@ -67,31 +59,18 @@ export const refreshToken = createAsyncThunk<ILoginSuccessRes, void, {state: Roo
     'auth/refreshToken',
     async (_, thunkAPI) => {
         try {
-            const state = thunkAPI.getState();
-            const token = state.auth.token;
-
-            const {data}: AxiosResponse<ILoginFetchResponse> = await axios.post(
-                `${apiUrl}${urlWeb.refreshToken}`,
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            return data.data;
+            const token = thunkAPI.getState().auth.token;
+            const client = createPrivateClient(token);
+            const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(urlWeb.refreshToken);
+            return data;
         } catch (error) {
-            if (error instanceof AxiosError) {
-                const errorMessage = error.response?.data.error?.message;
-
-                if (error.response?.status === 401 && errorMessage === 'Invalid or expired token') {
+            if (error instanceof Error) {
+                if (error.message === API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN) {
                     thunkAPI.dispatch(onLogout());
                 }
-
-                return thunkAPI.rejectWithValue(errorMessage || 'Refresh token failed');
+                return thunkAPI.rejectWithValue(error.message);
             }
-            return thunkAPI.rejectWithValue('Unknown error');
+            return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
         }
     }
 );

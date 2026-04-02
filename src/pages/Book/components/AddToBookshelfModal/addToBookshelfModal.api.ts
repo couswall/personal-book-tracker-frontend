@@ -1,5 +1,5 @@
-import axios, {AxiosError} from 'axios';
-import {apiUrl, urlWeb} from '@constants/apiEndpoints';
+import {urlWeb} from '@constants/apiEndpoints';
+import {createPrivateClient} from '@api/httpClient';
 import {
     IAddToBookshelfParams,
     IRemoveBookFromBookshelfParams,
@@ -7,70 +7,29 @@ import {
 } from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.interfaces';
 
 export const addBookToBookshelf = async (params: IAddToBookshelfParams) => {
-    const headers = {
-        Authorization: `Bearer ${params.token}`,
-        Accept: 'application/json',
-    };
-
-    try {
-        await axios.post(
-            `${apiUrl}${urlWeb.addBookToBookshelf}`,
-            {
-                bookshelfId: params.bookshelfId,
-                apiBookId: params.apiBookId,
-            },
-            {headers}
-        );
-        await params.onSuccess();
-    } catch (error) {
-        if (error instanceof AxiosError) {
-            throw new Error(error.response?.data.error?.message || 'Unknown error');
-        }
-        throw new Error('Unknown error');
-    }
+    const client = createPrivateClient(params.token);
+    await client.post(urlWeb.addBookToBookshelf, {
+        bookshelfId: params.bookshelfId,
+        apiBookId: params.apiBookId,
+    });
+    await params.onSuccess();
 };
 
 export const updateBookshelf = async (params: IUpdateBookshelfParams) => {
-    const headers = {
-        Authorization: `Bearer ${params.token}`,
-        Accept: 'application/json',
-    };
-
-    try {
-        await axios.put(
-            `${apiUrl}${urlWeb.updateBookToBookshelf}`,
-            {
-                bookshelfBookId: params.bookshelfBookId,
-                bookshelfId: params.bookshelfId,
-            },
-            {headers}
-        );
-        await params.onSuccess();
-    } catch (error) {
-        if (error instanceof AxiosError) {
-            throw new Error(error.response?.data.error?.message || 'Unknown error');
-        }
-        throw new Error('Unknown error');
-    }
+    const client = createPrivateClient(params.token);
+    await client.put(urlWeb.updateBookToBookshelf, {
+        bookshelfBookId: params.bookshelfBookId,
+        bookshelfId: params.bookshelfId,
+    });
+    await params.onSuccess();
 };
 
 export const removeBookFromBookshelf = async (params: IRemoveBookFromBookshelfParams) => {
-    const headers = {
-        Authorization: `Bearer ${params.token}`,
-        Accept: 'application/json',
-    };
-
-    try {
-        const endpoint = urlWeb.removeBookFromBookshelf.replace(
-            ':bookshelfBookId',
-            params.bookshelfBookId.toString()
-        );
-        await axios.delete(`${apiUrl}${endpoint}`, {headers});
-        await params.onSuccess();
-    } catch (error) {
-        if (error instanceof AxiosError) {
-            throw new Error(error.response?.data.error?.message || 'Unknown error');
-        }
-        throw new Error('Unknown error');
-    }
+    const client = createPrivateClient(params.token);
+    const endpoint = urlWeb.removeBookFromBookshelf.replace(
+        ':bookshelfBookId',
+        params.bookshelfBookId.toString()
+    );
+    await client.delete(endpoint);
+    await params.onSuccess();
 };

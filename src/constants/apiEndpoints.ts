@@ -6,7 +6,7 @@ export const urlWeb = {
     login: 'auth/login',
     registerUser: 'auth/register',
     refreshToken: 'auth/refresh',
-    getBookById: 'book/bookById',
+    getBookById: 'book/bookById/:id',
     searchBook: 'book/search',
     getBookshelvesWithStatus: 'bookshelf/bookStatus/:userId/:apiBookId',
     addBookToBookshelf: 'bookshelfBook/addToBookshelf',

@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {searchBook} from '@store/books/searchBook/thunks';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 import {ISearchBookReducer} from '@store/books/searchBook/interfaces';
 
 export const initialState: ISearchBookReducer = {
@@ -24,7 +25,10 @@ export const searchBookSlice = createSlice({
             })
             .addCase(searchBook.rejected, (state, action) => {
                 state.loading = false;
-                state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
+                state.error =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
             });
     },
 });

@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthStatus, IAuthSliceState, ILoginSuccessRes } from "@store/auth/interfaces";
-import { loginUser, registerUser, refreshToken } from "@store/auth/thunks";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {loginUser, registerUser, refreshToken} from '@store/auth/thunks';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
+import {AuthStatus, IAuthSliceState, ILoginSuccessRes} from '@store/auth/interfaces';
 
 const initialState: IAuthSliceState = {
     status: AuthStatus.Checking,
@@ -20,7 +21,7 @@ const initialState: IAuthSliceState = {
         loginErrorMsg: undefined,
         registerUserErrorMsg: undefined,
         refreshTokenErrorMsg: undefined,
-    }
+    },
 };
 
 export const authSlice = createSlice({
@@ -36,7 +37,7 @@ export const authSlice = createSlice({
         },
         cleanErrorMessages: (state) => {
             state.errors = initialState.errors;
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -55,9 +56,10 @@ export const authSlice = createSlice({
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = AuthStatus.NoAuthenticated;
                 state.loadings.loginLoading = false;
-                state.errors.loginErrorMsg = typeof action.payload === 'string' 
-                    ? action.payload 
-                    : 'Unknown error';
+                state.errors.loginErrorMsg =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
             })
             .addCase(registerUser.pending, (state) => {
                 state.status = AuthStatus.Checking;
@@ -74,9 +76,10 @@ export const authSlice = createSlice({
             .addCase(registerUser.rejected, (state, action) => {
                 state.status = AuthStatus.NoAuthenticated;
                 state.loadings.registerUserLoading = false;
-                state.errors.registerUserErrorMsg = typeof action.payload === 'string'
-                    ? action.payload
-                    : 'Unknown error';
+                state.errors.registerUserErrorMsg =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
             })
             .addCase(refreshToken.pending, (state) => {
                 state.loadings.refreshTokenLoading = true;
@@ -91,14 +94,12 @@ export const authSlice = createSlice({
             })
             .addCase(refreshToken.rejected, (state, action) => {
                 state.loadings.refreshTokenLoading = false;
-                state.errors.refreshTokenErrorMsg = typeof action.payload === 'string'
-                    ? action.payload
-                    : 'Unknown error';
-            })
+                state.errors.refreshTokenErrorMsg =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
+            });
     },
 });
 
-export const {
-    cleanErrorMessages,
-    onLogout,
-} = authSlice.actions;
+export const {cleanErrorMessages, onLogout} = authSlice.actions;

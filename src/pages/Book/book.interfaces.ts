@@ -15,7 +15,5 @@ export interface IBookshelfWithStatus {
 }
 
 export interface IGetBookshelvesWithStatusResponse {
-    data: {
-        bookshelves: IBookshelfWithStatus[];
-    };
+    bookshelves: IBookshelfWithStatus[];
 }

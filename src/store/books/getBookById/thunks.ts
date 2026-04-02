@@ -1,32 +1,23 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getEnvVariables } from "@helpers/getEnvVariables";
-import { urlWeb } from "@constants/apiEndpoints";
-import { IGetBookByIdFetchRes } from "@store/books/getBookById/interfaces";
-
-const apiUrl = getEnvVariables().api_url;
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createPrivateClient} from '@api/httpClient';
+import {urlWeb} from '@constants/apiEndpoints';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
+import {IApiResponse} from '@api/api.interfaces';
+import {IBook} from '@store/books/getBookById/interfaces';
 
 export const getBookById = createAsyncThunk(
-  "getBookById/fetch",
-  async ({ token, id }: { token: string; id: string }, thunkAPI) => {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-    };
-
-    try {
-      const { data }: AxiosResponse<IGetBookByIdFetchRes> = await axios.get(
-        `${apiUrl}${urlWeb.getBookById}/${id}`,
-        { headers }
-      );
-      return data.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkAPI.rejectWithValue(
-          error.response?.data.error?.message || "Unknwon error"
-        );
-      }
-      return thunkAPI.rejectWithValue("Unknown error");
+    'getBookById/fetch',
+    async ({token, id}: {token: string; id: string}, thunkAPI) => {
+        try {
+            const client = createPrivateClient(token);
+            const endpoint = urlWeb.getBookById.replace(':id', id);
+            const {data} = await client.get<IApiResponse<IBook>>(endpoint);
+            return data;
+        } catch (error) {
+            if (error instanceof Error) {
+                return thunkAPI.rejectWithValue(error.message);
+            }
+            return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
+        }
     }
-  }
 );

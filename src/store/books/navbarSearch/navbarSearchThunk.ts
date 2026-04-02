@@ -1,35 +1,25 @@
-import axios, {AxiosError, AxiosResponse} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {getEnvVariables} from '@helpers/getEnvVariables';
+import {createPrivateClient} from '@api/httpClient';
 import {urlWeb} from '@constants/apiEndpoints';
-import {ISearchBookAPIResponse, ISearchBookParams} from '@store/books/searchBook/interfaces';
-
-const apiUrl = getEnvVariables().api_url;
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
+import {IApiResponse} from '@api/api.interfaces';
+import {ISearchBookParams, ISearchingRes} from '@store/books/searchBook/interfaces';
 
 export const navbarSearchBook = createAsyncThunk(
     'navbarSearch/fetch',
     async ({token, params}: {token: string; params: ISearchBookParams}, thunkAPI) => {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-        };
-
         try {
-            const url = apiUrl + urlWeb.searchBook;
-            const {data}: AxiosResponse<ISearchBookAPIResponse> = await axios.get(url, {
-                headers,
-                params,
-            });
-
-            return data.data;
+            const client = createPrivateClient(token);
+            const {data} = await client.get<IApiResponse<ISearchingRes>, ISearchBookParams>(
+                urlWeb.searchBook,
+                {params}
+            );
+            return data;
         } catch (error) {
-            if (error instanceof AxiosError) {
-                return thunkAPI.rejectWithValue(
-                    error.response?.data.error?.message || 'Unknown API error'
-                );
+            if (error instanceof Error) {
+                return thunkAPI.rejectWithValue(error.message);
             }
-
-            return thunkAPI.rejectWithValue('Unknown error');
+            return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
         }
     }
 );

@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {navbarSearchBook} from '@store/books/navbarSearch/navbarSearchThunk';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 import {ISearchBookReducer} from '@store/books/searchBook/interfaces';
 
 const initialState: ISearchBookReducer = {
@@ -24,7 +25,10 @@ export const navbarSearchSlice = createSlice({
             })
             .addCase(navbarSearchBook.rejected, (state, action) => {
                 state.loading = false;
-                state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
+                state.error =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
             });
     },
 });
