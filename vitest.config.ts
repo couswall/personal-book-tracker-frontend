@@ -1,5 +1,5 @@
 import path from 'path';
-import {defineConfig, mergeConfig} from 'vitest/config';
+import {configDefaults, defineConfig, mergeConfig} from 'vitest/config';
 import viteConfig from './vite.config';
 
 export default mergeConfig(
@@ -16,6 +16,8 @@ export default mergeConfig(
             environment: 'jsdom',
             setupFiles: ['./src/setupTests.ts'],
             css: true,
+            // e2e/ holds Playwright specs, which use an incompatible test() global.
+            exclude: [...configDefaults.exclude, 'e2e/**'],
         },
     })
 );
