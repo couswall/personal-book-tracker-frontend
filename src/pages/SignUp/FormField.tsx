@@ -41,6 +41,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                         FontSize="1rem"
                         Cursor="pointer"
                         onClick={endIcon.onClick}
+                        aria-label={endIcon.label}
                     />
                 )}
             </InputContainer>

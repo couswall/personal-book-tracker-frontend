@@ -11,6 +11,7 @@ import {FormField} from '@pages/SignUp/FormField';
 import {useSignUpForm} from '@pages/SignUp/useSignUpForm';
 import {publicRoutes} from '@routes/routes';
 import {SIGN_UP, SIGNUP_FORM} from '@pages/SignUp/constants';
+import {PASSWORD_VISIBILITY_LABELS} from '@constants/ariaLabels';
 
 export const SignUpForm = () => {
     const {
@@ -104,6 +105,9 @@ export const SignUpForm = () => {
                             inputMaxLength={16}
                             endIcon={{
                                 className: `fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`,
+                                label: showPassword
+                                    ? PASSWORD_VISIBILITY_LABELS.HIDE
+                                    : PASSWORD_VISIBILITY_LABELS.SHOW,
                                 onClick: togglePasswordVisibility,
                             }}
                         />

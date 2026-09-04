@@ -11,6 +11,7 @@ import {FormField} from '@pages/Login/FormField';
 import {useLoginForm} from '@pages/Login/useLoginForm';
 import {publicRoutes} from '@routes/routes';
 import {LOGIN_PAGE} from '@pages/Login/constants';
+import {PASSWORD_VISIBILITY_LABELS} from '@constants/ariaLabels';
 
 export const LoginForm = () => {
     const {
@@ -78,6 +79,9 @@ export const LoginForm = () => {
                         register={register('password')}
                         endIcon={{
                             className: `fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`,
+                            label: showPassword
+                                ? PASSWORD_VISIBILITY_LABELS.HIDE
+                                : PASSWORD_VISIBILITY_LABELS.SHOW,
                             onClick: togglePasswordVisibility,
                         }}
                     />

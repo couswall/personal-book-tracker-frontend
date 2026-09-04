@@ -9,6 +9,7 @@ import {SearchingNavbar} from '@components/Navbar/components/SearchingNavbar/Sea
 import {toggleDarkMode} from '@store/index';
 import robotImg from '/assets/avatar-robot.jpg';
 import {privateRoutes} from '@routes/routes';
+import {NAVBAR_ARIA_LABELS} from '@components/Navbar/constants';
 
 export const NavbarIcons = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -33,6 +34,7 @@ export const NavbarIcons = () => {
                         onClick={() => navigate(privateRoutes.search)}
                         Display="none"
                         MdDisplay="flex"
+                        aria-label={NAVBAR_ARIA_LABELS.SEARCH_BOOKS}
                     >
                         <MutedIcon className="fa-solid fa-magnifying-glass" size="md" />
                     </ButtonGhost>
@@ -44,6 +46,11 @@ export const NavbarIcons = () => {
                 BorderRadius="1rem"
                 Width="36px"
                 onClick={() => dispatch(toggleDarkMode())}
+                aria-label={
+                    isDarkMode
+                        ? NAVBAR_ARIA_LABELS.SWITCH_TO_LIGHT_MODE
+                        : NAVBAR_ARIA_LABELS.SWITCH_TO_DARK_MODE
+                }
             >
                 <MutedIcon
                     className={isDarkMode ? 'fa-regular fa-sun' : 'fa-solid fa-moon'}
@@ -58,9 +65,10 @@ export const NavbarIcons = () => {
                     AlignItems="center"
                     Padding="0.25rem"
                     onClick={() => setShowSubNav(!showSubNav)}
+                    aria-label={NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}
                 >
                     <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" />
+                        <Image src={robotImg} ObjectFit="cover" alt="" />
                     </FlexContainer>
                     <MutedIcon className="fa-solid fa-angle-down" size="md" />
                 </ButtonGhost>

@@ -4,6 +4,7 @@ import {FlexContainer, ButtonGhost, MutedIcon} from '@components/index';
 import {NavbarStyled} from '@components/Navbar/styles';
 import {NavbarItems, NavbarIcons} from '@components/Navbar/components';
 import {ModalSidebar} from '@components/Navbar/components/ModalSidebar/ModalSidebar';
+import {NAVBAR_ARIA_LABELS} from '@components/Navbar/constants';
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -33,6 +34,7 @@ export const Navbar = () => {
                         onClick={() => setIsMenuOpen(true)}
                         Display="none"
                         LgDisplay="flex"
+                        aria-label={NAVBAR_ARIA_LABELS.OPEN_NAVIGATION_MENU}
                     >
                         <MutedIcon className="fa-solid fa-bars" size="md" />
                     </ButtonGhost>

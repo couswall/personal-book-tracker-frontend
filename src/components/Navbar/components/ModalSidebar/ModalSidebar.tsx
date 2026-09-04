@@ -9,7 +9,7 @@ import {
 } from '@components/Navbar/components/ModalSidebar/styles';
 import robotImg from '/assets/avatar-robot.jpg';
 import {LOGIN_PAGE} from '@pages/Login/constants';
-import {navbarRoutes} from '@components/Navbar/constants';
+import {NAVBAR_ARIA_LABELS, navbarRoutes} from '@components/Navbar/constants';
 import {ModalSidebarProps} from '@components/Navbar/components/interfaces';
 
 export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenuOpen}) => {
@@ -37,6 +37,7 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                         className="fa-solid fa-x"
                         Cursor="pointer"
                         onClick={() => setIsMenuOpen(false)}
+                        aria-label={NAVBAR_ARIA_LABELS.CLOSE_NAVIGATION_MENU}
                     />
                 </FlexContainer>
 
@@ -73,7 +74,7 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                     Gap="1rem"
                 >
                     <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" />
+                        <Image src={robotImg} ObjectFit="cover" alt="" />
                     </FlexContainer>
                     <FlexContainer BackgroundColor="inherit" FlexDirection="column" Gap="0.25rem">
                         <Text size="md" weight="bold">

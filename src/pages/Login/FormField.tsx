@@ -1,11 +1,5 @@
 import {UseFormRegisterReturn} from 'react-hook-form';
-import {
-    DarkGreyIcon,
-    FlexContainer,
-    Input,
-    InputContainer,
-    Label,
-} from '@components/index';
+import {DarkGreyIcon, FlexContainer, Input, InputContainer, Label} from '@components/index';
 import {ErrorMessage} from '@pages/Login/ErrorMessage';
 
 interface FormFieldProps {
@@ -17,6 +11,7 @@ interface FormFieldProps {
     register: UseFormRegisterReturn;
     endIcon?: {
         className: string;
+        label: string;
         onClick: () => void;
     };
 }
@@ -31,12 +26,7 @@ export const FormField = ({
     endIcon,
 }: FormFieldProps) => {
     return (
-        <FlexContainer
-            Gap="0.5rem"
-            FlexDirection="column"
-            Width="100%"
-            BackgroundColor="inherit"
-        >
+        <FlexContainer Gap="0.5rem" FlexDirection="column" Width="100%" BackgroundColor="inherit">
             <Label FontSize="0.875rem">{label}</Label>
             <InputContainer
                 Gap="0.5rem"
@@ -62,6 +52,7 @@ export const FormField = ({
                         FontSize="1rem"
                         Cursor="pointer"
                         onClick={endIcon.onClick}
+                        aria-label={endIcon.label}
                     />
                 )}
             </InputContainer>
