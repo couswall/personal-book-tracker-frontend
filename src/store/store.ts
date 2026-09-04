@@ -10,7 +10,13 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {authSlice, darkModeSlice, getBookByIdSlice, searchBookSlice, navbarSearchSlice} from '@store/index';
+import {
+    authSlice,
+    darkModeSlice,
+    getBookByIdSlice,
+    searchBookSlice,
+    navbarSearchSlice,
+} from '@store/index';
 
 const persistConfig = {
     key: 'root',

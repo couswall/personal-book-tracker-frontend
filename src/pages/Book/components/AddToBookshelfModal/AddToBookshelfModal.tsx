@@ -1,13 +1,5 @@
 import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
-import {
-    ButtonGhost,
-    ButtonPrimary,
-    FlexContainer,
-    Icon,
-    Modal,
-    Text,
-    TitleH4,
-} from '@components/index';
+import {ButtonGhost, FlexContainer, Icon, Modal, Text, TitleH4} from '@components/index';
 import {
     BookshelfOptionsContainer,
     ShelfIconWrapper,
@@ -22,8 +14,7 @@ const DEFAULT_SHELF_ICONS: Record<string, string> = {
     read: 'fa-solid fa-check-double',
 };
 
-const getShelfIcon = (name: string, isCustom: boolean): string => {
-    if (isCustom) return 'fa-solid fa-book-bookmark';
+const getShelfIcon = (name: string): string => {
     return DEFAULT_SHELF_ICONS[name.toLowerCase()] ?? 'fa-solid fa-book';
 };
 
@@ -96,7 +87,6 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     FlexDirection="column"
                     Gap="0.5rem"
                     BackgroundColor="transparent"
-                    MaxHeight="240px"
                     OverflowY="auto"
                     Padding="1rem"
                 >
@@ -115,7 +105,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                 <ShelfIconWrapper isSelected={option.isSelected}>
                                     <Icon
                                         variant={option.isSelected ? 'primary' : 'muted'}
-                                        className={getShelfIcon(option.name, option.isCustom)}
+                                        className={getShelfIcon(option.name)}
                                         size="md"
                                     />
                                 </ShelfIconWrapper>
@@ -148,24 +138,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     ))}
                 </FlexContainer>
 
-                <FlexContainer
-                    FlexDirection="column"
-                    Gap="0.75rem"
-                    Padding="0.5rem 1rem 1.5rem"
-                    BackgroundColor="transparent"
-                >
-                    <ButtonPrimary fullWidth Gap="0.5rem">
-                        <Icon className="fa-solid fa-plus" size="md" FontColor="inherit" />
-                        <Text
-                            size="xs"
-                            weight="bold"
-                            TextTransform="uppercase"
-                            LetterSpacing="0.1em"
-                            FontColor="inherit"
-                        >
-                            Create new shelf
-                        </Text>
-                    </ButtonPrimary>
+                <FlexContainer Padding="0.5rem 1rem 1.5rem" BackgroundColor="transparent">
                     {bookshelves.some((shelf) => shelf.isSelected) && (
                         <Text
                             variant={isLoading ? 'muted' : 'danger'}

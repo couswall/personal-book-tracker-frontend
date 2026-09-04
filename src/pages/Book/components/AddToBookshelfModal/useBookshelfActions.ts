@@ -1,36 +1,16 @@
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 import {
     addBookToBookshelf,
     removeBookFromBookshelf,
     updateBookshelf,
-    IAlertState,
     IUseBookshelfActionsParams,
 } from '@pages/Book/components/AddToBookshelfModal/index';
+import {useModalAlert} from '@pages/Book/hooks/useModalAlert';
 import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 
 export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfActionsParams) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [alert, setAlert] = useState<IAlertState>({
-        message: '',
-        variant: 'success',
-        visible: false,
-    });
-    const alertTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    useEffect(() => {
-        return () => {
-            if (alertTimeoutRef.current) clearTimeout(alertTimeoutRef.current);
-        };
-    }, []);
-
-    const showAlert = (message: string, variant: 'success' | 'danger') => {
-        if (alertTimeoutRef.current) clearTimeout(alertTimeoutRef.current);
-        setAlert({message, variant, visible: true});
-        alertTimeoutRef.current = setTimeout(
-            () => setAlert((prev) => ({...prev, visible: false})),
-            3000
-        );
-    };
+    const {alert, showAlert} = useModalAlert();
 
     const add = async (bookshelfId: number, bookshelfName: string) => {
         if (!token || !bookId) return;

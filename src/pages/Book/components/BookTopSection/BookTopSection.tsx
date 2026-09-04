@@ -9,14 +9,18 @@ interface BookTopSectionProps {
     book: IBook;
     isOwned: boolean;
     onOpenAddToBookshelfModal: () => void;
+    onUpdateProgress?: () => void;
     bookshelfLabel?: string;
+    progressPercentage?: number;
 }
 
 export const BookTopSection: React.FC<BookTopSectionProps> = ({
     book,
     onOpenAddToBookshelfModal,
+    onUpdateProgress,
     isOwned,
     bookshelfLabel,
+    progressPercentage,
 }) => (
     <S.TopSectionGrid>
         <S.ImageColumn>
@@ -107,7 +111,9 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
             {isOwned && (
                 <BookActivity
                     onOpenAddToBookshelfModal={onOpenAddToBookshelfModal}
+                    onUpdateProgress={onUpdateProgress}
                     bookshelfLabel={bookshelfLabel}
+                    progressPercentage={progressPercentage}
                 />
             )}
 

@@ -13,3 +13,5 @@ export * from './Logo/LogoIcon';
 export * from './Modal/index';
 export * from './Modal/Modal';
 export * from './GridContainer/index';
+export * from './ToggleSwitch/index';
+export * from './ToggleSwitch/ToggleSwitch';

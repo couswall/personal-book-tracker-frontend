@@ -7,7 +7,7 @@ export const ActivityCard = styled(FlexContainer)`
     background-color: ${({theme}) => theme.colors.backgroundSecondary}80;
 `;
 
-export const IconCirclePrimary = styled.div`
+export const IconCircleActivity = styled.div`
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
@@ -16,17 +16,6 @@ export const IconCirclePrimary = styled.div`
     align-items: center;
     justify-content: center;
     color: ${({theme}) => theme.colors.primaryColor};
-`;
-
-export const IconCircleSecondary = styled.div`
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background-color: ${({theme}) => theme.colors.primaryLight}33;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${({theme}) => theme.colors.primaryLight};
 `;
 
 export const TextLink = styled(Button)`

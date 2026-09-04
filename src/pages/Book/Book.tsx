@@ -12,6 +12,7 @@ import {
 } from '@components/index';
 import {NoBookFound, BookReviews, BookSidebar, BookTopSection} from '@pages/Book/components/index';
 import {AddToBookshelfModal} from '@pages/Book/components/AddToBookshelfModal/AddToBookshelfModal';
+import {UpdateProgressModal} from '@pages/Book/components/UpdateProgressModal/UpdateProgressModal';
 import * as S from '@pages/Book/book.styled';
 import {getBookById} from '@store/index';
 import {getBookshelvesWithStatus} from '@pages/Book/book.api';
@@ -24,7 +25,10 @@ export const Book = () => {
     const {book, loading} = useSelector((state: RootState) => state.getBookById);
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
     const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
+    const [showUpdateProgressModal, setShowUpdateProgressModal] = useState<boolean>(false);
     const [bookshelves, setBookshelves] = useState<IBookshelfWithStatus[]>([]);
+
+    const selectedBookshelf = bookshelves.find((shelf) => shelf.isSelected);
 
     const handleRefresh = useCallback(() => {
         if (!token || !user || !id) return Promise.resolve();
@@ -53,7 +57,9 @@ export const Book = () => {
                 book={book}
                 isOwned={bookshelves.some((shelf) => shelf.isSelected)}
                 onOpenAddToBookshelfModal={() => setShowAddToBookshelfModal(true)}
-                bookshelfLabel={bookshelves.find((shelf) => shelf.isSelected)?.name}
+                onUpdateProgress={() => setShowUpdateProgressModal(true)}
+                bookshelfLabel={selectedBookshelf?.name}
+                progressPercentage={selectedBookshelf?.readingProgress ?? undefined}
             />
 
             {/* ── Bottom Section ── */}
@@ -110,6 +116,17 @@ export const Book = () => {
                 onCloseModal={() => setShowAddToBookshelfModal(false)}
                 bookshelves={bookshelves}
                 bookId={id}
+                token={token}
+                onRefresh={handleRefresh}
+            />
+            <UpdateProgressModal
+                isOpen={showUpdateProgressModal}
+                onCloseModal={() => setShowUpdateProgressModal(false)}
+                bookTitle={book.title}
+                totalPages={book.pageCount}
+                bookshelfBookId={selectedBookshelf?.bookshelfBookId ?? undefined}
+                currentPage={selectedBookshelf?.currentPage ?? null}
+                readingProgress={selectedBookshelf?.readingProgress ?? null}
                 token={token}
                 onRefresh={handleRefresh}
             />

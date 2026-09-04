@@ -11,7 +11,8 @@ export interface IBookshelfWithStatus {
     isSelected: boolean;
     bookshelfBookId: number | null;
     bookCount: number;
-    isCustom: boolean;
+    readingProgress: number | null;
+    currentPage: number | null;
 }
 
 export interface IGetBookshelvesWithStatusResponse {

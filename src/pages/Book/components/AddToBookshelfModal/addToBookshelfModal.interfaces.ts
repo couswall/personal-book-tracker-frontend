@@ -1,4 +1,5 @@
 import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
+import {AlertVariant} from '@pages/Book/hooks/hooks.interfaces';
 
 export interface IBaseBookshelfParams {
     token: string;
@@ -19,12 +20,6 @@ export interface IRemoveBookFromBookshelfParams extends IBaseBookshelfParams {
     bookshelfBookId: number;
 }
 
-export interface IAlertState {
-    message: string;
-    variant: 'success' | 'danger';
-    visible: boolean;
-}
-
 export interface IUseBookshelfActionsParams {
     token?: string;
     bookId?: string;
@@ -33,7 +28,7 @@ export interface IUseBookshelfActionsParams {
 
 export interface IModalAlertProps {
     message: string;
-    variant: 'success' | 'danger';
+    variant: AlertVariant;
 }
 export interface IAddToBookshelfModalProps {
     isOpen: boolean;

@@ -12,4 +12,5 @@ export const urlWeb = {
     addBookToBookshelf: 'bookshelfBook/addToBookshelf',
     updateBookToBookshelf: 'bookshelfBook/updateBookshelf',
     removeBookFromBookshelf: 'bookshelfBook/:bookshelfBookId',
+    updateReadingProgress: 'bookshelfBook/updateReadingProgress',
 };
