@@ -1,15 +1,12 @@
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 import React from 'react';
 import {Button, FlexContainer, Paragraph, TitleH4} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/index';
-import {StarRating} from '@pages/Search/StarRating';
-import { privateRoutes } from '@routes/routes';
+import {StarRating} from '@pages/Search/components/StarRating';
+import {privateRoutes} from '@routes/routes';
 import {NAVBAR} from '@components/Navbar/constants';
-import {ISearchBook} from '@store/books/searchBook/interfaces';
-
-export interface IBookResultProps {
-    book: ISearchBook;
-}
+import {IBookResultProps} from '@pages/Search/components/search.components.interfaces';
+import {BOOK_RESULT_TEXTS} from '@pages/Search/components/search.components.constants';
 
 export const BookResult: React.FC<IBookResultProps> = ({book}) => {
     const navigate = useNavigate();
@@ -24,9 +21,18 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
             BackgroundColorVariant="card"
             Gap="1.25rem"
         >
-            <CoverBookImg imgSrc={book.imageCover} width="96px" height="144px" flex="0 0 auto" cursor='pointer' onClick={navigateToBook} />
+            <CoverBookImg
+                imgSrc={book.imageCover}
+                width="96px"
+                height="144px"
+                flex="0 0 auto"
+                cursor="pointer"
+                onClick={navigateToBook}
+            />
             <FlexContainer FlexDirection="column" BackgroundColor="inherit" Gap="0.5rem">
-                <TitleH4 Cursor="pointer" onClick={navigateToBook}>{book.title}</TitleH4>
+                <TitleH4 Cursor="pointer" onClick={navigateToBook}>
+                    {book.title}
+                </TitleH4>
                 {book.authors && (
                     <Paragraph
                         variant="muted"
@@ -49,7 +55,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                     </FlexContainer>
                 )}
                 <Button variant="secondary" Width="max-content">
-                    Add to Shelf
+                    {BOOK_RESULT_TEXTS.ADD_TO_SHELF}
                 </Button>
             </FlexContainer>
         </FlexContainer>

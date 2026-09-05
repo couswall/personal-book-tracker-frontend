@@ -2,19 +2,11 @@ import {FlexContainer, ButtonOutline, Icon, Text, ButtonPrimary} from '@componen
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
 import * as S from '@pages/Book/book.styled';
-import {formatIsoDate} from '@pages/Book/book.utils';
-import {IBook} from '@store/books/getBookById/interfaces';
+import {formatIsoDate} from '@pages/Book/components/BookTopSection/bookTopSection.utils';
+import {IBookTopSectionProps} from '@pages/Book/components/BookTopSection/bookTopSection.interfaces';
+import {BOOK_TOP_SECTION_TEXTS} from '@pages/Book/components/BookTopSection/bookTopSection.constants';
 
-interface BookTopSectionProps {
-    book: IBook;
-    isOwned: boolean;
-    onOpenAddToBookshelfModal: () => void;
-    onUpdateProgress?: () => void;
-    bookshelfLabel?: string;
-    progressPercentage?: number;
-}
-
-export const BookTopSection: React.FC<BookTopSectionProps> = ({
+export const BookTopSection: React.FC<IBookTopSectionProps> = ({
     book,
     onOpenAddToBookshelfModal,
     onUpdateProgress,
@@ -35,7 +27,7 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 <FlexContainer FlexDirection="column">
                     {book.authors?.length > 0 && (
                         <S.AuthorText variant="muted" FontSize="1.25rem" LgFontSize="1.125rem">
-                            by{' '}
+                            {BOOK_TOP_SECTION_TEXTS.BY_PREFIX}{' '}
                             {book.authors.map((author, index) => (
                                 <span key={index}>
                                     {author}
@@ -69,7 +61,7 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 {book.publishedDate && (
                     <FlexContainer FlexDirection="column" Gap="0.25rem">
                         <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
-                            Published
+                            {BOOK_TOP_SECTION_TEXTS.PUBLISHED}
                         </Text>
                         <Text weight="medium">{formatIsoDate(book.publishedDate)}</Text>
                     </FlexContainer>
@@ -77,14 +69,16 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 {book.pageCount && (
                     <FlexContainer FlexDirection="column" Gap="0.25rem">
                         <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
-                            Page Count
+                            {BOOK_TOP_SECTION_TEXTS.PAGE_COUNT}
                         </Text>
-                        <Text weight="medium">{book.pageCount} pages</Text>
+                        <Text weight="medium">
+                            {book.pageCount} {BOOK_TOP_SECTION_TEXTS.PAGES_SUFFIX}
+                        </Text>
                     </FlexContainer>
                 )}
                 <FlexContainer FlexDirection="column" Gap="0.25rem">
                     <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
-                        Global Rating
+                        {BOOK_TOP_SECTION_TEXTS.GLOBAL_RATING}
                     </Text>
                     <FlexContainer AlignItems="center" Gap="0.5rem">
                         <S.StarRating isPrimaryColor>
@@ -93,7 +87,9 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                             ))}
                             <Icon className="fa-solid fa-star-half-stroke" FontSize="1.125rem" />
                         </S.StarRating>
-                        <Text weight="medium">{book.averageRating || 'N/A'}</Text>
+                        <Text weight="medium">
+                            {book.averageRating || BOOK_TOP_SECTION_TEXTS.NO_RATING}
+                        </Text>
                     </FlexContainer>
                 </FlexContainer>
             </FlexContainer>
@@ -104,7 +100,7 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                         <S.CategoryBadge key={i}>{cat}</S.CategoryBadge>
                     ))
                 ) : (
-                    <S.CategoryBadge>Uncategorized</S.CategoryBadge>
+                    <S.CategoryBadge>{BOOK_TOP_SECTION_TEXTS.UNCATEGORIZED}</S.CategoryBadge>
                 )}
             </FlexContainer>
 
@@ -121,12 +117,12 @@ export const BookTopSection: React.FC<BookTopSectionProps> = ({
                 {!isOwned && (
                     <ButtonPrimary Gap="0.5rem" onClick={onOpenAddToBookshelfModal}>
                         <Icon className="fa-solid fa-plus" FontColor="inherit" />
-                        Add to Bookshelf
+                        {BOOK_TOP_SECTION_TEXTS.ADD_TO_BOOKSHELF}
                     </ButtonPrimary>
                 )}
                 <ButtonOutline Gap="0.5rem">
                     <Icon className="fa-solid fa-share-nodes" FontColor="inherit" />
-                    Share
+                    {BOOK_TOP_SECTION_TEXTS.SHARE}
                 </ButtonOutline>
             </FlexContainer>
         </S.InfoColumn>

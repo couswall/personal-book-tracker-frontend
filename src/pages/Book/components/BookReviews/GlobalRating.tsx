@@ -7,7 +7,11 @@ import {
     Text,
 } from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
-import {RATING_BARS} from '@pages/Book/book.constants';
+import {
+    BOOK_REVIEWS_TEXTS,
+    GLOBAL_RATING_SUMMARY,
+    RATING_BARS,
+} from '@pages/Book/components/BookReviews/bookReviews.constants';
 
 export const GlobalRating = () => (
     <BaseContainer as="section">
@@ -25,7 +29,7 @@ export const GlobalRating = () => (
                 AlignItems="center"
             >
                 <S.GlobalScoreCol>
-                    <S.BigScoreValue>4.7</S.BigScoreValue>
+                    <S.BigScoreValue>{GLOBAL_RATING_SUMMARY.score}</S.BigScoreValue>
                     <S.StarRating style={{marginBottom: '0.5rem'}}>
                         {[...Array(4)].map((_, i) => (
                             <i key={i} className="fa-solid fa-star"></i>
@@ -33,11 +37,11 @@ export const GlobalRating = () => (
                         <i className="fa-solid fa-star-half-stroke"></i>
                     </S.StarRating>
                     <Text variant="muted" size="sm" weight="medium">
-                        12,482 total reviews
+                        {GLOBAL_RATING_SUMMARY.totalReviews}
                     </Text>
                     <ButtonPrimary MarginTop="1.5rem" size="lg" Gap="0.5rem">
                         <Icon FontColor="inherit" className="fa-solid fa-pen-to-square" />
-                        Write a Review
+                        {BOOK_REVIEWS_TEXTS.WRITE_REVIEW}
                     </ButtonPrimary>
                 </S.GlobalScoreCol>
                 <S.ProgressBarsCol>

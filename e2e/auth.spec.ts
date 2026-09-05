@@ -1,7 +1,7 @@
 import {expect, Page, test} from '@playwright/test';
 import {endpoints, mockJson} from './mocks/api';
-import {ERROR_MESSAGES, LOGIN_PAGE} from '@pages/Login/constants';
-import {SIGN_UP} from '@pages/SignUp/constants';
+import {ERROR_MESSAGES, LOGIN_PAGE} from '@pages/Login/login.constants';
+import {SIGN_UP} from '@pages/SignUp/signUp.constants';
 import {privateRoutes, publicRoutes} from '@routes/routes';
 
 const loginSuccessBody = {

@@ -1,12 +1,7 @@
 import {BaseContainer, FlexContainer, Icon, Text} from '@components/index';
 import * as S from '@pages/Book/components/BookActivity/bookActivity.styled';
-
-interface IBookActivityProps {
-    onOpenAddToBookshelfModal: () => void;
-    onUpdateProgress?: () => void;
-    bookshelfLabel?: string;
-    progressPercentage?: number;
-}
+import {IBookActivityProps} from '@pages/Book/components/BookActivity/bookActivity.interfaces';
+import {BOOK_ACTIVITY_TEXTS} from '@pages/Book/components/BookActivity/bookActivity.constants';
 
 export const BookActivity: React.FC<IBookActivityProps> = ({
     onOpenAddToBookshelfModal,
@@ -14,11 +9,12 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
     bookshelfLabel,
     progressPercentage,
 }) => {
-    const isCurrentlyReading = bookshelfLabel?.toLowerCase() === 'currently reading';
+    const isCurrentlyReading =
+        bookshelfLabel?.toLowerCase() === BOOK_ACTIVITY_TEXTS.CURRENTLY_READING;
     const progressLabel =
         typeof progressPercentage === 'number'
-            ? `You are ${progressPercentage}% done`
-            : 'Track your reading progress';
+            ? BOOK_ACTIVITY_TEXTS.PROGRESS_DONE(progressPercentage)
+            : BOOK_ACTIVITY_TEXTS.TRACK_PROGRESS;
 
     return (
         <S.ActivityCard
@@ -30,7 +26,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
             MarginBottom="2rem"
         >
             <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
-                Your Activity
+                {BOOK_ACTIVITY_TEXTS.YOUR_ACTIVITY}
             </Text>
             <FlexContainer
                 FlexWrap="wrap"
@@ -44,14 +40,14 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                     </S.IconCircleActivity>
                     <BaseContainer BackgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
-                            Bookshelf
+                            {BOOK_ACTIVITY_TEXTS.BOOKSHELF}
                         </Text>
                         <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
                             <Text size="sm" weight="bold">
                                 {bookshelfLabel}
                             </Text>
                             <S.TextLink onClick={onOpenAddToBookshelfModal}>
-                                Move to another shelf
+                                {BOOK_ACTIVITY_TEXTS.MOVE_TO_ANOTHER_SHELF}
                             </S.TextLink>
                         </FlexContainer>
                     </BaseContainer>
@@ -68,7 +64,9 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                                 <Text size="xs" variant="muted" weight="medium">
                                     {progressLabel}
                                 </Text>
-                                <S.TextLink onClick={onUpdateProgress}>Update progress</S.TextLink>
+                                <S.TextLink onClick={onUpdateProgress}>
+                                    {BOOK_ACTIVITY_TEXTS.UPDATE_PROGRESS}
+                                </S.TextLink>
                             </BaseContainer>
                         </FlexContainer>
                     </>
@@ -82,7 +80,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                     </S.IconCircleActivity>
                     <BaseContainer BackgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
-                            Your Rating
+                            {BOOK_ACTIVITY_TEXTS.YOUR_RATING}
                         </Text>
                         <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
                             <S.StarRating>
@@ -90,7 +88,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                                     <Icon key={i} className="fa-solid fa-star" />
                                 ))}
                             </S.StarRating>
-                            <S.TextLink>Edit rating</S.TextLink>
+                            <S.TextLink>{BOOK_ACTIVITY_TEXTS.EDIT_RATING}</S.TextLink>
                         </FlexContainer>
                     </BaseContainer>
                 </FlexContainer>

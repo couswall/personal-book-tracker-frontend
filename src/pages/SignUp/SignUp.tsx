@@ -1,6 +1,6 @@
 import {FlexContainer} from '@components/index';
-import {LoginHeader} from '@pages/Login/LoginHeader';
-import {SignUpForm} from '@pages/SignUp/SignUpForm';
+import {LoginHeader} from '@pages/Login/components/LoginHeader';
+import {SignUpForm} from '@pages/SignUp/components/SignUpForm';
 
 export const SignUp = () => {
     return (

@@ -17,6 +17,7 @@ import * as S from '@pages/Book/book.styled';
 import {getBookById} from '@store/index';
 import {getBookshelvesWithStatus} from '@pages/Book/book.api';
 import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
+import {BOOK_TEXTS} from '@pages/Book/book.constants';
 
 export const Book = () => {
     const {id} = useParams();
@@ -76,7 +77,7 @@ export const Book = () => {
                     LgGridColumn="unset"
                 >
                     <BaseContainer as="section">
-                        <TitleH4 MarginBottom="1rem">Description</TitleH4>
+                        <TitleH4 MarginBottom="1rem">{BOOK_TEXTS.DESCRIPTION_TITLE}</TitleH4>
                         {book.description ? (
                             <>
                                 <S.DescriptionText
@@ -86,7 +87,9 @@ export const Book = () => {
                                 <S.ShowMoreBtn
                                     onClick={() => setShowMoreDescription(!showMoreDescription)}
                                 >
-                                    {showMoreDescription ? 'Show less' : 'Show more'}
+                                    {showMoreDescription
+                                        ? BOOK_TEXTS.SHOW_LESS
+                                        : BOOK_TEXTS.SHOW_MORE}
                                     <Icon
                                         FontColor="inherit"
                                         className={
@@ -99,7 +102,7 @@ export const Book = () => {
                             </>
                         ) : (
                             <S.DescriptionText $showMore={true}>
-                                No description available.
+                                {BOOK_TEXTS.NO_DESCRIPTION}
                             </S.DescriptionText>
                         )}
                     </BaseContainer>

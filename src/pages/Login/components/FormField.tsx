@@ -1,20 +1,6 @@
-import {UseFormRegisterReturn} from 'react-hook-form';
 import {DarkGreyIcon, FlexContainer, Input, InputContainer, Label} from '@components/index';
-import {ErrorMessage} from '@pages/Login/ErrorMessage';
-
-interface FormFieldProps {
-    label: string;
-    placeholder: string;
-    iconClass: string;
-    type?: string;
-    error?: string;
-    register: UseFormRegisterReturn;
-    endIcon?: {
-        className: string;
-        label: string;
-        onClick: () => void;
-    };
-}
+import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
+import {IFormFieldProps} from '@pages/Login/components/login.components.interfaces';
 
 export const FormField = ({
     label,
@@ -24,7 +10,7 @@ export const FormField = ({
     error,
     register,
     endIcon,
-}: FormFieldProps) => {
+}: IFormFieldProps) => {
     return (
         <FlexContainer Gap="0.5rem" FlexDirection="column" Width="100%" BackgroundColor="inherit">
             <Label FontSize="0.875rem">{label}</Label>

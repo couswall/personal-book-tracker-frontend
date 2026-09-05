@@ -5,18 +5,10 @@ import {
     ShelfIconWrapper,
     ModalAlert,
     IAddToBookshelfModalProps,
+    getShelfIcon,
+    ADD_TO_BOOKSHELF_TEXTS,
 } from '@pages/Book/components/AddToBookshelfModal/index';
 import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
-
-const DEFAULT_SHELF_ICONS: Record<string, string> = {
-    'to be read': 'fa-solid fa-hourglass-half',
-    'currently reading': 'fa-solid fa-book-open',
-    read: 'fa-solid fa-check-double',
-};
-
-const getShelfIcon = (name: string): string => {
-    return DEFAULT_SHELF_ICONS[name.toLowerCase()] ?? 'fa-solid fa-book';
-};
 
 export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
     isOpen,
@@ -71,7 +63,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     Padding="1.25rem 1.5rem"
                     Width="100%"
                 >
-                    <TitleH4>Add to bookshelf</TitleH4>
+                    <TitleH4>{ADD_TO_BOOKSHELF_TEXTS.MODAL_TITLE}</TitleH4>
                     <ButtonGhost
                         BorderRadius="50%"
                         Width="2.5rem"
@@ -123,7 +115,9 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                     </Text>
                                     <Text variant="muted" size="xs">
                                         {option.bookCount}{' '}
-                                        {option.bookCount === 1 ? 'BOOK' : 'BOOKS'}
+                                        {option.bookCount === 1
+                                            ? ADD_TO_BOOKSHELF_TEXTS.BOOK_SINGULAR
+                                            : ADD_TO_BOOKSHELF_TEXTS.BOOK_PLURAL}
                                     </Text>
                                 </FlexContainer>
                             </FlexContainer>
@@ -148,7 +142,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                             TextAlign="center"
                             onClick={isLoading ? undefined : handleDeleteFromBookshelf}
                         >
-                            Remove from Bookshelf
+                            {ADD_TO_BOOKSHELF_TEXTS.REMOVE_FROM_BOOKSHELF}
                         </Text>
                     )}
                 </FlexContainer>

@@ -6,11 +6,11 @@ import {
     Paragraph,
     TitleH2,
 } from '@components/index';
-import {ErrorAlert} from '@pages/SignUp/ErrorAlert';
-import {FormField} from '@pages/SignUp/FormField';
-import {useSignUpForm} from '@pages/SignUp/useSignUpForm';
+import {ErrorAlert} from '@pages/SignUp/components/ErrorAlert';
+import {FormField} from '@pages/SignUp/components/FormField';
+import {useSignUpForm} from '@pages/SignUp/hooks/useSignUpForm';
 import {publicRoutes} from '@routes/routes';
-import {SIGN_UP, SIGNUP_FORM} from '@pages/SignUp/constants';
+import {SIGN_UP, SIGNUP_FORM} from '@pages/SignUp/signUp.constants';
 import {PASSWORD_VISIBILITY_LABELS} from '@constants/ariaLabels';
 
 export const SignUpForm = () => {

@@ -10,7 +10,11 @@ import {
 } from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
 import {StarRow} from '@pages/Book/components/BookReviews/StarRow';
-import {AVATAR_URL, COMMUNITY_REVIEWS} from '@pages/Book/book.constants';
+import {
+    AVATAR_URL,
+    BOOK_REVIEWS_TEXTS,
+    COMMUNITY_REVIEWS,
+} from '@pages/Book/components/BookReviews/bookReviews.constants';
 
 export const CommunityReviews = () => (
     <BaseContainer as="section">
@@ -21,13 +25,14 @@ export const CommunityReviews = () => (
             FlexWrap="wrap"
             Gap="1rem"
         >
-            <TitleH4>Community Reviews</TitleH4>
+            <TitleH4>{BOOK_REVIEWS_TEXTS.COMMUNITY_REVIEWS_TITLE}</TitleH4>
             <FlexContainer AlignItems="center" Gap="0.75rem">
                 <Text size="sm" variant="muted">
-                    Sort by:
+                    {BOOK_REVIEWS_TEXTS.SORT_BY}
                 </Text>
                 <ButtonOutline size="sm" Gap="0.5rem">
-                    Most Helpful <Icon className="fa-solid fa-chevron-down" FontColor="inherit" />
+                    {BOOK_REVIEWS_TEXTS.MOST_HELPFUL}{' '}
+                    <Icon className="fa-solid fa-chevron-down" FontColor="inherit" />
                 </ButtonOutline>
             </FlexContainer>
         </FlexContainer>
@@ -59,8 +64,8 @@ export const CommunityReviews = () => (
                                         <Text weight="bold">{review.name}</Text>
                                         {review.verified && (
                                             <S.VerifiedBadge>
-                                                <i className="fa-solid fa-certificate"></i> Verified
-                                                Purchase
+                                                <i className="fa-solid fa-certificate"></i>{' '}
+                                                {BOOK_REVIEWS_TEXTS.VERIFIED_PURCHASE}
                                             </S.VerifiedBadge>
                                         )}
                                     </FlexContainer>
@@ -89,10 +94,10 @@ export const CommunityReviews = () => (
                                 <S.HelpfulIconWrapper>
                                     <i className="fa-solid fa-thumbs-up"></i>
                                 </S.HelpfulIconWrapper>
-                                Helpful ({review.helpful})
+                                {BOOK_REVIEWS_TEXTS.HELPFUL(review.helpful)}
                             </S.InteractionBtn>
                             <S.InteractionBtn>
-                                <i className="fa-regular fa-comment"></i> Reply
+                                <i className="fa-regular fa-comment"></i> {BOOK_REVIEWS_TEXTS.REPLY}
                             </S.InteractionBtn>
                         </FlexContainer>
                         <S.MoreOptionsBtn>
@@ -104,7 +109,7 @@ export const CommunityReviews = () => (
         </FlexContainer>
 
         <ButtonGhost MarginTop="2rem" Width="100%">
-            Load more reviews
+            {BOOK_REVIEWS_TEXTS.LOAD_MORE_REVIEWS}
         </ButtonGhost>
     </BaseContainer>
 );

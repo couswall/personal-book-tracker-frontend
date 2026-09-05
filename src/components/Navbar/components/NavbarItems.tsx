@@ -5,7 +5,7 @@ import {NavbarElement, NavbarLink, NavbarList} from '@components/Navbar/styles';
 import {useClickOutside} from '@components/Navbar/hooks/useClickOutside';
 import {navbarRoutes} from '@components/Navbar/constants';
 import {NavbarItemsProps} from '@components/Navbar/components/interfaces';
-import {LOGIN_PAGE} from '@pages/Login/constants';
+import {LOGIN_PAGE} from '@pages/Login/login.constants';
 
 export const NavbarItems: React.FC<NavbarItemsProps> = ({setShowSearchInput, searchBarRef}) => {
     const navigate = useNavigate();

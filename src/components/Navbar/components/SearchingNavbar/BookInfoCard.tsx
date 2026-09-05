@@ -3,7 +3,7 @@ import {FlexContainer, Text} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/index';
 import {NAVBAR} from '@components/Navbar/constants';
 import {privateRoutes} from '@routes/routes';
-import {IBookInfoCardProps} from '@pages/Search/interfaces';
+import {IBookInfoCardProps} from '@pages/Search/search.interfaces';
 
 export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
     book,

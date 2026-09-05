@@ -1,5 +1,5 @@
 import {FlexContainer, LogoIcon, TitleH1} from '@components/index';
-import {LOGIN_PAGE} from '@pages/Login/constants';
+import {LOGIN_PAGE} from '@pages/Login/login.constants';
 
 export const LoginHeader = () => {
     return (

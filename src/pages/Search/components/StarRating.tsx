@@ -1,11 +1,7 @@
-import {StarContainer, StarFill, StarWrapper} from '@pages/Search/styles';
+import {StarContainer, StarFill, StarWrapper} from '@pages/Search/components/starRating.styled';
+import {IStarRatingProps} from '@pages/Search/components/search.components.interfaces';
 
-interface StarRatingProps {
-    rating: number;
-    size?: string;
-}
-
-export const StarRating: React.FC<StarRatingProps> = ({rating, size = '1rem'}) => {
+export const StarRating: React.FC<IStarRatingProps> = ({rating, size = '1rem'}) => {
     const clampedRating = Math.max(0, Math.min(5, rating));
 
     return (

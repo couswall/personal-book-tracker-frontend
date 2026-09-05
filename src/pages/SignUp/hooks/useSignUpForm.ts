@@ -4,17 +4,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AppDispatch, RootState} from '@store/store';
-import {cleanErrorMessages, loginUser} from '@store/index';
-import {schemaLoginValidations} from '@pages/Login/schemaLoginValidations';
-import {ILoginForm} from '@pages/Login/interfaces';
+import {cleanErrorMessages, registerUser} from '@store/index';
+import {schemaSignUpValidations} from '@pages/SignUp/signUp.schema';
+import {ISignUpForm} from '@pages/SignUp/hooks/signUp.hooks.interfaces';
 
-export const useLoginForm = () => {
+export const useSignUpForm = () => {
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<ILoginForm>({
-        resolver: yupResolver(schemaLoginValidations),
+    } = useForm<ISignUpForm>({
+        resolver: yupResolver(schemaSignUpValidations),
     });
 
     const dispatch: AppDispatch = useDispatch();
@@ -22,8 +22,8 @@ export const useLoginForm = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const onSubmit = (data: ILoginForm) => {
-        dispatch(loginUser({credentials: data, navigate}));
+    const onSubmit = (data: ISignUpForm) => {
+        dispatch(registerUser({newUser: data, navigate}));
     };
 
     const togglePasswordVisibility = () => {
@@ -31,7 +31,7 @@ export const useLoginForm = () => {
     };
 
     useEffect(() => {
-        if (errorsMsg.loginErrorMsg) {
+        if (errorsMsg.registerUserErrorMsg) {
             dispatch(cleanErrorMessages());
         }
     }, []);

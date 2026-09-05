@@ -1,6 +1,7 @@
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
+import {IStarRowProps} from '@pages/Book/components/BookReviews/bookReviews.interfaces';
 
-export const StarRow = ({count, filled = true}: {count: number; filled?: boolean}) => (
+export const StarRow = ({count, filled = true}: IStarRowProps) => (
     <S.StarRating>
         {[...Array(5)].map((_, i) => (
             <i

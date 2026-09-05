@@ -1,13 +1,13 @@
 import {FieldErrors, UseFormRegister} from 'react-hook-form';
+import {ISignUpForm} from '@pages/SignUp/hooks/signUp.hooks.interfaces';
 
-export interface ISignUpForm {
-    fullName: string;
-    username: string;
-    email: string;
-    password: string;
+export type SignUpFieldName = 'fullName' | 'username' | 'email' | 'password';
+
+export interface IFormFieldEndIcon {
+    className: string;
+    label: string;
+    onClick: () => void;
 }
-
-export type SignUpFildName = 'fullName' | 'username' | 'email' | 'password';
 
 export interface IFormFieldProps {
     label: string;
@@ -15,14 +15,10 @@ export interface IFormFieldProps {
     inputType?: string;
     inputMaxLength?: number;
     iconClass: string;
-    fieldName: SignUpFildName;
+    fieldName: SignUpFieldName;
     register: UseFormRegister<ISignUpForm>;
     errors: FieldErrors<ISignUpForm>;
-    endIcon?: {
-        className: string;
-        label: string;
-        onClick: () => void;
-    };
+    endIcon?: IFormFieldEndIcon;
 }
 
 export interface IErrorAlertProps {

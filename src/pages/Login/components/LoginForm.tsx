@@ -6,11 +6,11 @@ import {
     Paragraph,
     TitleH2,
 } from '@components/index';
-import {ErrorAlert} from '@pages/SignUp/ErrorAlert';
-import {FormField} from '@pages/Login/FormField';
-import {useLoginForm} from '@pages/Login/useLoginForm';
+import {ErrorAlert} from '@pages/SignUp/components/ErrorAlert';
+import {FormField} from '@pages/Login/components/FormField';
+import {useLoginForm} from '@pages/Login/hooks/useLoginForm';
 import {publicRoutes} from '@routes/routes';
-import {LOGIN_PAGE} from '@pages/Login/constants';
+import {LOGIN_PAGE} from '@pages/Login/login.constants';
 import {PASSWORD_VISIBILITY_LABELS} from '@constants/ariaLabels';
 
 export const LoginForm = () => {

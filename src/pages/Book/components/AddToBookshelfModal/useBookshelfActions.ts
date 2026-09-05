@@ -4,6 +4,7 @@ import {
     removeBookFromBookshelf,
     updateBookshelf,
     IUseBookshelfActionsParams,
+    ADD_TO_BOOKSHELF_TEXTS,
 } from '@pages/Book/components/AddToBookshelfModal/index';
 import {useModalAlert} from '@pages/Book/hooks/useModalAlert';
 import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
@@ -17,7 +18,7 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
         try {
             setIsLoading(true);
             await addBookToBookshelf({token, bookshelfId, apiBookId: bookId, onSuccess: onRefresh});
-            showAlert(`Added to '${bookshelfName}'`, 'success');
+            showAlert(ADD_TO_BOOKSHELF_TEXTS.ADDED_TO(bookshelfName), 'success');
         } catch (error) {
             const message =
                 error instanceof Error ? error.message : GENERAL_ERROR_MSGS.SOMETHING_WENT_WRONG;
@@ -32,7 +33,7 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
         try {
             setIsLoading(true);
             await updateBookshelf({token, bookshelfBookId, bookshelfId, onSuccess: onRefresh});
-            showAlert(`Added to '${bookshelfName}'`, 'success');
+            showAlert(ADD_TO_BOOKSHELF_TEXTS.ADDED_TO(bookshelfName), 'success');
         } catch (error) {
             const message =
                 error instanceof Error ? error.message : GENERAL_ERROR_MSGS.SOMETHING_WENT_WRONG;
@@ -47,7 +48,7 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
         try {
             setIsLoading(true);
             await removeBookFromBookshelf({token, bookshelfBookId, onSuccess: onRefresh});
-            showAlert(`Removed from '${bookshelfName}'`, 'success');
+            showAlert(ADD_TO_BOOKSHELF_TEXTS.REMOVED_FROM(bookshelfName), 'success');
         } catch (error) {
             const message =
                 error instanceof Error ? error.message : GENERAL_ERROR_MSGS.SOMETHING_WENT_WRONG;

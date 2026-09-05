@@ -1,16 +1,9 @@
 import React from 'react';
 import {FlexContainer, Image, Paragraph} from '@components/index';
+import {ICoverBookImgProps} from '@pages/Book/components/book.components.interfaces';
+import {NO_IMAGE_AVAILABLE} from '@pages/Book/components/book.components.constants';
 
-interface CoverBookImgProps {
-    imgSrc?: string | null;
-    width?: string;
-    height?: string;
-    flex?: string;
-    onClick?: () => void;
-    cursor?: string;
-}
-
-export const CoverBookImg: React.FC<CoverBookImgProps> = ({
+export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
     imgSrc,
     width = '220px',
     height = '280px',
@@ -24,7 +17,7 @@ export const CoverBookImg: React.FC<CoverBookImgProps> = ({
             Overflow="hidden"
             Width={width}
             Height={height}
-            Flex={flex} 
+            Flex={flex}
             onClick={() => onClick?.()}
             Cursor={cursor}
         >
@@ -37,7 +30,7 @@ export const CoverBookImg: React.FC<CoverBookImgProps> = ({
                     JustifyContent="center"
                     AlignItems="center"
                 >
-                    <Paragraph>{'No Image Available'}</Paragraph>
+                    <Paragraph>{NO_IMAGE_AVAILABLE}</Paragraph>
                 </FlexContainer>
             )}
         </FlexContainer>

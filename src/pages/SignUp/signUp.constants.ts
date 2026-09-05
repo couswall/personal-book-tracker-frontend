@@ -3,7 +3,7 @@ export const SIGN_UP = {
     DESCRIPTION: 'Sign up to continue',
     BTN_SUBMIT: 'Sign up',
     HAVE_AN_ACCOUNT: 'You already have an account?',
-    LOGIN_HERE: 'Login here'
+    LOGIN_HERE: 'Login here',
 };
 
 export const SIGNUP_FORM = {
@@ -19,10 +19,10 @@ export const SIGNUP_FORM = {
         LABEL: 'Email',
         PLACEHOLDER: 'Type your email',
     },
-    PASSWORD:{
+    PASSWORD: {
         LABEL: 'Password',
         PLACEHOLDER: 'Type your password',
-    }
+    },
 };
 
 export const ERROR_MESSAGES = {
@@ -39,11 +39,11 @@ export const ERROR_MESSAGES = {
         FORMAT: 'Username can only include letters, numbers, dots and underscores',
     },
     EMAIL: {
-        FORMAT: 'Invalid email'
+        FORMAT: 'Invalid email',
     },
     PASSWORD: {
         MIN_LENGTH: 'Password must contain at least 6 characters',
         MAX_LENGTH: 'Password must contain at most 16 characters',
         FORMAT: 'Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 special character',
     },
-}
+};

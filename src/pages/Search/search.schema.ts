@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import {ERROR_MSG} from '@pages/Search/constants';
+import {ERROR_MSG} from '@pages/Search/search.constants';
 import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 
 export const schemaSearchBook = yup.object().shape({

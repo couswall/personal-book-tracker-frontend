@@ -16,7 +16,7 @@ import {
 import {SearchInputWrapper} from '@components/Navbar/components/SearchingNavbar/styles';
 import {BookInfoCard} from '@components/Navbar/components/SearchingNavbar/BookInfoCard';
 import {navbarSearchBook} from '@store/index';
-import {schemaSearchBook} from '@pages/Search/schemaSearchBook';
+import {schemaSearchBook} from '@pages/Search/search.schema';
 import {privateRoutes} from '@routes/routes';
 import {NAVBAR} from '@components/Navbar/constants';
 

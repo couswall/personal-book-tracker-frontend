@@ -8,7 +8,7 @@ import {
     NavSidebarItem,
 } from '@components/Navbar/components/ModalSidebar/styles';
 import robotImg from '/assets/avatar-robot.jpg';
-import {LOGIN_PAGE} from '@pages/Login/constants';
+import {LOGIN_PAGE} from '@pages/Login/login.constants';
 import {NAVBAR_ARIA_LABELS, navbarRoutes} from '@components/Navbar/constants';
 import {ModalSidebarProps} from '@components/Navbar/components/interfaces';
 

@@ -1,6 +1,6 @@
 import {expect, test} from '@playwright/test';
 import {endpoints, mockJson} from './mocks/api';
-import {LOGIN_PAGE} from '@pages/Login/constants';
+import {LOGIN_PAGE} from '@pages/Login/login.constants';
 import {privateRoutes, publicRoutes} from '@routes/routes';
 import {NAVBAR_ARIA_LABELS} from '@components/Navbar/constants';
 
