@@ -15,3 +15,5 @@ export const schemaSearchBook = yup.object().shape({
             (value) => value?.trim().length !== 0
         ),
 });
+
+export type SearchFormValues = yup.InferType<typeof schemaSearchBook>;

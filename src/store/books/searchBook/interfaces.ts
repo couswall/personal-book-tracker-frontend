@@ -1,6 +1,7 @@
 export interface IGetReducerBase {
     loading: boolean;
     error?: string;
+    currentRequestId?: string;
 }
 
 export interface ISearchBookReducer extends IGetReducerBase {

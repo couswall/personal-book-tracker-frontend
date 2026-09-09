@@ -1,10 +1,11 @@
-import {FieldValues, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router';
-import {useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useDebounce} from '@components/Navbar/hooks/useDebounce';
+import {useClickOutside} from '@components/Navbar/hooks/useClickOutside';
 import {
     FlexContainer,
     FormContainer,
@@ -15,14 +16,14 @@ import {
 } from '@components/index';
 import {SearchInputWrapper} from '@components/Navbar/components/SearchingNavbar/styles';
 import {BookInfoCard} from '@components/Navbar/components/SearchingNavbar/BookInfoCard';
-import {navbarSearchBook} from '@store/index';
-import {schemaSearchBook} from '@pages/Search/search.schema';
+import {navbarSearchBook, clearNavbarSearch} from '@store/index';
+import {schemaSearchBook, SearchFormValues} from '@pages/Search/search.schema';
 import {privateRoutes} from '@routes/routes';
-import {NAVBAR} from '@components/Navbar/constants';
+import {NAVBAR, NAVBAR_SEARCH_MIN_LENGTH} from '@components/Navbar/constants';
 
 export const SearchingNavbar = () => {
     const dispatch: AppDispatch = useDispatch();
-    const {register, watch, reset, handleSubmit} = useForm({
+    const {register, watch, reset, handleSubmit} = useForm<SearchFormValues>({
         defaultValues: {searchText: ''},
         resolver: yupResolver(schemaSearchBook),
     });
@@ -33,22 +34,45 @@ export const SearchingNavbar = () => {
     const debouncedValue = useDebounce(searchText);
     const truncatedSearchText =
         debouncedValue.length > 18 ? debouncedValue.substring(0, 18) + '...' : debouncedValue;
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
 
-    const onSubmit = (data: FieldValues) => {
-        navigate(privateRoutes.search, {state: data});
+    useClickOutside([formRef], () => setIsDropdownOpen(false));
+
+    const closeDropdown = () => {
         reset();
+        dispatch(clearNavbarSearch());
+        setIsDropdownOpen(false);
+    };
+
+    const navigateToSearch = (searchTextValue: string) => {
+        navigate(`${privateRoutes.search}?${new URLSearchParams({q: searchTextValue})}`);
+    };
+
+    const onSubmit = (data: SearchFormValues) => {
+        navigateToSearch(data.searchText);
+        closeDropdown();
+    };
+
+    const handleSeeAllResults = () => {
+        navigateToSearch(debouncedValue);
+        closeDropdown();
     };
 
     useEffect(() => {
-        if (debouncedValue.length > 2) {
+        if (debouncedValue.length >= NAVBAR_SEARCH_MIN_LENGTH) {
             const params = {searchText: debouncedValue, maxResults: 5};
             dispatch(navbarSearchBook({token, params}));
+            setIsDropdownOpen(true);
+        } else {
+            setIsDropdownOpen(false);
         }
     }, [debouncedValue]);
 
     return (
         <>
             <FormContainer
+                ref={formRef}
                 BackgroundColor="inherit"
                 Position="relative"
                 Width="320px"
@@ -81,10 +105,13 @@ export const SearchingNavbar = () => {
                         Border="unset"
                         Width="100%"
                         Padding="0.875rem 0.5rem 0.875rem 0px"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Escape') setIsDropdownOpen(false);
+                        }}
                         {...register('searchText')}
                     />
                 </SearchInputWrapper>
-                {debouncedValue.length > 3 && (
+                {isDropdownOpen && (
                     <FlexContainer
                         Position="absolute"
                         Width="320px"
@@ -97,15 +124,23 @@ export const SearchingNavbar = () => {
                         BoxShadowVariant="md"
                         ZIndex="2"
                     >
-                        {searchBookData?.books.map((book) => (
-                            <BookInfoCard
-                                key={book.id}
-                                book={book}
-                                imageWidth="40px"
-                                imageHeight="56px"
-                                onClickOption={() => reset()}
-                            />
-                        ))}
+                        {!loading && searchBookData?.books.length === 0 ? (
+                            <FlexContainer Padding="0.75rem" JustifyContent="center">
+                                <Text size="xs" variant="muted">
+                                    {NAVBAR.NO_RESULTS}
+                                </Text>
+                            </FlexContainer>
+                        ) : (
+                            searchBookData?.books.map((book) => (
+                                <BookInfoCard
+                                    key={book.id}
+                                    book={book}
+                                    imageWidth="40px"
+                                    imageHeight="56px"
+                                    onClickOption={closeDropdown}
+                                />
+                            ))
+                        )}
                         <FlexContainer
                             Padding="0.75rem"
                             JustifyContent="center"
@@ -113,6 +148,7 @@ export const SearchingNavbar = () => {
                             BackgroundColor="inherit"
                             HBackgroundColorVariant="primary"
                             Cursor="pointer"
+                            onClick={handleSeeAllResults}
                         >
                             <Text size="xs" variant="primary" weight="semibold" Cursor="pointer">
                                 {`${NAVBAR.SEARCH_ALL_RESULTS} "${truncatedSearchText}"`}

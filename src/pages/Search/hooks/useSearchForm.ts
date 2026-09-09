@@ -1,31 +1,30 @@
-import {useEffect, useState} from 'react';
-import {FieldValues, useForm, useWatch} from 'react-hook-form';
+import {useEffect} from 'react';
+import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
-import {useLocation, useNavigate} from 'react-router';
+import {useSearchParams} from 'react-router';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AppDispatch, RootState} from '@store/store';
 import {searchBook} from '@store/index';
-import {schemaSearchBook} from '@pages/Search/search.schema';
+import {schemaSearchBook, SearchFormValues} from '@pages/Search/search.schema';
 import {MAX_RESULTS} from '@pages/Search/search.constants';
 
 export const useSearchForm = () => {
-    const {state} = useLocation();
-    const navigate = useNavigate();
     const dispatch: AppDispatch = useDispatch();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get('q') ?? '';
+    const pageFromUrl = Number(searchParams.get('page'));
+    const currentPage = pageFromUrl > 0 ? pageFromUrl : 1;
     const {
         register,
         handleSubmit,
         reset,
-        control,
         formState: {errors},
-    } = useForm({
+    } = useForm<SearchFormValues>({
         defaultValues: {searchText: ''},
         resolver: yupResolver(schemaSearchBook),
     });
     const {token} = useSelector((state: RootState) => state.auth);
     const {searchBookData, loading} = useSelector((state: RootState) => state.searchBook);
-    const searchTextValue = useWatch({control, name: 'searchText'});
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const errorMsg = errors.searchText?.message ? String(errors.searchText.message) : undefined;
 
     const performSearch = (searchText: string, page: number) => {
@@ -33,31 +32,27 @@ export const useSearchForm = () => {
         dispatch(searchBook({token, params}));
     };
 
-    const onSubmit = ({searchText}: FieldValues) => {
-        setCurrentPage(1);
-        performSearch(searchText, 1);
+    const onSubmit = ({searchText}: SearchFormValues) => {
+        setSearchParams({q: searchText, page: '1'});
     };
 
     const handlePreviousPage = () => {
-        const newPage = currentPage - 1;
-        setCurrentPage(newPage);
-        performSearch(searchTextValue, newPage);
+        setSearchParams({q: query, page: String(currentPage - 1)});
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
     const handleNextPage = () => {
-        const newPage = currentPage + 1;
-        setCurrentPage(newPage);
-        performSearch(searchTextValue, newPage);
+        setSearchParams({q: query, page: String(currentPage + 1)});
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
-    const isLastPage = searchBookData?.books && !searchBookData.books.length;
+    const isLastPage = Boolean(searchBookData && searchBookData.books.length < MAX_RESULTS);
 
     useEffect(() => {
-        if (!state?.searchText) return;
-        reset({searchText: state.searchText});
-        performSearch(state.searchText, 1);
-        navigate('.', {replace: true, state: null});
-    }, [state]);
+        if (!query) return;
+        reset({searchText: query});
+        performSearch(query, currentPage);
+    }, [query, currentPage]);
 
     return {
         register,

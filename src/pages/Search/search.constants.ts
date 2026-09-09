@@ -5,6 +5,7 @@ export const SEARCH_PAGE = {
     PREVIOUS_BTN: 'Previous',
     NEXT_BTN: 'Next',
     PAGE: 'Page',
+    NO_RESULTS: 'No books found for your search.',
 };
 
 export const MAX_RESULTS = 10;

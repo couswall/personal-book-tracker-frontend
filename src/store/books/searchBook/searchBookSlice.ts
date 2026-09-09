@@ -14,16 +14,19 @@ export const searchBookSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(searchBook.pending, (state) => {
+            .addCase(searchBook.pending, (state, action) => {
                 state.loading = true;
                 state.error = undefined;
+                state.currentRequestId = action.meta.requestId;
             })
             .addCase(searchBook.fulfilled, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.searchBookData = action.payload;
                 state.loading = false;
                 state.error = undefined;
             })
             .addCase(searchBook.rejected, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.loading = false;
                 state.error =
                     typeof action.payload === 'string'

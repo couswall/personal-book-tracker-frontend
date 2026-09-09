@@ -18,8 +18,11 @@ export const SUB_MENU = {
 
 export const NAVBAR = {
     SEARCH_ALL_RESULTS: 'Search all results for',
+    NO_RESULTS: 'No books found',
     BY: 'by',
 };
+
+export const NAVBAR_SEARCH_MIN_LENGTH = 3;
 
 export const NAVBAR_ARIA_LABELS = {
     SEARCH_BOOKS: 'Search books',

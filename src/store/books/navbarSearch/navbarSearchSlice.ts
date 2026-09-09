@@ -11,19 +11,27 @@ const initialState: ISearchBookReducer = {
 export const navbarSearchSlice = createSlice({
     name: 'navbarSearch',
     initialState,
-    reducers: {},
+    reducers: {
+        clearNavbarSearch: (state) => {
+            state.searchBookData = undefined;
+            state.error = undefined;
+        },
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(navbarSearchBook.pending, (state) => {
+            .addCase(navbarSearchBook.pending, (state, action) => {
                 state.loading = true;
                 state.error = undefined;
+                state.currentRequestId = action.meta.requestId;
             })
             .addCase(navbarSearchBook.fulfilled, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.searchBookData = action.payload;
                 state.loading = false;
                 state.error = undefined;
             })
             .addCase(navbarSearchBook.rejected, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.loading = false;
                 state.error =
                     typeof action.payload === 'string'
@@ -32,3 +40,5 @@ export const navbarSearchSlice = createSlice({
             });
     },
 });
+
+export const {clearNavbarSearch} = navbarSearchSlice.actions;

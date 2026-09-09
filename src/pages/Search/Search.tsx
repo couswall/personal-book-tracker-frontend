@@ -5,7 +5,6 @@ import {
     FormContainer,
     Icon,
     Input,
-    LoadingSpinner,
     MutedIcon,
     Paragraph,
     TitleH1,
@@ -13,7 +12,7 @@ import {
 import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
 import {SEARCH_PAGE} from '@pages/Search/search.constants';
 import {SearchInputWrapper} from '@components/Navbar/components/SearchingNavbar/styles';
-import {BookResult} from '@pages/Search/components/BookResult';
+import {SearchResults} from '@pages/Search/components/SearchResults';
 import {useSearchForm} from '@pages/Search/hooks/useSearchForm';
 
 export const Search = () => {
@@ -76,15 +75,11 @@ export const Search = () => {
                 </FormContainer>
 
                 <FlexContainer FlexDirection="column" Gap="1rem">
-                    {loading ? (
-                        <FlexContainer Height="40vh" JustifyContent="center" AlignItems="center">
-                            <LoadingSpinner />
-                        </FlexContainer>
-                    ) : (
-                        searchBookData?.books.map((book) => (
-                            <BookResult key={book.id} book={book} />
-                        ))
-                    )}
+                    <SearchResults
+                        books={searchBookData?.books}
+                        loading={loading}
+                        hasSearched={!!searchBookData}
+                    />
                 </FlexContainer>
 
                 {searchBookData?.books && !loading && (
