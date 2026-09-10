@@ -37,5 +37,5 @@
         "noUncheckedSideEffectImports": true
     },
 
-    "include": ["src", "e2e"]
+    "include": ["src", "e2e", ".storybook/**/*"]
 }
