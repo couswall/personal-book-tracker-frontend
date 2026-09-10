@@ -24,11 +24,12 @@ interface IInputProps {
 
 export const Input = styled.input<IInputProps>`
     font-size: ${(props) => props.FontSize || '1rem'};
-    color: ${(props) => props.theme.colors.text.theme || props.FontColor};
+    color: ${(props) => props.FontColor || props.theme.colors.text.theme};
     font-family: ${(props) => props.FontFamily || props.theme.fonts.lexend};
     width: ${(props) => props.Width || 'auto'};
     height: ${(props) => props.Height || 'auto'};
-    background-color: ${(props) => props.BackgroundColor || props.theme.colors.inputBackground};
+    background-color: ${(props) =>
+        props.BackgroundColor || props.theme.colors.input.inputBackground};
     padding: ${(props) => props.Padding || '0'};
     margin: ${(props) => props.Margin || '0'};
     max-width: ${(props) => props.MaxWidth};

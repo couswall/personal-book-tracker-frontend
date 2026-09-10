@@ -105,4 +105,3 @@ export const ButtonOutline = styled(Button).attrs({variant: 'outline'})``;
 export const ButtonGhost = styled(Button).attrs({variant: 'ghost'})``;
 export const ButtonDanger = styled(Button).attrs({variant: 'danger'})``;
 export const ButtonSuccess = styled(Button).attrs({variant: 'success'})``;
-export const ButtonTransparent = styled(Button).attrs({variant: 'ghost'})``;
