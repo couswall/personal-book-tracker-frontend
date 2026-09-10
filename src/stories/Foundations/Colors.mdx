@@ -1,0 +1,199 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {lightTheme, darkTheme} from '@styles/Theme';
+import {ColorTable} from './ColorTable';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+Every color used in the app comes from `src/styles/Theme.ts` — one value for `lightTheme`, one for
+`darkTheme`. Components never hardcode colors; they read `props.theme.colors.*`, so switching
+theme (see the sun/moon toggle in the toolbar above) swaps every value on this page automatically.
+
+If you need a new color, add it to **both** themes in `Theme.ts` first, then reference it from a
+component — don't hardcode a hex value directly in a component's styles.
+
+export const brandTokens = [
+    {
+        name: 'primaryColor',
+        description: 'Primary brand color — buttons, progress bars, active states',
+        light: lightTheme.colors.primaryColor,
+        dark: darkTheme.colors.primaryColor,
+    },
+    {
+        name: 'primaryHover',
+        description: 'Hover state for the primary color',
+        light: lightTheme.colors.primaryHover,
+        dark: darkTheme.colors.primaryHover,
+    },
+    {
+        name: 'primaryLight',
+        description: 'Light tint of primary — badge backgrounds, highlights',
+        light: lightTheme.colors.primaryLight,
+        dark: darkTheme.colors.primaryLight,
+    },
+    {
+        name: 'secondaryColor',
+        description: 'Secondary accent color',
+        light: lightTheme.colors.secondaryColor,
+        dark: darkTheme.colors.secondaryColor,
+    },
+    {
+        name: 'tertiaryColor',
+        description: 'Tertiary accent color',
+        light: lightTheme.colors.tertiaryColor,
+        dark: darkTheme.colors.tertiaryColor,
+    },
+];
+
+<ColorTable title="Brand Identity" tokens={brandTokens} />
+
+export const surfaceTokens = [
+    {
+        name: 'background',
+        description: 'Page background',
+        light: lightTheme.colors.background,
+        dark: darkTheme.colors.background,
+    },
+    {
+        name: 'backgroundSecondary',
+        description: 'Surface background — cards, floating containers',
+        light: lightTheme.colors.backgroundSecondary,
+        dark: darkTheme.colors.backgroundSecondary,
+    },
+    {
+        name: 'backgroundTertiary',
+        description: 'Elevated surface — navbar, layered elements',
+        light: lightTheme.colors.backgroundTertiary,
+        dark: darkTheme.colors.backgroundTertiary,
+    },
+    {
+        name: 'borderColor',
+        description: 'Borders and separators',
+        light: lightTheme.colors.borderColor,
+        dark: darkTheme.colors.borderColor,
+    },
+];
+
+<ColorTable title="Surfaces & Foundations" tokens={surfaceTokens} />
+
+export const textTokens = [
+    {
+        name: 'text.theme',
+        description: 'Primary text color',
+        light: lightTheme.colors.text.theme,
+        dark: darkTheme.colors.text.theme,
+    },
+    {
+        name: 'text.light',
+        description: 'Muted text — metadata, secondary copy',
+        light: lightTheme.colors.text.light,
+        dark: darkTheme.colors.text.light,
+    },
+    {
+        name: 'text.accent',
+        description: 'Accent text — links, emphasis',
+        light: lightTheme.colors.text.accent,
+        dark: darkTheme.colors.text.accent,
+    },
+];
+
+<ColorTable title="Typography" tokens={textTokens} />
+
+export const uiTokens = [
+    {
+        name: 'lightColor',
+        description: 'Static light color, used regardless of active theme',
+        light: lightTheme.colors.lightColor,
+        dark: darkTheme.colors.lightColor,
+    },
+    {
+        name: 'darkGrey',
+        description: 'Static dark grey, used regardless of active theme',
+        light: lightTheme.colors.darkGrey,
+        dark: darkTheme.colors.darkGrey,
+    },
+    {
+        name: 'disabledButton',
+        description: 'Disabled button background',
+        light: lightTheme.colors.disabledButton,
+        dark: darkTheme.colors.disabledButton,
+    },
+    {
+        name: 'searchBarContainer',
+        description: 'Search bar container background',
+        light: lightTheme.colors.searchBarContainer,
+        dark: darkTheme.colors.searchBarContainer,
+    },
+];
+
+<ColorTable title="UI Elements" tokens={uiTokens} />
+
+export const statusTokens = [
+    {
+        name: 'danger',
+        description: 'Error / destructive state',
+        light: lightTheme.colors.danger,
+        dark: darkTheme.colors.danger,
+    },
+    {
+        name: 'dangerHover',
+        description: 'Hover state for danger',
+        light: lightTheme.colors.dangerHover,
+        dark: darkTheme.colors.dangerHover,
+    },
+    {
+        name: 'success',
+        description: 'Success state',
+        light: lightTheme.colors.success,
+        dark: darkTheme.colors.success,
+    },
+    {
+        name: 'successHover',
+        description: 'Hover state for success',
+        light: lightTheme.colors.successHover,
+        dark: darkTheme.colors.successHover,
+    },
+];
+
+<ColorTable title="Status Colors" tokens={statusTokens} />
+
+export const inputTokens = [
+    {
+        name: 'input.inputBackground',
+        description: 'Input field background',
+        light: lightTheme.colors.input.inputBackground,
+        dark: darkTheme.colors.input.inputBackground,
+    },
+    {
+        name: 'input.labelColor',
+        description: 'Input label color',
+        light: lightTheme.colors.input.labelColor,
+        dark: darkTheme.colors.input.labelColor,
+    },
+    {
+        name: 'input.errorMsgText',
+        description: 'Input validation error text',
+        light: lightTheme.colors.input.errorMsgText,
+        dark: darkTheme.colors.input.errorMsgText,
+    },
+];
+
+<ColorTable title="Input" tokens={inputTokens} />
+
+export const containerHoverTokens = [
+    {
+        name: 'containerHover.primary',
+        description: 'Container hover background — primary variant',
+        light: lightTheme.colors.containerHover.primary,
+        dark: darkTheme.colors.containerHover.primary,
+    },
+    {
+        name: 'containerHover.muted',
+        description: 'Container hover background — muted variant',
+        light: lightTheme.colors.containerHover.muted,
+        dark: darkTheme.colors.containerHover.muted,
+    },
+];
+
+<ColorTable title="Container Hover" tokens={containerHoverTokens} />
