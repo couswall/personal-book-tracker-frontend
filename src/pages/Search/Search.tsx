@@ -88,15 +88,16 @@ export const Search = () => {
                             MaxWidth="120px"
                             onClick={handlePreviousPage}
                             disabled={currentPage === 1 || loading}
-                            Gap="0.5rem"
                             AlignItems="center"
                             variant="outline"
+                            leftIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-left"
+                                    size="md"
+                                    FontColor="inherit"
+                                />
+                            }
                         >
-                            <Icon
-                                className="fa-solid fa-arrow-left"
-                                size="md"
-                                FontColor="inherit"
-                            />
                             {SEARCH_PAGE.PREVIOUS_BTN}
                         </Button>
                         <Paragraph>{`${SEARCH_PAGE.PAGE} ${currentPage}`}</Paragraph>
@@ -104,16 +105,17 @@ export const Search = () => {
                             MaxWidth="120px"
                             onClick={handleNextPage}
                             disabled={isLastPage || loading}
-                            Gap="0.5rem"
                             AlignItems="center"
                             variant="outline"
+                            rightIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-right"
+                                    size="md"
+                                    FontColor="inherit"
+                                />
+                            }
                         >
                             {SEARCH_PAGE.NEXT_BTN}
-                            <Icon
-                                className="fa-solid fa-arrow-right"
-                                size="md"
-                                FontColor="inherit"
-                            />
                         </Button>
                     </FlexContainer>
                 )}

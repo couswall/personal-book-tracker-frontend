@@ -1,11 +1,4 @@
-import {
-    Button,
-    FlexContainer,
-    FormContainer,
-    LoadingSpinner,
-    Paragraph,
-    TitleH2,
-} from '@components/index';
+import {Button, FlexContainer, FormContainer, Paragraph, TitleH2} from '@components/index';
 import {ErrorAlert} from '@pages/SignUp/components/ErrorAlert';
 import {FormField} from '@pages/SignUp/components/FormField';
 import {useSignUpForm} from '@pages/SignUp/hooks/useSignUpForm';
@@ -113,18 +106,8 @@ export const SignUpForm = () => {
                         />
                     </FlexContainer>
 
-                    <Button type="submit" disabled={loadings.registerUserLoading}>
-                        {loadings.registerUserLoading ? (
-                            <FlexContainer
-                                Width="100%"
-                                BackgroundColor="transparent"
-                                JustifyContent="center"
-                            >
-                                <LoadingSpinner Width="25px" Padding="5px" />
-                            </FlexContainer>
-                        ) : (
-                            <>{SIGN_UP.BTN_SUBMIT}</>
-                        )}
+                    <Button type="submit" loading={loadings.registerUserLoading} loadingText="">
+                        {SIGN_UP.BTN_SUBMIT}
                     </Button>
 
                     <FlexContainer

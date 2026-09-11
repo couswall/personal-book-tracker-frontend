@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router';
 import {AppDispatch, RootState} from '@store/store';
 import {SubMenuContainer} from '@components/Navbar/styles';
-import {DangerIcon, Icon, ButtonGhost, Text, FlexContainer} from '@components/index';
+import {DangerIcon, Icon, Button, Text, FlexContainer} from '@components/index';
 import {onLogout} from '@store/index';
 import {publicRoutes} from '@routes/routes';
 import {SUB_MENU, subMenuRoutes} from '@components/Navbar/constants';
@@ -47,35 +47,35 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
                 Padding="0.25rem 0px"
             >
                 {subMenuRoutes.map((item, index) => (
-                    <ButtonGhost
+                    <Button
+                        variant="ghost"
                         key={index}
                         Padding="0.5rem 1rem"
-                        Gap="1rem"
                         JustifyContent="flex-start"
                         BorderRadius="unset"
                         onClick={() => navigate(item.route)}
+                        leftIcon={<Icon variant="text" className={item.iconClassName} />}
                     >
-                        <Icon variant="text" className={item.iconClassName} />
                         <Text FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
                             {item.label}
                         </Text>
-                    </ButtonGhost>
+                    </Button>
                 ))}
             </FlexContainer>
 
-            <ButtonGhost
+            <Button
+                variant="ghost"
                 Margin="0.5rem 0px"
                 Padding="0.5rem 1rem"
                 BorderRadius="unset"
-                Gap="1rem"
                 JustifyContent="flex-start"
                 onClick={onSignout}
+                leftIcon={<DangerIcon className="fa-solid fa-arrow-right-from-bracket" />}
             >
-                <DangerIcon className="fa-solid fa-arrow-right-from-bracket" />
                 <Text variant="danger" FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
                     {SUB_MENU.LOGOUT}
                 </Text>
-            </ButtonGhost>
+            </Button>
         </SubMenuContainer>
     );
 };

@@ -1,9 +1,7 @@
-import styled, {css} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 import {ButtonProps, getVariantStyles, getSizeStyles} from '@components/Button/buttonVariants';
 
-export type {ButtonProps} from '@components/Button/buttonVariants';
-
-export const Button = styled.button<ButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
     display: ${(props) => props.Display ?? 'flex'};
     align-items: ${(props) => props.AlignItems ?? 'center'};
     justify-content: ${(props) => props.JustifyContent ?? 'center'};
@@ -99,9 +97,24 @@ export const Button = styled.button<ButtonProps>`
     }
 `;
 
-export const ButtonPrimary = styled(Button).attrs({variant: 'primary'})``;
-export const ButtonSecondary = styled(Button).attrs({variant: 'secondary'})``;
-export const ButtonOutline = styled(Button).attrs({variant: 'outline'})``;
-export const ButtonGhost = styled(Button).attrs({variant: 'ghost'})``;
-export const ButtonDanger = styled(Button).attrs({variant: 'danger'})``;
-export const ButtonSuccess = styled(Button).attrs({variant: 'success'})``;
+const spin = keyframes`
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
+export const ButtonSpinner = styled.span`
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: ${spin} 0.6s linear infinite;
+`;
+
+export const ButtonContent = styled.span`
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+`;

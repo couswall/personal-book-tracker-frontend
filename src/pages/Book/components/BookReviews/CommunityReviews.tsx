@@ -1,7 +1,6 @@
 import {
     BaseContainer,
-    ButtonGhost,
-    ButtonOutline,
+    Button,
     FlexContainer,
     Icon,
     Text,
@@ -30,10 +29,13 @@ export const CommunityReviews = () => (
                 <Text size="sm" variant="muted">
                     {BOOK_REVIEWS_TEXTS.SORT_BY}
                 </Text>
-                <ButtonOutline size="sm" Gap="0.5rem">
-                    {BOOK_REVIEWS_TEXTS.MOST_HELPFUL}{' '}
-                    <Icon className="fa-solid fa-chevron-down" FontColor="inherit" />
-                </ButtonOutline>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    rightIcon={<Icon className="fa-solid fa-chevron-down" FontColor="inherit" />}
+                >
+                    {BOOK_REVIEWS_TEXTS.MOST_HELPFUL}
+                </Button>
             </FlexContainer>
         </FlexContainer>
 
@@ -108,8 +110,8 @@ export const CommunityReviews = () => (
             ))}
         </FlexContainer>
 
-        <ButtonGhost MarginTop="2rem" Width="100%">
+        <Button variant="ghost" MarginTop="2rem" Width="100%">
             {BOOK_REVIEWS_TEXTS.LOAD_MORE_REVIEWS}
-        </ButtonGhost>
+        </Button>
     </BaseContainer>
 );

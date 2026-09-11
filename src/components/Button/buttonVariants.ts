@@ -1,12 +1,17 @@
+import type {ButtonHTMLAttributes, ReactNode} from 'react';
 import {css, DefaultTheme} from 'styled-components';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     size?: ButtonSize;
     fullWidth?: boolean;
+    loading?: boolean;
+    loadingText?: string;
+    leftIcon?: ReactNode;
+    rightIcon?: ReactNode;
     Width?: string;
     Height?: string;
     Margin?: string;

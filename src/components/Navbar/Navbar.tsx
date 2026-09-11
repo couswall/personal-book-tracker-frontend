@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import {Container} from '@components/Containers';
-import {FlexContainer, ButtonGhost, MutedIcon} from '@components/index';
+import {FlexContainer, Button, MutedIcon} from '@components/index';
 import {NavbarStyled} from '@components/Navbar/styles';
 import {NavbarItems, NavbarIcons} from '@components/Navbar/components';
 import {ModalSidebar} from '@components/Navbar/components/ModalSidebar/ModalSidebar';
@@ -27,7 +27,8 @@ export const Navbar = () => {
                     AlignItems="center"
                     Gap="16px"
                 >
-                    <ButtonGhost
+                    <Button
+                        variant="ghost"
                         Padding="0.5rem 0.75rem"
                         BorderRadius="1rem"
                         Width="36px"
@@ -37,7 +38,7 @@ export const Navbar = () => {
                         aria-label={NAVBAR_ARIA_LABELS.OPEN_NAVIGATION_MENU}
                     >
                         <MutedIcon className="fa-solid fa-bars" size="md" />
-                    </ButtonGhost>
+                    </Button>
                     <NavbarItems
                         showSearchInput={showSearchInput}
                         setShowSearchInput={setShowSearchInput}
