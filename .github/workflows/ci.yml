@@ -52,6 +52,8 @@ jobs:
         run: npx playwright install-deps chromium
 
       - run: npm run test:e2e
+        env:
+          VITE_API_URL: http://localhost:3000/api/
 
       - name: Upload Playwright report
         if: failure()
