@@ -10,7 +10,7 @@ export const DashboardLayout = () => {
     return (
         <>
             <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-                <FlexContainer FlexDirection="column">
+                <FlexContainer $flexDirection="column">
                     <Navbar />
                     <Outlet />
                 </FlexContainer>

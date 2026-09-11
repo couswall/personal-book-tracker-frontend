@@ -7,17 +7,17 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
     onCloseModal,
 }) => (
     <FlexContainer
-        FlexDirection="column"
-        Gap="0.25rem"
-        BackgroundColorVariant="tertiary"
-        BorderBottom="1px solid rgba(255, 255, 255, 0.05)"
-        Padding="1.25rem 1.5rem"
-        Width="100%"
+        $flexDirection="column"
+        $gap="0.25rem"
+        backgroundColorVariant="tertiary"
+        $borderBottom="1px solid rgba(255, 255, 255, 0.05)"
+        $padding="1.25rem 1.5rem"
+        $width="100%"
     >
         <FlexContainer
-            JustifyContent="space-between"
-            AlignItems="center"
-            BackgroundColor="transparent"
+            $justifyContent="space-between"
+            $alignItems="center"
+            $backgroundColor="transparent"
         >
             <TitleH4>{UPDATE_PROGRESS_TEXTS.MODAL_TITLE}</TitleH4>
             <Button

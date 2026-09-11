@@ -4,7 +4,7 @@ import {GlobalRating} from '@pages/Book/components/BookReviews/GlobalRating';
 import {CommunityReviews} from '@pages/Book/components/BookReviews/CommunityReviews';
 
 export const BookReviews = () => (
-    <FlexContainer FlexDirection="column" Gap="3rem" MarginTop="3rem">
+    <FlexContainer $flexDirection="column" $gap="3rem" $marginTop="3rem">
         <YourReview />
         <GlobalRating />
         <CommunityReviews />

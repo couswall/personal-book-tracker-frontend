@@ -28,11 +28,11 @@ export const MaxWidthVariants: Story = {
             {allMaxWidths.map((variant) => (
                 <Frame key={variant}>
                     <Container
-                        MaxWidthVariant={variant}
-                        Padding="12px 16px"
-                        BackgroundColorVariant="card"
+                        maxWidthVariant={variant}
+                        $padding="12px 16px"
+                        backgroundColorVariant="card"
                     >
-                        MaxWidthVariant=&quot;{variant}&quot;
+                        maxWidthVariant=&quot;{variant}&quot;
                     </Container>
                 </Frame>
             ))}

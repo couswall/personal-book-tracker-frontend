@@ -66,20 +66,20 @@ export const SearchingNavbar = () => {
         <>
             <FormContainer
                 ref={formRef}
-                BackgroundColor="inherit"
-                Position="relative"
-                Width="320px"
+                $backgroundColor="inherit"
+                $position="relative"
+                $width="320px"
                 onSubmit={handleSubmit(onSubmit)}
-                MdDisplay="none"
+                $mdDisplay="none"
             >
                 <SearchInputWrapper
-                    Background="unset"
-                    Gap="0.5rem"
-                    AlignItems="center"
-                    Width="100%"
-                    BorderRadius="1rem"
-                    Height="36px"
-                    Padding="0px 0px 0px 0.875rem"
+                    $background="unset"
+                    $gap="0.5rem"
+                    $alignItems="center"
+                    $width="100%"
+                    $borderRadius="1rem"
+                    $height="36px"
+                    $padding="0px 0px 0px 0.875rem"
                 >
                     {loading ? (
                         <LoadingSpinner $width="1rem" $padding="3px" />
@@ -92,13 +92,13 @@ export const SearchingNavbar = () => {
                         />
                     )}
                     <Input
-                        FontSize="0.875rem"
+                        $fontSize="0.875rem"
                         placeholder="Search books"
-                        Height="100%"
-                        BackgroundColor="transparent"
-                        Border="unset"
-                        Width="100%"
-                        Padding="0.875rem 0.5rem 0.875rem 0px"
+                        $height="100%"
+                        $backgroundColor="transparent"
+                        $border="unset"
+                        $width="100%"
+                        $padding="0.875rem 0.5rem 0.875rem 0px"
                         onKeyDown={(e) => {
                             if (e.key === 'Escape') setIsDropdownOpen(false);
                         }}
@@ -107,19 +107,19 @@ export const SearchingNavbar = () => {
                 </SearchInputWrapper>
                 {isDropdownOpen && (
                     <FlexContainer
-                        Position="absolute"
-                        Width="320px"
-                        Top="2.5rem"
-                        FlexDirection="column"
-                        BackgroundColorVariant="card"
-                        Border="1px solid"
-                        BorderRadius="1rem"
-                        Overflow="hidden"
-                        BoxShadowVariant="md"
-                        ZIndex="2"
+                        $position="absolute"
+                        $width="320px"
+                        $top="2.5rem"
+                        $flexDirection="column"
+                        backgroundColorVariant="card"
+                        $border="1px solid"
+                        $borderRadius="1rem"
+                        $overflow="hidden"
+                        boxShadowVariant="md"
+                        $zIndex="2"
                     >
                         {!loading && searchBookData?.books.length === 0 ? (
-                            <FlexContainer Padding="0.75rem" JustifyContent="center">
+                            <FlexContainer $padding="0.75rem" $justifyContent="center">
                                 <Text size="xs" variant="muted">
                                     {NAVBAR.NO_RESULTS}
                                 </Text>
@@ -136,12 +136,12 @@ export const SearchingNavbar = () => {
                             ))
                         )}
                         <FlexContainer
-                            Padding="0.75rem"
-                            JustifyContent="center"
-                            AlignItems="center"
-                            BackgroundColor="inherit"
-                            HBackgroundColorVariant="primary"
-                            Cursor="pointer"
+                            $padding="0.75rem"
+                            $justifyContent="center"
+                            $alignItems="center"
+                            $backgroundColor="inherit"
+                            hBackgroundColorVariant="primary"
+                            $cursor="pointer"
                             onClick={handleSeeAllResults}
                         >
                             <Text size="xs" variant="primary" weight="semibold" Cursor="pointer">

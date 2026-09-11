@@ -25,7 +25,7 @@ type Story = StoryObj<typeof GridContainer>;
 
 export const ThreeColumns: Story = {
     render: () => (
-        <GridContainer TemplateColumns="repeat(3, 1fr)" Gap="16px">
+        <GridContainer $templateColumns="repeat(3, 1fr)" $gap="16px">
             <DemoCell>1</DemoCell>
             <DemoCell>2</DemoCell>
             <DemoCell>3</DemoCell>
@@ -39,10 +39,10 @@ export const ThreeColumns: Story = {
 export const ResponsiveColumns: Story = {
     render: () => (
         <GridContainer
-            TemplateColumns="repeat(4, 1fr)"
-            MdTemplateColumns="repeat(2, 1fr)"
-            Gap="16px"
-            MdGap="8px"
+            $templateColumns="repeat(4, 1fr)"
+            $mdTemplateColumns="repeat(2, 1fr)"
+            $gap="16px"
+            $mdGap="8px"
         >
             <DemoCell>1</DemoCell>
             <DemoCell>2</DemoCell>

@@ -14,13 +14,13 @@ export const NavbarItems: React.FC<NavbarItemsProps> = ({setShowSearchInput, sea
     useClickOutside([searchBtnRef, searchBarRef], () => setShowSearchInput(false));
 
     return (
-        <FlexContainer BackgroundColor="inherit" AlignItems="center" Gap="1.75rem">
+        <FlexContainer $backgroundColor="inherit" $alignItems="center" $gap="1.75rem">
             <FlexContainer
-                BackgroundColor="inherit"
-                AlignItems="center"
-                Gap="0.5rem"
-                Width="fit-content"
-                Cursor="pointer"
+                $backgroundColor="inherit"
+                $alignItems="center"
+                $gap="0.5rem"
+                $width="fit-content"
+                $cursor="pointer"
                 onClick={() => navigate('/')}
             >
                 <LogoIcon size="31px" />

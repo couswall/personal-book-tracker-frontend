@@ -9,19 +9,19 @@ export const ProgressContextCard: React.FC<IProgressContextCardProps> = ({
     percentage,
 }) => (
     <FlexContainer
-        JustifyContent="space-between"
-        AlignItems="center"
-        FlexWrap="wrap"
-        Gap="1rem"
-        Padding="1rem"
-        BorderRadius="0.75rem"
-        BackgroundColorVariant="tertiary"
+        $justifyContent="space-between"
+        $alignItems="center"
+        $flexWrap="wrap"
+        $gap="1rem"
+        $padding="1rem"
+        $borderRadius="0.75rem"
+        backgroundColorVariant="tertiary"
     >
-        <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="transparent">
+        <FlexContainer $alignItems="center" $gap="0.75rem" $backgroundColor="transparent">
             <IconWrapper>
                 <Icon variant="primary" className="fa-solid fa-book-open" />
             </IconWrapper>
-            <BaseContainer BackgroundColor="transparent">
+            <BaseContainer $backgroundColor="transparent">
                 <Text size="xs" variant="muted" weight="bold" TextTransform="uppercase">
                     {UPDATE_PROGRESS_TEXTS.CURRENT_STATE}
                 </Text>

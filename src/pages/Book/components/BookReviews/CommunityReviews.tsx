@@ -18,14 +18,14 @@ import {
 export const CommunityReviews = () => (
     <BaseContainer as="section">
         <FlexContainer
-            AlignItems="center"
-            JustifyContent="space-between"
-            MarginBottom="2rem"
-            FlexWrap="wrap"
-            Gap="1rem"
+            $alignItems="center"
+            $justifyContent="space-between"
+            $marginBottom="2rem"
+            $flexWrap="wrap"
+            $gap="1rem"
         >
             <TitleH4>{BOOK_REVIEWS_TEXTS.COMMUNITY_REVIEWS_TITLE}</TitleH4>
-            <FlexContainer AlignItems="center" Gap="0.75rem">
+            <FlexContainer $alignItems="center" $gap="0.75rem">
                 <Text size="sm" variant="muted">
                     {BOOK_REVIEWS_TEXTS.SORT_BY}
                 </Text>
@@ -39,29 +39,33 @@ export const CommunityReviews = () => (
             </FlexContainer>
         </FlexContainer>
 
-        <FlexContainer FlexDirection="column" Gap="1.5rem" BackgroundColor="inherit">
+        <FlexContainer $flexDirection="column" $gap="1.5rem" $backgroundColor="inherit">
             {COMMUNITY_REVIEWS.map((review) => (
                 <S.ReviewCard key={review.name}>
                     <FlexContainer
-                        FlexDirection="column"
-                        Gap="1.5rem"
-                        MarginBottom="1.5rem"
-                        BackgroundColor="inherit"
+                        $flexDirection="column"
+                        $gap="1.5rem"
+                        $marginBottom="1.5rem"
+                        $backgroundColor="inherit"
                     >
                         <FlexContainer
-                            AlignItems="center"
-                            JustifyContent="space-between"
-                            BackgroundColor="inherit"
-                            FlexWrap="wrap"
-                            Gap="0.75rem"
+                            $alignItems="center"
+                            $justifyContent="space-between"
+                            $backgroundColor="inherit"
+                            $flexWrap="wrap"
+                            $gap="0.75rem"
                         >
-                            <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="inherit">
+                            <FlexContainer
+                                $alignItems="center"
+                                $gap="1rem"
+                                $backgroundColor="inherit"
+                            >
                                 <S.YourReviewAvatar $bgImage={AVATAR_URL} />
-                                <BaseContainer BackgroundColor="inherit">
+                                <BaseContainer $backgroundColor="inherit">
                                     <FlexContainer
-                                        AlignItems="center"
-                                        Gap="0.5rem"
-                                        BackgroundColor="inherit"
+                                        $alignItems="center"
+                                        $gap="0.5rem"
+                                        $backgroundColor="inherit"
                                     >
                                         <Text weight="bold">{review.name}</Text>
                                         {review.verified && (
@@ -77,21 +81,25 @@ export const CommunityReviews = () => (
                             <RatingStars rating={review.stars} />
                         </FlexContainer>
                     </FlexContainer>
-                    <BaseContainer BackgroundColor="inherit">
+                    <BaseContainer $backgroundColor="inherit">
                         <TitleH5 MarginBottom="0.5rem">{review.heading}</TitleH5>
                         <Text Opacity="0.8" LineHeight="1.625">
                             {review.body}
                         </Text>
                     </BaseContainer>
                     <FlexContainer
-                        AlignItems="center"
-                        JustifyContent="space-between"
-                        BackgroundColor="inherit"
-                        PaddingTop="1rem"
-                        MarginTop="1rem"
-                        BorderTop="1px solid"
+                        $alignItems="center"
+                        $justifyContent="space-between"
+                        $backgroundColor="inherit"
+                        $paddingTop="1rem"
+                        $marginTop="1rem"
+                        $borderTop="1px solid"
                     >
-                        <FlexContainer AlignItems="center" Gap="1.5rem" BackgroundColor="inherit">
+                        <FlexContainer
+                            $alignItems="center"
+                            $gap="1.5rem"
+                            $backgroundColor="inherit"
+                        >
                             <S.InteractionBtn className="helpful">
                                 <S.HelpfulIconWrapper>
                                     <i className="fa-solid fa-thumbs-up"></i>

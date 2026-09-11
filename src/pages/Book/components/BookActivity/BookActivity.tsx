@@ -25,31 +25,35 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
 
     return (
         <S.ActivityCard
-            FlexDirection="column"
-            BorderRadius="1rem"
-            Padding="1.5rem"
-            Border="1px solid"
-            Gap="1rem"
-            MarginBottom="2rem"
+            $flexDirection="column"
+            $borderRadius="1rem"
+            $padding="1.5rem"
+            $border="1px solid"
+            $gap="1rem"
+            $marginBottom="2rem"
         >
             <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
                 {BOOK_ACTIVITY_TEXTS.YOUR_ACTIVITY}
             </Text>
             <FlexContainer
-                FlexWrap="wrap"
-                Gap="2rem"
-                AlignItems="center"
-                BackgroundColor="transparent"
+                $flexWrap="wrap"
+                $gap="2rem"
+                $alignItems="center"
+                $backgroundColor="transparent"
             >
-                <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="inherit">
+                <FlexContainer $alignItems="center" $gap="1rem" $backgroundColor="inherit">
                     <IconWrapper>
                         <Icon variant="primary" className="fa-solid fa-book" />
                     </IconWrapper>
-                    <BaseContainer BackgroundColor="inherit">
+                    <BaseContainer $backgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
                             {BOOK_ACTIVITY_TEXTS.BOOKSHELF}
                         </Text>
-                        <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
+                        <FlexContainer
+                            $alignItems="center"
+                            $gap="0.75rem"
+                            $backgroundColor="inherit"
+                        >
                             <Text size="sm" weight="bold">
                                 {bookshelfLabel}
                             </Text>
@@ -63,11 +67,15 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                 {isCurrentlyReading && (
                     <>
                         <S.Divider />
-                        <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="transparent">
+                        <FlexContainer
+                            $alignItems="center"
+                            $gap="1rem"
+                            $backgroundColor="transparent"
+                        >
                             <IconWrapper>
                                 <Icon variant="primary" className="fa-solid fa-bookmark" />
                             </IconWrapper>
-                            <BaseContainer BackgroundColor="inherit">
+                            <BaseContainer $backgroundColor="inherit">
                                 <Text size="xs" variant="muted" weight="medium">
                                     {progressLabel}
                                 </Text>
@@ -81,15 +89,19 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
 
                 <S.Divider />
 
-                <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="transparent">
+                <FlexContainer $alignItems="center" $gap="1rem" $backgroundColor="transparent">
                     <IconWrapper>
                         <Icon variant="primary" className="fa-solid fa-star" />
                     </IconWrapper>
-                    <BaseContainer BackgroundColor="inherit">
+                    <BaseContainer $backgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
                             {BOOK_ACTIVITY_TEXTS.YOUR_RATING}
                         </Text>
-                        <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
+                        <FlexContainer
+                            $alignItems="center"
+                            $gap="0.75rem"
+                            $backgroundColor="inherit"
+                        >
                             <RatingStars rating={5} />
                             <S.TextLink>{BOOK_ACTIVITY_TEXTS.EDIT_RATING}</S.TextLink>
                         </FlexContainer>

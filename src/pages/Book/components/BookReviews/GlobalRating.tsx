@@ -9,17 +9,17 @@ import {
 export const GlobalRating = () => (
     <BaseContainer as="section">
         <BaseContainer
-            BackgroundColorVariant="secondary"
-            BorderRadius="1rem"
-            Padding="2.5rem"
-            LgPadding="1.5rem"
-            Border="1px solid"
+            backgroundColorVariant="secondary"
+            $borderRadius="1rem"
+            $padding="2.5rem"
+            $lgPadding="1.5rem"
+            $border="1px solid"
         >
             <GridContainer
-                TemplateColumns="repeat(12, minmax(0, 1fr))"
-                MdTemplateColumns="1fr"
-                Gap="2rem"
-                AlignItems="center"
+                $templateColumns="repeat(12, minmax(0, 1fr))"
+                $mdTemplateColumns="1fr"
+                $gap="2rem"
+                $alignItems="center"
             >
                 <S.GlobalScoreCol>
                     <S.BigScoreValue>{GLOBAL_RATING_SUMMARY.score}</S.BigScoreValue>
@@ -46,10 +46,10 @@ export const GlobalRating = () => (
                 <S.ProgressBarsCol>
                     {RATING_BARS.map(({label, percentage, opacity, white}) => (
                         <FlexContainer
-                            AlignItems="center"
-                            Gap="1rem"
+                            $alignItems="center"
+                            $gap="1rem"
                             key={label}
-                            BackgroundColor="inherit"
+                            $backgroundColor="inherit"
                         >
                             <Text
                                 size="sm"

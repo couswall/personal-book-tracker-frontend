@@ -12,23 +12,28 @@ export const FormField = ({
     endIcon,
 }: IFormFieldProps) => {
     return (
-        <FlexContainer Gap="0.5rem" FlexDirection="column" Width="100%" BackgroundColor="inherit">
+        <FlexContainer
+            $gap="0.5rem"
+            $flexDirection="column"
+            $width="100%"
+            $backgroundColor="inherit"
+        >
             <Label FontSize="0.875rem">{label}</Label>
             <InputContainer
-                Gap="0.5rem"
-                Padding="1rem 0px"
-                AlignItems="center"
-                Width="100%"
+                $gap="0.5rem"
+                $padding="1rem 0px"
+                $alignItems="center"
+                $width="100%"
                 hasError={!!error}
             >
                 <Icon variant="dark" className={iconClass} $fontSize="1rem" />
                 <Input
-                    BackgroundColor="transparent"
-                    Border="none"
-                    BorderRadius="0px"
-                    FontSize="1rem"
+                    $backgroundColor="transparent"
+                    $border="none"
+                    $borderRadius="0px"
+                    $fontSize="1rem"
                     placeholder={placeholder}
-                    Width="100%"
+                    $width="100%"
                     type={type}
                     {...register}
                 />

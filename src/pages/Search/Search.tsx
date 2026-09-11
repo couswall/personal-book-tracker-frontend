@@ -29,24 +29,24 @@ export const Search = () => {
     } = useSearchForm();
 
     return (
-        <Container Padding="20px 40px" MaxWidthVariant="lg" MinHeight="100vh">
-            <FlexContainer Gap="1.5rem" FlexDirection="column" JustifyContent="center">
+        <Container $padding="20px 40px" maxWidthVariant="lg" $minHeight="100vh">
+            <FlexContainer $gap="1.5rem" $flexDirection="column" $justifyContent="center">
                 <TitleH1 Width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
 
-                <FormContainer Gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
+                <FormContainer $gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
                     <FlexContainer
-                        Gap="0.5rem"
-                        FlexDirection="column"
-                        Width="100%"
-                        AlignItems="start"
+                        $gap="0.5rem"
+                        $flexDirection="column"
+                        $width="100%"
+                        $alignItems="start"
                     >
                         <SearchInputWrapper
-                            Background="unset"
-                            Gap="0.5rem"
-                            AlignItems="center"
-                            Width="100%"
-                            BorderRadius="0.75rem"
-                            Padding="0px 0px 0px 0.875rem"
+                            $background="unset"
+                            $gap="0.5rem"
+                            $alignItems="center"
+                            $width="100%"
+                            $borderRadius="0.75rem"
+                            $padding="0px 0px 0px 0.875rem"
                             hasError={!!errorMsg}
                         >
                             <Icon
@@ -57,11 +57,11 @@ export const Search = () => {
                             />
                             <Input
                                 placeholder={SEARCH_PAGE.PLACEHOLDER}
-                                Height="100%"
-                                BackgroundColor="transparent"
-                                Border="unset"
-                                Width="100%"
-                                Padding="0.875rem 0.5rem 0.875rem 0px"
+                                $height="100%"
+                                $backgroundColor="transparent"
+                                $border="unset"
+                                $width="100%"
+                                $padding="0.875rem 0.5rem 0.875rem 0px"
                                 {...register('searchText')}
                                 minLength={1}
                                 maxLength={50}
@@ -74,7 +74,7 @@ export const Search = () => {
                     </Button>
                 </FormContainer>
 
-                <FlexContainer FlexDirection="column" Gap="1rem">
+                <FlexContainer $flexDirection="column" $gap="1rem">
                     <SearchResults
                         books={searchBookData?.books}
                         loading={loading}
@@ -83,7 +83,7 @@ export const Search = () => {
                 </FlexContainer>
 
                 {searchBookData?.books && !loading && (
-                    <FlexContainer Gap="1rem" JustifyContent="space-between" AlignItems="center">
+                    <FlexContainer $gap="1rem" $justifyContent="space-between" $alignItems="center">
                         <Button
                             $maxWidth="120px"
                             onClick={handlePreviousPage}

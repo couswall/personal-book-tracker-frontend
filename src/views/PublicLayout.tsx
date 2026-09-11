@@ -10,7 +10,7 @@ export const PublicLayout = () => {
     return (
         <>
             <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-                <FlexContainer FlexDirection="column" BackgroundColor="transparent">
+                <FlexContainer $flexDirection="column" $backgroundColor="transparent">
                     {/* TODO: Create Public Navbar */}
                     <Outlet />
                 </FlexContainer>
