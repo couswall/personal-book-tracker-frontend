@@ -144,7 +144,7 @@ export const SearchingNavbar = () => {
                             $cursor="pointer"
                             onClick={handleSeeAllResults}
                         >
-                            <Text size="xs" variant="primary" weight="semibold" Cursor="pointer">
+                            <Text size="xs" variant="primary" weight="semibold" $cursor="pointer">
                                 {`${NAVBAR.SEARCH_ALL_RESULTS} "${truncatedSearchText}"`}
                             </Text>
                         </FlexContainer>

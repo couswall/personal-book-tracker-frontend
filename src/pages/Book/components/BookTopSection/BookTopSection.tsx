@@ -26,7 +26,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 <S.BookTitle>{book.title}</S.BookTitle>
                 <FlexContainer $flexDirection="column">
                     {book.authors?.length > 0 && (
-                        <S.AuthorText variant="muted" FontSize="1.25rem" LgFontSize="1.125rem">
+                        <S.AuthorText variant="muted" $fontSize="1.25rem" $lgFontSize="1.125rem">
                             {BOOK_TOP_SECTION_TEXTS.BY_PREFIX}{' '}
                             {book.authors.map((author, index) => (
                                 <span key={index}>
@@ -39,9 +39,9 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     {book.subtitle && (
                         <Text
                             variant="muted"
-                            FontSize="1.25rem"
-                            LgFontSize="1.125rem"
-                            MarginTop="0.25rem"
+                            $fontSize="1.25rem"
+                            $lgFontSize="1.125rem"
+                            $marginTop="0.25rem"
                         >
                             {book.subtitle}
                         </Text>
@@ -60,7 +60,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
             >
                 {book.publishedDate && (
                     <FlexContainer $flexDirection="column" $gap="0.25rem">
-                        <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                        <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PUBLISHED}
                         </Text>
                         <Text weight="medium">{formatIsoDate(book.publishedDate)}</Text>
@@ -68,7 +68,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 )}
                 {book.pageCount && (
                     <FlexContainer $flexDirection="column" $gap="0.25rem">
-                        <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                        <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PAGE_COUNT}
                         </Text>
                         <Text weight="medium">
@@ -77,7 +77,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     </FlexContainer>
                 )}
                 <FlexContainer $flexDirection="column" $gap="0.25rem">
-                    <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                    <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                         {BOOK_TOP_SECTION_TEXTS.GLOBAL_RATING}
                     </Text>
                     <FlexContainer $alignItems="center" $gap="0.5rem">

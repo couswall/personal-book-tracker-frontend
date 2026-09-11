@@ -23,8 +23,8 @@ export const YourReview = () => (
                 </div>
             </FlexContainer>
             <BaseContainer $backgroundColor="inherit">
-                <TitleH5 MarginBottom="0.5rem">{YOUR_REVIEW.heading}</TitleH5>
-                <Text FontStyle="italic" Opacity="0.8" LineHeight="1.625">
+                <TitleH5 $marginBottom="0.5rem">{YOUR_REVIEW.heading}</TitleH5>
+                <Text $fontStyle="italic" $opacity="0.8" $lineHeight="1.625">
                     {YOUR_REVIEW.body}
                 </Text>
             </BaseContainer>

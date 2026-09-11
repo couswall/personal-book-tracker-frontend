@@ -35,7 +35,7 @@ export const TypeScaleTable = ({sizeKeys}: TypeScaleTableProps) => (
                                 <code>{lineHeight}</code>
                             </Td>
                             <Td>
-                                <Text size={key} Margin="0" className="sb-unstyled">
+                                <Text size={key} $margin="0" className="sb-unstyled">
                                     The quick brown fox jumps
                                 </Text>
                             </Td>

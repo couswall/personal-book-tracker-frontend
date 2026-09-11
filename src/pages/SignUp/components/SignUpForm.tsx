@@ -32,10 +32,15 @@ export const SignUpForm = () => {
             $mdWidth="100%"
             $smallPadding="2.125rem 2.375rem"
         >
-            <TitleH2 FontSize="2rem" Margin="0px 0px 0.5rem 0px" TextAlign="center" LineHeight="1">
+            <TitleH2
+                $fontSize="2rem"
+                $margin="0px 0px 0.5rem 0px"
+                $textAlign="center"
+                $lineHeight="1"
+            >
                 {SIGN_UP.TITLE}
             </TitleH2>
-            <Paragraph size="sm" variant="muted" TextAlign="center">
+            <Paragraph size="sm" variant="muted" $textAlign="center">
                 {SIGN_UP.DESCRIPTION}
             </Paragraph>
 
@@ -116,14 +121,14 @@ export const SignUpForm = () => {
                         $marginTop="1.5rem"
                         $backgroundColor="inherit"
                     >
-                        <Paragraph size="sm" variant="muted" TextAlign="center">
+                        <Paragraph size="sm" variant="muted" $textAlign="center">
                             {SIGN_UP.HAVE_AN_ACCOUNT}
                         </Paragraph>
                         <Paragraph
                             size="sm"
                             variant="primary"
-                            FontWeight="600"
-                            Cursor="pointer"
+                            $fontWeight="600"
+                            $cursor="pointer"
                             onClick={() => navigate(publicRoutes.login)}
                         >
                             {SIGN_UP.LOGIN_HERE}

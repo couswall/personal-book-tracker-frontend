@@ -24,7 +24,7 @@ export const NavbarItems: React.FC<NavbarItemsProps> = ({setShowSearchInput, sea
                 onClick={() => navigate('/')}
             >
                 <LogoIcon size="31px" />
-                <TitleH1 FontSize="1.25rem" FontWeight="700" SmDisplay="none">
+                <TitleH1 $fontSize="1.25rem" $fontWeight="700" $smDisplay="none">
                     {LOGIN_PAGE.BOOK_TRACKER}
                 </TitleH1>
             </FlexContainer>
@@ -32,8 +32,8 @@ export const NavbarItems: React.FC<NavbarItemsProps> = ({setShowSearchInput, sea
                 {navbarRoutes.map((item, index) => (
                     <NavbarElement key={index} onClick={() => navigate(item.route)}>
                         <NavbarLink
-                            FontWeight="500"
-                            FontSize="1rem"
+                            $fontWeight="500"
+                            $fontSize="1rem"
                             variant={pathname === item.route ? 'accent' : 'muted'}
                         >
                             {item.label}

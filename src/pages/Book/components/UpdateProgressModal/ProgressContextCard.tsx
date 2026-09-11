@@ -22,7 +22,7 @@ export const ProgressContextCard: React.FC<IProgressContextCardProps> = ({
                 <Icon variant="primary" className="fa-solid fa-book-open" />
             </IconWrapper>
             <BaseContainer $backgroundColor="transparent">
-                <Text size="xs" variant="muted" weight="bold" TextTransform="uppercase">
+                <Text size="xs" variant="muted" weight="bold" $textTransform="uppercase">
                     {UPDATE_PROGRESS_TEXTS.CURRENT_STATE}
                 </Text>
                 <Text size="sm" weight="medium">

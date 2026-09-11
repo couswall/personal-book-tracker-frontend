@@ -17,7 +17,7 @@ export const ErrorAlert: React.FC<IErrorAlertProps> = ({errorMessage}) => {
                 $fontColor="#AD2103"
                 $fontSize="0.875rem"
             />
-            <Paragraph TextAlign="center" FontColor="#AD2103" FontSize="0.875rem">
+            <Paragraph $textAlign="center" $fontColor="#AD2103" $fontSize="0.875rem">
                 {errorMessage}
             </Paragraph>
         </FlexContainer>

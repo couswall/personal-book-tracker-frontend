@@ -32,10 +32,10 @@ export const LoginForm = () => {
             $smallWidth="100%"
             $smallPadding="2.125rem 2.375rem"
         >
-            <TitleH2 Margin="0px 0px 0.5rem 0px" TextAlign="center" LineHeight="1">
+            <TitleH2 $margin="0px 0px 0.5rem 0px" $textAlign="center" $lineHeight="1">
                 {LOGIN_PAGE.TITLE}
             </TitleH2>
-            <Paragraph size="sm" TextAlign="center" variant="muted">
+            <Paragraph size="sm" $textAlign="center" variant="muted">
                 {LOGIN_PAGE.DESCRIPTION}
             </Paragraph>
 
@@ -84,7 +84,7 @@ export const LoginForm = () => {
                         $marginBottom="1rem"
                         $backgroundColor="inherit"
                     >
-                        <Paragraph size="sm" Cursor="pointer" variant="primary" FontWeight="600">
+                        <Paragraph size="sm" $cursor="pointer" variant="primary" $fontWeight="600">
                             {LOGIN_PAGE.FORGOT_PASSWORD}
                         </Paragraph>
                     </FlexContainer>
@@ -99,14 +99,14 @@ export const LoginForm = () => {
                         $marginTop="1.5rem"
                         $backgroundColor="inherit"
                     >
-                        <Paragraph size="sm" Cursor="pointer" TextAlign="center" variant="muted">
+                        <Paragraph size="sm" $cursor="pointer" $textAlign="center" variant="muted">
                             {LOGIN_PAGE.ACCOUNT_CTA}
                         </Paragraph>
                         <Paragraph
                             size="sm"
                             variant="primary"
-                            FontWeight="600"
-                            Cursor="pointer"
+                            $fontWeight="600"
+                            $cursor="pointer"
                             onClick={() => navigate(publicRoutes.signUp)}
                         >
                             {LOGIN_PAGE.SIGN_UP_HERE}

@@ -137,9 +137,9 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                         <Text
                             variant={isLoading ? 'muted' : 'danger'}
                             size="sm"
-                            Cursor={isLoading ? 'default' : 'pointer'}
-                            Width="100%"
-                            TextAlign="center"
+                            $cursor={isLoading ? 'default' : 'pointer'}
+                            $width="100%"
+                            $textAlign="center"
                             onClick={isLoading ? undefined : handleDeleteFromBookshelf}
                         >
                             {ADD_TO_BOOKSHELF_TEXTS.REMOVE_FROM_BOOKSHELF}

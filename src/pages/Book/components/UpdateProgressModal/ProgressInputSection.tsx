@@ -24,8 +24,8 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
                     size="xs"
                     variant="muted"
                     weight="bold"
-                    TextTransform="uppercase"
-                    MarginBottom="0.5rem"
+                    $textTransform="uppercase"
+                    $marginBottom="0.5rem"
                 >
                     {UPDATE_PROGRESS_TEXTS.INPUT_METHOD_LABEL}
                 </Text>
@@ -66,8 +66,8 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
                 size="xs"
                 variant="muted"
                 weight="bold"
-                TextTransform="uppercase"
-                MarginBottom="0.5rem"
+                $textTransform="uppercase"
+                $marginBottom="0.5rem"
             >
                 {inputMethod === PROGRESS_INPUT_METHODS.PAGE
                     ? UPDATE_PROGRESS_TEXTS.PAGES_READ_LABEL

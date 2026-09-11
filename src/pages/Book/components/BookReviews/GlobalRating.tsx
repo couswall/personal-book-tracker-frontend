@@ -1,4 +1,12 @@
-import {BaseContainer, Button, FlexContainer, GridContainer, Icon, Text} from '@components/index';
+import {
+    BaseContainer,
+    Button,
+    FlexContainer,
+    GridContainer,
+    Icon,
+    RatingStars,
+    Text,
+} from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
 import {
     BOOK_REVIEWS_TEXTS,
@@ -23,13 +31,8 @@ export const GlobalRating = () => (
             >
                 <S.GlobalScoreCol>
                     <S.BigScoreValue>{GLOBAL_RATING_SUMMARY.score}</S.BigScoreValue>
-                    <S.StarRating style={{marginBottom: '0.5rem'}}>
-                        {[...Array(4)].map((_, i) => (
-                            <i key={i} className="fa-solid fa-star"></i>
-                        ))}
-                        <i className="fa-solid fa-star-half-stroke"></i>
-                    </S.StarRating>
-                    <Text variant="muted" size="sm" weight="medium">
+                    <RatingStars rating={Number(GLOBAL_RATING_SUMMARY.score)} size="1.125rem" />
+                    <Text variant="muted" size="sm" weight="medium" $marginTop="0.5rem">
                         {GLOBAL_RATING_SUMMARY.totalReviews}
                     </Text>
                     <Button
@@ -55,8 +58,8 @@ export const GlobalRating = () => (
                                 size="sm"
                                 weight="medium"
                                 variant="muted"
-                                Width="3rem"
-                                FlexShrink="0"
+                                $width="3rem"
+                                $flexShrink="0"
                             >
                                 {label}
                             </Text>
@@ -70,9 +73,9 @@ export const GlobalRating = () => (
                             <Text
                                 size="sm"
                                 weight="medium"
-                                Width="3rem"
-                                TextAlign="right"
-                                Opacity="0.8"
+                                $width="3rem"
+                                $textAlign="right"
+                                $opacity="0.8"
                             >
                                 {percentage}%
                             </Text>

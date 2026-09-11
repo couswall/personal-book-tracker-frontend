@@ -35,10 +35,10 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
         <Text
             variant="muted"
             size="xs"
-            WhiteSpace="nowrap"
-            TextOverflow="ellipsis"
-            Overflow="hidden"
-            Width="85%"
+            $whiteSpace="nowrap"
+            $textOverflow="ellipsis"
+            $overflow="hidden"
+            $width="85%"
         >
             {bookTitle}
         </Text>
