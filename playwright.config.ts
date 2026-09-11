@@ -1,4 +1,5 @@
 import {defineConfig, devices} from '@playwright/test';
+import {API_URL} from './e2e/mocks/api';
 
 export default defineConfig({
     testDir: './e2e',
@@ -15,5 +16,6 @@ export default defineConfig({
         command: 'npm run dev',
         url: 'http://localhost:5173',
         reuseExistingServer: !process.env.CI,
+        env: {VITE_API_URL: API_URL},
     },
 });
