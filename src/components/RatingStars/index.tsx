@@ -4,7 +4,7 @@ import {Icon} from '@components/Icon/index';
 interface RatingStarsProps {
     rating: number;
     size?: string;
-    MarginTop?: string;
+    $marginTop?: string;
 }
 
 const STAR_COUNT = 5;
@@ -35,8 +35,8 @@ const StarsRow = styled.div<{$marginTop?: string}>`
     margin-top: ${(props) => props.$marginTop};
 `;
 
-export const RatingStars = ({rating, size = '1rem', MarginTop}: RatingStarsProps) => (
-    <StarsRow $marginTop={MarginTop}>
+export const RatingStars = ({rating, size = '1rem', $marginTop}: RatingStarsProps) => (
+    <StarsRow $marginTop={$marginTop}>
         {getStarStates(rating).map((state, index) => (
             <Icon
                 key={index}

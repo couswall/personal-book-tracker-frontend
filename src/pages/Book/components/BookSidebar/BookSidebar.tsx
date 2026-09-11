@@ -32,7 +32,7 @@ export const BookSidebar = () => (
                         <Text size="xs" variant="muted" $fontStyle="italic">
                             {book.author}
                         </Text>
-                        <RatingStars rating={book.stars} size="0.75rem" MarginTop="0.25rem" />
+                        <RatingStars rating={book.stars} size="0.75rem" $marginTop="0.25rem" />
                     </FlexContainer>
                 </S.MockSidebarItem>
             ))}
