@@ -2,20 +2,20 @@ import styled, {css, keyframes} from 'styled-components';
 import {ButtonProps, getVariantStyles, getSizeStyles} from '@components/Button/buttonVariants';
 
 export const StyledButton = styled.button<ButtonProps>`
-    display: ${(props) => props.Display ?? 'flex'};
-    align-items: ${(props) => props.AlignItems ?? 'center'};
-    justify-content: ${(props) => props.JustifyContent ?? 'center'};
-    font-family: ${(props) => props.FontFamily ?? props.theme.fonts.lexend};
-    font-weight: ${(props) => props.FontWeight ?? '500'};
+    display: ${(props) => props.$display ?? 'flex'};
+    align-items: ${(props) => props.$alignItems ?? 'center'};
+    justify-content: ${(props) => props.$justifyContent ?? 'center'};
+    font-family: ${(props) => props.$fontFamily ?? props.theme.fonts.lexend};
+    font-weight: ${(props) => props.$fontWeight ?? '500'};
     cursor: pointer;
-    text-decoration: ${(props) => props.TextDecoration ?? 'none'};
-    outline: ${(props) => props.Outline ?? 'none'};
+    text-decoration: ${(props) => props.$textDecoration ?? 'none'};
+    outline: ${(props) => props.$outline ?? 'none'};
     transition: all 0.2s ease;
-    flex: ${(props) => props.Flex};
-    max-width: ${(props) => props.MaxWidth};
-    margin: ${(props) => props.Margin};
-    margin-top: ${(props) => props.MarginTop};
-    gap: ${(props) => props.Gap};
+    flex: ${(props) => props.$flex};
+    max-width: ${(props) => props.$maxWidth};
+    margin: ${(props) => props.$margin};
+    margin-top: ${(props) => props.$marginTop};
+    gap: ${(props) => props.$gap};
 
     /* Apply size styles */
     ${(props) => getSizeStyles(props.size ?? 'md')}
@@ -25,60 +25,60 @@ export const StyledButton = styled.button<ButtonProps>`
 
     /* Width handling */
     width: ${(props) => {
-        if (props.Width) return props.Width;
+        if (props.$width) return props.$width;
         if (props.fullWidth) return '100%';
         return 'auto';
     }};
 
     /* Override with custom props if provided */
     ${(props) =>
-        props.BackGroundColor &&
+        props.$backGroundColor &&
         css`
-            background-color: ${props.BackGroundColor};
+            background-color: ${props.$backGroundColor};
         `}
     ${(props) =>
-        props.FontColor &&
+        props.$fontColor &&
         css`
-            color: ${props.FontColor};
+            color: ${props.$fontColor};
         `}
     ${(props) =>
-        props.Height &&
+        props.$height &&
         css`
-            height: ${props.Height};
+            height: ${props.$height};
         `}
     ${(props) =>
-        props.Padding &&
+        props.$padding &&
         css`
-            padding: ${props.Padding};
+            padding: ${props.$padding};
         `}
     ${(props) =>
-        props.Border &&
+        props.$border &&
         css`
-            border: ${props.Border};
+            border: ${props.$border};
         `}
     ${(props) =>
-        props.BorderRadius &&
+        props.$borderRadius &&
         css`
-            border-radius: ${props.BorderRadius};
+            border-radius: ${props.$borderRadius};
         `}
     ${(props) =>
-        props.FontSize &&
+        props.$fontSize &&
         css`
-            font-size: ${props.FontSize};
+            font-size: ${props.$fontSize};
         `}
 
     &:hover {
-        text-decoration: ${(props) => props.HTextDecoration ?? 'none'};
+        text-decoration: ${(props) => props.$hTextDecoration ?? 'none'};
         ${(props) =>
-            props.HBackGColor &&
+            props.$hBackGColor &&
             css`
-                background-color: ${props.HBackGColor};
+                background-color: ${props.$hBackGColor};
             `}
     }
 
     &:disabled {
-        background-color: ${(props) => props.DisabledBackGC ?? props.theme.colors.disabledButton};
-        color: ${(props) => props.DisabledFontColor ?? props.theme.colors.darkGrey};
+        background-color: ${(props) => props.$disabledBackGC ?? props.theme.colors.disabledButton};
+        color: ${(props) => props.$disabledFontColor ?? props.theme.colors.darkGrey};
         cursor: not-allowed;
         opacity: 0.6;
     }
@@ -89,11 +89,11 @@ export const StyledButton = styled.button<ButtonProps>`
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-        display: ${(props) => props.LgDisplay};
+        display: ${(props) => props.$lgDisplay};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-        display: ${(props) => props.MdDisplay};
+        display: ${(props) => props.$mdDisplay};
     }
 `;
 

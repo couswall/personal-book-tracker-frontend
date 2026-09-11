@@ -4,7 +4,7 @@ import {IErrorMessageProps} from '@pages/Login/components/login.components.inter
 export const ErrorMessage = ({message = ''}: IErrorMessageProps) => {
     return (
         <FlexContainer Gap="0.5rem" AlignItems="center" BackgroundColor="inherit">
-            <Icon variant="error" className="fa-solid fa-x" FontSize="0.625rem" />
+            <Icon variant="error" className="fa-solid fa-x" $fontSize="0.625rem" />
             <Text size="xs" variant="danger">
                 {message}
             </Text>

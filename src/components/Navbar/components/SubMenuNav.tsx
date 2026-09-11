@@ -50,9 +50,9 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
                     <Button
                         variant="ghost"
                         key={index}
-                        Padding="0.5rem 1rem"
-                        JustifyContent="flex-start"
-                        BorderRadius="unset"
+                        $padding="0.5rem 1rem"
+                        $justifyContent="flex-start"
+                        $borderRadius="unset"
                         onClick={() => navigate(item.route)}
                         leftIcon={<Icon variant="text" className={item.iconClassName} />}
                     >
@@ -65,10 +65,10 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
 
             <Button
                 variant="ghost"
-                Margin="0.5rem 0px"
-                Padding="0.5rem 1rem"
-                BorderRadius="unset"
-                JustifyContent="flex-start"
+                $margin="0.5rem 0px"
+                $padding="0.5rem 1rem"
+                $borderRadius="unset"
+                $justifyContent="flex-start"
                 onClick={onSignout}
                 leftIcon={
                     <Icon variant="danger" className="fa-solid fa-arrow-right-from-bracket" />

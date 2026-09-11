@@ -113,14 +113,14 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     <Button
                         variant="primary"
                         onClick={onOpenAddToBookshelfModal}
-                        leftIcon={<Icon className="fa-solid fa-plus" FontColor="inherit" />}
+                        leftIcon={<Icon className="fa-solid fa-plus" $fontColor="inherit" />}
                     >
                         {BOOK_TOP_SECTION_TEXTS.ADD_TO_BOOKSHELF}
                     </Button>
                 )}
                 <Button
                     variant="outline"
-                    leftIcon={<Icon className="fa-solid fa-share-nodes" FontColor="inherit" />}
+                    leftIcon={<Icon className="fa-solid fa-share-nodes" $fontColor="inherit" />}
                 >
                     {BOOK_TOP_SECTION_TEXTS.SHARE}
                 </Button>

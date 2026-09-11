@@ -38,8 +38,8 @@ export const SearchBarNav: React.FC<SearchBarNavProps> = ({
                         <Icon
                             variant="dark"
                             className="fa-solid fa-solid fa-x"
-                            FontSize="1rem"
-                            Cursor="pointer"
+                            $fontSize="1rem"
+                            $cursor="pointer"
                             onClick={() => setShowSearchInput(!showSearchInput)}
                         />
                     </InputContainer>

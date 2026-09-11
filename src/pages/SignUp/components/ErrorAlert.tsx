@@ -12,7 +12,11 @@ export const ErrorAlert: React.FC<IErrorAlertProps> = ({errorMessage}) => {
             Padding="0.25rem"
             AlignItems="center"
         >
-            <Icon className="fa-regular fa-circle-xmark" FontColor="#AD2103" FontSize="0.875rem" />
+            <Icon
+                className="fa-regular fa-circle-xmark"
+                $fontColor="#AD2103"
+                $fontSize="0.875rem"
+            />
             <Paragraph TextAlign="center" FontColor="#AD2103" FontSize="0.875rem">
                 {errorMessage}
             </Paragraph>

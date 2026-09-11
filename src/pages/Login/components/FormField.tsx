@@ -21,7 +21,7 @@ export const FormField = ({
                 Width="100%"
                 hasError={!!error}
             >
-                <Icon variant="dark" className={iconClass} FontSize="1rem" />
+                <Icon variant="dark" className={iconClass} $fontSize="1rem" />
                 <Input
                     BackgroundColor="transparent"
                     Border="none"
@@ -36,8 +36,8 @@ export const FormField = ({
                     <Icon
                         variant="dark"
                         className={endIcon.className}
-                        FontSize="1rem"
-                        Cursor="pointer"
+                        $fontSize="1rem"
+                        $cursor="pointer"
                         onClick={endIcon.onClick}
                         aria-label={endIcon.label}
                     />

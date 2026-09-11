@@ -12,8 +12,8 @@ const meta: Meta<typeof Image> = {
     args: {
         src: '/assets/avatar-robot.jpg',
         alt: 'Placeholder avatar',
-        Width: '200px',
-        Height: '200px',
+        $width: '200px',
+        $height: '200px',
     },
 };
 
@@ -24,15 +24,15 @@ export const Default: Story = {};
 
 export const Circular: Story = {
     args: {
-        BorderRadius: '50%',
-        ObjectFit: 'cover',
+        $borderRadius: '50%',
+        $objectFit: 'cover',
     },
 };
 
 export const Cover: Story = {
     args: {
-        Width: '300px',
-        Height: '150px',
-        ObjectFit: 'cover',
+        $width: '300px',
+        $height: '150px',
+        $objectFit: 'cover',
     },
 };

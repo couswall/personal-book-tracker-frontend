@@ -34,10 +34,10 @@ export const GlobalRating = () => (
                     </Text>
                     <Button
                         variant="primary"
-                        MarginTop="1.5rem"
+                        $marginTop="1.5rem"
                         size="lg"
                         leftIcon={
-                            <Icon FontColor="inherit" className="fa-solid fa-pen-to-square" />
+                            <Icon $fontColor="inherit" className="fa-solid fa-pen-to-square" />
                         }
                     >
                         {BOOK_REVIEWS_TEXTS.WRITE_REVIEW}
