@@ -1,4 +1,4 @@
-import {DarkGreyIcon, FlexContainer, Input, InputContainer, Label} from '@components/index';
+import {Icon, FlexContainer, Input, InputContainer, Label} from '@components/index';
 import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
 import {IFormFieldProps} from '@pages/Login/components/login.components.interfaces';
 
@@ -21,7 +21,7 @@ export const FormField = ({
                 Width="100%"
                 hasError={!!error}
             >
-                <DarkGreyIcon className={iconClass} FontSize="1rem" />
+                <Icon variant="dark" className={iconClass} FontSize="1rem" />
                 <Input
                     BackgroundColor="transparent"
                     Border="none"
@@ -33,7 +33,8 @@ export const FormField = ({
                     {...register}
                 />
                 {endIcon && (
-                    <DarkGreyIcon
+                    <Icon
+                        variant="dark"
                         className={endIcon.className}
                         FontSize="1rem"
                         Cursor="pointer"

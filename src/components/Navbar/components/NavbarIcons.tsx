@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from 'react-router';
 import {useRef, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {useClickOutside} from '@components/Navbar/hooks/useClickOutside';
-import {FlexContainer, MutedIcon, Image, Button} from '@components/index';
+import {FlexContainer, Icon, Image, Button} from '@components/index';
 import {SubMenuNav} from '@components/Navbar/components/index';
 import {SearchingNavbar} from '@components/Navbar/components/SearchingNavbar/SearchingNavbar';
 import {toggleDarkMode} from '@store/index';
@@ -37,7 +37,7 @@ export const NavbarIcons = () => {
                         MdDisplay="flex"
                         aria-label={NAVBAR_ARIA_LABELS.SEARCH_BOOKS}
                     >
-                        <MutedIcon className="fa-solid fa-magnifying-glass" size="md" />
+                        <Icon variant="muted" className="fa-solid fa-magnifying-glass" size="md" />
                     </Button>
                 </>
             )}
@@ -54,7 +54,8 @@ export const NavbarIcons = () => {
                         : NAVBAR_ARIA_LABELS.SWITCH_TO_DARK_MODE
                 }
             >
-                <MutedIcon
+                <Icon
+                    variant="muted"
                     className={isDarkMode ? 'fa-regular fa-sun' : 'fa-solid fa-moon'}
                     size="md"
                 />
@@ -73,7 +74,7 @@ export const NavbarIcons = () => {
                     <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
                         <Image src={robotImg} ObjectFit="cover" alt="" />
                     </FlexContainer>
-                    <MutedIcon className="fa-solid fa-angle-down" size="md" />
+                    <Icon variant="muted" className="fa-solid fa-angle-down" size="md" />
                 </Button>
                 <SubMenuNav isVisible={showSubNav} subMenuRef={subMenuRef} />
             </FlexContainer>

@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router';
 import {AppDispatch, RootState} from '@store/store';
 import {SubMenuContainer} from '@components/Navbar/styles';
-import {DangerIcon, Icon, Button, Text, FlexContainer} from '@components/index';
+import {Icon, Button, Text, FlexContainer} from '@components/index';
 import {onLogout} from '@store/index';
 import {publicRoutes} from '@routes/routes';
 import {SUB_MENU, subMenuRoutes} from '@components/Navbar/constants';
@@ -70,7 +70,9 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
                 BorderRadius="unset"
                 JustifyContent="flex-start"
                 onClick={onSignout}
-                leftIcon={<DangerIcon className="fa-solid fa-arrow-right-from-bracket" />}
+                leftIcon={
+                    <Icon variant="danger" className="fa-solid fa-arrow-right-from-bracket" />
+                }
             >
                 <Text variant="danger" FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
                     {SUB_MENU.LOGOUT}

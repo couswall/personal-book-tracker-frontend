@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {useLocation, useNavigate} from 'react-router';
 import React from 'react';
 import {RootState} from '@store/store';
-import {Modal, FlexContainer, LogoIcon, MutedIcon, Image, Text} from '@components/index';
+import {Modal, FlexContainer, LogoIcon, Icon, Image, Text} from '@components/index';
 import {
     ModalSidebarContainer,
     NavSidebarItem,
@@ -32,7 +32,8 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                             {LOGIN_PAGE.BOOK_TRACKER}
                         </Text>
                     </FlexContainer>
-                    <MutedIcon
+                    <Icon
+                        variant="muted"
                         size="md"
                         className="fa-solid fa-x"
                         Cursor="pointer"
@@ -60,7 +61,12 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                             Height="unset"
                             onClick={() => navigate(item.route)}
                         >
-                            <MutedIcon size="sm" className={item.iconClassName} Cursor="pointer" />
+                            <Icon
+                                variant="muted"
+                                size="sm"
+                                className={item.iconClassName}
+                                Cursor="pointer"
+                            />
                             {item.label}
                         </NavSidebarItem>
                     ))}

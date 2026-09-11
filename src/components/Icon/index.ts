@@ -1,5 +1,4 @@
 import styled, {css, DefaultTheme} from 'styled-components';
-import {BaseContainer} from '@components/FlexContainer/index';
 
 type IconVariant = 'primary' | 'light' | 'dark' | 'muted' | 'error' | 'success' | 'danger' | 'text';
 type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -104,16 +103,4 @@ export const Icon = styled.i<IconProps>`
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
         display: ${(props) => props.SmDisplay};
     }
-`;
-
-// Convenience exports for backwards compatibility
-export const LightIcon = styled(Icon).attrs({variant: 'light'})``;
-export const DarkGreyIcon = styled(Icon).attrs({variant: 'dark'})``;
-export const ErrorIcon = styled(Icon).attrs({variant: 'error'})``;
-export const MutedIcon = styled(Icon).attrs({variant: 'muted'})``;
-export const SuccessIcon = styled(Icon).attrs({variant: 'success'})``;
-export const DangerIcon = styled(Icon).attrs({variant: 'danger'})``;
-
-export const LighterIconWrapper = styled(BaseContainer)`
-    background-color: ${(props) => props.theme.colors.backgroundSecondary};
 `;

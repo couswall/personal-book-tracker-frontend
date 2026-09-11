@@ -1,5 +1,4 @@
-import {BaseContainer, FlexContainer, Text} from '@components/index';
-import {IconCircleActivity} from '@pages/Book/components/BookActivity/bookActivity.styled';
+import {BaseContainer, FlexContainer, Icon, IconWrapper, Text} from '@components/index';
 import {IProgressContextCardProps} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 
@@ -19,9 +18,9 @@ export const ProgressContextCard: React.FC<IProgressContextCardProps> = ({
         BackgroundColorVariant="tertiary"
     >
         <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="transparent">
-            <IconCircleActivity>
-                <i className="fa-solid fa-book-open"></i>
-            </IconCircleActivity>
+            <IconWrapper>
+                <Icon variant="primary" className="fa-solid fa-book-open" />
+            </IconWrapper>
             <BaseContainer BackgroundColor="transparent">
                 <Text size="xs" variant="muted" weight="bold" TextTransform="uppercase">
                     {UPDATE_PROGRESS_TEXTS.CURRENT_STATE}
