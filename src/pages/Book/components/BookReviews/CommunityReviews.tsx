@@ -82,8 +82,8 @@ export const CommunityReviews = () => (
                         </FlexContainer>
                     </FlexContainer>
                     <BaseContainer $backgroundColor="inherit">
-                        <TitleH5 MarginBottom="0.5rem">{review.heading}</TitleH5>
-                        <Text Opacity="0.8" LineHeight="1.625">
+                        <TitleH5 $marginBottom="0.5rem">{review.heading}</TitleH5>
+                        <Text $opacity="0.8" $lineHeight="1.625">
                             {review.body}
                         </Text>
                     </BaseContainer>

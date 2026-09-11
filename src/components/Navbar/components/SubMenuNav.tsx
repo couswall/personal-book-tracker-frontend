@@ -56,7 +56,7 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
                         onClick={() => navigate(item.route)}
                         leftIcon={<Icon variant="text" className={item.iconClassName} />}
                     >
-                        <Text FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
+                        <Text $fontSize="0.875rem" $letterSpacing="1px" $cursor="pointer">
                             {item.label}
                         </Text>
                     </Button>
@@ -74,7 +74,7 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
                     <Icon variant="danger" className="fa-solid fa-arrow-right-from-bracket" />
                 }
             >
-                <Text variant="danger" FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
+                <Text variant="danger" $fontSize="0.875rem" $letterSpacing="1px" $cursor="pointer">
                     {SUB_MENU.LOGOUT}
                 </Text>
             </Button>

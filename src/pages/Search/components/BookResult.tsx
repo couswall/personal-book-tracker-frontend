@@ -29,17 +29,17 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                 onClick={navigateToBook}
             />
             <FlexContainer $flexDirection="column" $backgroundColor="inherit" $gap="0.5rem">
-                <TitleH4 Cursor="pointer" onClick={navigateToBook}>
+                <TitleH4 $cursor="pointer" onClick={navigateToBook}>
                     {book.title}
                 </TitleH4>
                 {book.authors && (
                     <Paragraph
                         variant="muted"
                         size="xs"
-                        WhiteSpace="nowrap"
-                        Width="100%"
-                        Overflow="hidden"
-                        TextOverflow="ellipsis"
+                        $whiteSpace="nowrap"
+                        $width="100%"
+                        $overflow="hidden"
+                        $textOverflow="ellipsis"
                     >{`${NAVBAR.BY} ${book.authors.join(',')}`}</Paragraph>
                 )}
                 {book.averageRating !== undefined && (

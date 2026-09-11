@@ -15,7 +15,7 @@ export const BookSidebar = () => (
         $gap="1.5rem"
         $lgPadding="1rem"
     >
-        <Text size="lg" FontWeight="bold">
+        <Text size="lg" $fontWeight="bold">
             {BOOK_SIDEBAR_TEXTS.TITLE}
         </Text>
         <BaseContainer $borderBottom="1px solid" $height="1px" />
@@ -29,7 +29,7 @@ export const BookSidebar = () => (
                         $backgroundColor="inherit"
                     >
                         <S.MockSidebarItemTitle>{book.title}</S.MockSidebarItemTitle>
-                        <Text size="xs" variant="muted" FontStyle="italic">
+                        <Text size="xs" variant="muted" $fontStyle="italic">
                             {book.author}
                         </Text>
                         <RatingStars rating={book.stars} size="0.75rem" MarginTop="0.25rem" />

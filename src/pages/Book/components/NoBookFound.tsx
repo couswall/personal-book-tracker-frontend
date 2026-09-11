@@ -10,8 +10,8 @@ export const NoBookFound = () => {
             $flexDirection="column"
             $gap="1rem"
         >
-            <TitleH1 FontSize="4rem">{NOT_FOUND_TITLE}</TitleH1>
-            <Paragraph FontSize="2rem">{NOT_FOUND_MESSAGE}</Paragraph>
+            <TitleH1 $fontSize="4rem">{NOT_FOUND_TITLE}</TitleH1>
+            <Paragraph $fontSize="2rem">{NOT_FOUND_MESSAGE}</Paragraph>
         </FlexContainer>
     );
 };

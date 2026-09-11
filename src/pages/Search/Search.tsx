@@ -31,7 +31,7 @@ export const Search = () => {
     return (
         <Container $padding="20px 40px" maxWidthVariant="lg" $minHeight="100vh">
             <FlexContainer $gap="1.5rem" $flexDirection="column" $justifyContent="center">
-                <TitleH1 Width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
+                <TitleH1 $width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
 
                 <FormContainer $gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
                     <FlexContainer

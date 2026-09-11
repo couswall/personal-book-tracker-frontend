@@ -20,7 +20,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
             $width="100%"
             $backgroundColor="inherit"
         >
-            <Label FontSize="0.875rem">{label}</Label>
+            <Label $fontSize="0.875rem">{label}</Label>
             <InputContainer
                 $gap="0.5rem"
                 $padding="1rem 0px"

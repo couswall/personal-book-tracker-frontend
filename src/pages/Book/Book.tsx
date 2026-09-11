@@ -77,7 +77,7 @@ export const Book = () => {
                     $lgGridColumn="unset"
                 >
                     <BaseContainer as="section">
-                        <TitleH4 MarginBottom="1rem">{BOOK_TEXTS.DESCRIPTION_TITLE}</TitleH4>
+                        <TitleH4 $marginBottom="1rem">{BOOK_TEXTS.DESCRIPTION_TITLE}</TitleH4>
                         {book.description ? (
                             <>
                                 <S.DescriptionText

@@ -43,10 +43,10 @@ export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
                 <Text
                     size="sm"
                     weight="semibold"
-                    WhiteSpace="nowrap"
-                    Width="100%"
-                    Overflow="hidden"
-                    TextOverflow="ellipsis"
+                    $whiteSpace="nowrap"
+                    $width="100%"
+                    $overflow="hidden"
+                    $textOverflow="ellipsis"
                 >
                     {book.title}
                 </Text>
@@ -54,10 +54,10 @@ export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
                     <Text
                         variant="muted"
                         size="xs"
-                        WhiteSpace="nowrap"
-                        Width="100%"
-                        Overflow="hidden"
-                        TextOverflow="ellipsis"
+                        $whiteSpace="nowrap"
+                        $width="100%"
+                        $overflow="hidden"
+                        $textOverflow="ellipsis"
                     >{`${NAVBAR.BY} ${book.authors.join(',')}`}</Text>
                 )}
             </FlexContainer>

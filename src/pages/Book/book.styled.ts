@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Button, Icon, Text} from '@components/index';
+import {Button, Text} from '@components/index';
 
 export const LayoutContainer = styled.main`
     padding: 2rem 1rem;
@@ -110,17 +110,6 @@ export const CategoryBadge = styled.span`
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border: 1px solid ${({theme}) => theme.colors.primaryColor}33;
-`;
-
-export const StarRating = styled.div<{isPrimaryColor?: boolean}>`
-    display: flex;
-    gap: 4px;
-    align-items: center;
-
-    ${Icon} {
-        color: ${({theme, isPrimaryColor}) =>
-            isPrimaryColor ? theme.colors.primaryColor : theme.colors.primaryHover};
-    }
 `;
 
 export const DescriptionText = styled.div<{$showMore?: boolean}>`

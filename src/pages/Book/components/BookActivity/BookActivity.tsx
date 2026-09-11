@@ -32,7 +32,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
             $gap="1rem"
             $marginBottom="2rem"
         >
-            <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+            <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                 {BOOK_ACTIVITY_TEXTS.YOUR_ACTIVITY}
             </Text>
             <FlexContainer
