@@ -1,4 +1,4 @@
-import {BaseContainer, FlexContainer, Icon, Text} from '@components/index';
+import {BaseContainer, FlexContainer, RatingStars, Text} from '@components/index';
 import * as S from '@pages/Book/components/BookActivity/bookActivity.styled';
 import {IBookActivityProps} from '@pages/Book/components/BookActivity/bookActivity.interfaces';
 import {BOOK_ACTIVITY_TEXTS} from '@pages/Book/components/BookActivity/bookActivity.constants';
@@ -83,11 +83,7 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                             {BOOK_ACTIVITY_TEXTS.YOUR_RATING}
                         </Text>
                         <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="inherit">
-                            <S.StarRating>
-                                {[...Array(5)].map((_, i) => (
-                                    <Icon key={i} className="fa-solid fa-star" />
-                                ))}
-                            </S.StarRating>
+                            <RatingStars rating={5} />
                             <S.TextLink>{BOOK_ACTIVITY_TEXTS.EDIT_RATING}</S.TextLink>
                         </FlexContainer>
                     </BaseContainer>

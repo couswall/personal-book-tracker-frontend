@@ -1,4 +1,4 @@
-import {BaseContainer, Button, FlexContainer, Icon, Text} from '@components/index';
+import {BaseContainer, Button, FlexContainer, RatingStars, Text} from '@components/index';
 import * as S from './bookSidebar.styled';
 import {
     BOOK_SIDEBAR_TEXTS,
@@ -32,17 +32,7 @@ export const BookSidebar = () => (
                         <Text size="xs" variant="muted" FontStyle="italic">
                             {book.author}
                         </Text>
-                        <S.StarRating style={{marginTop: '0.25rem'}}>
-                            {[...Array(5)].map((_, i) => (
-                                <Icon
-                                    key={i}
-                                    className={
-                                        i < book.stars ? 'fa-solid fa-star' : 'fa-regular fa-star'
-                                    }
-                                    FontSize="0.75rem"
-                                />
-                            ))}
-                        </S.StarRating>
+                        <RatingStars rating={book.stars} size="0.75rem" MarginTop="0.25rem" />
                     </FlexContainer>
                 </S.MockSidebarItem>
             ))}

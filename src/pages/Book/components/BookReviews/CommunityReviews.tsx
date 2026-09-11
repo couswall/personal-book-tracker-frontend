@@ -3,12 +3,12 @@ import {
     Button,
     FlexContainer,
     Icon,
+    RatingStars,
     Text,
     TitleH4,
     TitleH5,
 } from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
-import {StarRow} from '@pages/Book/components/BookReviews/StarRow';
 import {
     AVATAR_URL,
     BOOK_REVIEWS_TEXTS,
@@ -74,7 +74,7 @@ export const CommunityReviews = () => (
                                     <S.ReviewDateText>{review.date}</S.ReviewDateText>
                                 </BaseContainer>
                             </FlexContainer>
-                            <StarRow count={review.stars} filled={review.stars < 5} />
+                            <RatingStars rating={review.stars} />
                         </FlexContainer>
                     </FlexContainer>
                     <BaseContainer BackgroundColor="inherit">
