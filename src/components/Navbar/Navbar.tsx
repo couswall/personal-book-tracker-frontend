@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import {Container} from '@components/Containers';
-import {FlexContainer, Button, MutedIcon} from '@components/index';
+import {FlexContainer, Button, Icon} from '@components/index';
 import {NavbarStyled} from '@components/Navbar/styles';
 import {NavbarItems, NavbarIcons} from '@components/Navbar/components';
 import {ModalSidebar} from '@components/Navbar/components/ModalSidebar/ModalSidebar';
@@ -37,7 +37,7 @@ export const Navbar = () => {
                         LgDisplay="flex"
                         aria-label={NAVBAR_ARIA_LABELS.OPEN_NAVIGATION_MENU}
                     >
-                        <MutedIcon className="fa-solid fa-bars" size="md" />
+                        <Icon variant="muted" className="fa-solid fa-bars" size="md" />
                     </Button>
                     <NavbarItems
                         showSearchInput={showSearchInput}

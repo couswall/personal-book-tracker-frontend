@@ -5,7 +5,6 @@ import {
     FormContainer,
     Icon,
     Input,
-    MutedIcon,
     Paragraph,
     TitleH1,
 } from '@components/index';
@@ -50,7 +49,8 @@ export const Search = () => {
                             Padding="0px 0px 0px 0.875rem"
                             hasError={!!errorMsg}
                         >
-                            <MutedIcon
+                            <Icon
+                                variant="muted"
                                 className="fa-solid fa-magnifying-glass"
                                 size="md"
                                 Cursor="default"

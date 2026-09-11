@@ -1,8 +1,7 @@
 import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
-import {Button, FlexContainer, Icon, Modal, Text, TitleH4} from '@components/index';
+import {Button, FlexContainer, Icon, IconWrapper, Modal, Text, TitleH4} from '@components/index';
 import {
     BookshelfOptionsContainer,
-    ShelfIconWrapper,
     ModalAlert,
     IAddToBookshelfModalProps,
     getShelfIcon,
@@ -95,13 +94,13 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                                 AlignItems="center"
                                 BackgroundColor="transparent"
                             >
-                                <ShelfIconWrapper isSelected={option.isSelected}>
+                                <IconWrapper shape="square" isActive={option.isSelected}>
                                     <Icon
                                         variant={option.isSelected ? 'primary' : 'muted'}
                                         className={getShelfIcon(option.name)}
                                         size="md"
                                     />
-                                </ShelfIconWrapper>
+                                </IconWrapper>
                                 <FlexContainer
                                     FlexDirection="column"
                                     Gap="0.2rem"

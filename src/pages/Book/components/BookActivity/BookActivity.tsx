@@ -1,4 +1,11 @@
-import {BaseContainer, FlexContainer, RatingStars, Text} from '@components/index';
+import {
+    BaseContainer,
+    FlexContainer,
+    Icon,
+    IconWrapper,
+    RatingStars,
+    Text,
+} from '@components/index';
 import * as S from '@pages/Book/components/BookActivity/bookActivity.styled';
 import {IBookActivityProps} from '@pages/Book/components/BookActivity/bookActivity.interfaces';
 import {BOOK_ACTIVITY_TEXTS} from '@pages/Book/components/BookActivity/bookActivity.constants';
@@ -35,9 +42,9 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                 BackgroundColor="transparent"
             >
                 <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="inherit">
-                    <S.IconCircleActivity>
-                        <i className="fa-solid fa-book"></i>
-                    </S.IconCircleActivity>
+                    <IconWrapper>
+                        <Icon variant="primary" className="fa-solid fa-book" />
+                    </IconWrapper>
                     <BaseContainer BackgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
                             {BOOK_ACTIVITY_TEXTS.BOOKSHELF}
@@ -57,9 +64,9 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                     <>
                         <S.Divider />
                         <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="transparent">
-                            <S.IconCircleActivity>
-                                <i className="fa-solid fa-bookmark"></i>
-                            </S.IconCircleActivity>
+                            <IconWrapper>
+                                <Icon variant="primary" className="fa-solid fa-bookmark" />
+                            </IconWrapper>
                             <BaseContainer BackgroundColor="inherit">
                                 <Text size="xs" variant="muted" weight="medium">
                                     {progressLabel}
@@ -75,9 +82,9 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
                 <S.Divider />
 
                 <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="transparent">
-                    <S.IconCircleActivity>
-                        <i className="fa-solid fa-star"></i>
-                    </S.IconCircleActivity>
+                    <IconWrapper>
+                        <Icon variant="primary" className="fa-solid fa-star" />
+                    </IconWrapper>
                     <BaseContainer BackgroundColor="inherit">
                         <Text size="xs" variant="muted" weight="medium">
                             {BOOK_ACTIVITY_TEXTS.YOUR_RATING}

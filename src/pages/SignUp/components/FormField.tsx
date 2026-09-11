@@ -1,4 +1,4 @@
-import {DarkGreyIcon, FlexContainer, Input, InputContainer, Label} from '@components/index';
+import {Icon, FlexContainer, Input, InputContainer, Label} from '@components/index';
 import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
 import {IFormFieldProps} from '@pages/SignUp/components/signUp.components.interfaces';
 
@@ -23,7 +23,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                 Width="100%"
                 hasError={!!errors[fieldName]}
             >
-                <DarkGreyIcon className={iconClass} FontSize="1rem" />
+                <Icon variant="dark" className={iconClass} FontSize="1rem" />
                 <Input
                     Border="none"
                     BorderRadius="0px"
@@ -36,7 +36,8 @@ export const FormField: React.FC<IFormFieldProps> = ({
                     maxLength={inputMaxLength}
                 />
                 {endIcon && (
-                    <DarkGreyIcon
+                    <Icon
+                        variant="dark"
                         className={endIcon.className}
                         FontSize="1rem"
                         Cursor="pointer"
