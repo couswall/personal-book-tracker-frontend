@@ -19,7 +19,10 @@ const handleError = (error: unknown): never => {
         if (isApiErrorResponse(responseData)) {
             throw new Error(responseData.error.message);
         }
-        throw new Error(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
+        // TEMP DEBUG - remove after diagnosing CI e2e failure
+        throw new Error(
+            `${GENERAL_ERROR_MSGS.UNKNOWN_ERROR} [debug baseURL=${error.config?.baseURL} url=${error.config?.url} code=${error.code}]`
+        );
     }
     throw new Error(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
 };
