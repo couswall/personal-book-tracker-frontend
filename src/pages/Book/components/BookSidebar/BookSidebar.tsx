@@ -1,4 +1,4 @@
-import {BaseContainer, ButtonGhost, FlexContainer, Icon, Text} from '@components/index';
+import {BaseContainer, Button, FlexContainer, Icon, Text} from '@components/index';
 import * as S from './bookSidebar.styled';
 import {
     BOOK_SIDEBAR_TEXTS,
@@ -47,6 +47,6 @@ export const BookSidebar = () => (
                 </S.MockSidebarItem>
             ))}
         </FlexContainer>
-        <ButtonGhost>{BOOK_SIDEBAR_TEXTS.DISCOVER_MORE}</ButtonGhost>
+        <Button variant="ghost">{BOOK_SIDEBAR_TEXTS.DISCOVER_MORE}</Button>
     </FlexContainer>
 );

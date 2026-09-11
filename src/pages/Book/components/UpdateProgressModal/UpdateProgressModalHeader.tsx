@@ -1,4 +1,4 @@
-import {ButtonGhost, FlexContainer, Icon, Text, TitleH4} from '@components/index';
+import {Button, FlexContainer, Icon, Text, TitleH4} from '@components/index';
 import {IUpdateProgressModalHeaderProps} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 
@@ -20,7 +20,8 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
             BackgroundColor="transparent"
         >
             <TitleH4>{UPDATE_PROGRESS_TEXTS.MODAL_TITLE}</TitleH4>
-            <ButtonGhost
+            <Button
+                variant="ghost"
                 type="button"
                 BorderRadius="50%"
                 Width="2.5rem"
@@ -29,7 +30,7 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
                 onClick={onCloseModal}
             >
                 <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />
-            </ButtonGhost>
+            </Button>
         </FlexContainer>
         <Text
             variant="muted"

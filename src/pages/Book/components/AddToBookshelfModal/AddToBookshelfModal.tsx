@@ -1,5 +1,5 @@
 import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
-import {ButtonGhost, FlexContainer, Icon, Modal, Text, TitleH4} from '@components/index';
+import {Button, FlexContainer, Icon, Modal, Text, TitleH4} from '@components/index';
 import {
     BookshelfOptionsContainer,
     ShelfIconWrapper,
@@ -64,7 +64,8 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     Width="100%"
                 >
                     <TitleH4>{ADD_TO_BOOKSHELF_TEXTS.MODAL_TITLE}</TitleH4>
-                    <ButtonGhost
+                    <Button
+                        variant="ghost"
                         BorderRadius="50%"
                         Width="2.5rem"
                         Height="2.5rem"
@@ -72,7 +73,7 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                         onClick={onCloseModal}
                     >
                         <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />
-                    </ButtonGhost>
+                    </Button>
                 </FlexContainer>
 
                 <FlexContainer

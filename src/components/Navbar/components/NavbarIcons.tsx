@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from 'react-router';
 import {useRef, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {useClickOutside} from '@components/Navbar/hooks/useClickOutside';
-import {FlexContainer, MutedIcon, Image, ButtonGhost} from '@components/index';
+import {FlexContainer, MutedIcon, Image, Button} from '@components/index';
 import {SubMenuNav} from '@components/Navbar/components/index';
 import {SearchingNavbar} from '@components/Navbar/components/SearchingNavbar/SearchingNavbar';
 import {toggleDarkMode} from '@store/index';
@@ -27,7 +27,8 @@ export const NavbarIcons = () => {
             {!isSearchPage && (
                 <>
                     <SearchingNavbar />
-                    <ButtonGhost
+                    <Button
+                        variant="ghost"
                         Padding="0.5rem 0.75rem"
                         BorderRadius="1rem"
                         Width="36px"
@@ -37,11 +38,12 @@ export const NavbarIcons = () => {
                         aria-label={NAVBAR_ARIA_LABELS.SEARCH_BOOKS}
                     >
                         <MutedIcon className="fa-solid fa-magnifying-glass" size="md" />
-                    </ButtonGhost>
+                    </Button>
                 </>
             )}
 
-            <ButtonGhost
+            <Button
+                variant="ghost"
                 Padding="0.5rem 0.75rem"
                 BorderRadius="1rem"
                 Width="36px"
@@ -56,9 +58,10 @@ export const NavbarIcons = () => {
                     className={isDarkMode ? 'fa-regular fa-sun' : 'fa-solid fa-moon'}
                     size="md"
                 />
-            </ButtonGhost>
+            </Button>
             <FlexContainer Position="relative" BackgroundColor="inherit">
-                <ButtonGhost
+                <Button
+                    variant="ghost"
                     ref={triggerRef}
                     BorderRadius="1rem"
                     Gap="0.5rem"
@@ -71,7 +74,7 @@ export const NavbarIcons = () => {
                         <Image src={robotImg} ObjectFit="cover" alt="" />
                     </FlexContainer>
                     <MutedIcon className="fa-solid fa-angle-down" size="md" />
-                </ButtonGhost>
+                </Button>
                 <SubMenuNav isVisible={showSubNav} subMenuRef={subMenuRef} />
             </FlexContainer>
         </FlexContainer>

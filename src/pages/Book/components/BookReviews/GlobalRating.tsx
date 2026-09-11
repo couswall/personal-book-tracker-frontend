@@ -1,11 +1,4 @@
-import {
-    BaseContainer,
-    ButtonPrimary,
-    FlexContainer,
-    GridContainer,
-    Icon,
-    Text,
-} from '@components/index';
+import {BaseContainer, Button, FlexContainer, GridContainer, Icon, Text} from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
 import {
     BOOK_REVIEWS_TEXTS,
@@ -39,10 +32,16 @@ export const GlobalRating = () => (
                     <Text variant="muted" size="sm" weight="medium">
                         {GLOBAL_RATING_SUMMARY.totalReviews}
                     </Text>
-                    <ButtonPrimary MarginTop="1.5rem" size="lg" Gap="0.5rem">
-                        <Icon FontColor="inherit" className="fa-solid fa-pen-to-square" />
+                    <Button
+                        variant="primary"
+                        MarginTop="1.5rem"
+                        size="lg"
+                        leftIcon={
+                            <Icon FontColor="inherit" className="fa-solid fa-pen-to-square" />
+                        }
+                    >
                         {BOOK_REVIEWS_TEXTS.WRITE_REVIEW}
-                    </ButtonPrimary>
+                    </Button>
                 </S.GlobalScoreCol>
                 <S.ProgressBarsCol>
                     {RATING_BARS.map(({label, percentage, opacity, white}) => (

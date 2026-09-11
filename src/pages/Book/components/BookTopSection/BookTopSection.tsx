@@ -1,4 +1,4 @@
-import {FlexContainer, ButtonOutline, Icon, Text, ButtonPrimary} from '@components/index';
+import {FlexContainer, Button, Icon, Text} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
 import * as S from '@pages/Book/book.styled';
@@ -115,15 +115,20 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
 
             <FlexContainer FlexWrap="wrap" Gap="1rem">
                 {!isOwned && (
-                    <ButtonPrimary Gap="0.5rem" onClick={onOpenAddToBookshelfModal}>
-                        <Icon className="fa-solid fa-plus" FontColor="inherit" />
+                    <Button
+                        variant="primary"
+                        onClick={onOpenAddToBookshelfModal}
+                        leftIcon={<Icon className="fa-solid fa-plus" FontColor="inherit" />}
+                    >
                         {BOOK_TOP_SECTION_TEXTS.ADD_TO_BOOKSHELF}
-                    </ButtonPrimary>
+                    </Button>
                 )}
-                <ButtonOutline Gap="0.5rem">
-                    <Icon className="fa-solid fa-share-nodes" FontColor="inherit" />
+                <Button
+                    variant="outline"
+                    leftIcon={<Icon className="fa-solid fa-share-nodes" FontColor="inherit" />}
+                >
                     {BOOK_TOP_SECTION_TEXTS.SHARE}
-                </ButtonOutline>
+                </Button>
             </FlexContainer>
         </S.InfoColumn>
     </S.TopSectionGrid>
