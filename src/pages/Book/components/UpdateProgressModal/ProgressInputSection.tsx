@@ -19,28 +19,28 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
 }) => (
     <>
         {hasPageCount && (
-            <BaseContainer BackgroundColor="transparent">
+            <BaseContainer $backgroundColor="transparent">
                 <Text
                     size="xs"
                     variant="muted"
                     weight="bold"
-                    TextTransform="uppercase"
-                    MarginBottom="0.5rem"
+                    $textTransform="uppercase"
+                    $marginBottom="0.5rem"
                 >
                     {UPDATE_PROGRESS_TEXTS.INPUT_METHOD_LABEL}
                 </Text>
                 <FlexContainer
-                    Gap="0.25rem"
-                    Padding="0.25rem"
-                    BorderRadius="20px"
-                    BackgroundColorVariant="tertiary"
+                    $gap="0.25rem"
+                    $padding="0.25rem"
+                    $borderRadius="20px"
+                    backgroundColorVariant="tertiary"
                 >
                     <Button
                         type="button"
                         variant={inputMethod === PROGRESS_INPUT_METHODS.PAGE ? 'primary' : 'ghost'}
                         size="sm"
-                        BorderRadius="20px"
-                        Flex="1"
+                        $borderRadius="20px"
+                        $flex="1"
                         onClick={() => onSwitchInputMethod(PROGRESS_INPUT_METHODS.PAGE)}
                     >
                         {UPDATE_PROGRESS_TEXTS.PAGES_LABEL}
@@ -51,8 +51,8 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
                             inputMethod === PROGRESS_INPUT_METHODS.PERCENTAGE ? 'primary' : 'ghost'
                         }
                         size="sm"
-                        BorderRadius="20px"
-                        Flex="1"
+                        $borderRadius="20px"
+                        $flex="1"
                         onClick={() => onSwitchInputMethod(PROGRESS_INPUT_METHODS.PERCENTAGE)}
                     >
                         {UPDATE_PROGRESS_TEXTS.PERCENTAGE_LABEL}
@@ -61,24 +61,24 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
             </BaseContainer>
         )}
 
-        <BaseContainer BackgroundColor="transparent">
+        <BaseContainer $backgroundColor="transparent">
             <Text
                 size="xs"
                 variant="muted"
                 weight="bold"
-                TextTransform="uppercase"
-                MarginBottom="0.5rem"
+                $textTransform="uppercase"
+                $marginBottom="0.5rem"
             >
                 {inputMethod === PROGRESS_INPUT_METHODS.PAGE
                     ? UPDATE_PROGRESS_TEXTS.PAGES_READ_LABEL
                     : UPDATE_PROGRESS_TEXTS.PERCENTAGE_COMPLETED_LABEL}
             </Text>
-            <BaseContainer Position="relative" BackgroundColor="transparent">
+            <BaseContainer $position="relative" $backgroundColor="transparent">
                 <S.ProgressInput
                     type="number"
                     min={0}
                     max={inputMethod === PROGRESS_INPUT_METHODS.PAGE ? totalPages : 100}
-                    Width="100%"
+                    $width="100%"
                     {...valueField}
                     onKeyDown={handleProgressInputKeyDown}
                     onPaste={handleProgressInputPaste}

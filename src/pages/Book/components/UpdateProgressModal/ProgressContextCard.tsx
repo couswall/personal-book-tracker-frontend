@@ -1,5 +1,4 @@
-import {BaseContainer, FlexContainer, Text} from '@components/index';
-import {IconCircleActivity} from '@pages/Book/components/BookActivity/bookActivity.styled';
+import {BaseContainer, FlexContainer, Icon, IconWrapper, Text} from '@components/index';
 import {IProgressContextCardProps} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 
@@ -10,20 +9,20 @@ export const ProgressContextCard: React.FC<IProgressContextCardProps> = ({
     percentage,
 }) => (
     <FlexContainer
-        JustifyContent="space-between"
-        AlignItems="center"
-        FlexWrap="wrap"
-        Gap="1rem"
-        Padding="1rem"
-        BorderRadius="0.75rem"
-        BackgroundColorVariant="tertiary"
+        $justifyContent="space-between"
+        $alignItems="center"
+        $flexWrap="wrap"
+        $gap="1rem"
+        $padding="1rem"
+        $borderRadius="0.75rem"
+        backgroundColorVariant="tertiary"
     >
-        <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="transparent">
-            <IconCircleActivity>
-                <i className="fa-solid fa-book-open"></i>
-            </IconCircleActivity>
-            <BaseContainer BackgroundColor="transparent">
-                <Text size="xs" variant="muted" weight="bold" TextTransform="uppercase">
+        <FlexContainer $alignItems="center" $gap="0.75rem" $backgroundColor="transparent">
+            <IconWrapper>
+                <Icon variant="primary" className="fa-solid fa-book-open" />
+            </IconWrapper>
+            <BaseContainer $backgroundColor="transparent">
+                <Text size="xs" variant="muted" weight="bold" $textTransform="uppercase">
                     {UPDATE_PROGRESS_TEXTS.CURRENT_STATE}
                 </Text>
                 <Text size="sm" weight="medium">

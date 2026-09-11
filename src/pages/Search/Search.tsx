@@ -5,7 +5,6 @@ import {
     FormContainer,
     Icon,
     Input,
-    MutedIcon,
     Paragraph,
     TitleH1,
 } from '@components/index';
@@ -30,38 +29,39 @@ export const Search = () => {
     } = useSearchForm();
 
     return (
-        <Container Padding="20px 40px" MaxWidthVariant="lg" MinHeight="100vh">
-            <FlexContainer Gap="1.5rem" FlexDirection="column" JustifyContent="center">
-                <TitleH1 Width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
+        <Container $padding="20px 40px" maxWidthVariant="lg" $minHeight="100vh">
+            <FlexContainer $gap="1.5rem" $flexDirection="column" $justifyContent="center">
+                <TitleH1 $width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
 
-                <FormContainer Gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
+                <FormContainer $gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
                     <FlexContainer
-                        Gap="0.5rem"
-                        FlexDirection="column"
-                        Width="100%"
-                        AlignItems="start"
+                        $gap="0.5rem"
+                        $flexDirection="column"
+                        $width="100%"
+                        $alignItems="start"
                     >
                         <SearchInputWrapper
-                            Background="unset"
-                            Gap="0.5rem"
-                            AlignItems="center"
-                            Width="100%"
-                            BorderRadius="0.75rem"
-                            Padding="0px 0px 0px 0.875rem"
+                            $background="unset"
+                            $gap="0.5rem"
+                            $alignItems="center"
+                            $width="100%"
+                            $borderRadius="0.75rem"
+                            $padding="0px 0px 0px 0.875rem"
                             hasError={!!errorMsg}
                         >
-                            <MutedIcon
+                            <Icon
+                                variant="muted"
                                 className="fa-solid fa-magnifying-glass"
                                 size="md"
-                                Cursor="default"
+                                $cursor="default"
                             />
                             <Input
                                 placeholder={SEARCH_PAGE.PLACEHOLDER}
-                                Height="100%"
-                                BackgroundColor="transparent"
-                                Border="unset"
-                                Width="100%"
-                                Padding="0.875rem 0.5rem 0.875rem 0px"
+                                $height="100%"
+                                $backgroundColor="transparent"
+                                $border="unset"
+                                $width="100%"
+                                $padding="0.875rem 0.5rem 0.875rem 0px"
                                 {...register('searchText')}
                                 minLength={1}
                                 maxLength={50}
@@ -69,12 +69,12 @@ export const Search = () => {
                         </SearchInputWrapper>
                         {errorMsg && <ErrorMessage message={errorMsg} />}
                     </FlexContainer>
-                    <Button MaxWidth="100px" Height="50px">
+                    <Button $maxWidth="100px" $height="50px">
                         {SEARCH_PAGE.SEARCH_BTN}
                     </Button>
                 </FormContainer>
 
-                <FlexContainer FlexDirection="column" Gap="1rem">
+                <FlexContainer $flexDirection="column" $gap="1rem">
                     <SearchResults
                         books={searchBookData?.books}
                         loading={loading}
@@ -83,37 +83,39 @@ export const Search = () => {
                 </FlexContainer>
 
                 {searchBookData?.books && !loading && (
-                    <FlexContainer Gap="1rem" JustifyContent="space-between" AlignItems="center">
+                    <FlexContainer $gap="1rem" $justifyContent="space-between" $alignItems="center">
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handlePreviousPage}
                             disabled={currentPage === 1 || loading}
-                            Gap="0.5rem"
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
+                            leftIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-left"
+                                    size="md"
+                                    $fontColor="inherit"
+                                />
+                            }
                         >
-                            <Icon
-                                className="fa-solid fa-arrow-left"
-                                size="md"
-                                FontColor="inherit"
-                            />
                             {SEARCH_PAGE.PREVIOUS_BTN}
                         </Button>
                         <Paragraph>{`${SEARCH_PAGE.PAGE} ${currentPage}`}</Paragraph>
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handleNextPage}
                             disabled={isLastPage || loading}
-                            Gap="0.5rem"
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
+                            rightIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-right"
+                                    size="md"
+                                    $fontColor="inherit"
+                                />
+                            }
                         >
                             {SEARCH_PAGE.NEXT_BTN}
-                            <Icon
-                                className="fa-solid fa-arrow-right"
-                                size="md"
-                                FontColor="inherit"
-                            />
                         </Button>
                     </FlexContainer>
                 )}

@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router';
 import {AppDispatch, RootState} from '@store/store';
 import {SubMenuContainer} from '@components/Navbar/styles';
-import {DangerIcon, Icon, ButtonGhost, Text, FlexContainer} from '@components/index';
+import {Icon, Button, Text, FlexContainer} from '@components/index';
 import {onLogout} from '@store/index';
 import {publicRoutes} from '@routes/routes';
 import {SUB_MENU, subMenuRoutes} from '@components/Navbar/constants';
@@ -20,17 +20,17 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
     return (
         <SubMenuContainer
             $isVisible={isVisible}
-            BackgroundColorVariant="tertiary"
-            BoxShadowVariant="md"
-            Border="1px solid"
+            backgroundColorVariant="tertiary"
+            boxShadowVariant="md"
+            $border="1px solid"
             ref={subMenuRef}
         >
             <FlexContainer
-                Padding="0.5rem 1rem"
-                FlexDirection="column"
-                BackgroundColor="inherit"
-                BorderBottom="1px solid"
-                Cursor="default"
+                $padding="0.5rem 1rem"
+                $flexDirection="column"
+                $backgroundColor="inherit"
+                $borderBottom="1px solid"
+                $cursor="default"
             >
                 <Text variant="muted" size="xs">
                     {SUB_MENU.WELCOME_BACK}
@@ -41,41 +41,43 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
             </FlexContainer>
 
             <FlexContainer
-                FlexDirection="column"
-                BackgroundColor="inherit"
-                BorderBottom="1px solid"
-                Padding="0.25rem 0px"
+                $flexDirection="column"
+                $backgroundColor="inherit"
+                $borderBottom="1px solid"
+                $padding="0.25rem 0px"
             >
                 {subMenuRoutes.map((item, index) => (
-                    <ButtonGhost
+                    <Button
+                        variant="ghost"
                         key={index}
-                        Padding="0.5rem 1rem"
-                        Gap="1rem"
-                        JustifyContent="flex-start"
-                        BorderRadius="unset"
+                        $padding="0.5rem 1rem"
+                        $justifyContent="flex-start"
+                        $borderRadius="unset"
                         onClick={() => navigate(item.route)}
+                        leftIcon={<Icon variant="text" className={item.iconClassName} />}
                     >
-                        <Icon variant="text" className={item.iconClassName} />
-                        <Text FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
+                        <Text $fontSize="0.875rem" $letterSpacing="1px" $cursor="pointer">
                             {item.label}
                         </Text>
-                    </ButtonGhost>
+                    </Button>
                 ))}
             </FlexContainer>
 
-            <ButtonGhost
-                Margin="0.5rem 0px"
-                Padding="0.5rem 1rem"
-                BorderRadius="unset"
-                Gap="1rem"
-                JustifyContent="flex-start"
+            <Button
+                variant="ghost"
+                $margin="0.5rem 0px"
+                $padding="0.5rem 1rem"
+                $borderRadius="unset"
+                $justifyContent="flex-start"
                 onClick={onSignout}
+                leftIcon={
+                    <Icon variant="danger" className="fa-solid fa-arrow-right-from-bracket" />
+                }
             >
-                <DangerIcon className="fa-solid fa-arrow-right-from-bracket" />
-                <Text variant="danger" FontSize="0.875rem" LetterSpacing="1px" Cursor="pointer">
+                <Text variant="danger" $fontSize="0.875rem" $letterSpacing="1px" $cursor="pointer">
                     {SUB_MENU.LOGOUT}
                 </Text>
-            </ButtonGhost>
+            </Button>
         </SubMenuContainer>
     );
 };

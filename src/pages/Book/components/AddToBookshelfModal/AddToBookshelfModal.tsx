@@ -1,8 +1,7 @@
 import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
-import {ButtonGhost, FlexContainer, Icon, Modal, Text, TitleH4} from '@components/index';
+import {Button, FlexContainer, Icon, IconWrapper, Modal, Text, TitleH4} from '@components/index';
 import {
     BookshelfOptionsContainer,
-    ShelfIconWrapper,
     ModalAlert,
     IAddToBookshelfModalProps,
     getShelfIcon,
@@ -41,46 +40,47 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
         <Modal
             isOpen={isOpen}
             onCloseModal={onCloseModal}
-            JustifyContent="center"
-            AlignItems="center"
-            Padding="1rem"
+            $justifyContent="center"
+            $alignItems="center"
+            $padding="1rem"
         >
             <FlexContainer
-                FlexDirection="column"
-                BackgroundColorVariant="card"
-                BorderRadius="0.75rem"
-                Border="1px solid rgba(255, 255, 255, 0.05)"
-                Width="100%"
-                MaxWidth="440px"
-                Overflow="hidden"
-                BoxShadow="0 32px 64px -12px rgba(0, 0, 0, 0.6)"
+                $flexDirection="column"
+                backgroundColorVariant="card"
+                $borderRadius="0.75rem"
+                $border="1px solid rgba(255, 255, 255, 0.05)"
+                $width="100%"
+                $maxWidth="440px"
+                $overflow="hidden"
+                $boxShadow="0 32px 64px -12px rgba(0, 0, 0, 0.6)"
             >
                 <FlexContainer
-                    JustifyContent="space-between"
-                    AlignItems="center"
-                    BackgroundColorVariant="tertiary"
-                    BorderBottom="1px solid rgba(255, 255, 255, 0.05)"
-                    Padding="1.25rem 1.5rem"
-                    Width="100%"
+                    $justifyContent="space-between"
+                    $alignItems="center"
+                    backgroundColorVariant="tertiary"
+                    $borderBottom="1px solid rgba(255, 255, 255, 0.05)"
+                    $padding="1.25rem 1.5rem"
+                    $width="100%"
                 >
                     <TitleH4>{ADD_TO_BOOKSHELF_TEXTS.MODAL_TITLE}</TitleH4>
-                    <ButtonGhost
-                        BorderRadius="50%"
-                        Width="2.5rem"
-                        Height="2.5rem"
-                        Padding="0"
+                    <Button
+                        variant="ghost"
+                        $borderRadius="50%"
+                        $width="2.5rem"
+                        $height="2.5rem"
+                        $padding="0"
                         onClick={onCloseModal}
                     >
                         <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />
-                    </ButtonGhost>
+                    </Button>
                 </FlexContainer>
 
                 <FlexContainer
-                    FlexDirection="column"
-                    Gap="0.5rem"
-                    BackgroundColor="transparent"
-                    OverflowY="auto"
-                    Padding="1rem"
+                    $flexDirection="column"
+                    $gap="0.5rem"
+                    $backgroundColor="transparent"
+                    $overflowY="auto"
+                    $padding="1rem"
                 >
                     {bookshelves.map((option) => (
                         <BookshelfOptionsContainer
@@ -90,21 +90,21 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                             onClick={() => handleSelectBookshelf(option)}
                         >
                             <FlexContainer
-                                Gap="1rem"
-                                AlignItems="center"
-                                BackgroundColor="transparent"
+                                $gap="1rem"
+                                $alignItems="center"
+                                $backgroundColor="transparent"
                             >
-                                <ShelfIconWrapper isSelected={option.isSelected}>
+                                <IconWrapper shape="square" isActive={option.isSelected}>
                                     <Icon
                                         variant={option.isSelected ? 'primary' : 'muted'}
                                         className={getShelfIcon(option.name)}
                                         size="md"
                                     />
-                                </ShelfIconWrapper>
+                                </IconWrapper>
                                 <FlexContainer
-                                    FlexDirection="column"
-                                    Gap="0.2rem"
-                                    BackgroundColor="transparent"
+                                    $flexDirection="column"
+                                    $gap="0.2rem"
+                                    $backgroundColor="transparent"
                                 >
                                     <Text
                                         size="md"
@@ -132,14 +132,14 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     ))}
                 </FlexContainer>
 
-                <FlexContainer Padding="0.5rem 1rem 1.5rem" BackgroundColor="transparent">
+                <FlexContainer $padding="0.5rem 1rem 1.5rem" $backgroundColor="transparent">
                     {bookshelves.some((shelf) => shelf.isSelected) && (
                         <Text
                             variant={isLoading ? 'muted' : 'danger'}
                             size="sm"
-                            Cursor={isLoading ? 'default' : 'pointer'}
-                            Width="100%"
-                            TextAlign="center"
+                            $cursor={isLoading ? 'default' : 'pointer'}
+                            $width="100%"
+                            $textAlign="center"
                             onClick={isLoading ? undefined : handleDeleteFromBookshelf}
                         >
                             {ADD_TO_BOOKSHELF_TEXTS.REMOVE_FROM_BOOKSHELF}

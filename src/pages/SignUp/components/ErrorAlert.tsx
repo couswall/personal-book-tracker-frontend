@@ -4,16 +4,20 @@ import {IErrorAlertProps} from '@pages/SignUp/components/signUp.components.inter
 export const ErrorAlert: React.FC<IErrorAlertProps> = ({errorMessage}) => {
     return (
         <FlexContainer
-            Gap="0.25rem"
-            BackgroundColor="#FEA08B"
-            MarginTop="0.5rem"
-            BorderRadius="0.5rem"
-            Border="0.5px solid #AD2103"
-            Padding="0.25rem"
-            AlignItems="center"
+            $gap="0.25rem"
+            $backgroundColor="#FEA08B"
+            $marginTop="0.5rem"
+            $borderRadius="0.5rem"
+            $border="0.5px solid #AD2103"
+            $padding="0.25rem"
+            $alignItems="center"
         >
-            <Icon className="fa-regular fa-circle-xmark" FontColor="#AD2103" FontSize="0.875rem" />
-            <Paragraph TextAlign="center" FontColor="#AD2103" FontSize="0.875rem">
+            <Icon
+                className="fa-regular fa-circle-xmark"
+                $fontColor="#AD2103"
+                $fontSize="0.875rem"
+            />
+            <Paragraph $textAlign="center" $fontColor="#AD2103" $fontSize="0.875rem">
                 {errorMessage}
             </Paragraph>
         </FlexContainer>

@@ -35,22 +35,6 @@ export const BookshelfOptionsContainer = styled(FlexContainer)<IBookshelfOptions
     }
 `;
 
-interface IShelfIconWrapperProps extends IFlexContainerProps {
-    isSelected: boolean;
-}
-
-export const ShelfIconWrapper = styled(FlexContainer)<IShelfIconWrapperProps>`
-    width: 2.5rem;
-    min-width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    background-color: ${({isSelected, theme}) =>
-        isSelected ? `${theme.colors.primaryColor}33` : 'rgba(255, 255, 255, 0.05)'};
-    transition: background-color 0.2s ease;
-`;
-
 export const fadeSlide = keyframes`
     from {
         opacity: 0;

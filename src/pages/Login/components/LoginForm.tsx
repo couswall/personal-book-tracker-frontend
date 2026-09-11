@@ -1,11 +1,4 @@
-import {
-    Button,
-    FlexContainer,
-    FormContainer,
-    LoadingSpinner,
-    Paragraph,
-    TitleH2,
-} from '@components/index';
+import {Button, FlexContainer, FormContainer, Paragraph, TitleH2} from '@components/index';
 import {ErrorAlert} from '@pages/SignUp/components/ErrorAlert';
 import {FormField} from '@pages/Login/components/FormField';
 import {useLoginForm} from '@pages/Login/hooks/useLoginForm';
@@ -28,39 +21,39 @@ export const LoginForm = () => {
 
     return (
         <FlexContainer
-            BackgroundColorVariant="secondary"
-            JustifyContent="center"
-            AlignItems="center"
-            FlexDirection="column"
-            Padding="3.125rem 3.375rem"
-            BoxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-            BorderRadius="1rem"
-            Width="500px"
-            SmallWidth="100%"
-            SmallPadding="2.125rem 2.375rem"
+            backgroundColorVariant="secondary"
+            $justifyContent="center"
+            $alignItems="center"
+            $flexDirection="column"
+            $padding="3.125rem 3.375rem"
+            $boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+            $borderRadius="1rem"
+            $width="500px"
+            $smallWidth="100%"
+            $smallPadding="2.125rem 2.375rem"
         >
-            <TitleH2 Margin="0px 0px 0.5rem 0px" TextAlign="center" LineHeight="1">
+            <TitleH2 $margin="0px 0px 0.5rem 0px" $textAlign="center" $lineHeight="1">
                 {LOGIN_PAGE.TITLE}
             </TitleH2>
-            <Paragraph size="sm" TextAlign="center" variant="muted">
+            <Paragraph size="sm" $textAlign="center" variant="muted">
                 {LOGIN_PAGE.DESCRIPTION}
             </Paragraph>
 
             {errorsMsg.loginErrorMsg && <ErrorAlert errorMessage={errorsMsg.loginErrorMsg} />}
 
             <FormContainer
-                FlexDirection="column"
-                Gap="1rem"
-                MarginTop="2rem"
-                Width="100%"
+                $flexDirection="column"
+                $gap="1rem"
+                $marginTop="2rem"
+                $width="100%"
                 onSubmit={handleSubmit(onSubmit)}
-                BackgroundColor="inherit"
+                $backgroundColor="inherit"
             >
                 <FlexContainer
-                    FlexDirection="column"
-                    Gap="1rem"
-                    Width="100%"
-                    BackgroundColor="inherit"
+                    $flexDirection="column"
+                    $gap="1rem"
+                    $width="100%"
+                    $backgroundColor="inherit"
                 >
                     <FormField
                         label={LOGIN_PAGE.FIELDS.EMAIL_USERNAME.LABEL}
@@ -87,43 +80,33 @@ export const LoginForm = () => {
                     />
 
                     <FlexContainer
-                        JustifyContent="end"
-                        MarginBottom="1rem"
-                        BackgroundColor="inherit"
+                        $justifyContent="end"
+                        $marginBottom="1rem"
+                        $backgroundColor="inherit"
                     >
-                        <Paragraph size="sm" Cursor="pointer" variant="primary" FontWeight="600">
+                        <Paragraph size="sm" $cursor="pointer" variant="primary" $fontWeight="600">
                             {LOGIN_PAGE.FORGOT_PASSWORD}
                         </Paragraph>
                     </FlexContainer>
 
-                    <Button type="submit" disabled={loadings.loginLoading}>
-                        {loadings.loginLoading ? (
-                            <FlexContainer
-                                Width="100%"
-                                BackgroundColor="transparent"
-                                JustifyContent="center"
-                            >
-                                <LoadingSpinner Width="25px" Padding="5px" />
-                            </FlexContainer>
-                        ) : (
-                            <>{LOGIN_PAGE.BTN_LOGIN}</>
-                        )}
+                    <Button type="submit" loading={loadings.loginLoading} loadingText="">
+                        {LOGIN_PAGE.BTN_LOGIN}
                     </Button>
 
                     <FlexContainer
-                        JustifyContent="center"
-                        Gap="0.5rem"
-                        MarginTop="1.5rem"
-                        BackgroundColor="inherit"
+                        $justifyContent="center"
+                        $gap="0.5rem"
+                        $marginTop="1.5rem"
+                        $backgroundColor="inherit"
                     >
-                        <Paragraph size="sm" Cursor="pointer" TextAlign="center" variant="muted">
+                        <Paragraph size="sm" $cursor="pointer" $textAlign="center" variant="muted">
                             {LOGIN_PAGE.ACCOUNT_CTA}
                         </Paragraph>
                         <Paragraph
                             size="sm"
                             variant="primary"
-                            FontWeight="600"
-                            Cursor="pointer"
+                            $fontWeight="600"
+                            $cursor="pointer"
                             onClick={() => navigate(publicRoutes.signUp)}
                         >
                             {LOGIN_PAGE.SIGN_UP_HERE}

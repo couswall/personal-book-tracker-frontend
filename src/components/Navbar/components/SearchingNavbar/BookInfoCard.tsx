@@ -19,14 +19,14 @@ export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
     };
     return (
         <FlexContainer
-            Gap="0.75rem"
-            Padding="0.75rem"
-            Cursor="pointer"
-            Width="100%"
+            $gap="0.75rem"
+            $padding="0.75rem"
+            $cursor="pointer"
+            $width="100%"
             onClick={() => handleSelectOption(String(book.id))}
-            BorderBottom="1px solid"
-            BackgroundColor="inherit"
-            HBackgroundColorVariant="muted"
+            $borderBottom="1px solid"
+            $backgroundColor="inherit"
+            hBackgroundColorVariant="muted"
         >
             <CoverBookImg
                 imgSrc={book.imageCover}
@@ -35,18 +35,18 @@ export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
                 flex="none"
             />
             <FlexContainer
-                FlexDirection="column"
-                JustifyContent="center"
-                Overflow="hidden"
-                BackgroundColor="transparent"
+                $flexDirection="column"
+                $justifyContent="center"
+                $overflow="hidden"
+                $backgroundColor="transparent"
             >
                 <Text
                     size="sm"
                     weight="semibold"
-                    WhiteSpace="nowrap"
-                    Width="100%"
-                    Overflow="hidden"
-                    TextOverflow="ellipsis"
+                    $whiteSpace="nowrap"
+                    $width="100%"
+                    $overflow="hidden"
+                    $textOverflow="ellipsis"
                 >
                     {book.title}
                 </Text>
@@ -54,10 +54,10 @@ export const BookInfoCard: React.FC<IBookInfoCardProps> = ({
                     <Text
                         variant="muted"
                         size="xs"
-                        WhiteSpace="nowrap"
-                        Width="100%"
-                        Overflow="hidden"
-                        TextOverflow="ellipsis"
+                        $whiteSpace="nowrap"
+                        $width="100%"
+                        $overflow="hidden"
+                        $textOverflow="ellipsis"
                     >{`${NAVBAR.BY} ${book.authors.join(',')}`}</Text>
                 )}
             </FlexContainer>

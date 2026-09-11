@@ -1,4 +1,4 @@
-import {ButtonGhost, FlexContainer, Icon, Text, TitleH4} from '@components/index';
+import {Button, FlexContainer, Icon, Text, TitleH4} from '@components/index';
 import {IUpdateProgressModalHeaderProps} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 
@@ -7,37 +7,38 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
     onCloseModal,
 }) => (
     <FlexContainer
-        FlexDirection="column"
-        Gap="0.25rem"
-        BackgroundColorVariant="tertiary"
-        BorderBottom="1px solid rgba(255, 255, 255, 0.05)"
-        Padding="1.25rem 1.5rem"
-        Width="100%"
+        $flexDirection="column"
+        $gap="0.25rem"
+        backgroundColorVariant="tertiary"
+        $borderBottom="1px solid rgba(255, 255, 255, 0.05)"
+        $padding="1.25rem 1.5rem"
+        $width="100%"
     >
         <FlexContainer
-            JustifyContent="space-between"
-            AlignItems="center"
-            BackgroundColor="transparent"
+            $justifyContent="space-between"
+            $alignItems="center"
+            $backgroundColor="transparent"
         >
             <TitleH4>{UPDATE_PROGRESS_TEXTS.MODAL_TITLE}</TitleH4>
-            <ButtonGhost
+            <Button
+                variant="ghost"
                 type="button"
-                BorderRadius="50%"
-                Width="2.5rem"
-                Height="2.5rem"
-                Padding="0"
+                $borderRadius="50%"
+                $width="2.5rem"
+                $height="2.5rem"
+                $padding="0"
                 onClick={onCloseModal}
             >
                 <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />
-            </ButtonGhost>
+            </Button>
         </FlexContainer>
         <Text
             variant="muted"
             size="xs"
-            WhiteSpace="nowrap"
-            TextOverflow="ellipsis"
-            Overflow="hidden"
-            Width="85%"
+            $whiteSpace="nowrap"
+            $textOverflow="ellipsis"
+            $overflow="hidden"
+            $width="85%"
         >
             {bookTitle}
         </Text>

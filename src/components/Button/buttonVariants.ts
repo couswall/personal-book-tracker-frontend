@@ -1,39 +1,44 @@
+import type {ButtonHTMLAttributes, ReactNode} from 'react';
 import {css, DefaultTheme} from 'styled-components';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     size?: ButtonSize;
     fullWidth?: boolean;
-    Width?: string;
-    Height?: string;
-    Margin?: string;
-    MarginTop?: string;
-    Padding?: string;
-    BackGroundColor?: string;
-    HBackGColor?: string;
-    Border?: string;
-    FontSize?: string;
-    FontFamily?: string;
-    FontWeight?: string;
-    FontColor?: string;
-    TextDecoration?: string;
-    HTextDecoration?: string;
-    BorderRadius?: string;
-    Outline?: string;
-    Cursor?: string;
-    DisabledBackGC?: string;
-    DisabledFontColor?: string;
-    Flex?: string;
-    MaxWidth?: string;
-    Gap?: string;
-    Display?: string;
-    AlignItems?: string;
-    JustifyContent?: string;
-    LgDisplay?: string;
-    MdDisplay?: string;
+    loading?: boolean;
+    loadingText?: string;
+    leftIcon?: ReactNode;
+    rightIcon?: ReactNode;
+    $width?: string;
+    $height?: string;
+    $margin?: string;
+    $marginTop?: string;
+    $padding?: string;
+    $backGroundColor?: string;
+    $hBackGColor?: string;
+    $border?: string;
+    $fontSize?: string;
+    $fontFamily?: string;
+    $fontWeight?: string;
+    $fontColor?: string;
+    $textDecoration?: string;
+    $hTextDecoration?: string;
+    $borderRadius?: string;
+    $outline?: string;
+    $cursor?: string;
+    $disabledBackGC?: string;
+    $disabledFontColor?: string;
+    $flex?: string;
+    $maxWidth?: string;
+    $gap?: string;
+    $display?: string;
+    $alignItems?: string;
+    $justifyContent?: string;
+    $lgDisplay?: string;
+    $mdDisplay?: string;
 }
 
 export const getVariantStyles = (variant: ButtonVariant, theme: DefaultTheme) => {

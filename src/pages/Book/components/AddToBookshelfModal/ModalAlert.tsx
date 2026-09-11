@@ -6,14 +6,14 @@ export const ModalAlert: React.FC<IModalAlertProps> = ({message, variant}) => {
     const isSuccess = variant === 'success';
     return (
         <AlertContainer
-            Gap="1rem"
-            AlignItems="center"
-            Position="absolute"
-            Bottom="100px"
-            Padding="1rem"
-            BorderRadius="1.25rem"
-            BackgroundColorVariant="card"
-            Border="1px solid"
+            $gap="1rem"
+            $alignItems="center"
+            $position="absolute"
+            $bottom="100px"
+            $padding="1rem"
+            $borderRadius="1.25rem"
+            backgroundColorVariant="card"
+            $border="1px solid"
         >
             <Icon
                 variant={isSuccess ? 'success' : 'danger'}

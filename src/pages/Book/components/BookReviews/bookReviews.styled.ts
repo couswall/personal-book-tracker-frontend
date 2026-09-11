@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-export {StarRating} from '@pages/Book/book.styled';
 export * from '@pages/Book/components/BookReviews/reviewCard.styled';
 
 /* ── Your Review ── */

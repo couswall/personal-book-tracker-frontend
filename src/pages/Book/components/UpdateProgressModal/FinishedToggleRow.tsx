@@ -6,15 +6,15 @@ import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/
 export const FinishedToggleRow: React.FC<IFinishedToggleRowProps> = ({control}) => (
     <FlexContainer
         as="label"
-        JustifyContent="space-between"
-        AlignItems="center"
-        Padding="1rem"
-        BorderRadius="0.75rem"
-        Border="1px solid rgba(255, 255, 255, 0.05)"
-        HBackgroundColorVariant="muted"
-        Cursor="pointer"
+        $justifyContent="space-between"
+        $alignItems="center"
+        $padding="1rem"
+        $borderRadius="0.75rem"
+        $border="1px solid rgba(255, 255, 255, 0.05)"
+        hBackgroundColorVariant="muted"
+        $cursor="pointer"
     >
-        <FlexContainer AlignItems="center" Gap="0.75rem" BackgroundColor="transparent">
+        <FlexContainer $alignItems="center" $gap="0.75rem" $backgroundColor="transparent">
             <Icon className="fa-solid fa-flag-checkered" variant="primary" size="lg" />
             <Text size="sm" weight="medium">
                 {UPDATE_PROGRESS_TEXTS.FINISHED_BOOK}

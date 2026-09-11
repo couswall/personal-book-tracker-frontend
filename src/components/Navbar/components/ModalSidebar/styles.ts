@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {ButtonGhost, FlexContainer, MutedIcon} from '@components/index';
+import {Button, FlexContainer, Icon} from '@components/index';
 
 export const ModalSidebarContainer = styled(FlexContainer)<{$isVisible: boolean}>`
     width: 280px;
@@ -14,7 +14,7 @@ export const ModalSidebarContainer = styled(FlexContainer)<{$isVisible: boolean}
         opacity 0.3s ease-out;
 `;
 
-export const NavSidebarItem = styled(ButtonGhost)<{$isActive: boolean}>`
+export const NavSidebarItem = styled(Button).attrs({variant: 'ghost'})<{$isActive: boolean}>`
     color: ${(props) =>
         props.$isActive ? props.theme.colors.text.accent : props.theme.colors.text.light};
     background-color: ${(props) =>
@@ -22,7 +22,7 @@ export const NavSidebarItem = styled(ButtonGhost)<{$isActive: boolean}>`
     border-right: 4px solid
         ${(props) => (props.$isActive ? props.theme.colors.text.accent : 'transparent')};
 
-    ${MutedIcon} {
+    ${Icon} {
         color: ${(props) =>
             props.$isActive ? props.theme.colors.text.accent : props.theme.colors.text.light};
     }

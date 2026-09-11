@@ -1,8 +1,7 @@
 import {useNavigate} from 'react-router';
 import React from 'react';
-import {Button, FlexContainer, Paragraph, TitleH4} from '@components/index';
+import {Button, FlexContainer, Paragraph, RatingStars, TitleH4} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/index';
-import {StarRating} from '@pages/Search/components/StarRating';
 import {privateRoutes} from '@routes/routes';
 import {NAVBAR} from '@components/Navbar/constants';
 import {IBookResultProps} from '@pages/Search/components/search.components.interfaces';
@@ -16,10 +15,10 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
     };
     return (
         <FlexContainer
-            Padding="1rem"
-            BorderRadius="0.75rem"
-            BackgroundColorVariant="card"
-            Gap="1.25rem"
+            $padding="1rem"
+            $borderRadius="0.75rem"
+            backgroundColorVariant="card"
+            $gap="1.25rem"
         >
             <CoverBookImg
                 imgSrc={book.imageCover}
@@ -29,23 +28,23 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                 cursor="pointer"
                 onClick={navigateToBook}
             />
-            <FlexContainer FlexDirection="column" BackgroundColor="inherit" Gap="0.5rem">
-                <TitleH4 Cursor="pointer" onClick={navigateToBook}>
+            <FlexContainer $flexDirection="column" $backgroundColor="inherit" $gap="0.5rem">
+                <TitleH4 $cursor="pointer" onClick={navigateToBook}>
                     {book.title}
                 </TitleH4>
                 {book.authors && (
                     <Paragraph
                         variant="muted"
                         size="xs"
-                        WhiteSpace="nowrap"
-                        Width="100%"
-                        Overflow="hidden"
-                        TextOverflow="ellipsis"
+                        $whiteSpace="nowrap"
+                        $width="100%"
+                        $overflow="hidden"
+                        $textOverflow="ellipsis"
                     >{`${NAVBAR.BY} ${book.authors.join(',')}`}</Paragraph>
                 )}
                 {book.averageRating !== undefined && (
-                    <FlexContainer Gap="0.5rem" AlignItems="center" BackgroundColor="inherit">
-                        <StarRating rating={book.averageRating} size="0.875rem" />
+                    <FlexContainer $gap="0.5rem" $alignItems="center" $backgroundColor="inherit">
+                        <RatingStars rating={book.averageRating} size="0.875rem" />
                         <Paragraph variant="muted" size="xs">
                             {book.averageRating.toFixed(1)}
                         </Paragraph>
@@ -54,7 +53,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                         </Paragraph>
                     </FlexContainer>
                 )}
-                <Button variant="secondary" Width="max-content">
+                <Button variant="secondary" $width="max-content">
                     {BOOK_RESULT_TEXTS.ADD_TO_SHELF}
                 </Button>
             </FlexContainer>

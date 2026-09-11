@@ -1,0 +1,74 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {lightTheme} from '@styles/Theme';
+import {TypeScaleTable} from './TypeScaleTable';
+import {TokenTable} from './TokenTable';
+import {Table, Th, Td} from './TableParts';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+The type scale, weights, and font all live in `src/styles/Theme.ts` under `typography` and
+`fonts`. Components consume them through the `size`/`weight` props on the `Text` component
+(and its presets: `TitleH1`–`TitleH6`, `Paragraph`, `Label`, `Small`, `Caption`) rather than
+hardcoding a `font-size` — that's what makes the whole app resize consistently if the scale
+ever changes.
+
+Font family: <code>{lightTheme.fonts.lexend}</code>
+
+## Size scale
+
+export const sizeKeys = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'];
+
+<TypeScaleTable sizeKeys={sizeKeys} />
+
+## Weights
+
+export const weightRows = [
+    {name: 'normal', value: lightTheme.typography.weights.normal},
+    {name: 'medium', value: lightTheme.typography.weights.medium},
+    {name: 'semibold', value: lightTheme.typography.weights.semibold},
+    {name: 'bold', value: lightTheme.typography.weights.bold},
+];
+
+<TokenTable title="Font weights" rows={weightRows} />
+
+## Preset components
+
+export const presetRows = [
+    {component: 'TitleH1', size: '4xl', weight: 'bold', renderedAs: '<h1>'},
+    {component: 'TitleH2', size: '3xl', weight: 'bold', renderedAs: '<h2>'},
+    {component: 'TitleH3', size: '2xl', weight: 'bold', renderedAs: '<h3>'},
+    {component: 'TitleH4', size: 'xl', weight: 'bold', renderedAs: '<h4>'},
+    {component: 'TitleH5', size: 'lg', weight: 'semibold', renderedAs: '<h5>'},
+    {component: 'TitleH6', size: 'md', weight: 'semibold', renderedAs: '<h6>'},
+    {component: 'Paragraph', size: 'md', weight: 'normal', renderedAs: '<p>'},
+    {component: 'Label', size: 'sm', weight: 'medium', renderedAs: '<label>'},
+    {component: 'Small', size: 'sm', weight: 'normal', renderedAs: '<small>'},
+    {component: 'Caption', size: 'xs', weight: 'normal', renderedAs: '<span> (muted variant)'},
+];
+
+<Table>
+    <thead>
+        <tr>
+            <Th>Component</Th>
+            <Th>Size</Th>
+            <Th>Weight</Th>
+            <Th>Rendered as</Th>
+        </tr>
+    </thead>
+    <tbody>
+        {presetRows.map((row) => (
+            <tr key={row.component}>
+                <Td>
+                    <code>{row.component}</code>
+                </Td>
+                <Td>{row.size}</Td>
+                <Td>{row.weight}</Td>
+                <Td>
+                    <code>{row.renderedAs}</code>
+                </Td>
+            </tr>
+        ))}
+    </tbody>
+</Table>

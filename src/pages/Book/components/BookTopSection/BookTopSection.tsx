@@ -1,4 +1,4 @@
-import {FlexContainer, ButtonOutline, Icon, Text, ButtonPrimary} from '@components/index';
+import {FlexContainer, Button, Icon, RatingStars, Text} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
 import * as S from '@pages/Book/book.styled';
@@ -22,11 +22,11 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
         </S.ImageColumn>
 
         <S.InfoColumn>
-            <FlexContainer FlexDirection="column" Gap="0.5rem" MarginBottom="1.5rem">
+            <FlexContainer $flexDirection="column" $gap="0.5rem" $marginBottom="1.5rem">
                 <S.BookTitle>{book.title}</S.BookTitle>
-                <FlexContainer FlexDirection="column">
+                <FlexContainer $flexDirection="column">
                     {book.authors?.length > 0 && (
-                        <S.AuthorText variant="muted" FontSize="1.25rem" LgFontSize="1.125rem">
+                        <S.AuthorText variant="muted" $fontSize="1.25rem" $lgFontSize="1.125rem">
                             {BOOK_TOP_SECTION_TEXTS.BY_PREFIX}{' '}
                             {book.authors.map((author, index) => (
                                 <span key={index}>
@@ -39,9 +39,9 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     {book.subtitle && (
                         <Text
                             variant="muted"
-                            FontSize="1.25rem"
-                            LgFontSize="1.125rem"
-                            MarginTop="0.25rem"
+                            $fontSize="1.25rem"
+                            $lgFontSize="1.125rem"
+                            $marginTop="0.25rem"
                         >
                             {book.subtitle}
                         </Text>
@@ -50,25 +50,25 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
             </FlexContainer>
 
             <FlexContainer
-                FlexWrap="wrap"
-                AlignItems="center"
-                BorderTop="1px solid"
-                BorderBottom="1px solid"
-                Padding="1.5rem 0"
-                MarginBottom="1rem"
-                Gap="2rem"
+                $flexWrap="wrap"
+                $alignItems="center"
+                $borderTop="1px solid"
+                $borderBottom="1px solid"
+                $padding="1.5rem 0"
+                $marginBottom="1rem"
+                $gap="2rem"
             >
                 {book.publishedDate && (
-                    <FlexContainer FlexDirection="column" Gap="0.25rem">
-                        <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                    <FlexContainer $flexDirection="column" $gap="0.25rem">
+                        <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PUBLISHED}
                         </Text>
                         <Text weight="medium">{formatIsoDate(book.publishedDate)}</Text>
                     </FlexContainer>
                 )}
                 {book.pageCount && (
-                    <FlexContainer FlexDirection="column" Gap="0.25rem">
-                        <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                    <FlexContainer $flexDirection="column" $gap="0.25rem">
+                        <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PAGE_COUNT}
                         </Text>
                         <Text weight="medium">
@@ -76,17 +76,12 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                         </Text>
                     </FlexContainer>
                 )}
-                <FlexContainer FlexDirection="column" Gap="0.25rem">
-                    <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
+                <FlexContainer $flexDirection="column" $gap="0.25rem">
+                    <Text variant="muted" weight="bold" size="xs" $textTransform="uppercase">
                         {BOOK_TOP_SECTION_TEXTS.GLOBAL_RATING}
                     </Text>
-                    <FlexContainer AlignItems="center" Gap="0.5rem">
-                        <S.StarRating isPrimaryColor>
-                            {[...Array(4)].map((_, i) => (
-                                <Icon key={i} className="fa-solid fa-star" FontSize="1.125rem" />
-                            ))}
-                            <Icon className="fa-solid fa-star-half-stroke" FontSize="1.125rem" />
-                        </S.StarRating>
+                    <FlexContainer $alignItems="center" $gap="0.5rem">
+                        <RatingStars rating={book.averageRating} size="1.125rem" />
                         <Text weight="medium">
                             {book.averageRating || BOOK_TOP_SECTION_TEXTS.NO_RATING}
                         </Text>
@@ -94,7 +89,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 </FlexContainer>
             </FlexContainer>
 
-            <FlexContainer AlignItems="center" Gap="0.5rem" MarginBottom="2rem" FlexWrap="wrap">
+            <FlexContainer $alignItems="center" $gap="0.5rem" $marginBottom="2rem" $flexWrap="wrap">
                 {book.categories?.length > 0 ? (
                     book.categories.map((cat, i) => (
                         <S.CategoryBadge key={i}>{cat}</S.CategoryBadge>
@@ -113,17 +108,22 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 />
             )}
 
-            <FlexContainer FlexWrap="wrap" Gap="1rem">
+            <FlexContainer $flexWrap="wrap" $gap="1rem">
                 {!isOwned && (
-                    <ButtonPrimary Gap="0.5rem" onClick={onOpenAddToBookshelfModal}>
-                        <Icon className="fa-solid fa-plus" FontColor="inherit" />
+                    <Button
+                        variant="primary"
+                        onClick={onOpenAddToBookshelfModal}
+                        leftIcon={<Icon className="fa-solid fa-plus" $fontColor="inherit" />}
+                    >
                         {BOOK_TOP_SECTION_TEXTS.ADD_TO_BOOKSHELF}
-                    </ButtonPrimary>
+                    </Button>
                 )}
-                <ButtonOutline Gap="0.5rem">
-                    <Icon className="fa-solid fa-share-nodes" FontColor="inherit" />
+                <Button
+                    variant="outline"
+                    leftIcon={<Icon className="fa-solid fa-share-nodes" $fontColor="inherit" />}
+                >
                     {BOOK_TOP_SECTION_TEXTS.SHARE}
-                </ButtonOutline>
+                </Button>
             </FlexContainer>
         </S.InfoColumn>
     </S.TopSectionGrid>

@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {useLocation, useNavigate} from 'react-router';
 import React from 'react';
 import {RootState} from '@store/store';
-import {Modal, FlexContainer, LogoIcon, MutedIcon, Image, Text} from '@components/index';
+import {Modal, FlexContainer, LogoIcon, Icon, Image, Text} from '@components/index';
 import {
     ModalSidebarContainer,
     NavSidebarItem,
@@ -18,65 +18,80 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
     const {user} = useSelector((state: RootState) => state.auth);
     return (
         <Modal isOpen={isMenuOpen} onCloseModal={() => setIsMenuOpen(false)}>
-            <ModalSidebarContainer BackgroundColorVariant="secondary" $isVisible={isMenuOpen}>
+            <ModalSidebarContainer backgroundColorVariant="secondary" $isVisible={isMenuOpen}>
                 <FlexContainer
-                    Padding="1.5rem"
-                    JustifyContent="space-between"
-                    BorderBottom="1px solid"
-                    AlignItems="center"
-                    BackgroundColor="inherit"
+                    $padding="1.5rem"
+                    $justifyContent="space-between"
+                    $borderBottom="1px solid"
+                    $alignItems="center"
+                    $backgroundColor="inherit"
                 >
-                    <FlexContainer Gap="0.5rem" AlignItems="center" BackgroundColor="inherit">
+                    <FlexContainer $gap="0.5rem" $alignItems="center" $backgroundColor="inherit">
                         <LogoIcon size="24px" />
                         <Text size="lg" weight="bold">
                             {LOGIN_PAGE.BOOK_TRACKER}
                         </Text>
                     </FlexContainer>
-                    <MutedIcon
+                    <Icon
+                        variant="muted"
                         size="md"
                         className="fa-solid fa-x"
-                        Cursor="pointer"
+                        $cursor="pointer"
                         onClick={() => setIsMenuOpen(false)}
                         aria-label={NAVBAR_ARIA_LABELS.CLOSE_NAVIGATION_MENU}
                     />
                 </FlexContainer>
 
                 <FlexContainer
-                    FlexDirection="column"
-                    Padding="1rem 0px"
-                    BackgroundColor="inherit"
-                    Height="100%"
+                    $flexDirection="column"
+                    $padding="1rem 0px"
+                    $backgroundColor="inherit"
+                    $height="100%"
                 >
                     {navbarRoutes.map((item) => (
                         <NavSidebarItem
                             $isActive={pathname === item.route}
                             key={item.id}
                             size="sm"
-                            Padding="1.5rem"
-                            Gap="1rem"
-                            AlignItems="center"
-                            JustifyContent="flex-start"
-                            BorderRadius="unset"
-                            Height="unset"
+                            $padding="1.5rem"
+                            $gap="1rem"
+                            $alignItems="center"
+                            $justifyContent="flex-start"
+                            $borderRadius="unset"
+                            $height="unset"
                             onClick={() => navigate(item.route)}
                         >
-                            <MutedIcon size="sm" className={item.iconClassName} Cursor="pointer" />
+                            <Icon
+                                variant="muted"
+                                size="sm"
+                                className={item.iconClassName}
+                                $cursor="pointer"
+                            />
                             {item.label}
                         </NavSidebarItem>
                     ))}
                 </FlexContainer>
 
                 <FlexContainer
-                    Padding="1.5rem"
-                    BorderTop="1px solid"
-                    AlignItems="center"
-                    BackgroundColor="inherit"
-                    Gap="1rem"
+                    $padding="1.5rem"
+                    $borderTop="1px solid"
+                    $alignItems="center"
+                    $backgroundColor="inherit"
+                    $gap="1rem"
                 >
-                    <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" alt="" />
+                    <FlexContainer
+                        $height="32px"
+                        $width="32px"
+                        $borderRadius="50%"
+                        $overflow="hidden"
+                    >
+                        <Image src={robotImg} $objectFit="cover" alt="" />
                     </FlexContainer>
-                    <FlexContainer BackgroundColor="inherit" FlexDirection="column" Gap="0.25rem">
+                    <FlexContainer
+                        $backgroundColor="inherit"
+                        $flexDirection="column"
+                        $gap="0.25rem"
+                    >
                         <Text size="md" weight="bold">
                             {user.fullName}
                         </Text>

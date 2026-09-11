@@ -1,4 +1,4 @@
-import {DarkGreyIcon, FlexContainer, Input, InputContainer, Label} from '@components/index';
+import {Icon, FlexContainer, Input, InputContainer, Label} from '@components/index';
 import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
 import {IFormFieldProps} from '@pages/Login/components/login.components.interfaces';
 
@@ -12,31 +12,37 @@ export const FormField = ({
     endIcon,
 }: IFormFieldProps) => {
     return (
-        <FlexContainer Gap="0.5rem" FlexDirection="column" Width="100%" BackgroundColor="inherit">
-            <Label FontSize="0.875rem">{label}</Label>
+        <FlexContainer
+            $gap="0.5rem"
+            $flexDirection="column"
+            $width="100%"
+            $backgroundColor="inherit"
+        >
+            <Label $fontSize="0.875rem">{label}</Label>
             <InputContainer
-                Gap="0.5rem"
-                Padding="1rem 0px"
-                AlignItems="center"
-                Width="100%"
+                $gap="0.5rem"
+                $padding="1rem 0px"
+                $alignItems="center"
+                $width="100%"
                 hasError={!!error}
             >
-                <DarkGreyIcon className={iconClass} FontSize="1rem" />
+                <Icon variant="dark" className={iconClass} $fontSize="1rem" />
                 <Input
-                    BackgroundColor="transparent"
-                    Border="none"
-                    BorderRadius="0px"
-                    FontSize="1rem"
+                    $backgroundColor="transparent"
+                    $border="none"
+                    $borderRadius="0px"
+                    $fontSize="1rem"
                     placeholder={placeholder}
-                    Width="100%"
+                    $width="100%"
                     type={type}
                     {...register}
                 />
                 {endIcon && (
-                    <DarkGreyIcon
+                    <Icon
+                        variant="dark"
                         className={endIcon.className}
-                        FontSize="1rem"
-                        Cursor="pointer"
+                        $fontSize="1rem"
+                        $cursor="pointer"
                         onClick={endIcon.onClick}
                         aria-label={endIcon.label}
                     />

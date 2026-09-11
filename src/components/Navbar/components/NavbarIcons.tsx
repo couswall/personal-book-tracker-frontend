@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from 'react-router';
 import {useRef, useState} from 'react';
 import {AppDispatch, RootState} from '@store/store';
 import {useClickOutside} from '@components/Navbar/hooks/useClickOutside';
-import {FlexContainer, MutedIcon, Image, ButtonGhost} from '@components/index';
+import {FlexContainer, Icon, Image, Button} from '@components/index';
 import {SubMenuNav} from '@components/Navbar/components/index';
 import {SearchingNavbar} from '@components/Navbar/components/SearchingNavbar/SearchingNavbar';
 import {toggleDarkMode} from '@store/index';
@@ -23,28 +23,30 @@ export const NavbarIcons = () => {
     const isSearchPage = pathname === privateRoutes.search;
 
     return (
-        <FlexContainer BackgroundColor="inherit" AlignItems="center" Gap="0.5rem">
+        <FlexContainer $backgroundColor="inherit" $alignItems="center" $gap="0.5rem">
             {!isSearchPage && (
                 <>
                     <SearchingNavbar />
-                    <ButtonGhost
-                        Padding="0.5rem 0.75rem"
-                        BorderRadius="1rem"
-                        Width="36px"
+                    <Button
+                        variant="ghost"
+                        $padding="0.5rem 0.75rem"
+                        $borderRadius="1rem"
+                        $width="36px"
                         onClick={() => navigate(privateRoutes.search)}
-                        Display="none"
-                        MdDisplay="flex"
+                        $display="none"
+                        $mdDisplay="flex"
                         aria-label={NAVBAR_ARIA_LABELS.SEARCH_BOOKS}
                     >
-                        <MutedIcon className="fa-solid fa-magnifying-glass" size="md" />
-                    </ButtonGhost>
+                        <Icon variant="muted" className="fa-solid fa-magnifying-glass" size="md" />
+                    </Button>
                 </>
             )}
 
-            <ButtonGhost
-                Padding="0.5rem 0.75rem"
-                BorderRadius="1rem"
-                Width="36px"
+            <Button
+                variant="ghost"
+                $padding="0.5rem 0.75rem"
+                $borderRadius="1rem"
+                $width="36px"
                 onClick={() => dispatch(toggleDarkMode())}
                 aria-label={
                     isDarkMode
@@ -52,26 +54,33 @@ export const NavbarIcons = () => {
                         : NAVBAR_ARIA_LABELS.SWITCH_TO_DARK_MODE
                 }
             >
-                <MutedIcon
+                <Icon
+                    variant="muted"
                     className={isDarkMode ? 'fa-regular fa-sun' : 'fa-solid fa-moon'}
                     size="md"
                 />
-            </ButtonGhost>
-            <FlexContainer Position="relative" BackgroundColor="inherit">
-                <ButtonGhost
+            </Button>
+            <FlexContainer $position="relative" $backgroundColor="inherit">
+                <Button
+                    variant="ghost"
                     ref={triggerRef}
-                    BorderRadius="1rem"
-                    Gap="0.5rem"
-                    AlignItems="center"
-                    Padding="0.25rem"
+                    $borderRadius="1rem"
+                    $gap="0.5rem"
+                    $alignItems="center"
+                    $padding="0.25rem"
                     onClick={() => setShowSubNav(!showSubNav)}
                     aria-label={NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}
                 >
-                    <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" alt="" />
+                    <FlexContainer
+                        $height="32px"
+                        $width="32px"
+                        $borderRadius="50%"
+                        $overflow="hidden"
+                    >
+                        <Image src={robotImg} $objectFit="cover" alt="" />
                     </FlexContainer>
-                    <MutedIcon className="fa-solid fa-angle-down" size="md" />
-                </ButtonGhost>
+                    <Icon variant="muted" className="fa-solid fa-angle-down" size="md" />
+                </Button>
                 <SubMenuNav isVisible={showSubNav} subMenuRef={subMenuRef} />
             </FlexContainer>
         </FlexContainer>

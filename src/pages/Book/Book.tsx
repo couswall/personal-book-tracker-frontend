@@ -44,7 +44,7 @@ export const Book = () => {
 
     if (loading) {
         return (
-            <FlexContainer JustifyContent="center" AlignItems="center" MinHeight="100vh">
+            <FlexContainer $justifyContent="center" $alignItems="center" $minHeight="100vh">
                 <LoadingSpinner />
             </FlexContainer>
         );
@@ -65,19 +65,19 @@ export const Book = () => {
 
             {/* ── Bottom Section ── */}
             <GridContainer
-                TemplateColumns="repeat(12, minmax(0, 1fr))"
-                Gap="3rem"
-                LgTemplateColumns="1fr"
-                LgGap="2rem"
+                $templateColumns="repeat(12, minmax(0, 1fr))"
+                $gap="3rem"
+                $lgTemplateColumns="1fr"
+                $lgGap="2rem"
             >
                 <FlexContainer
-                    FlexDirection="column"
-                    Gap="3rem"
-                    GridColumn="span 8 / span 8"
-                    LgGridColumn="unset"
+                    $flexDirection="column"
+                    $gap="3rem"
+                    $gridColumn="span 8 / span 8"
+                    $lgGridColumn="unset"
                 >
                     <BaseContainer as="section">
-                        <TitleH4 MarginBottom="1rem">{BOOK_TEXTS.DESCRIPTION_TITLE}</TitleH4>
+                        <TitleH4 $marginBottom="1rem">{BOOK_TEXTS.DESCRIPTION_TITLE}</TitleH4>
                         {book.description ? (
                             <>
                                 <S.DescriptionText
@@ -91,7 +91,7 @@ export const Book = () => {
                                         ? BOOK_TEXTS.SHOW_LESS
                                         : BOOK_TEXTS.SHOW_MORE}
                                     <Icon
-                                        FontColor="inherit"
+                                        $fontColor="inherit"
                                         className={
                                             showMoreDescription
                                                 ? 'fa-solid fa-chevron-up'
@@ -110,7 +110,7 @@ export const Book = () => {
                     <BookReviews />
                 </FlexContainer>
 
-                <BaseContainer GridColumn="span 4 / span 4" LgGridColumn="unset">
+                <BaseContainer $gridColumn="span 4 / span 4" $lgGridColumn="unset">
                     <BookSidebar />
                 </BaseContainer>
             </GridContainer>
