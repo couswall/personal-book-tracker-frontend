@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormContainer} from '@components/FlexContainer';
+import {FormContainer} from '@components/Layout/FlexContainer/index';
 import {SearchBarContainer} from '@components/Navbar/styles';
 import {Input, InputContainer} from '@components/Input';
 import {Icon} from '@components/Icon';
@@ -13,27 +13,32 @@ export const SearchBarNav: React.FC<SearchBarNavProps> = ({
     return (
         <>
             <SearchBarContainer
-                Width="100%"
-                Position="absolute"
-                JustifyContent="center"
-                Top="80px"
-                Left="0"
+                $width="100%"
+                $position="absolute"
+                $justifyContent="center"
+                $top="80px"
+                $left="0"
                 className={showSearchInput ? 'expand-search-bar' : ''}
                 ref={searchBarRef}
             >
-                <FormContainer Height="100%" Width="100%" BorderRadius="0.5rem" MaxWidth="800px">
+                <FormContainer
+                    $height="100%"
+                    $width="100%"
+                    $borderRadius="0.5rem"
+                    $maxWidth="800px"
+                >
                     <InputContainer
-                        Padding="0.5rem 1rem"
-                        Gap="0.5rem"
-                        AlignItems="center"
-                        BorderRadius="0.5rem"
-                        Width="100%"
+                        $padding="0.5rem 1rem"
+                        $gap="0.5rem"
+                        $alignItems="center"
+                        $borderRadius="0.5rem"
+                        $width="100%"
                     >
                         <Input
                             placeholder="Search books"
-                            Height="100%"
-                            Width="calc(100% - 1rem)"
-                            Border="none"
+                            $height="100%"
+                            $width="calc(100% - 1rem)"
+                            $border="none"
                         />
                         <Icon
                             variant="dark"

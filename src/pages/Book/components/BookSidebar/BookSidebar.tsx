@@ -7,26 +7,26 @@ import {
 
 export const BookSidebar = () => (
     <FlexContainer
-        FlexDirection="column"
-        BackgroundColorVariant="secondary"
-        BorderRadius="1rem"
-        Padding="2.5rem"
-        Border="1px solid"
-        Gap="1.5rem"
-        LgPadding="1rem"
+        $flexDirection="column"
+        backgroundColorVariant="secondary"
+        $borderRadius="1rem"
+        $padding="2.5rem"
+        $border="1px solid"
+        $gap="1.5rem"
+        $lgPadding="1rem"
     >
         <Text size="lg" FontWeight="bold">
             {BOOK_SIDEBAR_TEXTS.TITLE}
         </Text>
-        <BaseContainer BorderBottom="1px solid" Height="1px" />
-        <FlexContainer FlexDirection="column" Gap="1.5rem" BackgroundColor="transparent">
+        <BaseContainer $borderBottom="1px solid" $height="1px" />
+        <FlexContainer $flexDirection="column" $gap="1.5rem" $backgroundColor="transparent">
             {SIDEBAR_BOOKS.map((book) => (
                 <S.MockSidebarItem key={book.title}>
                     <S.MockSidebarItemImg $bgImage={book.image} />
                     <FlexContainer
-                        FlexDirection="column"
-                        JustifyContent="center"
-                        BackgroundColor="inherit"
+                        $flexDirection="column"
+                        $justifyContent="center"
+                        $backgroundColor="inherit"
                     >
                         <S.MockSidebarItemTitle>{book.title}</S.MockSidebarItemTitle>
                         <Text size="xs" variant="muted" FontStyle="italic">

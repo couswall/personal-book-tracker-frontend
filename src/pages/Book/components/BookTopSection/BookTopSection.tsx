@@ -22,9 +22,9 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
         </S.ImageColumn>
 
         <S.InfoColumn>
-            <FlexContainer FlexDirection="column" Gap="0.5rem" MarginBottom="1.5rem">
+            <FlexContainer $flexDirection="column" $gap="0.5rem" $marginBottom="1.5rem">
                 <S.BookTitle>{book.title}</S.BookTitle>
-                <FlexContainer FlexDirection="column">
+                <FlexContainer $flexDirection="column">
                     {book.authors?.length > 0 && (
                         <S.AuthorText variant="muted" FontSize="1.25rem" LgFontSize="1.125rem">
                             {BOOK_TOP_SECTION_TEXTS.BY_PREFIX}{' '}
@@ -50,16 +50,16 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
             </FlexContainer>
 
             <FlexContainer
-                FlexWrap="wrap"
-                AlignItems="center"
-                BorderTop="1px solid"
-                BorderBottom="1px solid"
-                Padding="1.5rem 0"
-                MarginBottom="1rem"
-                Gap="2rem"
+                $flexWrap="wrap"
+                $alignItems="center"
+                $borderTop="1px solid"
+                $borderBottom="1px solid"
+                $padding="1.5rem 0"
+                $marginBottom="1rem"
+                $gap="2rem"
             >
                 {book.publishedDate && (
-                    <FlexContainer FlexDirection="column" Gap="0.25rem">
+                    <FlexContainer $flexDirection="column" $gap="0.25rem">
                         <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PUBLISHED}
                         </Text>
@@ -67,7 +67,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     </FlexContainer>
                 )}
                 {book.pageCount && (
-                    <FlexContainer FlexDirection="column" Gap="0.25rem">
+                    <FlexContainer $flexDirection="column" $gap="0.25rem">
                         <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
                             {BOOK_TOP_SECTION_TEXTS.PAGE_COUNT}
                         </Text>
@@ -76,11 +76,11 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                         </Text>
                     </FlexContainer>
                 )}
-                <FlexContainer FlexDirection="column" Gap="0.25rem">
+                <FlexContainer $flexDirection="column" $gap="0.25rem">
                     <Text variant="muted" weight="bold" size="xs" TextTransform="uppercase">
                         {BOOK_TOP_SECTION_TEXTS.GLOBAL_RATING}
                     </Text>
-                    <FlexContainer AlignItems="center" Gap="0.5rem">
+                    <FlexContainer $alignItems="center" $gap="0.5rem">
                         <RatingStars rating={book.averageRating} size="1.125rem" />
                         <Text weight="medium">
                             {book.averageRating || BOOK_TOP_SECTION_TEXTS.NO_RATING}
@@ -89,7 +89,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 </FlexContainer>
             </FlexContainer>
 
-            <FlexContainer AlignItems="center" Gap="0.5rem" MarginBottom="2rem" FlexWrap="wrap">
+            <FlexContainer $alignItems="center" $gap="0.5rem" $marginBottom="2rem" $flexWrap="wrap">
                 {book.categories?.length > 0 ? (
                     book.categories.map((cat, i) => (
                         <S.CategoryBadge key={i}>{cat}</S.CategoryBadge>
@@ -108,7 +108,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                 />
             )}
 
-            <FlexContainer FlexWrap="wrap" Gap="1rem">
+            <FlexContainer $flexWrap="wrap" $gap="1rem">
                 {!isOwned && (
                     <Button
                         variant="primary"

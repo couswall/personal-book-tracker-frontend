@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import {Container} from '@components/Containers';
+import {Container} from '@components/Layout/Container/index';
 import {FlexContainer, Button, Icon} from '@components/index';
 import {NavbarStyled} from '@components/Navbar/styles';
 import {NavbarItems, NavbarIcons} from '@components/Navbar/components';
@@ -13,19 +13,19 @@ export const Navbar = () => {
 
     return (
         <NavbarStyled
-            Height="80px"
-            Width="100%"
-            AlignItems="center"
-            JustifyContent="space-between"
-            Position="relative"
-            BackgroundColorVariant="tertiary"
+            $height="80px"
+            $width="100%"
+            $alignItems="center"
+            $justifyContent="space-between"
+            $position="relative"
+            backgroundColorVariant="tertiary"
         >
-            <Container Width="100%">
+            <Container $width="100%">
                 <FlexContainer
-                    BackgroundColor="inherit"
-                    JustifyContent="space-between"
-                    AlignItems="center"
-                    Gap="16px"
+                    $backgroundColor="inherit"
+                    $justifyContent="space-between"
+                    $alignItems="center"
+                    $gap="16px"
                 >
                     <Button
                         variant="ghost"

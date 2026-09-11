@@ -23,7 +23,7 @@ export const NavbarIcons = () => {
     const isSearchPage = pathname === privateRoutes.search;
 
     return (
-        <FlexContainer BackgroundColor="inherit" AlignItems="center" Gap="0.5rem">
+        <FlexContainer $backgroundColor="inherit" $alignItems="center" $gap="0.5rem">
             {!isSearchPage && (
                 <>
                     <SearchingNavbar />
@@ -60,7 +60,7 @@ export const NavbarIcons = () => {
                     size="md"
                 />
             </Button>
-            <FlexContainer Position="relative" BackgroundColor="inherit">
+            <FlexContainer $position="relative" $backgroundColor="inherit">
                 <Button
                     variant="ghost"
                     ref={triggerRef}
@@ -71,7 +71,12 @@ export const NavbarIcons = () => {
                     onClick={() => setShowSubNav(!showSubNav)}
                     aria-label={NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}
                 >
-                    <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
+                    <FlexContainer
+                        $height="32px"
+                        $width="32px"
+                        $borderRadius="50%"
+                        $overflow="hidden"
+                    >
                         <Image src={robotImg} $objectFit="cover" alt="" />
                     </FlexContainer>
                     <Icon variant="muted" className="fa-solid fa-angle-down" size="md" />

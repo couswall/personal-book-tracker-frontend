@@ -11,10 +11,10 @@ export const YourReview = () => (
         <S.YourReviewCard>
             <S.YourReviewBadge>{BOOK_REVIEWS_TEXTS.YOUR_REVIEW_BADGE}</S.YourReviewBadge>
             <FlexContainer
-                AlignItems="center"
-                Gap="1rem"
-                MarginBottom="1.5rem"
-                BackgroundColor="inherit"
+                $alignItems="center"
+                $gap="1rem"
+                $marginBottom="1.5rem"
+                $backgroundColor="inherit"
             >
                 <S.YourReviewAvatar $bgImage={AVATAR_URL} />
                 <div>
@@ -22,18 +22,18 @@ export const YourReview = () => (
                     <S.ReviewDateText>{YOUR_REVIEW.writtenOn}</S.ReviewDateText>
                 </div>
             </FlexContainer>
-            <BaseContainer BackgroundColor="inherit">
+            <BaseContainer $backgroundColor="inherit">
                 <TitleH5 MarginBottom="0.5rem">{YOUR_REVIEW.heading}</TitleH5>
                 <Text FontStyle="italic" Opacity="0.8" LineHeight="1.625">
                     {YOUR_REVIEW.body}
                 </Text>
             </BaseContainer>
             <FlexContainer
-                AlignItems="center"
-                Gap="1rem"
-                PaddingTop="1.5rem"
-                BorderTop="1px solid"
-                BackgroundColor="inherit"
+                $alignItems="center"
+                $gap="1rem"
+                $paddingTop="1.5rem"
+                $borderTop="1px solid"
+                $backgroundColor="inherit"
             >
                 <S.ReviewActionBtn>
                     <i className="fa-solid fa-pen"></i> {BOOK_REVIEWS_TEXTS.EDIT}

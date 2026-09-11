@@ -20,17 +20,17 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
     return (
         <SubMenuContainer
             $isVisible={isVisible}
-            BackgroundColorVariant="tertiary"
-            BoxShadowVariant="md"
-            Border="1px solid"
+            backgroundColorVariant="tertiary"
+            boxShadowVariant="md"
+            $border="1px solid"
             ref={subMenuRef}
         >
             <FlexContainer
-                Padding="0.5rem 1rem"
-                FlexDirection="column"
-                BackgroundColor="inherit"
-                BorderBottom="1px solid"
-                Cursor="default"
+                $padding="0.5rem 1rem"
+                $flexDirection="column"
+                $backgroundColor="inherit"
+                $borderBottom="1px solid"
+                $cursor="default"
             >
                 <Text variant="muted" size="xs">
                     {SUB_MENU.WELCOME_BACK}
@@ -41,10 +41,10 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
             </FlexContainer>
 
             <FlexContainer
-                FlexDirection="column"
-                BackgroundColor="inherit"
-                BorderBottom="1px solid"
-                Padding="0.25rem 0px"
+                $flexDirection="column"
+                $backgroundColor="inherit"
+                $borderBottom="1px solid"
+                $padding="0.25rem 0px"
             >
                 {subMenuRoutes.map((item, index) => (
                     <Button

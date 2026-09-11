@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {FlexContainer} from '@components/FlexContainer/index';
+import {FlexContainer} from '@components/Layout/FlexContainer/index';
 
 export type IconWrapperShape = 'circle' | 'square';
 

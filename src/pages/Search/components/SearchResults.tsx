@@ -7,7 +7,7 @@ import {SEARCH_PAGE} from '@pages/Search/search.constants';
 export const SearchResults: React.FC<ISearchResultsProps> = ({books, loading, hasSearched}) => {
     if (loading) {
         return (
-            <FlexContainer Height="40vh" JustifyContent="center" AlignItems="center">
+            <FlexContainer $height="40vh" $justifyContent="center" $alignItems="center">
                 <LoadingSpinner />
             </FlexContainer>
         );

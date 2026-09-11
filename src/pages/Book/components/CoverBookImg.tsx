@@ -13,22 +13,22 @@ export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
 }) => {
     return (
         <FlexContainer
-            BorderRadius="0.5rem"
-            Overflow="hidden"
-            Width={width}
-            Height={height}
-            Flex={flex}
+            $borderRadius="0.5rem"
+            $overflow="hidden"
+            $width={width}
+            $height={height}
+            $flex={flex}
             onClick={() => onClick?.()}
-            Cursor={cursor}
+            $cursor={cursor}
         >
             {imgSrc ? (
                 <Image src={imgSrc} $width="100%" $height="100%" $objectFit="fill" />
             ) : (
                 <FlexContainer
-                    Width="100%"
-                    Height="100%"
-                    JustifyContent="center"
-                    AlignItems="center"
+                    $width="100%"
+                    $height="100%"
+                    $justifyContent="center"
+                    $alignItems="center"
                 >
                     <Paragraph>{NO_IMAGE_AVAILABLE}</Paragraph>
                 </FlexContainer>

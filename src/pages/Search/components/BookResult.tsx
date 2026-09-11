@@ -15,10 +15,10 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
     };
     return (
         <FlexContainer
-            Padding="1rem"
-            BorderRadius="0.75rem"
-            BackgroundColorVariant="card"
-            Gap="1.25rem"
+            $padding="1rem"
+            $borderRadius="0.75rem"
+            backgroundColorVariant="card"
+            $gap="1.25rem"
         >
             <CoverBookImg
                 imgSrc={book.imageCover}
@@ -28,7 +28,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                 cursor="pointer"
                 onClick={navigateToBook}
             />
-            <FlexContainer FlexDirection="column" BackgroundColor="inherit" Gap="0.5rem">
+            <FlexContainer $flexDirection="column" $backgroundColor="inherit" $gap="0.5rem">
                 <TitleH4 Cursor="pointer" onClick={navigateToBook}>
                     {book.title}
                 </TitleH4>
@@ -43,7 +43,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                     >{`${NAVBAR.BY} ${book.authors.join(',')}`}</Paragraph>
                 )}
                 {book.averageRating !== undefined && (
-                    <FlexContainer Gap="0.5rem" AlignItems="center" BackgroundColor="inherit">
+                    <FlexContainer $gap="0.5rem" $alignItems="center" $backgroundColor="inherit">
                         <RatingStars rating={book.averageRating} size="0.875rem" />
                         <Paragraph variant="muted" size="xs">
                             {book.averageRating.toFixed(1)}

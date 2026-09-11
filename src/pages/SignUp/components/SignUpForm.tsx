@@ -21,16 +21,16 @@ export const SignUpForm = () => {
 
     return (
         <FlexContainer
-            BackgroundColorVariant="secondary"
-            JustifyContent="center"
-            AlignItems="center"
-            FlexDirection="column"
-            Padding="3.125rem 3.375rem"
-            BoxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-            BorderRadius="1rem"
-            Width="720px"
-            MdWidth="100%"
-            SmallPadding="2.125rem 2.375rem"
+            backgroundColorVariant="secondary"
+            $justifyContent="center"
+            $alignItems="center"
+            $flexDirection="column"
+            $padding="3.125rem 3.375rem"
+            $boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+            $borderRadius="1rem"
+            $width="720px"
+            $mdWidth="100%"
+            $smallPadding="2.125rem 2.375rem"
         >
             <TitleH2 FontSize="2rem" Margin="0px 0px 0.5rem 0px" TextAlign="center" LineHeight="1">
                 {SIGN_UP.TITLE}
@@ -44,20 +44,20 @@ export const SignUpForm = () => {
             )}
 
             <FormContainer
-                FlexDirection="column"
-                Gap="1rem"
-                MarginTop="2rem"
-                Width="100%"
+                $flexDirection="column"
+                $gap="1rem"
+                $marginTop="2rem"
+                $width="100%"
                 onSubmit={handleSubmit(onSubmit)}
-                BackgroundColor="inherit"
+                $backgroundColor="inherit"
             >
                 <FlexContainer
-                    FlexDirection="column"
-                    Gap="1.25rem"
-                    Width="100%"
-                    BackgroundColor="inherit"
+                    $flexDirection="column"
+                    $gap="1.25rem"
+                    $width="100%"
+                    $backgroundColor="inherit"
                 >
-                    <FlexContainer Gap="1rem" SmallFlexDir="column" BackgroundColor="inherit">
+                    <FlexContainer $gap="1rem" $smallFlexDir="column" $backgroundColor="inherit">
                         <FormField
                             fieldName="fullName"
                             label={SIGNUP_FORM.FULL_NAME.LABEL}
@@ -78,7 +78,7 @@ export const SignUpForm = () => {
                         />
                     </FlexContainer>
 
-                    <FlexContainer Gap="1rem" SmallFlexDir="column" BackgroundColor="inherit">
+                    <FlexContainer $gap="1rem" $smallFlexDir="column" $backgroundColor="inherit">
                         <FormField
                             fieldName="email"
                             label={SIGNUP_FORM.EMAIL.LABEL}
@@ -111,10 +111,10 @@ export const SignUpForm = () => {
                     </Button>
 
                     <FlexContainer
-                        JustifyContent="center"
-                        Gap="0.5rem"
-                        MarginTop="1.5rem"
-                        BackgroundColor="inherit"
+                        $justifyContent="center"
+                        $gap="0.5rem"
+                        $marginTop="1.5rem"
+                        $backgroundColor="inherit"
                     >
                         <Paragraph size="sm" variant="muted" TextAlign="center">
                             {SIGN_UP.HAVE_AN_ACCOUNT}

@@ -12,9 +12,9 @@ const meta: Meta<typeof Input> = {
     },
     args: {
         placeholder: 'Enter text...',
-        Width: '280px',
-        Padding: '10px 12px',
-        BorderRadius: '8px',
+        $width: '280px',
+        $padding: '10px 12px',
+        $borderRadius: '8px',
     },
 };
 
