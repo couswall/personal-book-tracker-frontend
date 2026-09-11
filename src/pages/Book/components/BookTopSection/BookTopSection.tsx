@@ -1,4 +1,4 @@
-import {FlexContainer, Button, Icon, Text} from '@components/index';
+import {FlexContainer, Button, Icon, RatingStars, Text} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/CoverBookImg';
 import {BookActivity} from '@pages/Book/components/BookActivity';
 import * as S from '@pages/Book/book.styled';
@@ -81,12 +81,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                         {BOOK_TOP_SECTION_TEXTS.GLOBAL_RATING}
                     </Text>
                     <FlexContainer AlignItems="center" Gap="0.5rem">
-                        <S.StarRating isPrimaryColor>
-                            {[...Array(4)].map((_, i) => (
-                                <Icon key={i} className="fa-solid fa-star" FontSize="1.125rem" />
-                            ))}
-                            <Icon className="fa-solid fa-star-half-stroke" FontSize="1.125rem" />
-                        </S.StarRating>
+                        <RatingStars rating={book.averageRating} size="1.125rem" />
                         <Text weight="medium">
                             {book.averageRating || BOOK_TOP_SECTION_TEXTS.NO_RATING}
                         </Text>

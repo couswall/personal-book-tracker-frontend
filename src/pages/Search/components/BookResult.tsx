@@ -1,8 +1,7 @@
 import {useNavigate} from 'react-router';
 import React from 'react';
-import {Button, FlexContainer, Paragraph, TitleH4} from '@components/index';
+import {Button, FlexContainer, Paragraph, RatingStars, TitleH4} from '@components/index';
 import {CoverBookImg} from '@pages/Book/components/index';
-import {StarRating} from '@pages/Search/components/StarRating';
 import {privateRoutes} from '@routes/routes';
 import {NAVBAR} from '@components/Navbar/constants';
 import {IBookResultProps} from '@pages/Search/components/search.components.interfaces';
@@ -45,7 +44,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                 )}
                 {book.averageRating !== undefined && (
                     <FlexContainer Gap="0.5rem" AlignItems="center" BackgroundColor="inherit">
-                        <StarRating rating={book.averageRating} size="0.875rem" />
+                        <RatingStars rating={book.averageRating} size="0.875rem" />
                         <Paragraph variant="muted" size="xs">
                             {book.averageRating.toFixed(1)}
                         </Paragraph>
