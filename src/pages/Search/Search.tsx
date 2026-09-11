@@ -53,7 +53,7 @@ export const Search = () => {
                                 variant="muted"
                                 className="fa-solid fa-magnifying-glass"
                                 size="md"
-                                Cursor="default"
+                                $cursor="default"
                             />
                             <Input
                                 placeholder={SEARCH_PAGE.PLACEHOLDER}
@@ -69,7 +69,7 @@ export const Search = () => {
                         </SearchInputWrapper>
                         {errorMsg && <ErrorMessage message={errorMsg} />}
                     </FlexContainer>
-                    <Button MaxWidth="100px" Height="50px">
+                    <Button $maxWidth="100px" $height="50px">
                         {SEARCH_PAGE.SEARCH_BTN}
                     </Button>
                 </FormContainer>
@@ -85,16 +85,16 @@ export const Search = () => {
                 {searchBookData?.books && !loading && (
                     <FlexContainer Gap="1rem" JustifyContent="space-between" AlignItems="center">
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handlePreviousPage}
                             disabled={currentPage === 1 || loading}
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
                             leftIcon={
                                 <Icon
                                     className="fa-solid fa-arrow-left"
                                     size="md"
-                                    FontColor="inherit"
+                                    $fontColor="inherit"
                                 />
                             }
                         >
@@ -102,16 +102,16 @@ export const Search = () => {
                         </Button>
                         <Paragraph>{`${SEARCH_PAGE.PAGE} ${currentPage}`}</Paragraph>
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handleNextPage}
                             disabled={isLastPage || loading}
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
                             rightIcon={
                                 <Icon
                                     className="fa-solid fa-arrow-right"
                                     size="md"
-                                    FontColor="inherit"
+                                    $fontColor="inherit"
                                 />
                             }
                         >

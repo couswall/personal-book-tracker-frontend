@@ -42,7 +42,7 @@ export const RatingStars = ({rating, size = '1rem', MarginTop}: RatingStarsProps
                 key={index}
                 className={STAR_ICON_CLASS[state]}
                 variant="primary"
-                FontSize={size}
+                $fontSize={size}
             />
         ))}
     </StarsRow>

@@ -39,8 +39,8 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
                         type="button"
                         variant={inputMethod === PROGRESS_INPUT_METHODS.PAGE ? 'primary' : 'ghost'}
                         size="sm"
-                        BorderRadius="20px"
-                        Flex="1"
+                        $borderRadius="20px"
+                        $flex="1"
                         onClick={() => onSwitchInputMethod(PROGRESS_INPUT_METHODS.PAGE)}
                     >
                         {UPDATE_PROGRESS_TEXTS.PAGES_LABEL}
@@ -51,8 +51,8 @@ export const ProgressInputSection: React.FC<IProgressInputSectionProps> = ({
                             inputMethod === PROGRESS_INPUT_METHODS.PERCENTAGE ? 'primary' : 'ghost'
                         }
                         size="sm"
-                        BorderRadius="20px"
-                        Flex="1"
+                        $borderRadius="20px"
+                        $flex="1"
                         onClick={() => onSwitchInputMethod(PROGRESS_INPUT_METHODS.PERCENTAGE)}
                     >
                         {UPDATE_PROGRESS_TEXTS.PERCENTAGE_LABEL}

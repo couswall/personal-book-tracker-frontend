@@ -65,10 +65,10 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
                     <TitleH4>{ADD_TO_BOOKSHELF_TEXTS.MODAL_TITLE}</TitleH4>
                     <Button
                         variant="ghost"
-                        BorderRadius="50%"
-                        Width="2.5rem"
-                        Height="2.5rem"
-                        Padding="0"
+                        $borderRadius="50%"
+                        $width="2.5rem"
+                        $height="2.5rem"
+                        $padding="0"
                         onClick={onCloseModal}
                     >
                         <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />

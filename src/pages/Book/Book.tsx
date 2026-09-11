@@ -91,7 +91,7 @@ export const Book = () => {
                                         ? BOOK_TEXTS.SHOW_LESS
                                         : BOOK_TEXTS.SHOW_MORE}
                                     <Icon
-                                        FontColor="inherit"
+                                        $fontColor="inherit"
                                         className={
                                             showMoreDescription
                                                 ? 'fa-solid fa-chevron-up'

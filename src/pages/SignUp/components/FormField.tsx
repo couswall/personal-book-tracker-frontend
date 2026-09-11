@@ -23,7 +23,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                 Width="100%"
                 hasError={!!errors[fieldName]}
             >
-                <Icon variant="dark" className={iconClass} FontSize="1rem" />
+                <Icon variant="dark" className={iconClass} $fontSize="1rem" />
                 <Input
                     Border="none"
                     BorderRadius="0px"
@@ -39,8 +39,8 @@ export const FormField: React.FC<IFormFieldProps> = ({
                     <Icon
                         variant="dark"
                         className={endIcon.className}
-                        FontSize="1rem"
-                        Cursor="pointer"
+                        $fontSize="1rem"
+                        $cursor="pointer"
                         onClick={endIcon.onClick}
                         aria-label={endIcon.label}
                     />

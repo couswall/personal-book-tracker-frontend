@@ -88,7 +88,7 @@ export const SearchingNavbar = () => {
                             variant="muted"
                             className="fa-solid fa-magnifying-glass"
                             size="sm"
-                            Cursor="default"
+                            $cursor="default"
                         />
                     )}
                     <Input

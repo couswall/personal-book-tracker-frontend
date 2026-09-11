@@ -23,10 +23,10 @@ export const UpdateProgressModalHeader: React.FC<IUpdateProgressModalHeaderProps
             <Button
                 variant="ghost"
                 type="button"
-                BorderRadius="50%"
-                Width="2.5rem"
-                Height="2.5rem"
-                Padding="0"
+                $borderRadius="50%"
+                $width="2.5rem"
+                $height="2.5rem"
+                $padding="0"
                 onClick={onCloseModal}
             >
                 <Icon className="fa-solid fa-xmark" size="lg" variant="muted" />

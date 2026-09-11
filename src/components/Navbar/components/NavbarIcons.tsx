@@ -29,12 +29,12 @@ export const NavbarIcons = () => {
                     <SearchingNavbar />
                     <Button
                         variant="ghost"
-                        Padding="0.5rem 0.75rem"
-                        BorderRadius="1rem"
-                        Width="36px"
+                        $padding="0.5rem 0.75rem"
+                        $borderRadius="1rem"
+                        $width="36px"
                         onClick={() => navigate(privateRoutes.search)}
-                        Display="none"
-                        MdDisplay="flex"
+                        $display="none"
+                        $mdDisplay="flex"
                         aria-label={NAVBAR_ARIA_LABELS.SEARCH_BOOKS}
                     >
                         <Icon variant="muted" className="fa-solid fa-magnifying-glass" size="md" />
@@ -44,9 +44,9 @@ export const NavbarIcons = () => {
 
             <Button
                 variant="ghost"
-                Padding="0.5rem 0.75rem"
-                BorderRadius="1rem"
-                Width="36px"
+                $padding="0.5rem 0.75rem"
+                $borderRadius="1rem"
+                $width="36px"
                 onClick={() => dispatch(toggleDarkMode())}
                 aria-label={
                     isDarkMode
@@ -64,15 +64,15 @@ export const NavbarIcons = () => {
                 <Button
                     variant="ghost"
                     ref={triggerRef}
-                    BorderRadius="1rem"
-                    Gap="0.5rem"
-                    AlignItems="center"
-                    Padding="0.25rem"
+                    $borderRadius="1rem"
+                    $gap="0.5rem"
+                    $alignItems="center"
+                    $padding="0.25rem"
                     onClick={() => setShowSubNav(!showSubNav)}
                     aria-label={NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}
                 >
                     <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" alt="" />
+                        <Image src={robotImg} $objectFit="cover" alt="" />
                     </FlexContainer>
                     <Icon variant="muted" className="fa-solid fa-angle-down" size="md" />
                 </Button>

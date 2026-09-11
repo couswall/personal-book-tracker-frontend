@@ -22,7 +22,7 @@ export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
             Cursor={cursor}
         >
             {imgSrc ? (
-                <Image src={imgSrc} Width="100%" Height="100%" ObjectFit="fill" />
+                <Image src={imgSrc} $width="100%" $height="100%" $objectFit="fill" />
             ) : (
                 <FlexContainer
                     Width="100%"

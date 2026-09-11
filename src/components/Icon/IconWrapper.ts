@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import {FlexContainer, IFlexContainerProps} from '@components/FlexContainer/index';
+import {FlexContainer} from '@components/FlexContainer/index';
 
 export type IconWrapperShape = 'circle' | 'square';
 
-interface IconWrapperProps extends IFlexContainerProps {
+interface IconWrapperProps {
     isActive?: boolean;
     shape?: IconWrapperShape;
+    $width?: string;
+    $height?: string;
+    $borderRadius?: string;
 }
 
 const SHAPE_RADIUS: Record<IconWrapperShape, string> = {
@@ -14,11 +17,11 @@ const SHAPE_RADIUS: Record<IconWrapperShape, string> = {
 };
 
 export const IconWrapper = styled(FlexContainer)<IconWrapperProps>`
-    width: ${(props) => props.Width ?? '2.5rem'};
-    height: ${(props) => props.Height ?? '2.5rem'};
+    width: ${(props) => props.$width ?? '2.5rem'};
+    height: ${(props) => props.$height ?? '2.5rem'};
     align-items: center;
     justify-content: center;
-    border-radius: ${(props) => props.BorderRadius ?? SHAPE_RADIUS[props.shape ?? 'circle']};
+    border-radius: ${(props) => props.$borderRadius ?? SHAPE_RADIUS[props.shape ?? 'circle']};
     background-color: ${(props) =>
         (props.isActive ?? true)
             ? `${props.theme.colors.primaryColor}33`

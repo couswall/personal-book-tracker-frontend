@@ -29,12 +29,12 @@ export const Navbar = () => {
                 >
                     <Button
                         variant="ghost"
-                        Padding="0.5rem 0.75rem"
-                        BorderRadius="1rem"
-                        Width="36px"
+                        $padding="0.5rem 0.75rem"
+                        $borderRadius="1rem"
+                        $width="36px"
                         onClick={() => setIsMenuOpen(true)}
-                        Display="none"
-                        LgDisplay="flex"
+                        $display="none"
+                        $lgDisplay="flex"
                         aria-label={NAVBAR_ARIA_LABELS.OPEN_NAVIGATION_MENU}
                     >
                         <Icon variant="muted" className="fa-solid fa-bars" size="md" />

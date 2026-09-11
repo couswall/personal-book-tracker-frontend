@@ -32,7 +32,7 @@ export const CommunityReviews = () => (
                 <Button
                     variant="outline"
                     size="sm"
-                    rightIcon={<Icon className="fa-solid fa-chevron-down" FontColor="inherit" />}
+                    rightIcon={<Icon className="fa-solid fa-chevron-down" $fontColor="inherit" />}
                 >
                     {BOOK_REVIEWS_TEXTS.MOST_HELPFUL}
                 </Button>
@@ -110,7 +110,7 @@ export const CommunityReviews = () => (
             ))}
         </FlexContainer>
 
-        <Button variant="ghost" MarginTop="2rem" Width="100%">
+        <Button variant="ghost" $marginTop="2rem" $width="100%">
             {BOOK_REVIEWS_TEXTS.LOAD_MORE_REVIEWS}
         </Button>
     </BaseContainer>

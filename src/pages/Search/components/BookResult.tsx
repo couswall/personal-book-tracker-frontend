@@ -53,7 +53,7 @@ export const BookResult: React.FC<IBookResultProps> = ({book}) => {
                         </Paragraph>
                     </FlexContainer>
                 )}
-                <Button variant="secondary" Width="max-content">
+                <Button variant="secondary" $width="max-content">
                     {BOOK_RESULT_TEXTS.ADD_TO_SHELF}
                 </Button>
             </FlexContainer>

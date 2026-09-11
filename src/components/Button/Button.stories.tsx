@@ -51,14 +51,14 @@ export const Loading: Story = {args: {loading: true}};
 export const LoadingWithText: Story = {args: {loading: true, loadingText: 'Saving...'}};
 
 export const WithLeftIcon: Story = {
-    args: {leftIcon: <Icon className="fa-solid fa-plus" FontColor="inherit" />},
+    args: {leftIcon: <Icon className="fa-solid fa-plus" $fontColor="inherit" />},
 };
 export const WithRightIcon: Story = {
-    args: {rightIcon: <Icon className="fa-solid fa-arrow-right" FontColor="inherit" />},
+    args: {rightIcon: <Icon className="fa-solid fa-arrow-right" $fontColor="inherit" />},
 };
 export const WithBothIcons: Story = {
     args: {
-        leftIcon: <Icon className="fa-solid fa-download" FontColor="inherit" />,
-        rightIcon: <Icon className="fa-solid fa-chevron-down" FontColor="inherit" />,
+        leftIcon: <Icon className="fa-solid fa-download" $fontColor="inherit" />,
+        rightIcon: <Icon className="fa-solid fa-chevron-down" $fontColor="inherit" />,
     },
 };

@@ -36,7 +36,7 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                         variant="muted"
                         size="md"
                         className="fa-solid fa-x"
-                        Cursor="pointer"
+                        $cursor="pointer"
                         onClick={() => setIsMenuOpen(false)}
                         aria-label={NAVBAR_ARIA_LABELS.CLOSE_NAVIGATION_MENU}
                     />
@@ -53,19 +53,19 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                             $isActive={pathname === item.route}
                             key={item.id}
                             size="sm"
-                            Padding="1.5rem"
-                            Gap="1rem"
-                            AlignItems="center"
-                            JustifyContent="flex-start"
-                            BorderRadius="unset"
-                            Height="unset"
+                            $padding="1.5rem"
+                            $gap="1rem"
+                            $alignItems="center"
+                            $justifyContent="flex-start"
+                            $borderRadius="unset"
+                            $height="unset"
                             onClick={() => navigate(item.route)}
                         >
                             <Icon
                                 variant="muted"
                                 size="sm"
                                 className={item.iconClassName}
-                                Cursor="pointer"
+                                $cursor="pointer"
                             />
                             {item.label}
                         </NavSidebarItem>
@@ -80,7 +80,7 @@ export const ModalSidebar: React.FC<ModalSidebarProps> = ({isMenuOpen, setIsMenu
                     Gap="1rem"
                 >
                     <FlexContainer Height="32px" Width="32px" BorderRadius="50%" Overflow="hidden">
-                        <Image src={robotImg} ObjectFit="cover" alt="" />
+                        <Image src={robotImg} $objectFit="cover" alt="" />
                     </FlexContainer>
                     <FlexContainer BackgroundColor="inherit" FlexDirection="column" Gap="0.25rem">
                         <Text size="md" weight="bold">
