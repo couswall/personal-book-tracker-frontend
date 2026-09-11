@@ -82,7 +82,7 @@ export const SearchingNavbar = () => {
                     Padding="0px 0px 0px 0.875rem"
                 >
                     {loading ? (
-                        <LoadingSpinner Width="1rem" Padding="3px" />
+                        <LoadingSpinner $width="1rem" $padding="3px" />
                     ) : (
                         <Icon
                             variant="muted"

@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 interface LoadersProps {
-    Width?: string;
-    Height?: string;
-    Margin?: string;
-    Padding?: string;
+    $width?: string;
+    $height?: string;
+    $margin?: string;
+    $padding?: string;
 }
 
 export const LoadingSpinner = styled.div<LoadersProps>`
-    width: ${(props) => props.Width || '50px'};
-    padding: ${(props) => props.Padding || '8px'};
+    width: ${(props) => props.$width || '50px'};
+    padding: ${(props) => props.$padding || '8px'};
     aspect-ratio: 1;
     border-radius: 50%;
     background: ${(props) => props.theme.colors.primaryColor};
