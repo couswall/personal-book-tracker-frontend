@@ -4,5 +4,6 @@ export const formatIsoDate = (isoString: string): string => {
         year: 'numeric',
         month: 'long',
         day: '2-digit',
+        timeZone: 'UTC',
     }).format(date);
 };
