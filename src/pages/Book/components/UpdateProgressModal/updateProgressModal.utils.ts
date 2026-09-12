@@ -11,7 +11,19 @@ const ALLOWED_NAVIGATION_KEYS = [
     'End',
 ];
 
-export const handleProgressInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+interface ProgressInputKeyDownEvent {
+    ctrlKey: boolean;
+    metaKey: boolean;
+    key: string;
+    preventDefault: () => void;
+}
+
+interface ProgressInputPasteEvent {
+    clipboardData: {getData: (format: string) => string};
+    preventDefault: () => void;
+}
+
+export const handleProgressInputKeyDown = (event: ProgressInputKeyDownEvent): void => {
     if (event.ctrlKey || event.metaKey || ALLOWED_NAVIGATION_KEYS.includes(event.key)) {
         return;
     }
@@ -21,7 +33,7 @@ export const handleProgressInputKeyDown = (event: React.KeyboardEvent<HTMLInputE
     }
 };
 
-export const handleProgressInputPaste = (event: React.ClipboardEvent<HTMLInputElement>): void => {
+export const handleProgressInputPaste = (event: ProgressInputPasteEvent): void => {
     const pastedText = event.clipboardData.getData('text');
 
     if (!/^[0-9]+$/.test(pastedText)) {
