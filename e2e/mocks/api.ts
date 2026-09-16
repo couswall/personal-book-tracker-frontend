@@ -12,6 +12,10 @@ export const endpoints = {
     refreshToken: 'auth/refresh',
     searchBook: 'book/search',
     getBookById: (id: string) => `book/bookById/${id}`,
+    getBookshelvesWithStatus: (userId: number, apiBookId: string) =>
+        `bookshelf/bookStatus/${userId}/${apiBookId}`,
+    addBookToBookshelf: 'bookshelfBook/addToBookshelf',
+    updateReadingProgress: 'bookshelfBook/updateReadingProgress',
 };
 
 interface MockJsonOptions {
