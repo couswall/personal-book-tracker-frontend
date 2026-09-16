@@ -22,6 +22,10 @@ export default mergeConfig(
             // to start on Windows and occasionally times out ("Failed to start forks worker").
             // 'threads' reuses worker threads instead, which is faster and more reliable here.
             pool: 'threads',
+            // isolate: false was tried to cut per-file jsdom startup time, but this suite
+            // mocks '@api/httpClient' per file with vi.mock() extensively - disabling
+            // isolation shares each worker's module registry across files, so one file's
+            // mock setup corrupted another's (many spurious failures). Not viable here.
         },
     })
 );
