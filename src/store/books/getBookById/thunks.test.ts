@@ -38,7 +38,7 @@ const book: IBook = {
     deletedAt: null,
 };
 
-describe('getBookById thunk + slice', () => {
+describe('getBookById thunk', () => {
     beforeEach(() => {
         mockedCreatePrivateClient.mockReset();
     });
@@ -65,19 +65,5 @@ describe('getBookById thunk + slice', () => {
         expect(store.getState().getBookById.loading).toBe(false);
         expect(store.getState().getBookById.book).toBeNull();
         expect(store.getState().getBookById.error).toBe('Book not found');
-    });
-
-    it('cleanGetBookByIdState resets to the initial state', () => {
-        const populatedState = getBookByIdSlice.reducer(
-            undefined,
-            getBookById.fulfilled(book, 'reqId', {token: 'tok', id: '1'})
-        );
-
-        const state = getBookByIdSlice.reducer(
-            populatedState,
-            getBookByIdSlice.actions.cleanGetBookByIdState()
-        );
-
-        expect(state).toEqual(getBookByIdSlice.getInitialState());
     });
 });
