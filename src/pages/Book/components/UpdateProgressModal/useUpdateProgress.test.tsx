@@ -1,7 +1,10 @@
 import {beforeEach, describe, expect, it, vi} from 'vitest';
-import {render, screen} from '@testing-library/react';
+import {screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {Controller} from 'react-hook-form';
+import {ToggleSwitch} from '@components/ToggleSwitch/ToggleSwitch';
 import {useUpdateProgress} from '@pages/Book/components/UpdateProgressModal/useUpdateProgress';
+import {renderWithProviders} from '@src/testUtils/renderWithProviders';
 import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 import {IUseUpdateProgressParams} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 import * as progressApi from '@pages/Book/components/UpdateProgressModal/updateProgressModal.api';
@@ -30,6 +33,7 @@ const Harness = (props: IUseUpdateProgressParams) => {
         isLoading,
         alert,
         valueField,
+        control,
         submit,
     } = useUpdateProgress(props);
 
@@ -44,6 +48,19 @@ const Harness = (props: IUseUpdateProgressParams) => {
             <span data-testid="alert-variant">{alert.variant}</span>
             <label htmlFor="value">value</label>
             <input id="value" type="number" {...valueField} />
+            <Controller
+                name="isFinished"
+                control={control}
+                render={({field: {value, onChange, name, ref}}) => (
+                    <ToggleSwitch
+                        aria-label="finished"
+                        checked={value}
+                        onChange={onChange}
+                        name={name}
+                        ref={ref}
+                    />
+                )}
+            />
             <button onClick={() => switchInputMethod('PERCENTAGE')}>Switch to percentage</button>
             <button onClick={() => switchInputMethod('PAGE')}>Switch to pages</button>
             <button onClick={() => submit()}>Save</button>
@@ -57,7 +74,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('defaults to the PAGE input method when the book has a page count', () => {
-        render(<Harness {...defaultProps} />);
+        renderWithProviders(<Harness {...defaultProps} />);
 
         expect(screen.getByTestId('has-page-count')).toHaveTextContent('true');
         expect(screen.getByTestId('input-method')).toHaveTextContent('PAGE');
@@ -65,7 +82,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('defaults to the PERCENTAGE input method when the book has no page count', () => {
-        render(<Harness {...defaultProps} totalPages={0} />);
+        renderWithProviders(<Harness {...defaultProps} totalPages={0} />);
 
         expect(screen.getByTestId('has-page-count')).toHaveTextContent('false');
         expect(screen.getByTestId('input-method')).toHaveTextContent('PERCENTAGE');
@@ -73,7 +90,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('switches the input method and preloads the value for that method', async () => {
-        render(<Harness {...defaultProps} />);
+        renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
         await user.click(screen.getByRole('button', {name: 'Switch to percentage'}));
@@ -91,7 +108,7 @@ describe('useUpdateProgress', () => {
             currentPage: 160,
             totalPages: 400,
         });
-        render(<Harness {...defaultProps} />);
+        renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
         await user.clear(screen.getByLabelText('value'));
@@ -116,7 +133,7 @@ describe('useUpdateProgress', () => {
 
     it('shows a danger alert when the update fails', async () => {
         vi.mocked(progressApi.updateReadingProgress).mockRejectedValue(new Error('Network error'));
-        render(<Harness {...defaultProps} />);
+        renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
         await user.click(screen.getByRole('button', {name: 'Save'}));
@@ -134,7 +151,7 @@ describe('useUpdateProgress', () => {
             currentPage: 0,
             totalPages: 400,
         });
-        render(<Harness {...defaultProps} />);
+        renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
         await user.clear(screen.getByLabelText('value'));
@@ -145,8 +162,34 @@ describe('useUpdateProgress', () => {
         );
     });
 
+    it('sends isFinished: true when the finished toggle is checked', async () => {
+        vi.mocked(progressApi.updateReadingProgress).mockResolvedValue({
+            id: 1,
+            bookshelfId: 2,
+            bookId: 3,
+            readingProgress: 100,
+            currentPage: 400,
+            totalPages: 400,
+        });
+        renderWithProviders(<Harness {...defaultProps} />);
+        const user = userEvent.setup();
+
+        expect(screen.getByRole('checkbox', {name: 'finished'})).not.toBeChecked();
+
+        await user.click(screen.getByRole('checkbox', {name: 'finished'}));
+        expect(screen.getByRole('checkbox', {name: 'finished'})).toBeChecked();
+
+        await user.click(screen.getByRole('button', {name: 'Save'}));
+
+        expect(progressApi.updateReadingProgress).toHaveBeenCalledWith(
+            expect.objectContaining({isFinished: true})
+        );
+    });
+
     it('does not submit when there is no token or bookshelfBookId', async () => {
-        render(<Harness {...defaultProps} token={undefined} bookshelfBookId={undefined} />);
+        renderWithProviders(
+            <Harness {...defaultProps} token={undefined} bookshelfBookId={undefined} />
+        );
         const user = userEvent.setup();
 
         await user.click(screen.getByRole('button', {name: 'Save'}));
