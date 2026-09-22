@@ -130,6 +130,7 @@ export const Book = () => {
                 bookshelfBookId={selectedBookshelf?.bookshelfBookId ?? undefined}
                 currentPage={selectedBookshelf?.currentPage ?? null}
                 readingProgress={selectedBookshelf?.readingProgress ?? null}
+                progressType={selectedBookshelf?.progressType ?? null}
                 token={token}
                 onRefresh={handleRefresh}
             />

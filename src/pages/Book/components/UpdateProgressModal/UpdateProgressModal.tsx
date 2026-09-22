@@ -18,6 +18,7 @@ export const UpdateProgressModal: React.FC<IUpdateProgressModalProps> = ({
     readingProgress: initialReadingProgress,
     token,
     onRefresh,
+    progressType: initialProgressType,
 }) => {
     const {
         hasPageCount,
@@ -36,6 +37,7 @@ export const UpdateProgressModal: React.FC<IUpdateProgressModalProps> = ({
         totalPages,
         initialCurrentPage,
         initialReadingProgress,
+        initialProgressType,
         isOpen,
         onRefresh,
     });

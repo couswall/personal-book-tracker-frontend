@@ -1,3 +1,5 @@
+import {ProgressInputMethod} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
+
 export interface IGetBookshelvesWithStatusParams {
     token: string;
     userId: number;
@@ -13,6 +15,7 @@ export interface IBookshelfWithStatus {
     bookCount: number;
     readingProgress: number | null;
     currentPage: number | null;
+    progressType: ProgressInputMethod | null;
 }
 
 export interface IGetBookshelvesWithStatusResponse {
