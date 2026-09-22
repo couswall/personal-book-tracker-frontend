@@ -27,6 +27,7 @@ const bookshelves: IBookshelfWithStatus[] = [
         bookCount: 3,
         readingProgress: 42,
         currentPage: 120,
+        progressType: 'PAGE',
     },
 ];
 

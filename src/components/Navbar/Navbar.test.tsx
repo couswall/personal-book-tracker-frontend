@@ -19,12 +19,12 @@ describe('Navbar', () => {
     it('renders the logo and the main nav links', () => {
         renderWithProviders(<Navbar />, {preloadedState: {auth: authenticatedState}});
 
-        // Each label renders twice: once in the desktop nav, once in the mobile
-        // drawer (ModalSidebar), which is always mounted and only hidden via CSS.
+        // The mobile drawer (ModalSidebar) only mounts once opened, so each
+        // label renders once here, from the desktop nav.
         expect(screen.getAllByText(LOGIN_PAGE.BOOK_TRACKER).length).toBeGreaterThan(0);
-        expect(screen.getAllByText('Home').length).toBe(2);
-        expect(screen.getAllByText('My Books').length).toBe(2);
-        expect(screen.getAllByText('Browse').length).toBe(2);
+        expect(screen.getAllByText('Home').length).toBe(1);
+        expect(screen.getAllByText('My Books').length).toBe(1);
+        expect(screen.getAllByText('Browse').length).toBe(1);
     });
 
     it("shows the signed-in user's first name in the account menu", async () => {

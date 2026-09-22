@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {updateReadingProgress} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.api';
 import {
@@ -20,12 +20,20 @@ export const useUpdateProgress = ({
     totalPages,
     initialCurrentPage,
     initialReadingProgress,
+    initialProgressType,
     isOpen,
     onRefresh,
 }: IUseUpdateProgressParams) => {
     const hasPageCount = totalPages > 0;
+    const resolveInputMethod = useCallback(
+        (progressType: ProgressInputMethod | null): ProgressInputMethod => {
+            if (!hasPageCount) return PROGRESS_INPUT_METHODS.PERCENTAGE;
+            return progressType ?? PROGRESS_INPUT_METHODS.PAGE;
+        },
+        [hasPageCount]
+    );
     const [inputMethod, setInputMethod] = useState<ProgressInputMethod>(
-        hasPageCount ? PROGRESS_INPUT_METHODS.PAGE : PROGRESS_INPUT_METHODS.PERCENTAGE
+        resolveInputMethod(initialProgressType)
     );
     const [progress, setProgress] = useState<IConfirmedProgress>({
         currentPage: initialCurrentPage ?? 0,
@@ -43,9 +51,7 @@ export const useUpdateProgress = ({
 
     useEffect(() => {
         if (!isOpen) return;
-        const method = hasPageCount
-            ? PROGRESS_INPUT_METHODS.PAGE
-            : PROGRESS_INPUT_METHODS.PERCENTAGE;
+        const method = resolveInputMethod(initialProgressType);
         const confirmedProgress = {
             currentPage: initialCurrentPage ?? 0,
             readingProgress: initialReadingProgress ?? 0,
@@ -59,7 +65,14 @@ export const useUpdateProgress = ({
                     : confirmedProgress.readingProgress,
             isFinished: confirmedProgress.readingProgress >= 100,
         });
-    }, [isOpen, initialCurrentPage, initialReadingProgress, hasPageCount, reset]);
+    }, [
+        isOpen,
+        initialCurrentPage,
+        initialReadingProgress,
+        initialProgressType,
+        reset,
+        resolveInputMethod,
+    ]);
 
     const switchInputMethod = (method: ProgressInputMethod) => {
         if (method === inputMethod) return;

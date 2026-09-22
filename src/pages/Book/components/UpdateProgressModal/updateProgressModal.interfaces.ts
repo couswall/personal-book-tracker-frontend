@@ -31,6 +31,7 @@ export interface IUseUpdateProgressParams {
     totalPages: number;
     initialCurrentPage: number | null;
     initialReadingProgress: number | null;
+    initialProgressType: ProgressInputMethod | null;
     isOpen: boolean;
     onRefresh: () => Promise<void>;
 }
@@ -45,6 +46,7 @@ export interface IUpdateProgressModalProps {
     readingProgress: number | null;
     token?: string;
     onRefresh: () => Promise<void>;
+    progressType: ProgressInputMethod | null;
 }
 
 export interface IConfirmedProgress {

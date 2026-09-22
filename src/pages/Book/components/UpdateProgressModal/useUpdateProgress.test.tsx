@@ -19,6 +19,7 @@ const defaultProps: IUseUpdateProgressParams = {
     totalPages: 400,
     initialCurrentPage: 100,
     initialReadingProgress: 25,
+    initialProgressType: null,
     isOpen: true,
     onRefresh,
 };
@@ -87,6 +88,21 @@ describe('useUpdateProgress', () => {
         expect(screen.getByTestId('has-page-count')).toHaveTextContent('false');
         expect(screen.getByTestId('input-method')).toHaveTextContent('PERCENTAGE');
         expect(screen.getByLabelText('value')).toHaveValue(25);
+    });
+
+    it('uses the backend progress type when the book has a page count', () => {
+        renderWithProviders(<Harness {...defaultProps} initialProgressType="PERCENTAGE" />);
+
+        expect(screen.getByTestId('input-method')).toHaveTextContent('PERCENTAGE');
+        expect(screen.getByLabelText('value')).toHaveValue(25);
+    });
+
+    it('ignores a backend progress type of PAGE when the book has no page count', () => {
+        renderWithProviders(
+            <Harness {...defaultProps} totalPages={0} initialProgressType="PAGE" />
+        );
+
+        expect(screen.getByTestId('input-method')).toHaveTextContent('PERCENTAGE');
     });
 
     it('switches the input method and preloads the value for that method', async () => {

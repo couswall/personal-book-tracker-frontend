@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {FlexContainer} from '@components/Layout/FlexContainer/index';
 
-export const ModalOverlay = styled(FlexContainer)<{$isVisible: boolean}>`
+export const ModalOverlay = styled(FlexContainer)`
     position: fixed;
     top: 0;
     left: 0;
@@ -9,17 +9,7 @@ export const ModalOverlay = styled(FlexContainer)<{$isVisible: boolean}>`
     height: 100vh;
     z-index: 5;
 
-    background-color: ${(props) =>
-        props.$isVisible
-            ? `${props.theme.colors.background}CC`
-            : `${props.theme.colors.background}00`};
-    backdrop-filter: ${(props) => (props.$isVisible ? 'blur(4px)' : 'blur(0px)')};
-    -webkit-backdrop-filter: ${(props) => (props.$isVisible ? 'blur(4px)' : 'blur(0px)')};
-    visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};
-    pointer-events: ${(props) => (props.$isVisible ? 'auto' : 'none')};
-
-    transition:
-        background-color 0.2s ease-out,
-        backdrop-filter 0.2s ease-out,
-        visibility 0s ${(props) => (props.$isVisible ? '0s' : '0.2s')};
+    background-color: ${(props) => `${props.theme.colors.background}CC`};
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 `;
