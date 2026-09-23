@@ -14,7 +14,7 @@ export const NavbarItems: React.FC<NavbarItemsProps> = ({setShowSearchInput, sea
     useClickOutside([searchBtnRef, searchBarRef], () => setShowSearchInput(false));
 
     return (
-        <FlexContainer $backgroundColor="inherit" $alignItems="center" $gap="1.75rem">
+        <FlexContainer $backgroundColor="inherit" $alignItems="center" $gap="1.75rem" $zIndex="2">
             <FlexContainer
                 $backgroundColor="inherit"
                 $alignItems="center"

@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest';
 import {screen} from '@testing-library/react';
 import {AppRouter} from '@routes/AppRouter';
 import {LOGIN_PAGE} from '@pages/Login/login.constants';
+import {HOME_TEXTS} from '@pages/Home/home.constants';
 import {authSlice} from '@store/auth/authSlice';
 import {AuthStatus} from '@store/auth/interfaces';
 import {renderWithProviders} from '@src/testUtils/renderWithProviders';
@@ -26,6 +27,8 @@ describe('AppRouter', () => {
             },
         });
 
-        expect(screen.getByRole('heading', {name: 'HomePage'})).toBeInTheDocument();
+        expect(
+            screen.getByRole('heading', {name: HOME_TEXTS.CURRENTLY_READING_TITLE})
+        ).toBeInTheDocument();
     });
 });

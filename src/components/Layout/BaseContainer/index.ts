@@ -20,6 +20,10 @@ export type ThemeContainerHBorderColorVariants = {
     muted: string;
 };
 
+export type ThemeContainerHBoxShadowVariants = {
+    glow: string;
+};
+
 export interface IBaseContainerProps {
     $width?: string;
     $maxWidth?: string;
@@ -61,6 +65,7 @@ export interface IBaseContainerProps {
     $smallHeight?: string;
     hasError?: boolean;
     $overflow?: string;
+    $overflowX?: string;
     $filter?: string;
     hBackgroundColorVariant?: keyof ThemeContainerHBGColorVariants;
     $zIndex?: string;
@@ -68,6 +73,10 @@ export interface IBaseContainerProps {
     $paddingTop?: string;
     $overflowY?: string;
     hBorderColorVariant?: keyof ThemeContainerHBorderColorVariants;
+    $aspectRatio?: string;
+    $hBoxShadow?: string;
+    hBoxShadowVariant?: keyof ThemeContainerHBoxShadowVariants;
+    $hBorderColor?: string;
 }
 
 const boxShadowMap: Record<BoxShadowVariant, string> = {
@@ -85,10 +94,10 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     max-width: ${(props) => props.$maxWidth};
     min-height: ${(props) => props.$minHeight};
     max-height: ${(props) => props.$maxHeight};
-    padding: ${(props) => props.$padding || '0'};
-    margin: ${(props) => props.$margin || '0'};
+    padding: ${(props) => props.$padding};
+    margin: ${(props) => props.$margin};
     margin-bottom: ${(props) => props.$marginBottom};
-    background: ${(props) => props.$background || 'none'};
+    background: ${(props) => props.$background};
     background-color: ${(props) => {
         const colorMap: ThemeContainerBGColorVariants = {
             primary: props.theme.colors.background,
@@ -97,12 +106,12 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
             accent: props.theme.colors.primaryLight,
             card: props.theme.colors.backgroundSecondary,
         };
-        return props.$backgroundColor || colorMap[props.backgroundColorVariant || 'primary'];
+        return props.$backgroundColor ?? colorMap[props.backgroundColorVariant ?? 'primary'];
     }};
     border: ${(props) => props.$border};
     border-bottom: ${(props) => props.$borderBottom};
     border-top: ${(props) => props.$borderTop};
-    border-radius: ${(props) => props.$borderRadius || '0'};
+    border-radius: ${(props) => props.$borderRadius};
     border-color: ${(props) => props.theme.colors.borderColor};
     display: ${(props) => props.$display};
     align-items: ${(props) => props.$alignItems};
@@ -110,7 +119,7 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     gap: ${(props) => props.$gap};
     box-sizing: border-box;
     box-shadow: ${(props) =>
-        props.$boxShadow || (props.boxShadowVariant && boxShadowMap[props.boxShadowVariant])};
+        props.$boxShadow ?? (props.boxShadowVariant && boxShadowMap[props.boxShadowVariant])};
     margin-top: ${(props) => props.$marginTop};
     cursor: ${(props) => props.$cursor};
     position: ${(props) => props.$position};
@@ -118,12 +127,14 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
     bottom: ${(props) => props.$bottom};
     left: ${(props) => props.$left};
     right: ${(props) => props.$right};
-    overflow: ${(props) => props.$overflow || 'unset'};
+    overflow: ${(props) => props.$overflow};
+    overflow-x: ${(props) => props.$overflowX};
     overflow-y: ${(props) => props.$overflowY};
     filter: ${(props) => props.$filter};
     z-index: ${(props) => props.$zIndex};
     grid-column: ${(props) => props.$gridColumn};
     padding-top: ${(props) => props.$paddingTop};
+    aspect-ratio: ${(props) => props.$aspectRatio};
 
     &:hover {
         background-color: ${(props) => {
@@ -135,10 +146,21 @@ export const BaseContainer = styled.div<IBaseContainerProps>`
         }};
         border-color: ${(props) => {
             const colorMap: ThemeContainerHBorderColorVariants = {
-                primary: props.theme.colors.containerHover.primary,
+                primary: props.theme.colors.primaryColor,
                 muted: props.theme.colors.containerHover.muted,
             };
-            return props.hBorderColorVariant && colorMap[props.hBorderColorVariant];
+            return (
+                props.$hBorderColor ??
+                (props.hBorderColorVariant && colorMap[props.hBorderColorVariant])
+            );
+        }};
+        box-shadow: ${(props) => {
+            const shadowMap: ThemeContainerHBoxShadowVariants = {
+                glow: `0 0 15px ${props.theme.colors.containerHover.primary}`,
+            };
+            return (
+                props.$hBoxShadow ?? (props.hBoxShadowVariant && shadowMap[props.hBoxShadowVariant])
+            );
         }};
     }
 
