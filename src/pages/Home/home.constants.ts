@@ -14,6 +14,17 @@ export const HOME_TEXTS = {
     CHALLENGE_TITLE: (year: number) => `Reading Challenge ${year}`,
     BOOKS_GOAL_LABEL: (goal: number) => `of ${goal} books`,
     VIEW_CHALLENGE_DETAILS: 'View Challenge Details',
+    CURRENTLY_READING_EMPTY_TITLE: 'Ready for your next read?',
+    CURRENTLY_READING_EMPTY_DESCRIPTION:
+        'Choose a book from your library and start tracking your reading progress.',
+    CURRENTLY_READING_EMPTY_BUTTON: 'Start Reading',
+    WANT_TO_READ_EMPTY_TITLE: 'Your reading list is empty',
+    WANT_TO_READ_EMPTY_DESCRIPTION: "Save books you'd like to read later and they'll appear here.",
+    WANT_TO_READ_EMPTY_BUTTON: 'Add a Book',
+    CHALLENGE_EMPTY_TITLE: 'Set a reading goal for this year',
+    CHALLENGE_EMPTY_DESCRIPTION:
+        "Choose how many books you'd like to read and keep track of your progress throughout the year.",
+    CHALLENGE_EMPTY_BUTTON: 'Set a Challenge',
 };
 
 export const HOME_STATS: IHomeStat[] = [
