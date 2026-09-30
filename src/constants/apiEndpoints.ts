@@ -8,7 +8,7 @@ export const urlWeb = {
     refreshToken: 'auth/refresh',
     getBookById: 'book/bookById/:id',
     searchBook: 'book/search',
-    getBookshelvesWithStatus: 'bookshelf/bookStatus/:userId/:apiBookId',
+    getBookshelvesWithStatus: 'bookshelf/bookStatus/:apiBookId',
     addBookToBookshelf: 'bookshelfBook/addToBookshelf',
     updateBookToBookshelf: 'bookshelfBook/updateBookshelf',
     removeBookFromBookshelf: 'bookshelfBook/:bookshelfBookId',

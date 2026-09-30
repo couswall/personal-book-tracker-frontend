@@ -16,31 +16,32 @@ import {UpdateProgressModal} from '@pages/Book/components/UpdateProgressModal/Up
 import * as S from '@pages/Book/book.styled';
 import {getBookById} from '@store/index';
 import {getBookshelvesWithStatus} from '@pages/Book/book.api';
-import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
+import {IBookshelfWithStatus, IRead} from '@pages/Book/book.interfaces';
 import {BOOK_TEXTS} from '@pages/Book/book.constants';
 
 export const Book = () => {
     const {id} = useParams();
     const dispatch: AppDispatch = useDispatch();
-    const {token, user} = useSelector((state: RootState) => state.auth);
+    const {token} = useSelector((state: RootState) => state.auth);
     const {book, loading} = useSelector((state: RootState) => state.getBookById);
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
     const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
     const [showUpdateProgressModal, setShowUpdateProgressModal] = useState<boolean>(false);
     const [bookshelves, setBookshelves] = useState<IBookshelfWithStatus[]>([]);
+    const [reads, setReads] = useState<IRead[]>([]);
 
     const selectedBookshelf = bookshelves.find((shelf) => shelf.isSelected);
 
     const handleRefresh = useCallback(() => {
-        if (!token || !user || !id) return Promise.resolve();
-        return getBookshelvesWithStatus({token, userId: user.id, apiBookId: id, setBookshelves});
-    }, [token, user, id]);
+        if (!token || !id) return Promise.resolve();
+        return getBookshelvesWithStatus({token, apiBookId: id, setBookshelves, setReads});
+    }, [token, id]);
 
     useEffect(() => {
-        if (!id || !token || !user) return;
+        if (!token || !id) return;
         dispatch(getBookById({token, id}));
-        getBookshelvesWithStatus({token, userId: user.id, apiBookId: id, setBookshelves});
-    }, [id, token, dispatch, user]);
+        getBookshelvesWithStatus({token, apiBookId: id, setBookshelves, setReads});
+    }, [id, token, dispatch]);
 
     if (loading) {
         return (
@@ -60,6 +61,7 @@ export const Book = () => {
                 onOpenAddToBookshelfModal={() => setShowAddToBookshelfModal(true)}
                 onUpdateProgress={() => setShowUpdateProgressModal(true)}
                 bookshelfLabel={selectedBookshelf?.name}
+                bookshelfType={selectedBookshelf?.type}
                 progressPercentage={selectedBookshelf?.readingProgress ?? undefined}
             />
 
@@ -118,6 +120,10 @@ export const Book = () => {
                 isOpen={showAddToBookshelfModal}
                 onCloseModal={() => setShowAddToBookshelfModal(false)}
                 bookshelves={bookshelves}
+                reads={reads}
+                bookTitle={book.title}
+                bookAuthors={book.authors}
+                coverImageUrl={book.coverImageUrl}
                 bookId={id}
                 token={token}
                 onRefresh={handleRefresh}

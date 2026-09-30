@@ -12,6 +12,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
     onUpdateProgress,
     isOwned,
     bookshelfLabel,
+    bookshelfType,
     progressPercentage,
 }) => (
     <S.TopSectionGrid>
@@ -104,6 +105,7 @@ export const BookTopSection: React.FC<IBookTopSectionProps> = ({
                     onOpenAddToBookshelfModal={onOpenAddToBookshelfModal}
                     onUpdateProgress={onUpdateProgress}
                     bookshelfLabel={bookshelfLabel}
+                    bookshelfType={bookshelfType}
                     progressPercentage={progressPercentage}
                 />
             )}

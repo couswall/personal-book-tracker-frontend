@@ -14,10 +14,10 @@ export const BookActivity: React.FC<IBookActivityProps> = ({
     onOpenAddToBookshelfModal,
     onUpdateProgress,
     bookshelfLabel,
+    bookshelfType,
     progressPercentage,
 }) => {
-    const isCurrentlyReading =
-        bookshelfLabel?.toLowerCase() === BOOK_ACTIVITY_TEXTS.CURRENTLY_READING;
+    const isCurrentlyReading = bookshelfType === 'CURRENTLY_READING';
     const progressLabel =
         typeof progressPercentage === 'number'
             ? BOOK_ACTIVITY_TEXTS.PROGRESS_DONE(progressPercentage)
