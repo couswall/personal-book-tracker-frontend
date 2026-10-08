@@ -1,5 +1,5 @@
 import {defineConfig, devices} from '@playwright/test';
-import {API_URL} from './e2e/mocks/api';
+import {API_URL} from './e2e/mocks/apiUrl';
 
 export default defineConfig({
     testDir: './e2e',
