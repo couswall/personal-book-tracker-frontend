@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router';
 import {FlexContainer, Text} from '@components/index';
 
 export const ScrollRow = styled(FlexContainer)`
@@ -9,7 +10,18 @@ export const ScrollRow = styled(FlexContainer)`
     }
 `;
 
-export const ShelfItem = styled(FlexContainer)``;
+export const ShelfItem = styled(Link)`
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: 9.5rem;
+    color: inherit;
+    text-decoration: none;
+
+    @media (max-width: ${({theme}) => theme.breakpoints.lg}) {
+        width: 8.5rem;
+    }
+`;
 
 export const ShelfCoverWrapper = styled(FlexContainer)`
     transition: border-color 0.3s ease;

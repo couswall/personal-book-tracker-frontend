@@ -7,17 +7,18 @@ import {
     Text,
     TitleH4,
 } from '@components/index';
-import {IHomeStat} from '@pages/Home/home.interfaces';
+import {IDashboardShelf} from '@pages/Home/home.interfaces';
+import {SHELF_ICONS} from '@pages/Home/home.constants';
 
 interface IStatsOverviewProps {
-    stats: IHomeStat[];
+    shelves: IDashboardShelf[];
 }
 
-export const StatsOverview: React.FC<IStatsOverviewProps> = ({stats}) => (
+export const StatsOverview: React.FC<IStatsOverviewProps> = ({shelves}) => (
     <GridContainer $templateColumns="repeat(3, 1fr)" $gap="1rem" $smTemplateColumns="1fr">
-        {stats.map((stat) => (
+        {shelves.map((shelf) => (
             <FlexContainer
-                key={stat.id}
+                key={shelf.id}
                 $alignItems="center"
                 $gap="1rem"
                 $padding="1.25rem"
@@ -28,7 +29,7 @@ export const StatsOverview: React.FC<IStatsOverviewProps> = ({stats}) => (
                 hBoxShadowVariant="glow"
             >
                 <IconWrapper shape="square">
-                    <Icon variant="primary" className={stat.iconClassName} size="lg" />
+                    <Icon variant="primary" className={SHELF_ICONS[shelf.type]} size="lg" />
                 </IconWrapper>
                 <BaseContainer $backgroundColor="transparent">
                     <Text
@@ -38,9 +39,9 @@ export const StatsOverview: React.FC<IStatsOverviewProps> = ({stats}) => (
                         $textTransform="uppercase"
                         $letterSpacing="0.05em"
                     >
-                        {stat.label}
+                        {shelf.name}
                     </Text>
-                    <TitleH4>{stat.value}</TitleH4>
+                    <TitleH4>{shelf.bookCount}</TitleH4>
                 </BaseContainer>
             </FlexContainer>
         ))}

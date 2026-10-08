@@ -12,6 +12,7 @@ export const EmptyState: React.FC<IEmptyStateProps> = ({
     buttonIconClassName,
     buttonVariant = 'primary',
     buttonFullWidth = false,
+    onButtonClick,
 }) => {
     const iconCircle = (
         <S.ToneIconWrapper
@@ -44,6 +45,7 @@ export const EmptyState: React.FC<IEmptyStateProps> = ({
                 variant={buttonVariant}
                 fullWidth={buttonFullWidth}
                 $marginTop="1rem"
+                onClick={onButtonClick}
                 leftIcon={<Icon className={buttonIconClassName} $fontColor="inherit" size="sm" />}
             >
                 {buttonLabel}

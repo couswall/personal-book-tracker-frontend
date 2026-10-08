@@ -2,17 +2,20 @@ import {BaseContainer, Button, FlexContainer, Text, TitleH2, TitleH4} from '@com
 import * as S from '@pages/Home/components/ReadingChallenge/readingChallenge.styled';
 import {
     RING_CIRCUMFERENCE,
+    buildChallengeMessage,
     getRingOffset,
 } from '@pages/Home/components/ReadingChallenge/readingChallenge.utils';
 import {EmptyState} from '@pages/Home/components/EmptyState/EmptyState';
-import {IReadingChallenge} from '@pages/Home/home.interfaces';
+import {IDashboardReadingChallenge} from '@pages/Home/home.interfaces';
 import {HOME_TEXTS} from '@pages/Home/home.constants';
 
 interface IReadingChallengeProps {
-    challenge: IReadingChallenge;
+    challenge: IDashboardReadingChallenge;
 }
 
-export const ReadingChallenge: React.FC<IReadingChallengeProps> = ({challenge}) => (
+export const ReadingChallenge: React.FC<IReadingChallengeProps> = ({
+    challenge: {year, goal, booksRead, booksThisMonth, progress},
+}) => (
     <FlexContainer
         $flexDirection="column"
         $border="1px solid"
@@ -28,14 +31,14 @@ export const ReadingChallenge: React.FC<IReadingChallengeProps> = ({challenge}) 
             $padding="0 0 1rem 0"
             $backgroundColor="transparent"
         >
-            <TitleH4>{HOME_TEXTS.CHALLENGE_TITLE(challenge.year)}</TitleH4>
+            <TitleH4>{HOME_TEXTS.CHALLENGE_TITLE(year)}</TitleH4>
         </BaseContainer>
-        {challenge.booksGoal === 0 ? (
+        {goal === null || progress === null ? (
             <EmptyState
                 ringed
                 iconTone="secondary"
                 iconClassName="fa-solid fa-trophy"
-                title={HOME_TEXTS.CHALLENGE_EMPTY_TITLE}
+                title={HOME_TEXTS.CHALLENGE_EMPTY_TITLE(year)}
                 description={HOME_TEXTS.CHALLENGE_EMPTY_DESCRIPTION}
                 buttonLabel={HOME_TEXTS.CHALLENGE_EMPTY_BUTTON}
                 buttonIconClassName="fa-solid fa-list-check"
@@ -52,10 +55,7 @@ export const ReadingChallenge: React.FC<IReadingChallengeProps> = ({challenge}) 
                                 cy="50"
                                 r="40"
                                 strokeDasharray={RING_CIRCUMFERENCE}
-                                strokeDashoffset={getRingOffset(
-                                    challenge.booksRead,
-                                    challenge.booksGoal
-                                )}
+                                strokeDashoffset={getRingOffset(progress.percentage)}
                             />
                         </S.RingSvg>
                         <FlexContainer
@@ -69,20 +69,22 @@ export const ReadingChallenge: React.FC<IReadingChallengeProps> = ({challenge}) 
                             $justifyContent="center"
                             $backgroundColor="transparent"
                         >
-                            <TitleH2 $margin="0">{challenge.booksRead}</TitleH2>
+                            <TitleH2 $margin="0">
+                                {HOME_TEXTS.CHALLENGE_PERCENTAGE(progress.percentage)}
+                            </TitleH2>
                             <Text
                                 size="xs"
                                 variant="muted"
                                 weight="bold"
                                 $textTransform="uppercase"
                             >
-                                {HOME_TEXTS.BOOKS_GOAL_LABEL(challenge.booksGoal)}
+                                {HOME_TEXTS.BOOKS_OF_GOAL(booksRead, goal)}
                             </Text>
                         </FlexContainer>
                     </S.RingWrapper>
                 </FlexContainer>
                 <Text weight="semibold" variant="secondary" $textAlign="center">
-                    {challenge.message}
+                    {buildChallengeMessage({goal, booksThisMonth, progress})}
                 </Text>
                 <Button variant="outline" fullWidth>
                     {HOME_TEXTS.VIEW_CHALLENGE_DETAILS}

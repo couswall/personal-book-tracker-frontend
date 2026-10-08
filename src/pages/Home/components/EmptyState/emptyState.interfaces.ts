@@ -12,4 +12,5 @@ export interface IEmptyStateProps {
     buttonIconClassName: string;
     buttonVariant?: ButtonProps['variant'];
     buttonFullWidth?: boolean;
+    onButtonClick?: () => void;
 }
