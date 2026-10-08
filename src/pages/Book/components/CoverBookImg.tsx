@@ -5,6 +5,9 @@ import {NO_IMAGE_AVAILABLE} from '@pages/Book/components/book.components.constan
 
 export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
     imgSrc,
+    alt = '',
+    objectFit = 'fill',
+    borderRadius = '0.5rem',
     width = '220px',
     height = '280px',
     flex,
@@ -13,7 +16,7 @@ export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
 }) => {
     return (
         <FlexContainer
-            $borderRadius="0.5rem"
+            $borderRadius={borderRadius}
             $overflow="hidden"
             $width={width}
             $height={height}
@@ -22,15 +25,17 @@ export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
             $cursor={cursor}
         >
             {imgSrc ? (
-                <Image src={imgSrc} $width="100%" $height="100%" $objectFit="fill" />
+                <Image src={imgSrc} alt={alt} $width="100%" $height="100%" $objectFit={objectFit} />
             ) : (
                 <FlexContainer
+                    role={alt ? 'img' : undefined}
+                    aria-label={alt || undefined}
                     $width="100%"
                     $height="100%"
                     $justifyContent="center"
                     $alignItems="center"
                 >
-                    <Paragraph>{NO_IMAGE_AVAILABLE}</Paragraph>
+                    <Paragraph aria-hidden={alt ? true : undefined}>{NO_IMAGE_AVAILABLE}</Paragraph>
                 </FlexContainer>
             )}
         </FlexContainer>

@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Navigate, Route, Routes} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
-import {MyBooks, Login, SignUp, Book, Search} from '@pages/index';
+import {MyBooks, Login, SignUp, Book, Search, Home} from '@pages/index';
 import {AppDispatch, RootState} from '@store/store';
 import {refreshToken} from '@store/auth/thunks';
 import {privateRoutes, publicRoutes} from '@routes/routes';
@@ -24,7 +24,7 @@ export const AppRouter = () => {
         <Routes>
             {isAuthenticated ? (
                 <Route element={<DashboardLayout />}>
-                    <Route path="/" element={<h1>{'HomePage'}</h1>} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/*" element={<h1>{'404 error'}</h1>} />
                     <Route path={privateRoutes.myBooks} element={<MyBooks />} />
                     <Route path={privateRoutes.book} element={<Book />} />

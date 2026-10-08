@@ -44,11 +44,8 @@ const mockGetBookById = (status: number, data: IBook | null = book) =>
 
 const mockGetBookshelvesWithStatus = (bookshelves: IBookshelfWithStatus[]) =>
     server.use(
-        http.get(
-            `${apiUrl}${urlWeb.getBookshelvesWithStatus
-                .replace(':userId', String(userId))
-                .replace(':apiBookId', bookId)}`,
-            () => HttpResponse.json({success: true, message: '', data: {bookshelves}})
+        http.get(`${apiUrl}${urlWeb.getBookshelvesWithStatus.replace(':apiBookId', bookId)}`, () =>
+            HttpResponse.json({success: true, message: '', data: {bookshelves, reads: []}})
         )
     );
 

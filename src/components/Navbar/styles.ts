@@ -62,6 +62,7 @@ export const SubMenuContainer = styled(FlexContainer)<{$isVisible: boolean}>`
     padding: 0.5rem 0px;
     border-radius: 0.75rem;
     gap: 0.25rem;
+    z-index: 2;
 
     opacity: ${(props) => (props.$isVisible ? 1 : 0)};
     visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};

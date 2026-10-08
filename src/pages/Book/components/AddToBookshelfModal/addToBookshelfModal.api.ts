@@ -12,7 +12,6 @@ export const addBookToBookshelf = async (params: IAddToBookshelfParams) => {
         bookshelfId: params.bookshelfId,
         apiBookId: params.apiBookId,
     });
-    await params.onSuccess();
 };
 
 export const updateBookshelf = async (params: IUpdateBookshelfParams) => {
@@ -21,7 +20,6 @@ export const updateBookshelf = async (params: IUpdateBookshelfParams) => {
         bookshelfBookId: params.bookshelfBookId,
         bookshelfId: params.bookshelfId,
     });
-    await params.onSuccess();
 };
 
 export const removeBookFromBookshelf = async (params: IRemoveBookFromBookshelfParams) => {
@@ -31,5 +29,4 @@ export const removeBookFromBookshelf = async (params: IRemoveBookFromBookshelfPa
         params.bookshelfBookId.toString()
     );
     await client.delete(endpoint);
-    await params.onSuccess();
 };

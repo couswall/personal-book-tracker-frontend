@@ -1,7 +1,5 @@
 import {expect, test} from '@playwright/test';
-import {endpoints, mockJson} from './mocks/api';
-import {LOGIN_PAGE} from '@pages/Login/login.constants';
-import {privateRoutes, publicRoutes} from '@routes/routes';
+import {endpoints, loginToDashboard, mockJson} from './mocks/api';
 import {BOOK_TOP_SECTION_TEXTS} from '@pages/Book/components/BookTopSection/bookTopSection.constants';
 import {BOOK_ACTIVITY_TEXTS} from '@pages/Book/components/BookActivity/bookActivity.constants';
 import {ADD_TO_BOOKSHELF_TEXTS} from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.constants';
@@ -9,15 +7,6 @@ import {UPDATE_PROGRESS_TEXTS} from '@pages/Book/components/UpdateProgressModal/
 
 const userId = 7;
 const bookId = '1';
-
-const loginSuccessBody = {
-    success: true,
-    message: '',
-    data: {
-        user: {id: userId, fullName: 'Jane Doe', username: 'jane', email: 'jane@test.com'},
-        token: 'e2e-token',
-    },
-};
 
 const book = {
     id: 1,
@@ -39,29 +28,35 @@ const notOwnedShelves = [
     {
         id: 1,
         name: 'To Be Read',
+        type: 'TO_BE_READ',
         isSelected: false,
         bookshelfBookId: null,
         bookCount: 2,
         readingProgress: null,
         currentPage: null,
+        progressType: null,
     },
     {
         id: 2,
         name: 'Currently Reading',
+        type: 'CURRENTLY_READING',
         isSelected: false,
         bookshelfBookId: null,
         bookCount: 1,
         readingProgress: null,
         currentPage: null,
+        progressType: null,
     },
     {
         id: 3,
         name: 'Read',
+        type: 'READ',
         isSelected: false,
         bookshelfBookId: null,
         bookCount: 5,
         readingProgress: null,
         currentPage: null,
+        progressType: null,
     },
 ];
 
@@ -69,46 +64,47 @@ const ownedShelves = [
     {
         id: 1,
         name: 'To Be Read',
+        type: 'TO_BE_READ',
         isSelected: false,
         bookshelfBookId: null,
         bookCount: 2,
         readingProgress: null,
         currentPage: null,
+        progressType: null,
     },
     {
         id: 2,
         name: 'Currently Reading',
+        type: 'CURRENTLY_READING',
         isSelected: true,
         bookshelfBookId: 55,
         bookCount: 2,
         readingProgress: 25,
         currentPage: 100,
+        progressType: 'PAGE',
     },
     {
         id: 3,
         name: 'Read',
+        type: 'READ',
         isSelected: false,
         bookshelfBookId: null,
         bookCount: 5,
         readingProgress: null,
         currentPage: null,
+        progressType: null,
     },
 ];
 
 test.beforeEach(async ({page}) => {
-    await mockJson(page, endpoints.login, loginSuccessBody, {method: 'POST'});
     await mockJson(page, endpoints.getBookById(bookId), {success: true, message: '', data: book});
-    await mockJson(page, endpoints.getBookshelvesWithStatus(userId, bookId), {
+    await mockJson(page, endpoints.getBookshelvesWithStatus(bookId), {
         success: true,
         message: '',
-        data: {bookshelves: notOwnedShelves},
+        data: {bookshelves: notOwnedShelves, reads: []},
     });
 
-    await page.goto(publicRoutes.login);
-    await page.getByPlaceholder(LOGIN_PAGE.FIELDS.EMAIL_USERNAME.PLACEHOLDER).fill('jane');
-    await page.getByPlaceholder(LOGIN_PAGE.FIELDS.PASSWORD.PLACEHOLDER).fill('Secret1!');
-    await page.getByRole('button', {name: LOGIN_PAGE.BTN_LOGIN}).click();
-    await expect(page).toHaveURL(new RegExp(privateRoutes.myBooks));
+    await loginToDashboard(page, userId);
 
     await page.goto(`/book/${bookId}`);
     await expect(page.getByRole('heading', {name: 'Dune'})).toBeVisible();
@@ -133,10 +129,10 @@ test.describe('Bookshelf and reading progress', () => {
                 method: 'POST',
             }
         );
-        await mockJson(page, endpoints.getBookshelvesWithStatus(userId, bookId), {
+        await mockJson(page, endpoints.getBookshelvesWithStatus(bookId), {
             success: true,
             message: '',
-            data: {bookshelves: ownedShelves},
+            data: {bookshelves: ownedShelves, reads: []},
         });
 
         await page.getByText('Currently Reading').click();

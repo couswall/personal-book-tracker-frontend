@@ -7,5 +7,4 @@ export const BOOK_ACTIVITY_TEXTS = {
     PROGRESS_DONE: (percentage: number) => `You are ${percentage}% done`,
     YOUR_RATING: 'Your Rating',
     EDIT_RATING: 'Edit rating',
-    CURRENTLY_READING: 'currently reading',
 };

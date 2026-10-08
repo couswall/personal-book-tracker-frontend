@@ -1,39 +1,63 @@
 import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {act, renderHook} from '@testing-library/react';
 import {useBookshelfActions} from '@pages/Book/components/AddToBookshelfModal/useBookshelfActions';
-import {ADD_TO_BOOKSHELF_TEXTS} from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.constants';
+import {
+    ADD_TO_BOOKSHELF_TEXTS,
+    ALREADY_ON_SHELF_ERROR,
+} from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.constants';
 import * as bookshelfApi from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.api';
+import {
+    read,
+    reading,
+} from '@pages/Book/components/AddToBookshelfModal/bookshelfSelection.fixtures';
 
 vi.mock('@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.api');
 
 const onRefresh = vi.fn().mockResolvedValue(undefined);
 
+const renderActions = () =>
+    renderHook(() => useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh}));
+
 describe('useBookshelfActions', () => {
     beforeEach(() => {
+        onRefresh.mockClear();
         vi.mocked(bookshelfApi.addBookToBookshelf).mockReset();
         vi.mocked(bookshelfApi.updateBookshelf).mockReset();
         vi.mocked(bookshelfApi.removeBookFromBookshelf).mockReset();
     });
 
-    it('shows a success alert and clears loading after adding a book', async () => {
+    it('adds with only bookshelfId and apiBookId, refreshes, then shows a success alert', async () => {
         vi.mocked(bookshelfApi.addBookToBookshelf).mockResolvedValue(undefined);
-        const {result} = renderHook(() =>
-            useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh})
-        );
+        const {result} = renderActions();
 
         await act(async () => {
-            await result.current.add(1, 'Currently Reading');
+            await result.current.add(reading);
         });
 
         expect(bookshelfApi.addBookToBookshelf).toHaveBeenCalledWith({
             token: 'tok',
-            bookshelfId: 1,
+            bookshelfId: 2,
             apiBookId: 'dune-1965',
-            onSuccess: onRefresh,
         });
+        expect(onRefresh).toHaveBeenCalledTimes(1);
         expect(result.current.isLoading).toBe(false);
         expect(result.current.alert).toEqual({
             message: ADD_TO_BOOKSHELF_TEXTS.ADDED_TO('Currently Reading'),
+            variant: 'success',
+            visible: true,
+        });
+    });
+
+    it('shows the regular success alert when adding to Read', async () => {
+        vi.mocked(bookshelfApi.addBookToBookshelf).mockResolvedValue(undefined);
+        const {result} = renderActions();
+
+        await act(async () => {
+            await result.current.add(read);
+        });
+
+        expect(result.current.alert).toEqual({
+            message: ADD_TO_BOOKSHELF_TEXTS.ADDED_TO('Read'),
             variant: 'success',
             visible: true,
         });
@@ -46,13 +70,11 @@ describe('useBookshelfActions', () => {
                 resolveAdd = () => resolve(undefined);
             })
         );
-        const {result} = renderHook(() =>
-            useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh})
-        );
+        const {result} = renderActions();
 
-        let addPromise: Promise<void> = Promise.resolve();
+        let addPromise: Promise<boolean> = Promise.resolve(false);
         act(() => {
-            addPromise = result.current.add(1, 'Currently Reading');
+            addPromise = result.current.add(reading);
         });
 
         expect(result.current.isLoading).toBe(true);
@@ -67,12 +89,10 @@ describe('useBookshelfActions', () => {
 
     it('shows a danger alert when adding fails', async () => {
         vi.mocked(bookshelfApi.addBookToBookshelf).mockRejectedValue(new Error('Network error'));
-        const {result} = renderHook(() =>
-            useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh})
-        );
+        const {result} = renderActions();
 
         await act(async () => {
-            await result.current.add(1, 'Currently Reading');
+            await result.current.add(reading);
         });
 
         expect(result.current.alert).toEqual({
@@ -82,30 +102,42 @@ describe('useBookshelfActions', () => {
         });
     });
 
-    it('shows a success alert after moving to a different bookshelf', async () => {
-        vi.mocked(bookshelfApi.updateBookshelf).mockResolvedValue(undefined);
-        const {result} = renderHook(() =>
-            useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh})
+    it('silently reloads the book status when the book is already shelved', async () => {
+        vi.mocked(bookshelfApi.addBookToBookshelf).mockRejectedValue(
+            new Error(ALREADY_ON_SHELF_ERROR)
         );
+        const {result} = renderActions();
+
+        let added = true;
+        await act(async () => {
+            added = await result.current.add(reading);
+        });
+
+        expect(added).toBe(false);
+        expect(onRefresh).toHaveBeenCalled();
+        expect(result.current.alert.visible).toBe(false);
+    });
+
+    it('moves with only bookshelfBookId and bookshelfId', async () => {
+        vi.mocked(bookshelfApi.updateBookshelf).mockResolvedValue(undefined);
+        const {result} = renderActions();
 
         await act(async () => {
-            await result.current.update(10, 2, 'Read');
+            await result.current.update(10, read);
         });
 
         expect(bookshelfApi.updateBookshelf).toHaveBeenCalledWith({
             token: 'tok',
             bookshelfBookId: 10,
-            bookshelfId: 2,
-            onSuccess: onRefresh,
+            bookshelfId: 3,
         });
-        expect(result.current.alert.message).toBe(ADD_TO_BOOKSHELF_TEXTS.ADDED_TO('Read'));
+        expect(onRefresh).toHaveBeenCalledTimes(1);
+        expect(result.current.alert.message).toBe(ADD_TO_BOOKSHELF_TEXTS.MOVED_TO('Read'));
     });
 
-    it('shows a success alert after removing from a bookshelf', async () => {
+    it('removes, refreshes, then shows a success alert', async () => {
         vi.mocked(bookshelfApi.removeBookFromBookshelf).mockResolvedValue(undefined);
-        const {result} = renderHook(() =>
-            useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh})
-        );
+        const {result} = renderActions();
 
         await act(async () => {
             await result.current.remove(10, 'Currently Reading');
@@ -114,8 +146,8 @@ describe('useBookshelfActions', () => {
         expect(bookshelfApi.removeBookFromBookshelf).toHaveBeenCalledWith({
             token: 'tok',
             bookshelfBookId: 10,
-            onSuccess: onRefresh,
         });
+        expect(onRefresh).toHaveBeenCalledTimes(1);
         expect(result.current.alert.message).toBe(
             ADD_TO_BOOKSHELF_TEXTS.REMOVED_FROM('Currently Reading')
         );
@@ -125,7 +157,7 @@ describe('useBookshelfActions', () => {
         const {result} = renderHook(() => useBookshelfActions({onRefresh}));
 
         await act(async () => {
-            await result.current.add(1, 'Currently Reading');
+            await result.current.add(reading);
         });
 
         expect(bookshelfApi.addBookToBookshelf).not.toHaveBeenCalled();

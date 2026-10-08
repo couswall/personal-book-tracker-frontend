@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
                 urlWeb.login,
                 credentials
             );
-            navigate(privateRoutes.myBooks);
+            navigate(privateRoutes.home);
             return data;
         } catch (error) {
             if (error instanceof Error) {
@@ -44,7 +44,7 @@ export const registerUser = createAsyncThunk(
                 urlWeb.registerUser,
                 newUser
             );
-            navigate(privateRoutes.myBooks);
+            navigate(privateRoutes.home);
             return data;
         } catch (error) {
             if (error instanceof Error) {

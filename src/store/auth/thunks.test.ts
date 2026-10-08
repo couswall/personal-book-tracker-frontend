@@ -37,7 +37,7 @@ describe('loginUser', () => {
         mockedCreatePublicClient.mockReset();
     });
 
-    it('navigates to myBooks and stores the session on success', async () => {
+    it('navigates to home and stores the session on success', async () => {
         const navigate = vi.fn();
         const post = vi.fn().mockResolvedValue({success: true, message: '', data: loginSuccessRes});
         mockedCreatePublicClient.mockReturnValue(buildClientMock({post}));
@@ -47,7 +47,7 @@ describe('loginUser', () => {
             loginUser({credentials: {emailOrUsername: 'jane', password: 'secret'}, navigate})
         );
 
-        expect(navigate).toHaveBeenCalledWith(privateRoutes.myBooks);
+        expect(navigate).toHaveBeenCalledWith(privateRoutes.home);
         expect(store.getState().auth.status).toBe(AuthStatus.Authenticated);
         expect(store.getState().auth.token).toBe('abc123');
     });
@@ -73,7 +73,7 @@ describe('registerUser', () => {
         mockedCreatePublicClient.mockReset();
     });
 
-    it('navigates to myBooks and stores the session on success', async () => {
+    it('navigates to home and stores the session on success', async () => {
         const navigate = vi.fn();
         const post = vi.fn().mockResolvedValue({success: true, message: '', data: loginSuccessRes});
         mockedCreatePublicClient.mockReturnValue(buildClientMock({post}));
@@ -91,7 +91,7 @@ describe('registerUser', () => {
             })
         );
 
-        expect(navigate).toHaveBeenCalledWith(privateRoutes.myBooks);
+        expect(navigate).toHaveBeenCalledWith(privateRoutes.home);
         expect(store.getState().auth.status).toBe(AuthStatus.Authenticated);
     });
 });
