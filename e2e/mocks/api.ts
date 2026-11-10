@@ -8,6 +8,7 @@ export const endpoints = {
     login: 'auth/login',
     registerUser: 'auth/register',
     refreshToken: 'auth/refresh',
+    logout: 'auth/logout',
     searchBook: 'book/search',
     getBookById: (id: string) => `book/bookById/${id}`,
     getBookshelvesWithStatus: (apiBookId: string) => `bookshelf/bookStatus/${apiBookId}`,
@@ -21,16 +22,16 @@ interface MockJsonOptions {
     method?: string;
 }
 
+const isEndpoint = (path: string) => (url: URL) =>
+    `${url.origin}${url.pathname}` === `${API_URL}${path}`;
+
 export const mockJson = (page: Page, path: string, body: unknown, options: MockJsonOptions = {}) =>
-    page.route(
-        (url) => `${url.origin}${url.pathname}` === `${API_URL}${path}`,
-        (route) => {
-            if (options.method && route.request().method() !== options.method) {
-                return route.fallback();
-            }
-            return route.fulfill({status: options.status ?? 200, json: body});
+    page.route(isEndpoint(path), (route) => {
+        if (options.method && route.request().method() !== options.method) {
+            return route.fallback();
         }
-    );
+        return route.fulfill({status: options.status ?? 200, json: body});
+    });
 
 export const buildLoginSuccessBody = (userId = 1) => ({
     success: true,
@@ -81,13 +82,35 @@ export const expectHomeDashboard = async (page: Page) => {
 };
 
 /**
- * Logs in with mocked auth and lands on the Home dashboard, which loads from /api/dashboard.
- * Mocks survive page.reload(), so the session-refresh call is mocked too.
+ * Mocks login, refresh and logout so they behave like the real httpOnly refresh cookie:
+ * refresh answers 401 until login succeeds, 200 after it (also after page.reload()),
+ * and 401 again after logout.
  */
-export const loginToDashboard = async (page: Page, userId = 1) => {
+export const mockSession = async (page: Page, userId = 1) => {
     const loginBody = buildLoginSuccessBody(userId);
-    await mockJson(page, endpoints.login, loginBody, {method: 'POST'});
-    await mockJson(page, endpoints.refreshToken, loginBody, {method: 'POST'});
+    let hasRefreshCookie = false;
+
+    await page.route(isEndpoint(endpoints.login), (route) => {
+        hasRefreshCookie = true;
+        return route.fulfill({json: loginBody});
+    });
+    await page.route(isEndpoint(endpoints.refreshToken), (route) =>
+        hasRefreshCookie
+            ? route.fulfill({json: loginBody})
+            : route.fulfill({
+                  status: 401,
+                  json: {success: false, error: {message: 'Invalid or expired token'}},
+              })
+    );
+    await page.route(isEndpoint(endpoints.logout), (route) => {
+        hasRefreshCookie = false;
+        return route.fulfill({json: {success: true, message: ''}});
+    });
+};
+
+/** Logs in with mocked auth and lands on the Home dashboard, which loads from /api/dashboard. */
+export const loginToDashboard = async (page: Page, userId = 1) => {
+    await mockSession(page, userId);
     await mockJson(page, endpoints.getDashboard, emptyDashboardBody, {method: 'GET'});
 
     await submitLoginForm(page);

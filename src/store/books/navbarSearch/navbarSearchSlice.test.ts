@@ -34,7 +34,7 @@ describe('navbarSearchSlice extraReducers', () => {
     it('sets loading and clears the error on pending', () => {
         const state = navbarSearchSlice.reducer(
             getInitialState(),
-            navbarSearchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+            navbarSearchBook.pending('reqId', {params: {searchText: 'dune'}})
         );
 
         expect(state.loading).toBe(true);
@@ -45,10 +45,9 @@ describe('navbarSearchSlice extraReducers', () => {
         const state = navbarSearchSlice.reducer(
             navbarSearchSlice.reducer(
                 getInitialState(),
-                navbarSearchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+                navbarSearchBook.pending('reqId', {params: {searchText: 'dune'}})
             ),
             navbarSearchBook.fulfilled(searchResult, 'reqId', {
-                token: 'tok',
                 params: {searchText: 'dune'},
             })
         );
@@ -61,12 +60,12 @@ describe('navbarSearchSlice extraReducers', () => {
         const state = navbarSearchSlice.reducer(
             navbarSearchSlice.reducer(
                 getInitialState(),
-                navbarSearchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+                navbarSearchBook.pending('reqId', {params: {searchText: 'dune'}})
             ),
             navbarSearchBook.rejected(
                 new Error('failed'),
                 'reqId',
-                {token: 'tok', params: {searchText: 'dune'}},
+                {params: {searchText: 'dune'}},
                 'Search failed'
             )
         );
@@ -76,7 +75,7 @@ describe('navbarSearchSlice extraReducers', () => {
     });
 
     it('ignores a fulfilled response from a stale, superseded request', () => {
-        const arg = {token: 'tok', params: {searchText: 'dune'}};
+        const arg = {params: {searchText: 'dune'}};
         const afterFirstPending = navbarSearchSlice.reducer(
             getInitialState(),
             navbarSearchBook.pending('first-request', arg)

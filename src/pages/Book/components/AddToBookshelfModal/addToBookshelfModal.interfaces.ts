@@ -5,26 +5,21 @@ import {AlertVariant} from '@pages/Book/hooks/hooks.interfaces';
  * The request helpers only send the request. The caller reloads the book's status afterwards,
  * so a failed reload isn't reported as a failed add/move/remove.
  */
-export interface IBaseBookshelfParams {
-    token: string;
-}
-
-export interface IAddToBookshelfParams extends IBaseBookshelfParams {
+export interface IAddToBookshelfParams {
     bookshelfId: number;
     apiBookId: string;
 }
 
-export interface IUpdateBookshelfParams extends IBaseBookshelfParams {
+export interface IUpdateBookshelfParams {
     bookshelfBookId: number;
     bookshelfId: number;
 }
 
-export interface IRemoveBookFromBookshelfParams extends IBaseBookshelfParams {
+export interface IRemoveBookFromBookshelfParams {
     bookshelfBookId: number;
 }
 
 export interface IUseBookshelfActionsParams {
-    token?: string;
     bookId?: string;
     onRefresh: () => Promise<void>;
 }
@@ -57,7 +52,6 @@ export interface IAddToBookshelfModalProps {
     bookAuthors: string[];
     coverImageUrl: string | null;
     bookId?: string;
-    token?: string;
     onRefresh: () => Promise<void>;
 }
 

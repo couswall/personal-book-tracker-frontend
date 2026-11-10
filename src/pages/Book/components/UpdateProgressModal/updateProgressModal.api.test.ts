@@ -35,7 +35,6 @@ describe('updateReadingProgress', () => {
         const onSuccess = vi.fn().mockResolvedValue(undefined);
 
         const result = await updateReadingProgress({
-            token: 'tok',
             bookshelfBookId: 1,
             progressType: 'PAGE',
             value: 120,
@@ -60,7 +59,6 @@ describe('updateReadingProgress', () => {
 
         await expect(
             updateReadingProgress({
-                token: 'tok',
                 bookshelfBookId: 1,
                 progressType: 'PAGE',
                 value: 120,

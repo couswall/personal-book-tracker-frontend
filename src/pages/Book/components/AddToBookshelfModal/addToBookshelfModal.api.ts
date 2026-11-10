@@ -7,7 +7,7 @@ import {
 } from '@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.interfaces';
 
 export const addBookToBookshelf = async (params: IAddToBookshelfParams) => {
-    const client = createPrivateClient(params.token);
+    const client = createPrivateClient();
     await client.post(urlWeb.addBookToBookshelf, {
         bookshelfId: params.bookshelfId,
         apiBookId: params.apiBookId,
@@ -15,7 +15,7 @@ export const addBookToBookshelf = async (params: IAddToBookshelfParams) => {
 };
 
 export const updateBookshelf = async (params: IUpdateBookshelfParams) => {
-    const client = createPrivateClient(params.token);
+    const client = createPrivateClient();
     await client.put(urlWeb.updateBookToBookshelf, {
         bookshelfBookId: params.bookshelfBookId,
         bookshelfId: params.bookshelfId,
@@ -23,7 +23,7 @@ export const updateBookshelf = async (params: IUpdateBookshelfParams) => {
 };
 
 export const removeBookFromBookshelf = async (params: IRemoveBookFromBookshelfParams) => {
-    const client = createPrivateClient(params.token);
+    const client = createPrivateClient();
     const endpoint = urlWeb.removeBookFromBookshelf.replace(
         ':bookshelfBookId',
         params.bookshelfBookId.toString()

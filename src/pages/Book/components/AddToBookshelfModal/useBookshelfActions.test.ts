@@ -15,8 +15,7 @@ vi.mock('@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.api');
 
 const onRefresh = vi.fn().mockResolvedValue(undefined);
 
-const renderActions = () =>
-    renderHook(() => useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh}));
+const renderActions = () => renderHook(() => useBookshelfActions({bookId: 'dune-1965', onRefresh}));
 
 describe('useBookshelfActions', () => {
     beforeEach(() => {
@@ -35,7 +34,6 @@ describe('useBookshelfActions', () => {
         });
 
         expect(bookshelfApi.addBookToBookshelf).toHaveBeenCalledWith({
-            token: 'tok',
             bookshelfId: 2,
             apiBookId: 'dune-1965',
         });
@@ -127,7 +125,6 @@ describe('useBookshelfActions', () => {
         });
 
         expect(bookshelfApi.updateBookshelf).toHaveBeenCalledWith({
-            token: 'tok',
             bookshelfBookId: 10,
             bookshelfId: 3,
         });
@@ -144,7 +141,6 @@ describe('useBookshelfActions', () => {
         });
 
         expect(bookshelfApi.removeBookFromBookshelf).toHaveBeenCalledWith({
-            token: 'tok',
             bookshelfBookId: 10,
         });
         expect(onRefresh).toHaveBeenCalledTimes(1);
@@ -153,7 +149,7 @@ describe('useBookshelfActions', () => {
         );
     });
 
-    it('does nothing when there is no token or bookId', async () => {
+    it('does nothing when there is no bookId', async () => {
         const {result} = renderHook(() => useBookshelfActions({onRefresh}));
 
         await act(async () => {

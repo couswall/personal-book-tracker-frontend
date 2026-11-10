@@ -23,13 +23,12 @@ export const useSearchForm = () => {
         defaultValues: {searchText: ''},
         resolver: yupResolver(schemaSearchBook),
     });
-    const {token} = useSelector((state: RootState) => state.auth);
     const {searchBookData, loading} = useSelector((state: RootState) => state.searchBook);
     const errorMsg = errors.searchText?.message ? String(errors.searchText.message) : undefined;
 
     const performSearch = (searchText: string, page: number) => {
         const params = {searchText, maxResults: MAX_RESULTS, page};
-        dispatch(searchBook({token, params}));
+        dispatch(searchBook({params}));
     };
 
     const onSubmit = ({searchText}: SearchFormValues) => {

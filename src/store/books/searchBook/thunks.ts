@@ -6,23 +6,20 @@ import {ISearchBookParams, ISearchingRes} from '@store/books/searchBook/interfac
 import {IApiResponse} from '@api/api.interfaces';
 
 export const createSearchThunk = (typePrefix: string) =>
-    createAsyncThunk(
-        typePrefix,
-        async ({token, params}: {token: string; params: ISearchBookParams}, thunkAPI) => {
-            try {
-                const client = createPrivateClient(token);
-                const {data} = await client.get<IApiResponse<ISearchingRes>, ISearchBookParams>(
-                    urlWeb.searchBook,
-                    {params}
-                );
-                return data;
-            } catch (error) {
-                if (error instanceof Error) {
-                    return thunkAPI.rejectWithValue(error.message);
-                }
-                return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
+    createAsyncThunk(typePrefix, async ({params}: {params: ISearchBookParams}, thunkAPI) => {
+        try {
+            const client = createPrivateClient();
+            const {data} = await client.get<IApiResponse<ISearchingRes>, ISearchBookParams>(
+                urlWeb.searchBook,
+                {params}
+            );
+            return data;
+        } catch (error) {
+            if (error instanceof Error) {
+                return thunkAPI.rejectWithValue(error.message);
             }
+            return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
         }
-    );
+    });
 
 export const searchBook = createSearchThunk('searchBook/fetch');

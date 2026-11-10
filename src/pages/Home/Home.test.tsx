@@ -97,13 +97,13 @@ describe('Home', {timeout: 15000}, () => {
         expect(calls.count).toBe(2);
     });
 
-    it('logs the user out on an invalid or expired token', async () => {
+    it('shows the error state on a 401 and leaves logging out to the auth interceptor', async () => {
         mockDashboard(failure(401, API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN));
 
         const {store} = renderHome();
 
-        await waitFor(() => expect(store.getState().auth.token).not.toBe('tok'));
-        expect(store.getState().auth.status).not.toBe(AuthStatus.Authenticated);
+        expect(await screen.findByText(HOME_TEXTS.ERROR_TITLE)).toBeInTheDocument();
+        expect(store.getState().auth.status).toBe(AuthStatus.Authenticated);
     });
 
     it('refetches the whole dashboard after updating reading progress', async () => {

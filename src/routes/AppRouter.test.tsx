@@ -11,8 +11,35 @@ import {renderWithProviders} from '@src/testUtils/renderWithProviders';
 import {server} from '@src/testUtils/mswServer';
 import {apiUrl, urlWeb} from '@constants/apiEndpoints';
 
+const refreshFails = () =>
+    http.post(`${apiUrl}${urlWeb.refreshToken}`, () =>
+        HttpResponse.json(
+            {success: false, error: {message: 'Invalid or expired token'}},
+            {status: 401}
+        )
+    );
+
+const refreshSucceeds = () =>
+    http.post(`${apiUrl}${urlWeb.refreshToken}`, () =>
+        HttpResponse.json({
+            success: true,
+            message: '',
+            data: {
+                user: {id: 1, fullName: 'Jane Doe', username: 'jane', email: 'jane@test.com'},
+                token: 'new-access-token',
+            },
+        })
+    );
+
+const dashboardSucceeds = () =>
+    http.get(`${apiUrl}${urlWeb.getDashboard}`, () =>
+        HttpResponse.json({success: true, message: '', data: {dashboard: emptyDashboard}})
+    );
+
 describe('AppRouter', () => {
     it('redirects an unauthenticated user visiting a private route to login', () => {
+        server.use(refreshFails());
+
         renderWithProviders(<AppRouter />, {
             route: '/mybooks',
             preloadedState: {
@@ -23,28 +50,11 @@ describe('AppRouter', () => {
         expect(screen.getByText(LOGIN_PAGE.TITLE)).toBeInTheDocument();
     });
 
-    it('renders the private layout for an authenticated user', async () => {
-        server.use(
-            // AppRouter refreshes the token on mount; a failure other than 401 keeps the session.
-            http.post(
-                `${apiUrl}${urlWeb.refreshToken}`,
-                () => new HttpResponse(null, {status: 500})
-            ),
-            http.get(`${apiUrl}${urlWeb.getDashboard}`, () =>
-                HttpResponse.json({success: true, message: '', data: {dashboard: emptyDashboard}})
-            )
-        );
+    it('restores the session on startup when the refresh cookie is valid', async () => {
+        server.use(refreshSucceeds(), dashboardSucceeds());
 
-        renderWithProviders(<AppRouter />, {
-            route: '/',
-            preloadedState: {
-                auth: {
-                    ...authSlice.getInitialState(),
-                    status: AuthStatus.Authenticated,
-                    token: 'tok',
-                },
-            },
-        });
+        // The default auth state is Checking, like a fresh page load.
+        renderWithProviders(<AppRouter />, {route: '/'});
 
         expect(
             await screen.findByRole(
@@ -54,4 +64,12 @@ describe('AppRouter', () => {
             )
         ).toBeInTheDocument();
     }, 15000);
+
+    it('shows the login page on startup when the refresh cookie is missing or invalid', async () => {
+        server.use(refreshFails());
+
+        renderWithProviders(<AppRouter />, {route: '/'});
+
+        expect(await screen.findByText(LOGIN_PAGE.TITLE)).toBeInTheDocument();
+    });
 });

@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {authSlice, cleanErrorMessages, onLogout} from '@store/auth/authSlice';
-import {loginUser, refreshToken, registerUser} from '@store/auth/thunks';
+import {authSlice, cleanErrorMessages} from '@store/auth/authSlice';
+import {loginUser, logoutUser, refreshToken, registerUser} from '@store/auth/thunks';
 import {
     AuthStatus,
     IAuthSliceState,
@@ -29,7 +29,7 @@ describe('authSlice reducers', () => {
         expect(getInitialState().status).toBe(AuthStatus.Checking);
     });
 
-    it('onLogout resets the state to its initial values', () => {
+    it('logoutUser.fulfilled clears the session and sets the status to NoAuthenticated', () => {
         const authenticatedState: IAuthSliceState = {
             ...getInitialState(),
             status: AuthStatus.Authenticated,
@@ -37,9 +37,9 @@ describe('authSlice reducers', () => {
             user: loginSuccessRes.user,
         };
 
-        const state = authSlice.reducer(authenticatedState, onLogout());
+        const state = authSlice.reducer(authenticatedState, logoutUser.fulfilled(undefined, ''));
 
-        expect(state).toEqual(getInitialState());
+        expect(state).toEqual({...getInitialState(), status: AuthStatus.NoAuthenticated});
     });
 
     it('cleanErrorMessages clears every error message', () => {
@@ -59,14 +59,19 @@ describe('authSlice reducers', () => {
 });
 
 describe('authSlice extraReducers - loginUser', () => {
-    it('sets the checking status and loading flag on pending', () => {
+    it('sets the loading flag on pending without changing the status', () => {
+        const loggedOutState: IAuthSliceState = {
+            ...getInitialState(),
+            status: AuthStatus.NoAuthenticated,
+        };
+
         const state = authSlice.reducer(
-            getInitialState(),
+            loggedOutState,
             loginUser.pending('reqId', {credentials, navigate: noopNavigate})
         );
 
         expect(state.loadings.loginLoading).toBe(true);
-        expect(state.status).toBe(AuthStatus.Checking);
+        expect(state.status).toBe(AuthStatus.NoAuthenticated);
     });
 
     it('stores the user and token on fulfilled', () => {
@@ -145,10 +150,12 @@ describe('authSlice extraReducers - refreshToken', () => {
         expect(state.token).toBe(loginSuccessRes.token);
     });
 
-    it('stores the rejection message on rejected without resetting the status', () => {
+    it('logs the user out and stores the rejection message on rejected', () => {
         const authenticatedState: IAuthSliceState = {
             ...getInitialState(),
             status: AuthStatus.Authenticated,
+            token: 'abc123',
+            user: loginSuccessRes.user,
         };
 
         const state = authSlice.reducer(
@@ -156,7 +163,9 @@ describe('authSlice extraReducers - refreshToken', () => {
             refreshToken.rejected(new Error('failed'), 'reqId', undefined, 'Session expired')
         );
 
-        expect(state.status).toBe(AuthStatus.Authenticated);
+        expect(state.status).toBe(AuthStatus.NoAuthenticated);
+        expect(state.token).toBe('');
+        expect(state.user).toEqual(getInitialState().user);
         expect(state.errors.refreshTokenErrorMsg).toBe('Session expired');
     });
 });

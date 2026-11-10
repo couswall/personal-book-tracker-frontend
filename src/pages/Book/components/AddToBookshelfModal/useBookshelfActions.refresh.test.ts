@@ -12,8 +12,7 @@ vi.mock('@pages/Book/components/AddToBookshelfModal/addToBookshelfModal.api');
 
 const onRefresh = vi.fn();
 
-const renderActions = () =>
-    renderHook(() => useBookshelfActions({token: 'tok', bookId: 'dune-1965', onRefresh}));
+const renderActions = () => renderHook(() => useBookshelfActions({bookId: 'dune-1965', onRefresh}));
 
 /** The request and the reload that follows it fail independently. */
 describe('useBookshelfActions when the status reload fails', () => {

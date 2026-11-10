@@ -15,7 +15,6 @@ import {
 } from '@pages/Book/components/UpdateProgressModal/updateProgressModal.constants';
 
 export const useUpdateProgress = ({
-    token,
     bookshelfBookId,
     totalPages,
     initialCurrentPage,
@@ -87,11 +86,10 @@ export const useUpdateProgress = ({
     const valueField = register('value', {valueAsNumber: true});
 
     const submit = handleSubmit(async (data) => {
-        if (!token || !bookshelfBookId) return;
+        if (!bookshelfBookId) return;
         try {
             setIsLoading(true);
             const bookshelfBook = await updateReadingProgress({
-                token,
                 bookshelfBookId,
                 progressType: inputMethod,
                 value: Number.isNaN(data.value) ? 0 : data.value,

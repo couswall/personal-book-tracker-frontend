@@ -13,8 +13,17 @@ vi.mock('@pages/Book/components/UpdateProgressModal/updateProgressModal.api');
 
 const onRefresh = vi.fn().mockResolvedValue(undefined);
 
+const mockUpdateResolves = (readingProgress: number, currentPage: number) =>
+    vi.mocked(progressApi.updateReadingProgress).mockResolvedValue({
+        id: 1,
+        bookshelfId: 2,
+        bookId: 3,
+        readingProgress,
+        currentPage,
+        totalPages: 400,
+    });
+
 const defaultProps: IUseUpdateProgressParams = {
-    token: 'tok',
     bookshelfBookId: 10,
     totalPages: 400,
     initialCurrentPage: 100,
@@ -116,14 +125,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('submits the current value and shows a success alert', async () => {
-        vi.mocked(progressApi.updateReadingProgress).mockResolvedValue({
-            id: 1,
-            bookshelfId: 2,
-            bookId: 3,
-            readingProgress: 40,
-            currentPage: 160,
-            totalPages: 400,
-        });
+        mockUpdateResolves(40, 160);
         renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
@@ -132,7 +134,6 @@ describe('useUpdateProgress', () => {
         await user.click(screen.getByRole('button', {name: 'Save'}));
 
         expect(progressApi.updateReadingProgress).toHaveBeenCalledWith({
-            token: 'tok',
             bookshelfBookId: 10,
             progressType: 'PAGE',
             value: 160,
@@ -159,14 +160,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('sends 0 when the value field is cleared to an empty/NaN value', async () => {
-        vi.mocked(progressApi.updateReadingProgress).mockResolvedValue({
-            id: 1,
-            bookshelfId: 2,
-            bookId: 3,
-            readingProgress: 0,
-            currentPage: 0,
-            totalPages: 400,
-        });
+        mockUpdateResolves(0, 0);
         renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
@@ -179,14 +173,7 @@ describe('useUpdateProgress', () => {
     });
 
     it('sends isFinished: true when the finished toggle is checked', async () => {
-        vi.mocked(progressApi.updateReadingProgress).mockResolvedValue({
-            id: 1,
-            bookshelfId: 2,
-            bookId: 3,
-            readingProgress: 100,
-            currentPage: 400,
-            totalPages: 400,
-        });
+        mockUpdateResolves(100, 400);
         renderWithProviders(<Harness {...defaultProps} />);
         const user = userEvent.setup();
 
@@ -202,10 +189,8 @@ describe('useUpdateProgress', () => {
         );
     });
 
-    it('does not submit when there is no token or bookshelfBookId', async () => {
-        renderWithProviders(
-            <Harness {...defaultProps} token={undefined} bookshelfBookId={undefined} />
-        );
+    it('does not submit when there is no bookshelfBookId', async () => {
+        renderWithProviders(<Harness {...defaultProps} bookshelfBookId={undefined} />);
         const user = userEvent.setup();
 
         await user.click(screen.getByRole('button', {name: 'Save'}));

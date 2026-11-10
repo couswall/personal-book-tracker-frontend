@@ -36,7 +36,6 @@ export const renderSelection = (bookshelves: IBookshelfWithStatus[], reads: IRea
         useBookshelfSelection({
             bookshelves,
             reads,
-            token: 'tok',
             bookId: 'OXf3o_EBrxYC',
             onRefresh: vi.fn().mockResolvedValue(undefined),
             onCloseModal: vi.fn(),

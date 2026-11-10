@@ -16,7 +16,6 @@ export const UpdateProgressModal: React.FC<IUpdateProgressModalProps> = ({
     bookshelfBookId,
     currentPage: initialCurrentPage,
     readingProgress: initialReadingProgress,
-    token,
     onRefresh,
     progressType: initialProgressType,
 }) => {
@@ -32,7 +31,6 @@ export const UpdateProgressModal: React.FC<IUpdateProgressModalProps> = ({
         control,
         submit,
     } = useUpdateProgress({
-        token,
         bookshelfBookId,
         totalPages,
         initialCurrentPage,

@@ -8,6 +8,7 @@ import {
 } from './mocks/api';
 import {ERROR_MESSAGES, LOGIN_PAGE} from '@pages/Login/login.constants';
 import {SIGN_UP} from '@pages/SignUp/signUp.constants';
+import {NAVBAR_ARIA_LABELS, SUB_MENU} from '@components/Navbar/constants';
 import {privateRoutes, publicRoutes} from '@routes/routes';
 
 test.describe('Authentication', () => {
@@ -49,5 +50,17 @@ test.describe('Authentication', () => {
         await page.reload();
 
         await expectHomeDashboard(page);
+    });
+
+    test('stays logged out after logging out and reloading the page', async ({page}) => {
+        await loginToDashboard(page);
+
+        await page.getByRole('button', {name: NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}).click();
+        await page.getByRole('button', {name: SUB_MENU.LOGOUT}).click();
+        await expect(page).toHaveURL(new RegExp(publicRoutes.login));
+
+        await page.reload();
+
+        await expect(page.getByText(LOGIN_PAGE.TITLE)).toBeVisible();
     });
 });

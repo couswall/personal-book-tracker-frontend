@@ -1,20 +1,12 @@
 import {Outlet} from 'react-router';
-import {useSelector} from 'react-redux';
-import {ThemeProvider} from 'styled-components';
-import {RootState} from '@store/store';
 import {FlexContainer, Navbar} from '@components/index';
-import {darkTheme, lightTheme} from '@styles/Theme';
+import {AppThemeProvider} from '@views/AppThemeProvider';
 
-export const DashboardLayout = () => {
-    const {isDarkMode} = useSelector((state: RootState) => state.darkMode);
-    return (
-        <>
-            <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-                <FlexContainer $flexDirection="column">
-                    <Navbar />
-                    <Outlet />
-                </FlexContainer>
-            </ThemeProvider>
-        </>
-    );
-};
+export const DashboardLayout = () => (
+    <AppThemeProvider>
+        <FlexContainer $flexDirection="column">
+            <Navbar />
+            <Outlet />
+        </FlexContainer>
+    </AppThemeProvider>
+);

@@ -17,7 +17,6 @@ export interface IBookshelfBookProgress {
 }
 
 export interface IUpdateReadingProgressParams {
-    token: string;
     bookshelfBookId: number;
     progressType: ProgressInputMethod;
     value: number;
@@ -26,7 +25,6 @@ export interface IUpdateReadingProgressParams {
 }
 
 export interface IUseUpdateProgressParams {
-    token?: string;
     bookshelfBookId?: number;
     totalPages: number;
     initialCurrentPage: number | null;
@@ -44,7 +42,6 @@ export interface IUpdateProgressModalProps {
     bookshelfBookId?: number;
     currentPage: number | null;
     readingProgress: number | null;
-    token?: string;
     onRefresh: () => Promise<void>;
     progressType: ProgressInputMethod | null;
 }
