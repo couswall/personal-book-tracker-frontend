@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router';
 import {AppDispatch, RootState} from '@store/store';
 import {SubMenuContainer} from '@components/Navbar/styles';
 import {Icon, Button, Text, FlexContainer} from '@components/index';
-import {onLogout} from '@store/index';
+import {logoutUser} from '@store/index';
 import {publicRoutes} from '@routes/routes';
 import {SUB_MENU, subMenuRoutes} from '@components/Navbar/constants';
 import {SubMenuNavProps} from '@components/Navbar/components/interfaces';
@@ -13,10 +13,11 @@ export const SubMenuNav = ({isVisible, subMenuRef}: SubMenuNavProps) => {
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
     const name = user.fullName.split(' ')[0];
-    const onSignout = () => {
-        dispatch(onLogout());
+    const onSignout = async () => {
+        await dispatch(logoutUser());
         navigate(publicRoutes.login);
     };
+
     return (
         <SubMenuContainer
             $isVisible={isVisible}

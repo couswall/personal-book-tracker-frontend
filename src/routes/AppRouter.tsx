@@ -5,20 +5,21 @@ import {MyBooks, Login, SignUp, Book, Search, Home} from '@pages/index';
 import {AppDispatch, RootState} from '@store/store';
 import {refreshToken} from '@store/auth/thunks';
 import {privateRoutes, publicRoutes} from '@routes/routes';
-import {DashboardLayout, PublicLayout} from '@views/index';
+import {AuthLoadingScreen, DashboardLayout, PublicLayout} from '@views/index';
 import {AuthStatus} from '@store/auth/interfaces';
 
 export const AppRouter = () => {
     const dispatch = useDispatch<AppDispatch>();
     const authStatus = useSelector((state: RootState) => state.auth.status);
-    const token = useSelector((state: RootState) => state.auth.token);
     const isAuthenticated = authStatus === AuthStatus.Authenticated;
 
     useEffect(() => {
-        if (token) {
-            dispatch(refreshToken());
-        }
-    }, []);
+        dispatch(refreshToken());
+    }, [dispatch]);
+
+    if (authStatus === AuthStatus.Checking) {
+        return <AuthLoadingScreen />;
+    }
 
     return (
         <Routes>

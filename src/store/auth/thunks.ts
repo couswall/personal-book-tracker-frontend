@@ -1,11 +1,9 @@
 import {NavigateFunction} from 'react-router';
 import {privateRoutes} from '@routes/routes';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {RootState} from '@store/store';
-import {onLogout} from '@store/auth/authSlice';
-import {createPrivateClient, createPublicClient} from '@api/httpClient';
+import {createAuthClient} from '@api/httpClient';
 import {urlWeb} from '@constants/apiEndpoints';
-import {API_ERROR_MSGS, GENERAL_ERROR_MSGS} from '@constants/errorMessages';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 import {ILoginParams, ILoginSuccessRes, IRegisterUserParams} from '@store/auth/interfaces';
 import {IApiResponse} from '@api/api.interfaces';
 
@@ -16,7 +14,7 @@ export const loginUser = createAsyncThunk(
         thunkAPI
     ) => {
         try {
-            const client = createPublicClient();
+            const client = createAuthClient();
             const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(
                 urlWeb.login,
                 credentials
@@ -39,7 +37,7 @@ export const registerUser = createAsyncThunk(
         {rejectWithValue}
     ) => {
         try {
-            const client = createPublicClient();
+            const client = createAuthClient();
             const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(
                 urlWeb.registerUser,
                 newUser
@@ -55,19 +53,23 @@ export const registerUser = createAsyncThunk(
     }
 );
 
-export const refreshToken = createAsyncThunk<ILoginSuccessRes, void, {state: RootState}>(
+export const logoutUser = createAsyncThunk('auth/logout', async () => {
+    try {
+        await createAuthClient().post(urlWeb.logout);
+    } catch {
+        // Ignore errors: the user is logged out locally either way.
+    }
+});
+
+export const refreshToken = createAsyncThunk<ILoginSuccessRes, void>(
     'auth/refreshToken',
     async (_, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.token;
-            const client = createPrivateClient(token);
+            const client = createAuthClient();
             const {data} = await client.post<IApiResponse<ILoginSuccessRes>>(urlWeb.refreshToken);
             return data;
         } catch (error) {
             if (error instanceof Error) {
-                if (error.message === API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN) {
-                    thunkAPI.dispatch(onLogout());
-                }
                 return thunkAPI.rejectWithValue(error.message);
             }
             return thunkAPI.rejectWithValue(GENERAL_ERROR_MSGS.UNKNOWN_ERROR);
