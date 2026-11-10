@@ -28,9 +28,9 @@ describe('addBookToBookshelf', () => {
         const post = vi.fn().mockResolvedValue(undefined);
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({post}));
 
-        await addBookToBookshelf({token: 'tok', bookshelfId: 1, apiBookId: 'dune-1965'});
+        await addBookToBookshelf({bookshelfId: 1, apiBookId: 'dune-1965'});
 
-        expect(mockedCreatePrivateClient).toHaveBeenCalledWith('tok');
+        expect(mockedCreatePrivateClient).toHaveBeenCalledWith();
         expect(post).toHaveBeenCalledWith('bookshelfBook/addToBookshelf', {
             bookshelfId: 1,
             apiBookId: 'dune-1965',
@@ -41,9 +41,9 @@ describe('addBookToBookshelf', () => {
         const post = vi.fn().mockRejectedValue(new Error('Network error'));
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({post}));
 
-        await expect(
-            addBookToBookshelf({token: 'tok', bookshelfId: 1, apiBookId: 'dune-1965'})
-        ).rejects.toThrow('Network error');
+        await expect(addBookToBookshelf({bookshelfId: 1, apiBookId: 'dune-1965'})).rejects.toThrow(
+            'Network error'
+        );
     });
 });
 
@@ -54,7 +54,7 @@ describe('updateBookshelf', () => {
         const put = vi.fn().mockResolvedValue(undefined);
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({put}));
 
-        await updateBookshelf({token: 'tok', bookshelfBookId: 10, bookshelfId: 2});
+        await updateBookshelf({bookshelfBookId: 10, bookshelfId: 2});
 
         expect(put).toHaveBeenCalledWith('bookshelfBook/updateBookshelf', {
             bookshelfBookId: 10,
@@ -66,9 +66,9 @@ describe('updateBookshelf', () => {
         const put = vi.fn().mockRejectedValue(new Error('Network error'));
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({put}));
 
-        await expect(
-            updateBookshelf({token: 'tok', bookshelfBookId: 10, bookshelfId: 2})
-        ).rejects.toThrow('Network error');
+        await expect(updateBookshelf({bookshelfBookId: 10, bookshelfId: 2})).rejects.toThrow(
+            'Network error'
+        );
     });
 });
 
@@ -79,7 +79,7 @@ describe('removeBookFromBookshelf', () => {
         const deleteFn = vi.fn().mockResolvedValue(undefined);
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({delete: deleteFn}));
 
-        await removeBookFromBookshelf({token: 'tok', bookshelfBookId: 10});
+        await removeBookFromBookshelf({bookshelfBookId: 10});
 
         expect(deleteFn).toHaveBeenCalledWith('bookshelfBook/10');
     });
@@ -88,7 +88,7 @@ describe('removeBookFromBookshelf', () => {
         const deleteFn = vi.fn().mockRejectedValue(new Error('Network error'));
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({delete: deleteFn}));
 
-        await expect(removeBookFromBookshelf({token: 'tok', bookshelfBookId: 10})).rejects.toThrow(
+        await expect(removeBookFromBookshelf({bookshelfBookId: 10})).rejects.toThrow(
             'Network error'
         );
     });

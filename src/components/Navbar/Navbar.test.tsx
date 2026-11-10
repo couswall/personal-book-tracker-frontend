@@ -1,6 +1,9 @@
 import {describe, expect, it} from 'vitest';
-import {screen} from '@testing-library/react';
+import {screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {http, HttpResponse} from 'msw';
+import {server} from '@src/testUtils/mswServer';
+import {apiUrl, urlWeb} from '@constants/apiEndpoints';
 import {Navbar} from '@components/Navbar/Navbar';
 import {NAVBAR_ARIA_LABELS, SUB_MENU} from '@components/Navbar/constants';
 import {LOGIN_PAGE} from '@pages/Login/login.constants';
@@ -37,7 +40,14 @@ describe('Navbar', () => {
         expect(screen.getByText('Jane')).toBeInTheDocument();
     });
 
-    it('logs the user out and resets the session when Logout is clicked', async () => {
+    it('calls the logout endpoint and clears the session when Logout is clicked', async () => {
+        let logoutCalls = 0;
+        server.use(
+            http.post(`${apiUrl}${urlWeb.logout}`, () => {
+                logoutCalls += 1;
+                return HttpResponse.json({success: true, message: ''});
+            })
+        );
         const {store} = renderWithProviders(<Navbar />, {
             preloadedState: {auth: authenticatedState},
         });
@@ -46,7 +56,23 @@ describe('Navbar', () => {
         await user.click(screen.getByRole('button', {name: NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}));
         await user.click(screen.getByRole('button', {name: SUB_MENU.LOGOUT}));
 
-        expect(store.getState().auth.status).toBe(AuthStatus.Checking);
+        await waitFor(() => expect(store.getState().auth.status).toBe(AuthStatus.NoAuthenticated));
         expect(store.getState().auth.token).toBe('');
+        expect(logoutCalls).toBe(1);
+    });
+
+    it('still clears the session when the logout request fails', async () => {
+        server.use(
+            http.post(`${apiUrl}${urlWeb.logout}`, () => new HttpResponse(null, {status: 500}))
+        );
+        const {store} = renderWithProviders(<Navbar />, {
+            preloadedState: {auth: authenticatedState},
+        });
+        const user = userEvent.setup();
+
+        await user.click(screen.getByRole('button', {name: NAVBAR_ARIA_LABELS.OPEN_ACCOUNT_MENU}));
+        await user.click(screen.getByRole('button', {name: SUB_MENU.LOGOUT}));
+
+        await waitFor(() => expect(store.getState().auth.status).toBe(AuthStatus.NoAuthenticated));
     });
 });

@@ -33,7 +33,7 @@ describe('navbarSearchBook thunk', () => {
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
         const store = buildStore();
-        await store.dispatch(navbarSearchBook({token: 'tok', params: {searchText: 'dune'}}));
+        await store.dispatch(navbarSearchBook({params: {searchText: 'dune'}}));
 
         expect(store.getState().navbarSearch.loading).toBe(false);
         expect(store.getState().navbarSearch.searchBookData).toEqual(searchResult);
@@ -44,7 +44,7 @@ describe('navbarSearchBook thunk', () => {
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
         const store = buildStore();
-        await store.dispatch(navbarSearchBook({token: 'tok', params: {searchText: 'dune'}}));
+        await store.dispatch(navbarSearchBook({params: {searchText: 'dune'}}));
 
         expect(store.getState().navbarSearch.loading).toBe(false);
         expect(store.getState().navbarSearch.error).toBe('Search failed');

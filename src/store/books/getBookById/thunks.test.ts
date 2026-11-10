@@ -48,7 +48,7 @@ describe('getBookById thunk', () => {
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
         const store = buildStore();
-        await store.dispatch(getBookById({token: 'tok', id: '1'}));
+        await store.dispatch(getBookById({id: '1'}));
 
         expect(get).toHaveBeenCalledWith('book/bookById/1');
         expect(store.getState().getBookById.loading).toBe(false);
@@ -60,7 +60,7 @@ describe('getBookById thunk', () => {
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
         const store = buildStore();
-        await store.dispatch(getBookById({token: 'tok', id: '404'}));
+        await store.dispatch(getBookById({id: '404'}));
 
         expect(store.getState().getBookById.loading).toBe(false);
         expect(store.getState().getBookById.book).toBeNull();

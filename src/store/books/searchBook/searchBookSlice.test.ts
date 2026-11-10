@@ -10,7 +10,7 @@ describe('searchBookSlice extraReducers', () => {
     it('sets loading and clears the error on pending', () => {
         const state = searchBookSlice.reducer(
             getInitialState(),
-            searchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+            searchBook.pending('reqId', {params: {searchText: 'dune'}})
         );
 
         expect(state.loading).toBe(true);
@@ -21,10 +21,9 @@ describe('searchBookSlice extraReducers', () => {
         const state = searchBookSlice.reducer(
             searchBookSlice.reducer(
                 getInitialState(),
-                searchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+                searchBook.pending('reqId', {params: {searchText: 'dune'}})
             ),
             searchBook.fulfilled(searchResult, 'reqId', {
-                token: 'tok',
                 params: {searchText: 'dune'},
             })
         );
@@ -37,12 +36,12 @@ describe('searchBookSlice extraReducers', () => {
         const state = searchBookSlice.reducer(
             searchBookSlice.reducer(
                 getInitialState(),
-                searchBook.pending('reqId', {token: 'tok', params: {searchText: 'dune'}})
+                searchBook.pending('reqId', {params: {searchText: 'dune'}})
             ),
             searchBook.rejected(
                 new Error('failed'),
                 'reqId',
-                {token: 'tok', params: {searchText: 'dune'}},
+                {params: {searchText: 'dune'}},
                 'Search failed'
             )
         );
@@ -52,7 +51,7 @@ describe('searchBookSlice extraReducers', () => {
     });
 
     it('ignores a fulfilled response from a stale, superseded request', () => {
-        const arg = {token: 'tok', params: {searchText: 'dune'}};
+        const arg = {params: {searchText: 'dune'}};
         const afterFirstPending = searchBookSlice.reducer(
             getInitialState(),
             searchBook.pending('first-request', arg)
@@ -72,7 +71,7 @@ describe('searchBookSlice extraReducers', () => {
     });
 
     it('ignores a rejected response from a stale, superseded request', () => {
-        const arg = {token: 'tok', params: {searchText: 'dune'}};
+        const arg = {params: {searchText: 'dune'}};
         const afterFirstPending = searchBookSlice.reducer(
             getInitialState(),
             searchBook.pending('first-request', arg)

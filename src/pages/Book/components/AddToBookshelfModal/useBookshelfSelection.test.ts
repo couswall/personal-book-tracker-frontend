@@ -50,7 +50,6 @@ describe('useBookshelfSelection', () => {
         await act(() => result.current.handleSelectBookshelf(reading));
 
         expect(vi.mocked(bookshelfApi.updateBookshelf).mock.calls[0][0]).toStrictEqual({
-            token: 'tok',
             bookshelfBookId: 58,
             bookshelfId: 2,
         });
@@ -116,7 +115,6 @@ describe('useBookshelfSelection', () => {
                 useBookshelfSelection({
                     bookshelves,
                     reads: [],
-                    token: 'tok',
                     bookId: 'OXf3o_EBrxYC',
                     onRefresh: vi.fn().mockResolvedValue(undefined),
                     onCloseModal: vi.fn(),

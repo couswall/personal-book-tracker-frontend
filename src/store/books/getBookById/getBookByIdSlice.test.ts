@@ -25,7 +25,7 @@ describe('getBookByIdSlice extraReducers', () => {
     it('sets loading and clears the error on pending', () => {
         const state = getBookByIdSlice.reducer(
             getInitialState(),
-            getBookById.pending('reqId', {token: 'tok', id: '1'})
+            getBookById.pending('reqId', {id: '1'})
         );
 
         expect(state.loading).toBe(true);
@@ -35,7 +35,7 @@ describe('getBookByIdSlice extraReducers', () => {
     it('stores the book on fulfilled', () => {
         const state = getBookByIdSlice.reducer(
             getInitialState(),
-            getBookById.fulfilled(book, 'reqId', {token: 'tok', id: '1'})
+            getBookById.fulfilled(book, 'reqId', {id: '1'})
         );
 
         expect(state.loading).toBe(false);
@@ -45,12 +45,7 @@ describe('getBookByIdSlice extraReducers', () => {
     it('stores the error message on rejected', () => {
         const state = getBookByIdSlice.reducer(
             getInitialState(),
-            getBookById.rejected(
-                new Error('failed'),
-                'reqId',
-                {token: 'tok', id: '404'},
-                'Book not found'
-            )
+            getBookById.rejected(new Error('failed'), 'reqId', {id: '404'}, 'Book not found')
         );
 
         expect(state.loading).toBe(false);
@@ -62,7 +57,7 @@ describe('getBookByIdSlice reducers', () => {
     it('cleanGetBookByIdState resets to the initial state', () => {
         const populatedState = getBookByIdSlice.reducer(
             undefined,
-            getBookById.fulfilled(book, 'reqId', {token: 'tok', id: '1'})
+            getBookById.fulfilled(book, 'reqId', {id: '1'})
         );
 
         const state = getBookByIdSlice.reducer(

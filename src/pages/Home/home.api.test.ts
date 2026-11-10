@@ -23,13 +23,13 @@ describe('getDashboard', () => {
         mockedCreatePrivateClient.mockReset();
     });
 
-    it('fetches the dashboard with the token and unwraps it from the response', async () => {
+    it('fetches the dashboard and unwraps it from the response', async () => {
         const get = vi.fn().mockResolvedValue({success: true, message: '', data: {dashboard}});
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
-        await expect(getDashboard({token: 'tok'})).resolves.toEqual(dashboard);
+        await expect(getDashboard()).resolves.toEqual(dashboard);
 
-        expect(mockedCreatePrivateClient).toHaveBeenCalledWith('tok');
+        expect(mockedCreatePrivateClient).toHaveBeenCalledWith();
         expect(get).toHaveBeenCalledWith('dashboard');
     });
 
@@ -37,6 +37,6 @@ describe('getDashboard', () => {
         const get = vi.fn().mockRejectedValue(new Error('Network error'));
         mockedCreatePrivateClient.mockReturnValue(buildClientMock({get}));
 
-        await expect(getDashboard({token: 'tok'})).rejects.toThrow('Network error');
+        await expect(getDashboard()).rejects.toThrow('Network error');
     });
 });

@@ -50,13 +50,12 @@ describe('getBookshelvesWithStatus', () => {
         const setReads = vi.fn();
 
         await getBookshelvesWithStatus({
-            token: 'tok',
             apiBookId: 'dune-1965',
             setBookshelves,
             setReads,
         });
 
-        expect(mockedCreatePrivateClient).toHaveBeenCalledWith('tok');
+        expect(mockedCreatePrivateClient).toHaveBeenCalledWith();
         expect(get).toHaveBeenCalledWith('bookshelf/bookStatus/dune-1965');
         expect(setBookshelves).toHaveBeenCalledWith(bookshelves);
         expect(setReads).toHaveBeenCalledWith(reads);
@@ -70,7 +69,6 @@ describe('getBookshelvesWithStatus', () => {
 
         await expect(
             getBookshelvesWithStatus({
-                token: 'tok',
                 apiBookId: 'dune-1965',
                 setBookshelves,
                 setReads,

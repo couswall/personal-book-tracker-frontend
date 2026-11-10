@@ -3,18 +3,17 @@ import {loginUser, refreshToken, registerUser} from '@store/auth/thunks';
 import {authSlice} from '@store/auth/authSlice';
 import {AuthStatus} from '@store/auth/interfaces';
 import {API_ERROR_MSGS} from '@constants/errorMessages';
+import {urlWeb} from '@constants/apiEndpoints';
 import {privateRoutes} from '@routes/routes';
-import {createPrivateClient, createPublicClient} from '@api/httpClient';
+import {createAuthClient} from '@api/httpClient';
 import {IHttpClient} from '@api/api.interfaces';
 import {createTestStore} from '@src/testUtils/renderWithProviders';
 
 vi.mock('@api/httpClient', () => ({
-    createPublicClient: vi.fn(),
-    createPrivateClient: vi.fn(),
+    createAuthClient: vi.fn(),
 }));
 
-const mockedCreatePublicClient = vi.mocked(createPublicClient);
-const mockedCreatePrivateClient = vi.mocked(createPrivateClient);
+const mockedCreateAuthClient = vi.mocked(createAuthClient);
 
 const buildClientMock = (overrides: Partial<IHttpClient>): IHttpClient => ({
     get: vi.fn(),
@@ -32,15 +31,15 @@ const loginSuccessRes = {
     token: 'abc123',
 };
 
-describe('loginUser', () => {
-    beforeEach(() => {
-        mockedCreatePublicClient.mockReset();
-    });
+beforeEach(() => {
+    mockedCreateAuthClient.mockReset();
+});
 
+describe('loginUser', () => {
     it('navigates to home and stores the session on success', async () => {
         const navigate = vi.fn();
         const post = vi.fn().mockResolvedValue({success: true, message: '', data: loginSuccessRes});
-        mockedCreatePublicClient.mockReturnValue(buildClientMock({post}));
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
 
         const store = buildAuthStore();
         await store.dispatch(
@@ -55,7 +54,7 @@ describe('loginUser', () => {
     it('stores the error message and does not navigate on failure', async () => {
         const navigate = vi.fn();
         const post = vi.fn().mockRejectedValue(new Error('Invalid credentials'));
-        mockedCreatePublicClient.mockReturnValue(buildClientMock({post}));
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
 
         const store = buildAuthStore();
         await store.dispatch(
@@ -69,14 +68,10 @@ describe('loginUser', () => {
 });
 
 describe('registerUser', () => {
-    beforeEach(() => {
-        mockedCreatePublicClient.mockReset();
-    });
-
     it('navigates to home and stores the session on success', async () => {
         const navigate = vi.fn();
         const post = vi.fn().mockResolvedValue({success: true, message: '', data: loginSuccessRes});
-        mockedCreatePublicClient.mockReturnValue(buildClientMock({post}));
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
 
         const store = buildAuthStore();
         await store.dispatch(
@@ -97,35 +92,41 @@ describe('registerUser', () => {
 });
 
 describe('refreshToken', () => {
-    beforeEach(() => {
-        mockedCreatePrivateClient.mockReset();
-    });
+    it('calls the refresh endpoint without a body and stores the new session', async () => {
+        const post = vi.fn().mockResolvedValue({success: true, message: '', data: loginSuccessRes});
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
 
-    it('logs the user out when the token is invalid or expired', async () => {
-        const post = vi.fn().mockRejectedValue(new Error(API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN));
-        mockedCreatePrivateClient.mockReturnValue(buildClientMock({post}));
-
-        const store = buildAuthStore({status: AuthStatus.Authenticated, token: 'stale-token'});
-
+        const store = buildAuthStore();
         await store.dispatch(refreshToken());
 
-        expect(store.getState().auth.status).toBe(AuthStatus.Checking);
+        expect(post).toHaveBeenCalledWith(urlWeb.refreshToken);
+        expect(store.getState().auth.status).toBe(AuthStatus.Authenticated);
+        expect(store.getState().auth.token).toBe('abc123');
+    });
+
+    it('logs the user out when the refresh cookie is invalid or expired', async () => {
+        const post = vi.fn().mockRejectedValue(new Error(API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN));
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
+
+        const store = buildAuthStore({status: AuthStatus.Authenticated, token: 'stale-token'});
+        await store.dispatch(refreshToken());
+
+        expect(store.getState().auth.status).toBe(AuthStatus.NoAuthenticated);
         expect(store.getState().auth.token).toBe('');
         expect(store.getState().auth.errors.refreshTokenErrorMsg).toBe(
             API_ERROR_MSGS.INVALID_OR_EXPIRED_TOKEN
         );
     });
 
-    it('keeps the session and stores the error message for other failures', async () => {
+    it('also logs the user out for other failures', async () => {
         const post = vi.fn().mockRejectedValue(new Error('Network error'));
-        mockedCreatePrivateClient.mockReturnValue(buildClientMock({post}));
+        mockedCreateAuthClient.mockReturnValue(buildClientMock({post}));
 
         const store = buildAuthStore({status: AuthStatus.Authenticated, token: 'valid-token'});
-
         await store.dispatch(refreshToken());
 
-        expect(store.getState().auth.status).toBe(AuthStatus.Authenticated);
-        expect(store.getState().auth.token).toBe('valid-token');
+        expect(store.getState().auth.status).toBe(AuthStatus.NoAuthenticated);
+        expect(store.getState().auth.token).toBe('');
         expect(store.getState().auth.errors.refreshTokenErrorMsg).toBe('Network error');
     });
 });
