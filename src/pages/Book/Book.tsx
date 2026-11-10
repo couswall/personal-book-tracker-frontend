@@ -22,7 +22,6 @@ import {BOOK_TEXTS} from '@pages/Book/book.constants';
 export const Book = () => {
     const {id} = useParams();
     const dispatch: AppDispatch = useDispatch();
-    const {token} = useSelector((state: RootState) => state.auth);
     const {book, loading} = useSelector((state: RootState) => state.getBookById);
     const [showMoreDescription, setShowMoreDescription] = useState<boolean>(false);
     const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState<boolean>(false);
@@ -33,15 +32,15 @@ export const Book = () => {
     const selectedBookshelf = bookshelves.find((shelf) => shelf.isSelected);
 
     const handleRefresh = useCallback(() => {
-        if (!token || !id) return Promise.resolve();
-        return getBookshelvesWithStatus({token, apiBookId: id, setBookshelves, setReads});
-    }, [token, id]);
+        if (!id) return Promise.resolve();
+        return getBookshelvesWithStatus({apiBookId: id, setBookshelves, setReads});
+    }, [id]);
 
     useEffect(() => {
-        if (!token || !id) return;
-        dispatch(getBookById({token, id}));
-        getBookshelvesWithStatus({token, apiBookId: id, setBookshelves, setReads});
-    }, [id, token, dispatch]);
+        if (!id) return;
+        dispatch(getBookById({id}));
+        getBookshelvesWithStatus({apiBookId: id, setBookshelves, setReads});
+    }, [id, dispatch]);
 
     if (loading) {
         return (
@@ -125,7 +124,6 @@ export const Book = () => {
                 bookAuthors={book.authors}
                 coverImageUrl={book.coverImageUrl}
                 bookId={id}
-                token={token}
                 onRefresh={handleRefresh}
             />
             <UpdateProgressModal
@@ -137,7 +135,6 @@ export const Book = () => {
                 currentPage={selectedBookshelf?.currentPage ?? null}
                 readingProgress={selectedBookshelf?.readingProgress ?? null}
                 progressType={selectedBookshelf?.progressType ?? null}
-                token={token}
                 onRefresh={handleRefresh}
             />
         </S.LayoutContainer>

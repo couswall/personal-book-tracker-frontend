@@ -9,7 +9,7 @@ import {
 export const updateReadingProgress = async (
     params: IUpdateReadingProgressParams
 ): Promise<IBookshelfBookProgress> => {
-    const client = createPrivateClient(params.token);
+    const client = createPrivateClient();
     const response = await client.put<IApiResponse<{bookshelfBook: IBookshelfBookProgress}>>(
         urlWeb.updateReadingProgress,
         {

@@ -17,13 +17,11 @@ export const AddToBookshelfModal: React.FC<IAddToBookshelfModalProps> = ({
     bookAuthors,
     coverImageUrl,
     bookId,
-    token,
     onRefresh,
 }) => {
     const selection = useBookshelfSelection({
         bookshelves,
         reads,
-        token,
         bookId,
         onRefresh,
         onCloseModal,

@@ -7,9 +7,9 @@ import {IBook} from '@store/books/getBookById/interfaces';
 
 export const getBookById = createAsyncThunk(
     'getBookById/fetch',
-    async ({token, id}: {token: string; id: string}, thunkAPI) => {
+    async ({id}: {id: string}, thunkAPI) => {
         try {
-            const client = createPrivateClient(token);
+            const client = createPrivateClient();
             const endpoint = urlWeb.getBookById.replace(':id', id);
             const {data} = await client.get<IApiResponse<IBook>>(endpoint);
             return data;

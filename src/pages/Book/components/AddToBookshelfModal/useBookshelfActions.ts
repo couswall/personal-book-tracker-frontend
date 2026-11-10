@@ -11,7 +11,7 @@ import {IBookshelfWithStatus} from '@pages/Book/book.interfaces';
 import {useModalAlert} from '@pages/Book/hooks/useModalAlert';
 import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 
-export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfActionsParams) => {
+export const useBookshelfActions = ({bookId, onRefresh}: IUseBookshelfActionsParams) => {
     const [isLoading, setIsLoading] = useState(false);
     const {alert, showAlert} = useModalAlert();
 
@@ -32,10 +32,10 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
 
     /** Resolves true when the book ended up on the shelf, false otherwise. */
     const add = async (shelf: IBookshelfWithStatus) => {
-        if (!token || !bookId) return false;
+        if (!bookId) return false;
         try {
             setIsLoading(true);
-            await addBookToBookshelf({token, bookshelfId: shelf.id, apiBookId: bookId});
+            await addBookToBookshelf({bookshelfId: shelf.id, apiBookId: bookId});
             showAlert(ADD_TO_BOOKSHELF_TEXTS.ADDED_TO(shelf.name), 'success');
             await refresh();
             return true;
@@ -54,10 +54,10 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
     };
 
     const update = async (bookshelfBookId: number, shelf: IBookshelfWithStatus) => {
-        if (!token || !bookId) return false;
+        if (!bookId) return false;
         try {
             setIsLoading(true);
-            await updateBookshelf({token, bookshelfBookId, bookshelfId: shelf.id});
+            await updateBookshelf({bookshelfBookId, bookshelfId: shelf.id});
             showAlert(ADD_TO_BOOKSHELF_TEXTS.MOVED_TO(shelf.name), 'success');
             await refresh();
             return true;
@@ -70,10 +70,9 @@ export const useBookshelfActions = ({token, bookId, onRefresh}: IUseBookshelfAct
     };
 
     const remove = async (bookshelfBookId: number, bookshelfName: string) => {
-        if (!token) return false;
         try {
             setIsLoading(true);
-            await removeBookFromBookshelf({token, bookshelfBookId});
+            await removeBookFromBookshelf({bookshelfBookId});
             showAlert(ADD_TO_BOOKSHELF_TEXTS.REMOVED_FROM(bookshelfName), 'success');
             await refresh();
             return true;

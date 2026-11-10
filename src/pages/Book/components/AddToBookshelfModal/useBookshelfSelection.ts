@@ -7,12 +7,11 @@ import {getRemovalWarning} from '@pages/Book/components/AddToBookshelfModal/addT
 export const useBookshelfSelection = ({
     bookshelves,
     reads,
-    token,
     bookId,
     onRefresh,
     onCloseModal,
 }: IUseBookshelfSelectionParams) => {
-    const {isLoading, alert, add, update, remove} = useBookshelfActions({token, bookId, onRefresh});
+    const {isLoading, alert, add, update, remove} = useBookshelfActions({bookId, onRefresh});
     const [targetShelfId, setTargetShelfId] = useState<number | null>(null);
     /**
      * The bookshelfBookId the Remove dialog was opened for. Tying it to that id (instead of a

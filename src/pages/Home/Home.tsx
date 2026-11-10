@@ -18,7 +18,7 @@ import {useDashboard} from '@pages/Home/hooks/useDashboard';
 import {IShelfBook} from '@pages/Home/home.interfaces';
 
 export const Home = () => {
-    const {dashboard, status, token, refetch, retry} = useDashboard();
+    const {dashboard, status, refetch, retry} = useDashboard();
     const [progressBook, setProgressBook] = useState<IShelfBook | null>(null);
     const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
 
@@ -77,7 +77,6 @@ export const Home = () => {
                     currentPage={progressBook.currentPage}
                     readingProgress={progressBook.readingProgress}
                     progressType={progressBook.progressType}
-                    token={token}
                     onRefresh={refetch}
                 />
             )}

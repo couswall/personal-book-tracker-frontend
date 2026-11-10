@@ -22,7 +22,6 @@ export const SearchingNavbar = () => {
     });
     const searchText = watch('searchText');
     const navigate = useNavigate();
-    const {token} = useSelector((state: RootState) => state.auth);
     const {searchBookData, loading} = useSelector((state: RootState) => state.navbarSearch);
     const debouncedValue = useDebounce(searchText);
     const truncatedSearchText =
@@ -55,12 +54,12 @@ export const SearchingNavbar = () => {
     useEffect(() => {
         if (debouncedValue.length >= NAVBAR_SEARCH_MIN_LENGTH) {
             const params = {searchText: debouncedValue, maxResults: 5};
-            dispatch(navbarSearchBook({token, params}));
+            dispatch(navbarSearchBook({params}));
             setIsDropdownOpen(true);
         } else {
             setIsDropdownOpen(false);
         }
-    }, [debouncedValue]);
+    }, [debouncedValue, dispatch]);
 
     return (
         <>

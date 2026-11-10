@@ -7,7 +7,7 @@ import {
 import {IApiResponse} from '@api/api.interfaces';
 
 export const getBookshelvesWithStatus = async (params: IGetBookshelvesWithStatusParams) => {
-    const client = createPrivateClient(params.token);
+    const client = createPrivateClient();
     const endpoint = urlWeb.getBookshelvesWithStatus.replace(':apiBookId', params.apiBookId);
 
     const {data} = await client.get<IApiResponse<IGetBookshelvesWithStatusResponse>>(endpoint);

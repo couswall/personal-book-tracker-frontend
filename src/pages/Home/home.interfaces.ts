@@ -72,8 +72,4 @@ export interface IGetDashboardResponse {
     dashboard: IDashboard;
 }
 
-export interface IGetDashboardParams {
-    token: string;
-}
-
 export type DashboardStatus = 'loading' | 'error' | 'success';

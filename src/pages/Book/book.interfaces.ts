@@ -1,7 +1,6 @@
 import {ProgressInputMethod} from '@pages/Book/components/UpdateProgressModal/updateProgressModal.interfaces';
 
 export interface IGetBookshelvesWithStatusParams {
-    token: string;
     apiBookId: string;
     setBookshelves: React.Dispatch<React.SetStateAction<IBookshelfWithStatus[]>>;
     setReads: React.Dispatch<React.SetStateAction<IRead[]>>;
