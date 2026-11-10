@@ -37,3 +37,14 @@ export interface IApiErrorResponse {
     success: boolean;
     error: IApiError;
 }
+
+export interface IAuthInterceptors {
+    getAccessToken: () => string;
+    refreshAccessToken: () => Promise<unknown>;
+}
+
+declare module 'axios' {
+    interface InternalAxiosRequestConfig {
+        _retry?: boolean;
+    }
+}

@@ -1,7 +1,19 @@
 import axios, {AxiosError, AxiosInstance, HttpStatusCode} from 'axios';
 import {getEnvVariables} from '@helpers/getEnvVariables';
 import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
-import {IApiErrorResponse, IHttpClient, IHttpRequestConfig} from '@api/api.interfaces';
+import {
+    IApiErrorResponse,
+    IAuthInterceptors,
+    IHttpClient,
+    IHttpRequestConfig,
+} from '@api/api.interfaces';
+
+const privateInstance = axios.create({
+    baseURL: getEnvVariables().api_url,
+    headers: {
+        Accept: 'application/json',
+    },
+});
 
 const isApiErrorResponse = (data: unknown): data is IApiErrorResponse => {
     if (typeof data !== 'object' || data === null) return false;
@@ -76,20 +88,49 @@ const buildAdapter = (instance: AxiosInstance): IHttpClient => ({
     },
 });
 
-export const createPublicClient = (): IHttpClient => {
+export const createAuthClient = (): IHttpClient => {
     const instance = axios.create({
         baseURL: getEnvVariables().api_url,
+        withCredentials: true,
     });
     return buildAdapter(instance);
 };
 
-export const createPrivateClient = (token: string): IHttpClient => {
-    const instance = axios.create({
-        baseURL: getEnvVariables().api_url,
-        headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-        },
+export const createPrivateClient = (): IHttpClient => {
+    return buildAdapter(privateInstance);
+};
+
+export const setupAuthInterceptors = ({getAccessToken, refreshAccessToken}: IAuthInterceptors) => {
+    privateInstance.interceptors.request.use((config) => {
+        const token = getAccessToken();
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
     });
-    return buildAdapter(instance);
+
+    let refreshPromise: Promise<unknown> | null = null;
+
+    privateInstance.interceptors.response.use(
+        (response) => response,
+        async (error: unknown) => {
+            if (
+                error instanceof AxiosError &&
+                error.response?.status === HttpStatusCode.Unauthorized &&
+                error.config &&
+                !error.config._retry
+            ) {
+                error.config._retry = true;
+
+                if (!refreshPromise) {
+                    refreshPromise = refreshAccessToken().finally(() => {
+                        refreshPromise = null;
+                    });
+                }
+                await refreshPromise;
+                return privateInstance(error.config);
+            }
+            throw error;
+        }
+    );
 };
