@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {searchBook} from '@store/books/searchBook/thunks';
+import {GENERAL_ERROR_MSGS} from '@constants/errorMessages';
 import {ISearchBookReducer} from '@store/books/searchBook/interfaces';
 
 export const initialState: ISearchBookReducer = {
@@ -13,18 +14,24 @@ export const searchBookSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(searchBook.pending, (state) => {
+            .addCase(searchBook.pending, (state, action) => {
                 state.loading = true;
                 state.error = undefined;
+                state.currentRequestId = action.meta.requestId;
             })
             .addCase(searchBook.fulfilled, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.searchBookData = action.payload;
                 state.loading = false;
                 state.error = undefined;
             })
             .addCase(searchBook.rejected, (state, action) => {
+                if (action.meta.requestId !== state.currentRequestId) return;
                 state.loading = false;
-                state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
+                state.error =
+                    typeof action.payload === 'string'
+                        ? action.payload
+                        : GENERAL_ERROR_MSGS.UNKNOWN_ERROR;
             });
     },
 });

@@ -17,33 +17,33 @@ interface ITypographyBaseProps {
     variant?: TypographyVariant;
     size?: TypographySize;
     weight?: TypographyWeight;
-    FontSize?: string;
-    FontWeight?: string;
-    FontColor?: string;
-    FontFamily?: string;
-    FontStyle?: string;
-    LineHeight?: string;
-    TextAlign?: string;
-    Margin?: string;
-    Padding?: string;
-    Cursor?: string;
-    TextDecoration?: string;
-    Width?: string;
-    LetterSpacing?: string;
-    Border?: string;
-    BorderRadius?: string;
-    BackgroundColor?: string;
-    WhiteSpace?: string;
-    TextOverflow?: string;
-    Overflow?: string;
-    HTextDecoration?: string;
-    SmDisplay?: string;
-    MarginTop?: string;
-    LgFontSize?: string;
-    TextTransform?: string;
-    MarginBottom?: string;
-    Opacity?: string;
-    FlexShrink?: string;
+    $fontSize?: string;
+    $fontWeight?: string;
+    $fontColor?: string;
+    $fontFamily?: string;
+    $fontStyle?: string;
+    $lineHeight?: string;
+    $textAlign?: string;
+    $margin?: string;
+    $padding?: string;
+    $cursor?: string;
+    $textDecoration?: string;
+    $width?: string;
+    $letterSpacing?: string;
+    $border?: string;
+    $borderRadius?: string;
+    $backgroundColor?: string;
+    $whiteSpace?: string;
+    $textOverflow?: string;
+    $overflow?: string;
+    $hTextDecoration?: string;
+    $smDisplay?: string;
+    $marginTop?: string;
+    $lgFontSize?: string;
+    $textTransform?: string;
+    $marginBottom?: string;
+    $opacity?: string;
+    $flexShrink?: string;
 }
 
 const getVariantStyles = (variant: TypographyVariant, theme: DefaultTheme) => {
@@ -95,27 +95,27 @@ const getWeightStyles = (weight: TypographyWeight, theme: DefaultTheme) => {
 };
 
 export const Text = styled.p<ITypographyBaseProps>`
-    font-family: ${(props) => props.FontFamily || props.theme.fonts.lexend};
-    font-style: ${(props) => props.FontStyle || 'normal'};
-    text-align: ${(props) => props.TextAlign || 'left'};
-    margin: ${(props) => props.Margin || '0'};
-    padding: ${(props) => props.Padding || '0'};
-    cursor: ${(props) => props.Cursor};
-    text-decoration: ${(props) => props.TextDecoration};
-    width: ${(props) => props.Width};
-    letter-spacing: ${(props) => props.LetterSpacing};
-    border: ${(props) => props.Border};
-    border-radius: ${(props) => props.BorderRadius};
-    background-color: ${(props) => props.BackgroundColor};
-    white-space: ${(props) => props.WhiteSpace};
-    text-overflow: ${(props) => props.TextOverflow};
-    overflow: ${(props) => props.Overflow};
-    margin-top: ${(props) => props.MarginTop};
-    margin-bottom: ${(props) => props.MarginBottom};
-    text-transform: ${(props) => props.TextTransform};
+    font-family: ${(props) => props.$fontFamily || props.theme.fonts.lexend};
+    font-style: ${(props) => props.$fontStyle || 'normal'};
+    text-align: ${(props) => props.$textAlign || 'left'};
+    margin: ${(props) => props.$margin || '0'};
+    padding: ${(props) => props.$padding || '0'};
+    cursor: ${(props) => props.$cursor};
+    text-decoration: ${(props) => props.$textDecoration};
+    width: ${(props) => props.$width};
+    letter-spacing: ${(props) => props.$letterSpacing};
+    border: ${(props) => props.$border};
+    border-radius: ${(props) => props.$borderRadius};
+    background-color: ${(props) => props.$backgroundColor};
+    white-space: ${(props) => props.$whiteSpace};
+    text-overflow: ${(props) => props.$textOverflow};
+    overflow: ${(props) => props.$overflow};
+    margin-top: ${(props) => props.$marginTop};
+    margin-bottom: ${(props) => props.$marginBottom};
+    text-transform: ${(props) => props.$textTransform};
     transition: color 0.2s ease;
-    opacity: ${(props) => props.Opacity};
-    flex-shrink: ${(props) => props.FlexShrink};
+    opacity: ${(props) => props.$opacity};
+    flex-shrink: ${(props) => props.$flexShrink};
 
     /* Apply size styles */
     ${(props) => getSizeStyles(props.size || 'md', props.theme)}
@@ -128,36 +128,36 @@ export const Text = styled.p<ITypographyBaseProps>`
 
     /* Override with custom props if provided */
     ${(props) =>
-        props.FontSize &&
+        props.$fontSize &&
         css`
-            font-size: ${props.FontSize};
+            font-size: ${props.$fontSize};
         `}
     ${(props) =>
-        props.FontWeight &&
+        props.$fontWeight &&
         css`
-            font-weight: ${props.FontWeight};
+            font-weight: ${props.$fontWeight};
         `}
     ${(props) =>
-        props.FontColor &&
+        props.$fontColor &&
         css`
-            color: ${props.FontColor};
+            color: ${props.$fontColor};
         `}
     ${(props) =>
-        props.LineHeight &&
+        props.$lineHeight &&
         css`
-            line-height: ${props.LineHeight};
+            line-height: ${props.$lineHeight};
         `}
 
     &:hover {
-        text-decoration: ${(props) => props.HTextDecoration};
+        text-decoration: ${(props) => props.$hTextDecoration};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-        font-size: ${(props) => props.LgFontSize};
+        font-size: ${(props) => props.$lgFontSize};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-        display: ${(props) => props.SmDisplay};
+        display: ${(props) => props.$smDisplay};
     }
 `;
 

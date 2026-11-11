@@ -1,17 +1,3 @@
-export interface IBaseFetchRes {
-    success: boolean;
-    message?: string;
-    error?: IErrorResponse;
-}
-
-export interface IErrorResponse {
-    message: string;
-}
-
-export interface IGetBookByIdFetchRes extends IBaseFetchRes {
-    data?: IBook;
-}
-
 export interface IBook {
     id: number;
     apiBookId: string;

@@ -1,98 +1,113 @@
 import {
     BaseContainer,
-    ButtonGhost,
-    ButtonOutline,
+    Button,
     FlexContainer,
     Icon,
+    RatingStars,
     Text,
     TitleH4,
     TitleH5,
 } from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
-import {StarRow} from '@pages/Book/components/BookReviews/StarRow';
-import {AVATAR_URL, COMMUNITY_REVIEWS} from '@pages/Book/book.constants';
+import {
+    AVATAR_URL,
+    BOOK_REVIEWS_TEXTS,
+    COMMUNITY_REVIEWS,
+} from '@pages/Book/components/BookReviews/bookReviews.constants';
 
 export const CommunityReviews = () => (
     <BaseContainer as="section">
         <FlexContainer
-            AlignItems="center"
-            JustifyContent="space-between"
-            MarginBottom="2rem"
-            FlexWrap="wrap"
-            Gap="1rem"
+            $alignItems="center"
+            $justifyContent="space-between"
+            $marginBottom="2rem"
+            $flexWrap="wrap"
+            $gap="1rem"
         >
-            <TitleH4>Community Reviews</TitleH4>
-            <FlexContainer AlignItems="center" Gap="0.75rem">
+            <TitleH4>{BOOK_REVIEWS_TEXTS.COMMUNITY_REVIEWS_TITLE}</TitleH4>
+            <FlexContainer $alignItems="center" $gap="0.75rem">
                 <Text size="sm" variant="muted">
-                    Sort by:
+                    {BOOK_REVIEWS_TEXTS.SORT_BY}
                 </Text>
-                <ButtonOutline size="sm" Gap="0.5rem">
-                    Most Helpful <Icon className="fa-solid fa-chevron-down" FontColor="inherit" />
-                </ButtonOutline>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    rightIcon={<Icon className="fa-solid fa-chevron-down" $fontColor="inherit" />}
+                >
+                    {BOOK_REVIEWS_TEXTS.MOST_HELPFUL}
+                </Button>
             </FlexContainer>
         </FlexContainer>
 
-        <FlexContainer FlexDirection="column" Gap="1.5rem" BackgroundColor="inherit">
+        <FlexContainer $flexDirection="column" $gap="1.5rem" $backgroundColor="inherit">
             {COMMUNITY_REVIEWS.map((review) => (
                 <S.ReviewCard key={review.name}>
                     <FlexContainer
-                        FlexDirection="column"
-                        Gap="1.5rem"
-                        MarginBottom="1.5rem"
-                        BackgroundColor="inherit"
+                        $flexDirection="column"
+                        $gap="1.5rem"
+                        $marginBottom="1.5rem"
+                        $backgroundColor="inherit"
                     >
                         <FlexContainer
-                            AlignItems="center"
-                            JustifyContent="space-between"
-                            BackgroundColor="inherit"
-                            FlexWrap="wrap"
-                            Gap="0.75rem"
+                            $alignItems="center"
+                            $justifyContent="space-between"
+                            $backgroundColor="inherit"
+                            $flexWrap="wrap"
+                            $gap="0.75rem"
                         >
-                            <FlexContainer AlignItems="center" Gap="1rem" BackgroundColor="inherit">
+                            <FlexContainer
+                                $alignItems="center"
+                                $gap="1rem"
+                                $backgroundColor="inherit"
+                            >
                                 <S.YourReviewAvatar $bgImage={AVATAR_URL} />
-                                <BaseContainer BackgroundColor="inherit">
+                                <BaseContainer $backgroundColor="inherit">
                                     <FlexContainer
-                                        AlignItems="center"
-                                        Gap="0.5rem"
-                                        BackgroundColor="inherit"
+                                        $alignItems="center"
+                                        $gap="0.5rem"
+                                        $backgroundColor="inherit"
                                     >
                                         <Text weight="bold">{review.name}</Text>
                                         {review.verified && (
                                             <S.VerifiedBadge>
-                                                <i className="fa-solid fa-certificate"></i> Verified
-                                                Purchase
+                                                <i className="fa-solid fa-certificate"></i>{' '}
+                                                {BOOK_REVIEWS_TEXTS.VERIFIED_PURCHASE}
                                             </S.VerifiedBadge>
                                         )}
                                     </FlexContainer>
                                     <S.ReviewDateText>{review.date}</S.ReviewDateText>
                                 </BaseContainer>
                             </FlexContainer>
-                            <StarRow count={review.stars} filled={review.stars < 5} />
+                            <RatingStars rating={review.stars} />
                         </FlexContainer>
                     </FlexContainer>
-                    <BaseContainer BackgroundColor="inherit">
-                        <TitleH5 MarginBottom="0.5rem">{review.heading}</TitleH5>
-                        <Text Opacity="0.8" LineHeight="1.625">
+                    <BaseContainer $backgroundColor="inherit">
+                        <TitleH5 $marginBottom="0.5rem">{review.heading}</TitleH5>
+                        <Text $opacity="0.8" $lineHeight="1.625">
                             {review.body}
                         </Text>
                     </BaseContainer>
                     <FlexContainer
-                        AlignItems="center"
-                        JustifyContent="space-between"
-                        BackgroundColor="inherit"
-                        PaddingTop="1rem"
-                        MarginTop="1rem"
-                        BorderTop="1px solid"
+                        $alignItems="center"
+                        $justifyContent="space-between"
+                        $backgroundColor="inherit"
+                        $paddingTop="1rem"
+                        $marginTop="1rem"
+                        $borderTop="1px solid"
                     >
-                        <FlexContainer AlignItems="center" Gap="1.5rem" BackgroundColor="inherit">
+                        <FlexContainer
+                            $alignItems="center"
+                            $gap="1.5rem"
+                            $backgroundColor="inherit"
+                        >
                             <S.InteractionBtn className="helpful">
                                 <S.HelpfulIconWrapper>
                                     <i className="fa-solid fa-thumbs-up"></i>
                                 </S.HelpfulIconWrapper>
-                                Helpful ({review.helpful})
+                                {BOOK_REVIEWS_TEXTS.HELPFUL(review.helpful)}
                             </S.InteractionBtn>
                             <S.InteractionBtn>
-                                <i className="fa-regular fa-comment"></i> Reply
+                                <i className="fa-regular fa-comment"></i> {BOOK_REVIEWS_TEXTS.REPLY}
                             </S.InteractionBtn>
                         </FlexContainer>
                         <S.MoreOptionsBtn>
@@ -103,8 +118,8 @@ export const CommunityReviews = () => (
             ))}
         </FlexContainer>
 
-        <ButtonGhost MarginTop="2rem" Width="100%">
-            Load more reviews
-        </ButtonGhost>
+        <Button variant="ghost" $marginTop="2rem" $width="100%">
+            {BOOK_REVIEWS_TEXTS.LOAD_MORE_REVIEWS}
+        </Button>
     </BaseContainer>
 );

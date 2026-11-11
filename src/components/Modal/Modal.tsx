@@ -10,14 +10,10 @@ export interface ModalProps extends IFlexContainerProps {
 
 export const Modal: React.FC<ModalProps> = ({children, onCloseModal, isOpen, ...props}) => {
     useEffect(() => {
-        if (isOpen) {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-            document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = `${scrollbarWidth}px`;
-        } else {
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-        }
+        if (!isOpen) return;
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
         return () => {
             document.body.style.overflow = '';
             document.body.style.paddingRight = '';
@@ -30,8 +26,10 @@ export const Modal: React.FC<ModalProps> = ({children, onCloseModal, isOpen, ...
         }
     };
 
+    if (!isOpen) return null;
+
     return (
-        <ModalOverlay $isVisible={isOpen} onClick={handleOverlayClick} {...props}>
+        <ModalOverlay onClick={handleOverlayClick} {...props}>
             {children}
         </ModalOverlay>
     );

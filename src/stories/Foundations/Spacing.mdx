@@ -1,0 +1,51 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {lightTheme} from '@styles/Theme';
+import {TokenTable} from './TokenTable';
+
+<Meta title="Foundations/Spacing" />
+
+# Spacing & Layout
+
+Breakpoints and container widths also live in `src/styles/Theme.ts`, under `breakpoints` and
+`widths`. Both themes share the same values — light/dark only changes colors, never layout — so
+this page reads from `lightTheme` alone.
+
+## Breakpoints
+
+Used as `max-width` media query thresholds throughout the container and layout components — e.g.
+`@media (max-width: theme.breakpoints.lg)`.
+
+export const breakpointRows = [
+    {name: 'xxl', value: lightTheme.breakpoints.xxl},
+    {name: 'xl', value: lightTheme.breakpoints.xl},
+    {name: 'lg', value: lightTheme.breakpoints.lg},
+    {name: 'md', value: lightTheme.breakpoints.md},
+    {name: 'sm', value: lightTheme.breakpoints.sm},
+    {name: 'xs', value: lightTheme.breakpoints.xs},
+];
+
+<TokenTable title="Breakpoints" rows={breakpointRows} />
+
+## Section max widths
+
+Used via the `Container` component's `MaxWidthVariant` prop.
+
+export const widthRows = [
+    {name: 'sm', value: lightTheme.widths.sectionMaxWidths.sm},
+    {name: 'md', value: lightTheme.widths.sectionMaxWidths.md},
+    {name: 'lg', value: lightTheme.widths.sectionMaxWidths.lg},
+    {name: 'xl', value: lightTheme.widths.sectionMaxWidths.xl},
+    {name: 'xxl', value: lightTheme.widths.sectionMaxWidths.xxl},
+    {name: 'full', value: lightTheme.widths.sectionMaxWidths.full},
+];
+
+<TokenTable title="Section max widths" rows={widthRows} />
+
+## Section padding & margin defaults
+
+export const spacingRows = [
+    {name: 'paddings.sectionContainer', value: lightTheme.paddings.sectionContainer},
+    {name: 'margins.sectionContainer', value: lightTheme.margins.sectionContainer},
+];
+
+<TokenTable title="Container defaults" rows={spacingRows} />

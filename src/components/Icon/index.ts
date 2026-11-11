@@ -1,5 +1,4 @@
 import styled, {css, DefaultTheme} from 'styled-components';
-import {BaseContainer} from '@components/FlexContainer/index';
 
 type IconVariant = 'primary' | 'light' | 'dark' | 'muted' | 'error' | 'success' | 'danger' | 'text';
 type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -7,15 +6,15 @@ type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 interface IconProps {
     variant?: IconVariant;
     size?: IconSize;
-    FontColor?: string;
-    FontSize?: string;
-    Padding?: string;
-    Margin?: string;
-    MarginLeft?: string;
-    Cursor?: string;
-    Display?: string;
-    LgDisplay?: string;
-    SmDisplay?: string;
+    $fontColor?: string;
+    $fontSize?: string;
+    $padding?: string;
+    $margin?: string;
+    $marginLeft?: string;
+    $cursor?: string;
+    $display?: string;
+    $lgDisplay?: string;
+    $smDisplay?: string;
 }
 
 const getVariantStyles = (variant: IconVariant, theme: DefaultTheme) => {
@@ -72,11 +71,11 @@ const getSizeStyles = (size: IconSize) => {
 };
 
 export const Icon = styled.i<IconProps>`
-    margin: ${(props) => props.Margin || '0'};
-    margin-left: ${(props) => props.MarginLeft || '0'};
-    padding: ${(props) => props.Padding || '0'};
-    cursor: ${(props) => props.Cursor};
-    display: ${(props) => props.Display};
+    margin: ${(props) => props.$margin || '0'};
+    margin-left: ${(props) => props.$marginLeft || '0'};
+    padding: ${(props) => props.$padding || '0'};
+    cursor: ${(props) => props.$cursor};
+    display: ${(props) => props.$display};
     transition: color 0.2s ease;
 
     /* Apply size styles */
@@ -87,33 +86,21 @@ export const Icon = styled.i<IconProps>`
 
     /* Override with custom props if provided */
     ${(props) =>
-        props.FontColor &&
+        props.$fontColor &&
         css`
-            color: ${props.FontColor};
+            color: ${props.$fontColor};
         `}
     ${(props) =>
-        props.FontSize &&
+        props.$fontSize &&
         css`
-            font-size: ${props.FontSize};
+            font-size: ${props.$fontSize};
         `}
 
     @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-        display: ${(props) => props.LgDisplay};
+        display: ${(props) => props.$lgDisplay};
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-        display: ${(props) => props.SmDisplay};
+        display: ${(props) => props.$smDisplay};
     }
-`;
-
-// Convenience exports for backwards compatibility
-export const LightIcon = styled(Icon).attrs({variant: 'light'})``;
-export const DarkGreyIcon = styled(Icon).attrs({variant: 'dark'})``;
-export const ErrorIcon = styled(Icon).attrs({variant: 'error'})``;
-export const MutedIcon = styled(Icon).attrs({variant: 'muted'})``;
-export const SuccessIcon = styled(Icon).attrs({variant: 'success'})``;
-export const DangerIcon = styled(Icon).attrs({variant: 'danger'})``;
-
-export const LighterIconWrapper = styled(BaseContainer)`
-    background-color: ${(props) => props.theme.colors.backgroundSecondary};
 `;

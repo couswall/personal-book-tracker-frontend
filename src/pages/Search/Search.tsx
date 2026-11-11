@@ -1,10 +1,3 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {FieldValues, useForm, useWatch} from 'react-hook-form';
-import {useLocation, useNavigate} from 'react-router';
-import {useEffect, useState} from 'react';
-import {AppDispatch, RootState} from '@store/store';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {searchBook} from '@store/index';
 import {
     Button,
     Container,
@@ -12,102 +5,63 @@ import {
     FormContainer,
     Icon,
     Input,
-    LoadingSpinner,
-    MutedIcon,
     Paragraph,
     TitleH1,
 } from '@components/index';
-import {ErrorMessage} from '@pages/Login/ErrorMessage';
-import {schemaSearchBook} from '@pages/Search/schemaSearchBook';
-import {SEARCH_PAGE, MAX_RESULTS} from '@pages/Search/constants';
-
+import {ErrorMessage} from '@pages/Login/components/ErrorMessage';
+import {SEARCH_PAGE} from '@pages/Search/search.constants';
 import {SearchInputWrapper} from '@components/Navbar/components/SearchingNavbar/styles';
-import {BookResult} from '@pages/Search/BookResult';
+import {SearchResults} from '@pages/Search/components/SearchResults';
+import {useSearchForm} from '@pages/Search/hooks/useSearchForm';
 
 export const Search = () => {
-    const {state} = useLocation();
-    const navigate = useNavigate();
-    const dispatch: AppDispatch = useDispatch();
     const {
         register,
         handleSubmit,
-        reset,
-        control,
-        formState: {errors},
-    } = useForm({
-        defaultValues: {searchText: ''},
-        resolver: yupResolver(schemaSearchBook),
-    });
-    const {token} = useSelector((state: RootState) => state.auth);
-    const {searchBookData, loading} = useSelector((state: RootState) => state.searchBook);
-    const searchTextValue = useWatch({control, name: 'searchText'});
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const errorMsg = errors.searchText?.message ? String(errors.searchText.message) : undefined;
-
-    const performSearch = (searchText: string, page: number) => {
-        const params = {searchText, maxResults: MAX_RESULTS, page};
-        dispatch(searchBook({token, params}));
-    };
-
-    const onSubmit = ({searchText}: FieldValues) => {
-        setCurrentPage(1);
-        performSearch(searchText, 1);
-    };
-
-    const handlePreviousPage = () => {
-        const newPage = currentPage - 1;
-        setCurrentPage(newPage);
-        performSearch(searchTextValue, newPage);
-    };
-
-    const handleNextPage = () => {
-        const newPage = currentPage + 1;
-        setCurrentPage(newPage);
-        performSearch(searchTextValue, newPage);
-    };
-
-    const isLastPage = searchBookData?.books && !searchBookData.books.length;
-
-    useEffect(() => {
-        if (!state?.searchText) return;
-        reset({searchText: state.searchText});
-        performSearch(state.searchText, 1);
-        navigate('.', {replace: true, state: null});
-    }, [state]);
+        onSubmit,
+        errorMsg,
+        searchBookData,
+        loading,
+        currentPage,
+        isLastPage,
+        handlePreviousPage,
+        handleNextPage,
+    } = useSearchForm();
 
     return (
-        <Container Padding="20px 40px" MaxWidthVariant="lg" MinHeight="100vh">
-            <FlexContainer Gap="1.5rem" FlexDirection="column" JustifyContent="center">
-                <TitleH1 Width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
+        <Container $padding="20px 40px" maxWidthVariant="lg" $minHeight="100vh">
+            <FlexContainer $gap="1.5rem" $flexDirection="column" $justifyContent="center">
+                <TitleH1 $width="100%">{SEARCH_PAGE.TITLE}</TitleH1>
 
-                <FormContainer Gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
+                <FormContainer $gap="0.5rem" onSubmit={handleSubmit(onSubmit)}>
                     <FlexContainer
-                        Gap="0.5rem"
-                        FlexDirection="column"
-                        Width="100%"
-                        AlignItems="start"
+                        $gap="0.5rem"
+                        $flexDirection="column"
+                        $width="100%"
+                        $alignItems="start"
                     >
                         <SearchInputWrapper
-                            Background="unset"
-                            Gap="0.5rem"
-                            AlignItems="center"
-                            Width="100%"
-                            BorderRadius="0.75rem"
-                            Padding="0px 0px 0px 0.875rem"
+                            $background="unset"
+                            $gap="0.5rem"
+                            $alignItems="center"
+                            $width="100%"
+                            $borderRadius="0.75rem"
+                            $padding="0px 0px 0px 0.875rem"
                             hasError={!!errorMsg}
                         >
-                            <MutedIcon
+                            <Icon
+                                variant="muted"
                                 className="fa-solid fa-magnifying-glass"
                                 size="md"
-                                Cursor="default"
+                                $cursor="default"
                             />
                             <Input
                                 placeholder={SEARCH_PAGE.PLACEHOLDER}
-                                Height="100%"
-                                BackgroundColor="transparent"
-                                Border="unset"
-                                Width="100%"
-                                Padding="0.875rem 0.5rem 0.875rem 0px"
+                                $height="100%"
+                                $backgroundColor="transparent"
+                                $border="unset"
+                                $width="100%"
+                                $padding="0.875rem 0.5rem 0.875rem 0px"
                                 {...register('searchText')}
                                 minLength={1}
                                 maxLength={50}
@@ -115,55 +69,53 @@ export const Search = () => {
                         </SearchInputWrapper>
                         {errorMsg && <ErrorMessage message={errorMsg} />}
                     </FlexContainer>
-                    <Button MaxWidth="100px" Height="50px">
+                    <Button $maxWidth="100px" $height="50px">
                         {SEARCH_PAGE.SEARCH_BTN}
                     </Button>
                 </FormContainer>
 
-                <FlexContainer FlexDirection="column" Gap="1rem">
-                    {loading ? (
-                        <FlexContainer Height="40vh" JustifyContent="center" AlignItems="center">
-                            <LoadingSpinner />
-                        </FlexContainer>
-                    ) : (
-                        searchBookData?.books.map((book) => (
-                            <BookResult key={book.id} book={book} />
-                        ))
-                    )}
+                <FlexContainer $flexDirection="column" $gap="1rem">
+                    <SearchResults
+                        books={searchBookData?.books}
+                        loading={loading}
+                        hasSearched={!!searchBookData}
+                    />
                 </FlexContainer>
 
                 {searchBookData?.books && !loading && (
-                    <FlexContainer Gap="1rem" JustifyContent="space-between" AlignItems="center">
+                    <FlexContainer $gap="1rem" $justifyContent="space-between" $alignItems="center">
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handlePreviousPage}
                             disabled={currentPage === 1 || loading}
-                            Gap="0.5rem"
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
+                            leftIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-left"
+                                    size="md"
+                                    $fontColor="inherit"
+                                />
+                            }
                         >
-                            <Icon
-                                className="fa-solid fa-arrow-left"
-                                size="md"
-                                FontColor="inherit"
-                            />
                             {SEARCH_PAGE.PREVIOUS_BTN}
                         </Button>
                         <Paragraph>{`${SEARCH_PAGE.PAGE} ${currentPage}`}</Paragraph>
                         <Button
-                            MaxWidth="120px"
+                            $maxWidth="120px"
                             onClick={handleNextPage}
                             disabled={isLastPage || loading}
-                            Gap="0.5rem"
-                            AlignItems="center"
+                            $alignItems="center"
                             variant="outline"
+                            rightIcon={
+                                <Icon
+                                    className="fa-solid fa-arrow-right"
+                                    size="md"
+                                    $fontColor="inherit"
+                                />
+                            }
                         >
                             {SEARCH_PAGE.NEXT_BTN}
-                            <Icon
-                                className="fa-solid fa-arrow-right"
-                                size="md"
-                                FontColor="inherit"
-                            />
                         </Button>
                     </FlexContainer>
                 )}

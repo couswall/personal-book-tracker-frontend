@@ -6,7 +6,7 @@ export interface SearchBarNavProps {
     searchBarRef: RefObject<HTMLDivElement>;
 }
 
-export interface NavbarItemsProps extends SearchBarNavProps {}
+export type NavbarItemsProps = SearchBarNavProps;
 
 export interface SubMenuNavProps {
     isVisible: boolean;

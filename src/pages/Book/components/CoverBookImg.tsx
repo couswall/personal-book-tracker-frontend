@@ -1,17 +1,13 @@
 import React from 'react';
 import {FlexContainer, Image, Paragraph} from '@components/index';
+import {ICoverBookImgProps} from '@pages/Book/components/book.components.interfaces';
+import {NO_IMAGE_AVAILABLE} from '@pages/Book/components/book.components.constants';
 
-interface CoverBookImgProps {
-    imgSrc?: string | null;
-    width?: string;
-    height?: string;
-    flex?: string;
-    onClick?: () => void;
-    cursor?: string;
-}
-
-export const CoverBookImg: React.FC<CoverBookImgProps> = ({
+export const CoverBookImg: React.FC<ICoverBookImgProps> = ({
     imgSrc,
+    alt = '',
+    objectFit = 'fill',
+    borderRadius = '0.5rem',
     width = '220px',
     height = '280px',
     flex,
@@ -20,24 +16,26 @@ export const CoverBookImg: React.FC<CoverBookImgProps> = ({
 }) => {
     return (
         <FlexContainer
-            BorderRadius="0.5rem"
-            Overflow="hidden"
-            Width={width}
-            Height={height}
-            Flex={flex} 
+            $borderRadius={borderRadius}
+            $overflow="hidden"
+            $width={width}
+            $height={height}
+            $flex={flex}
             onClick={() => onClick?.()}
-            Cursor={cursor}
+            $cursor={cursor}
         >
             {imgSrc ? (
-                <Image src={imgSrc} Width="100%" Height="100%" ObjectFit="fill" />
+                <Image src={imgSrc} alt={alt} $width="100%" $height="100%" $objectFit={objectFit} />
             ) : (
                 <FlexContainer
-                    Width="100%"
-                    Height="100%"
-                    JustifyContent="center"
-                    AlignItems="center"
+                    role={alt ? 'img' : undefined}
+                    aria-label={alt || undefined}
+                    $width="100%"
+                    $height="100%"
+                    $justifyContent="center"
+                    $alignItems="center"
                 >
-                    <Paragraph>{'No Image Available'}</Paragraph>
+                    <Paragraph aria-hidden={alt ? true : undefined}>{NO_IMAGE_AVAILABLE}</Paragraph>
                 </FlexContainer>
             )}
         </FlexContainer>

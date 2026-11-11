@@ -1,8 +1,7 @@
-import {IBaseFetchRes} from '@store/books/getBookById/interfaces';
-
 export interface IGetReducerBase {
     loading: boolean;
     error?: string;
+    currentRequestId?: string;
 }
 
 export interface ISearchBookReducer extends IGetReducerBase {
@@ -21,10 +20,6 @@ export interface ISearchBook {
     imageCover?: string;
     averageRating?: number;
     reviewCount?: number;
-}
-
-export interface ISearchBookAPIResponse extends IBaseFetchRes {
-    data: ISearchingRes;
 }
 
 export interface ISearchingRes {

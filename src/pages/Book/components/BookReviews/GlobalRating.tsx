@@ -1,59 +1,65 @@
 import {
     BaseContainer,
-    ButtonPrimary,
+    Button,
     FlexContainer,
     GridContainer,
     Icon,
+    RatingStars,
     Text,
 } from '@components/index';
 import * as S from '@pages/Book/components/BookReviews/bookReviews.styled';
-import {RATING_BARS} from '@pages/Book/book.constants';
+import {
+    BOOK_REVIEWS_TEXTS,
+    GLOBAL_RATING_SUMMARY,
+    RATING_BARS,
+} from '@pages/Book/components/BookReviews/bookReviews.constants';
 
 export const GlobalRating = () => (
     <BaseContainer as="section">
         <BaseContainer
-            BackgroundColorVariant="secondary"
-            BorderRadius="1rem"
-            Padding="2.5rem"
-            LgPadding="1.5rem"
-            Border="1px solid"
+            backgroundColorVariant="secondary"
+            $borderRadius="1rem"
+            $padding="2.5rem"
+            $lgPadding="1.5rem"
+            $border="1px solid"
         >
             <GridContainer
-                TemplateColumns="repeat(12, minmax(0, 1fr))"
-                MdTemplateColumns="1fr"
-                Gap="2rem"
-                AlignItems="center"
+                $templateColumns="repeat(12, minmax(0, 1fr))"
+                $mdTemplateColumns="1fr"
+                $gap="2rem"
+                $alignItems="center"
             >
                 <S.GlobalScoreCol>
-                    <S.BigScoreValue>4.7</S.BigScoreValue>
-                    <S.StarRating style={{marginBottom: '0.5rem'}}>
-                        {[...Array(4)].map((_, i) => (
-                            <i key={i} className="fa-solid fa-star"></i>
-                        ))}
-                        <i className="fa-solid fa-star-half-stroke"></i>
-                    </S.StarRating>
-                    <Text variant="muted" size="sm" weight="medium">
-                        12,482 total reviews
+                    <S.BigScoreValue>{GLOBAL_RATING_SUMMARY.score}</S.BigScoreValue>
+                    <RatingStars rating={Number(GLOBAL_RATING_SUMMARY.score)} size="1.125rem" />
+                    <Text variant="muted" size="sm" weight="medium" $marginTop="0.5rem">
+                        {GLOBAL_RATING_SUMMARY.totalReviews}
                     </Text>
-                    <ButtonPrimary MarginTop="1.5rem" size="lg" Gap="0.5rem">
-                        <Icon FontColor="inherit" className="fa-solid fa-pen-to-square" />
-                        Write a Review
-                    </ButtonPrimary>
+                    <Button
+                        variant="primary"
+                        $marginTop="1.5rem"
+                        size="lg"
+                        leftIcon={
+                            <Icon $fontColor="inherit" className="fa-solid fa-pen-to-square" />
+                        }
+                    >
+                        {BOOK_REVIEWS_TEXTS.WRITE_REVIEW}
+                    </Button>
                 </S.GlobalScoreCol>
                 <S.ProgressBarsCol>
                     {RATING_BARS.map(({label, percentage, opacity, white}) => (
                         <FlexContainer
-                            AlignItems="center"
-                            Gap="1rem"
+                            $alignItems="center"
+                            $gap="1rem"
                             key={label}
-                            BackgroundColor="inherit"
+                            $backgroundColor="inherit"
                         >
                             <Text
                                 size="sm"
                                 weight="medium"
                                 variant="muted"
-                                Width="3rem"
-                                FlexShrink="0"
+                                $width="3rem"
+                                $flexShrink="0"
                             >
                                 {label}
                             </Text>
@@ -67,9 +73,9 @@ export const GlobalRating = () => (
                             <Text
                                 size="sm"
                                 weight="medium"
-                                Width="3rem"
-                                TextAlign="right"
-                                Opacity="0.8"
+                                $width="3rem"
+                                $textAlign="right"
+                                $opacity="0.8"
                             >
                                 {percentage}%
                             </Text>

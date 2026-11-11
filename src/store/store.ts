@@ -10,12 +10,20 @@ import {
     REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {authSlice, darkModeSlice, getBookByIdSlice, searchBookSlice, navbarSearchSlice} from '@store/index';
+import {
+    authSlice,
+    darkModeSlice,
+    getBookByIdSlice,
+    searchBookSlice,
+    navbarSearchSlice,
+    refreshToken,
+} from '@store/index';
+import {setupAuthInterceptors} from '@api/httpClient';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'darkMode'],
+    whitelist: ['darkMode'],
 };
 
 const rootReducer = combineReducers({
@@ -36,6 +44,11 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
+});
+
+setupAuthInterceptors({
+    getAccessToken: () => store.getState().auth.token,
+    refreshAccessToken: () => store.dispatch(refreshToken()).unwrap(),
 });
 
 export const persistor = persistStore(store);
